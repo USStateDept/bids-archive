@@ -78,16 +78,6 @@ div.olLayerDiv {
     background: rgba(0, 60, 136, 0.5);
     filter: alpha(opacity=80);
 }
-#leadAddText a:hover {
-    background: #130085; /* fallback for IE */
-    background: rgba(0, 60, 136, 0.7);
-    filter: alpha(opacity=100);
-}
-@media only screen and (max-width: 600px) {
-    #leadAddText a:hover {
-        background: rgba(0, 60, 136, 0.5);
-    }
-}
 
 .olLayerGoogleCopyright {
     left: 2px;
