@@ -66,7 +66,9 @@ Ext.onReady(function() {
 				mode : 'local',
 				forceSelection : true,
 				triggerAction : 'all',
+				//emptyText : 'Select Source',
 				selectOnFocus : true
+				//applyTo: 'local-states'
 			}), new Ext.form.ComboBox({
 				store : new Ext.data.ArrayStore({
 					fields : ['Source'],
@@ -79,7 +81,9 @@ Ext.onReady(function() {
 				mode : 'local',
 				forceSelection : true,
 				triggerAction : 'all',
+				//emptyText : 'Select Source',
 				selectOnFocus : true
+				//applyTo: 'local-states'
 			}), {
 				fieldLabel : 'Project Title',
 				name : 'PrTitle'
@@ -130,6 +134,7 @@ Ext.onReady(function() {
 			}, {
 				xtype : 'fieldset',
 				title : 'Sector',
+				//name : "Sector",
 				width : 270,
 				autoHeight : true,
 				defaultType : 'checkbox', // each item will be a radio button
@@ -199,6 +204,12 @@ Ext.onReady(function() {
 				}]
 			}]
 		}],
+		/*
+		 listeners : {
+		 render : function() {
+		 countryStore.load();
+		 }
+		 },*/
 		buttons : [{
 			text : 'Edit',
 			id : 'btnEdit',
@@ -238,6 +249,11 @@ Ext.onReady(function() {
 				tabs.getForm().reset();
 			}
 		}]
+		/*buttons : [{
+		 text : 'Save'
+		 }, {
+		 text : 'Cancel'
+		 }]*/
 	});
 
 	tabs.render(document.body);
@@ -258,6 +274,26 @@ Ext.onReady(function() {
 		e : false
 	};
 
+	/*var action = new GeoExt.Action({
+		//control: new OpenLayers.Control.ZoomToMaxExtent(),
+		//map: map,
+		text : "Add a Lead",
+		icon : 'add.png',
+		handler : function() {
+			//Ext.example.msg('Click','You clicked on "Action 1".');
+
+			Ext.Msg.show({
+				title : 'Add a Lead',
+				msg : 'By clicking okay, you agree that any trade lead added to this system will be unclassified, and that you understand the rules and regulations regarding this site.',
+				width : 300,
+				buttons : Ext.MessageBox.OK,
+				fn : myCallbackFunction
+				//icon : Ext.MessageBox.ERROR
+			})
+		}
+		//tooltip: "zoom to max extent"
+	});*/
+
 	function myCallbackFunction() {
 
 		win.myExtraParams.e = false;
@@ -270,19 +306,27 @@ Ext.onReady(function() {
 		win.show();
 	}
 
+
+	//toolbarItems.push(action);
+
 	var mapPanel = new GeoExt.MapPanel({
 		region : "center",
+		//renderTo: "mapPanel",
 		tbar : toolbarItems,
+		//center : [146.1569825, -41.6109735],
+		//projection: "EPSG:900913",
+
+		wrapDateLine: true,
 		map : {
 			projection : "EPSG:900913"
 		},
 
 		zoom : 3,
 		layers : [new OpenLayers.Layer.XYZ("Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
-			attribution : "Data, imagery and map information provided by <a href='http://www.mapquest.com/'  target='_blank'>MapQuest</a>, <a href='http://www.openstreetmap.org/' target='_blank'>Open Street Map</a> and contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/' target='_blank'>CC-BY-SA</a>  <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>",
+			attribution : "Data, imagery and map information provided by MapQuest, Open Street Map and contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/' target='_blank'>CC-BY-SA.</a>",
 			transitionEffect : "resize"
 		}), new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
-			attribution : "Tiles Courtesy of <a href='http://open.mapquest.co.uk/' target='_blank'>MapQuest</a>. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency. <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>",
+			attribution : "Tiles Courtesy of MapQuest. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency.",
 			transitionEffect : "resize"
 		})]
 	});
@@ -290,15 +334,19 @@ Ext.onReady(function() {
 	var info;
 	var map = mapPanel.map;
 
+	// create our own layer node UI class, using the TreeNodeUIEventMixin
 	var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
 
+	// using OpenLayers.Format.JSON to create a nice formatted string of the
+	// configuration for editing it in the UI
 	var treeConfig = [{
 		nodeType : "gx_baselayercontainer",
 		expanded : true
 	}, {
 		nodeType : "gx_overlaylayercontainer",
 		expanded : true,
-		
+		// render the nodes inside this container with a radio button,
+		// and assign them the group "foo".
 		loader : {
 			baseAttrs : {
 				radioGroup : "foo",
@@ -306,9 +354,12 @@ Ext.onReady(function() {
 			}
 		}
 	}];
-
+	// The line below is only needed for this example, because we want to allow
+	// interactive modifications of the tree configuration using the
+	// "Show/Edit Tree Config" button. Don't use this line in your code.
 	treeConfig = new OpenLayers.Format.JSON().write(treeConfig, true);
 
+	// create the tree with the configuration from above
 	tree = new Ext.tree.TreePanel({
 		border : true,
 		region : "north",
@@ -328,7 +379,8 @@ Ext.onReady(function() {
 			}
 		})],
 		loader : new Ext.tree.TreeLoader({
-			
+			// applyLoader has to be set to false to not interfer with loaders
+			// of nodes further down the tree hierarchy
 			applyLoader : false,
 			uiProviders : {
 				"layernodeui" : LayerNodeUI
@@ -336,9 +388,13 @@ Ext.onReady(function() {
 		}),
 		root : {
 			nodeType : "async",
-			
+			// the children property of an Ext.tree.AsyncTreeNode is used to
+			// provide an initial set of layer nodes. We use the treeConfig
+			// from above, that we created with OpenLayers.Format.JSON.write.
 			children : Ext.decode(treeConfig)
-			
+			// Don't use the line above in your application. Instead, use
+			//children: treeConfig
+
 		},
 		listeners : {
 			"radiochange" : function(node) {
@@ -350,6 +406,7 @@ Ext.onReady(function() {
 
 	});
 
+	// dialog for editing the tree configuration
 	var treeConfigWin = new Ext.Window({
 		layout : "fit",
 		hideBorders : true,
@@ -394,9 +451,10 @@ Ext.onReady(function() {
 		styleMap : new OpenLayers.StyleMap({
 			'default' : new OpenLayers.Style({
 				pointRadius : '${radius}',
-				fillOpacity : 0.6,
-				fillColor : '#ffcc66',
-				strokeColor : '#cc6633'
+				fillOpacity : 0.7,
+				fillColor : '#0b49d9',
+				strokeWidth: 1,
+				strokeColor : '#063dbf'
 			}, {
 				context : {
 					radius : function(feature) {
@@ -421,16 +479,21 @@ Ext.onReady(function() {
 		sd, {
 			templates : {
 				// hover: single & list
-				hover : '${.PrFSrc}: ${.PrTitle}',
-				hoverList : '<div style =\"font-size: 10px\"><b>${count} Projects</b><br>${html}</div>',
-				hoverItem : '<div style =\"font-size: 10px\"><b>${.SpecLoc}: </b>${.PrTitle}<br></div>',
-				// select: single & list
-				single : '<div style=\"font-size: 10px\"><b>Project Title: </b>${.PrTitle}' + '<br><b>Contact to Add Comments: </b><a href=\"${.SubOffC}\">Email Comments</a>' + '<br><b>Project Description: </b>${.PrDesc}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '<br><b>Project Number: </b>${.PrNum}' + '<br><b>Link to Project: </b><a href=\"${.LinkPr}\">More Info</a>' + '<br><b>Sector: </b>${.Sector}' + '<br><b>Keywords: </b>${.Keyword}' + '<br><b>Project Size (USD): </b>${.PrSize}' + '<br><b>Initial Approval: </b>${.PrAnnou}' + '<br><b>Final Approval: </b>${.TenDate}' + '<br><b>Borrowing Entity: </b>${.BrEnt}' + '<br><b>Project POC: </b>${.ImEnPOC}' + '<br><b>Post Comments: </b>${.PostCom}' + '<br><b>Contact to Add Comments: </b>${.ImEnPOC}' + '<br><b>Post POC: </b>${.SubOff}' + '</div>',
-				item : '<li><a href=\"#\" ${showPopup()}>${.PrTitle}</a></li>'
+				// hover single
+				hover : '<div><font size=\"2\"><b>${.PrTitle}' + '</b></font></div>' + '<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '</font></div>',
+				// hover list
+				hoverList : '<div><font size=\"2\"><b>${count} leads found</b></font><br><font size=\"1\" color=\"#909090\">Click for more information</font></div>',
+				//hoverItem : '<div style =\"font-size: 10px\"><b>${.SpecLoc}: </b>${.PrTitle}<br></div>',
+				// selected item from single & list
+				single : '<div><font size=\"3\"><b>${.PrTitle}</b></font></div>' + '<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '<br><b>Borrowing Entity: </b>${.BrEnt}' + '<br><b>Project Size (USD): </b>${.PrSize}' + '<br><b>Description: </b>${.PrDesc}' + '<br><b>Keywords: </b>${.Keyword}' +  '<br><b>Link to Project: </b><a href=\"${.LinkPr}\">More Info</a>' + '<br><br><b>Initial Approval: </b>${.PrAnnou}' + '<br><b>Final Approval: </b>${.TenDate}' + '<br><br><b>Project POC: </b>${.ImEnPOC}' + '<br><b>Post POC: </b>${.SubOff}' + '<br><b>Post Comments: </b>${.PostCom}' + '<br><b>Contact to Add Comments: </b>${.ImEnPOC}' + '<br><a href=\"${.SubOffC}\">Email Comments to Post POC</a>' + '</font></div>',
+				// List of clustered items
+				item : '<li><a href=\"#\" ${showPopup()}>${.PrTitle}</a></li>' + '<div><font size = \"1\" color=\"#909090\">' + '<b>Country: </b>${.Country}' + '<br><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '</font></div><br>',
 			}
 		}]]
 	});
 	map.addControl(fpControl);
+
+	//vecLayer.addFeatures(features);
 
 	map.addLayer(sd);
 
@@ -531,6 +594,7 @@ Ext.onReady(function() {
 
 	grid = new Ext.grid.GridPanel({
 
+		//id: "grid",
 		title : "Compare Projects",
 		region : "south",
 		collapsible : true,
@@ -539,7 +603,11 @@ Ext.onReady(function() {
 		id : 'gridx',
 		plugins : [Ext.ux.PanelCollapsedTitle],
 
-		columns : [ {
+		columns : [/*{
+			header : "Timestamp",
+			dataIndex : "Timestam",
+			width : 100
+		},*/ {
 			header : "Project Funding Source",
 			dataIndex : "PrFSrc",
 			width : 200
@@ -631,7 +699,19 @@ Ext.onReady(function() {
 			header : "US Firm Wins",
 			dataIndex : "USFirWi",
 			width : 125
-		} ],
+		}, /*{
+			header : "Marker",
+			dataIndex : "Marker",
+			width : 125
+		}, {
+			header : "Cleared",
+			dataIndex : "Cleared",
+			width : 125
+		}, {
+			header : "ID",
+			dataIndex : "fid",
+			width : 125
+		}*/],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
 
 		height : 200,
@@ -662,13 +742,17 @@ Ext.onReady(function() {
 				var sou = grid.getSelectionModel().getSelected().data.Source;
 				var fid = grid.getSelectionModel().getSelected().data.fid;
 				var ten = grid.getSelectionModel().getSelected().data.TenDate;
-				
+				//var us = grid.getSelectionModel().getSelected().data.USFirWi;
+				//var usf = grid.getSelectionModel().getSelected().data.USFirCo;
+				console.log(ten);
+				//console.log(record);
 				tabs.getForm().findField("SpecLoc").setValue(sp);
 				tabs.getForm().findField("PrFSrc").setValue(pr);
 				tabs.getForm().findField("Country").setValue(co);
 				tabs.getForm().findField("PrTitle").setValue(prt);
 				tabs.getForm().findField("PrNum").setValue(prn);
 				tabs.getForm().findField("LinkPr").setValue(li);
+				//tabs.getForm().findField("Sector").setValue(se);
 				tabs.getForm().findField("Keyword").setValue(ke);
 				tabs.getForm().findField("PrSize").setValue(prs);
 				tabs.getForm().findField("PrAnnou").setValue(pra);
@@ -681,7 +765,12 @@ Ext.onReady(function() {
 				tabs.getForm().findField("SubOffC").setValue(subo);
 				tabs.getForm().findField("Source").setValue(sou);
 				tabs.getForm().findField("fid").setValue(fid);
+
+				//var dt = new Date(ten);
+				//dt.format('m/d/Y');
 				tabs.getForm().findField("TenDate").setValue(ten);
+				//tabs.getForm().findField("USFirWi").setValue(us);
+				//tabs.getForm().findField("USFirCo").setValue(usf);
 
 				if (se.indexOf("Water") != -1) {
 					tabs.getForm().findField("chWa").setValue(true);
@@ -853,37 +942,72 @@ Ext.onReady(function() {
 			emptyText : 'Begin...',
 			fieldLabel : 'Date Range',
 			width : 190
+			//allowBlank : false
 		}), dEnd = new Ext.form.DateField({
+			//fieldLabel : 'Tender Date',
 			emptyText : 'End...',
 			width : 190
+			//allowBlank : false
 		}), tBegin = new Ext.form.DateField({
 			emptyText : 'Begin...',
 			fieldLabel : 'Tender Date',
+			//disabled : true,
+			//name : 'tBegin',
 			width : 190
+			//allowBlank : false
 		}), tEnd = new Ext.form.DateField({
+			//fieldLabel : 'Date Range',
 			emptyText : 'End...',
+			//disabled : true,
+			//name : 'tEnd',
 			width : 190
+			//allowBlank : false
+			//}), eoBox= new Ext.ux.form.LovCombo({
 		}), eoBox = new Ext.ux.form.CheckboxCombo({
+			//xtype: 'checkboxcombo',
+			//name: 'eoBox',
+			//multiSelect: true,
 			store : enteringStore,
 			fieldLabel : 'Entering Officer',
 			displayField : 'EnteringOfficer',
+			//typeAhead : true,
 			mode : 'local',
+			//allowBlank: false,
 			valueField : 'EnteringOfficer',
+			//forceSelection : true,
+			//triggerAction : 'all',
 			emptyText : 'Select Officer...',
+			//selectOnFocus : true
+			//applyTo: 'local-states'
 		}), regBox = new Ext.ux.form.CheckboxCombo({
 			store : regionStore,
 			fieldLabel : 'Region',
 			displayField : 'Region',
 			valueField : 'Region',
+			//typeAhead : true,
 			mode : 'local',
+			//forceSelection : true,
+			//triggerAction : 'all',
 			emptyText : 'Select Region...'
+			//selectOnFocus : true
+			//applyTo: 'local-states'
 		}), secBox = new Ext.ux.form.CheckboxCombo({
 			store : sectorStore,
 			fieldLabel : 'Sector',
 			displayField : 'Sector',
 			valueField : 'Sector',
+			//typeAhead : true,
 			mode : 'local',
+			//forceSelection : true,
+			//triggerAction : 'all',
 			emptyText : 'Select Sector...'
+			//selectOnFocus : true
+			//valueField : 'Water'
+			/*listeners : {
+			select : State_Select
+			}*/
+
+			//applyTo: 'local-states'
 		}), sizeBox = new Ext.ux.form.CheckboxCombo({
 			store : new Ext.data.ArrayStore({
 				fields : ['PrSize'],
@@ -892,15 +1016,25 @@ Ext.onReady(function() {
 			fieldLabel : 'Size',
 			displayField : 'PrSize',
 			valueField : 'PrSize',
+			//typeAhead : true,
 			mode : 'local',
+			//forceSelection : true,
+			//triggerAction : 'all',
 			emptyText : 'Select Size...'
+			//selectOnFocus : true
+			//applyTo: 'local-states'
 		}), fsBox = new Ext.ux.form.CheckboxCombo({
 			store : fundingStore,
 			fieldLabel : 'Funding Source',
 			displayField : 'FundingSource',
 			valueField : 'FundingSource',
+			//typeAhead : true,
 			mode : 'local',
+			//forceSelection : true,
+			//triggerAction : 'all',
 			emptyText : 'Select Funding...'
+			//selectOnFocus : true
+			//applyTo: 'local-states'
 		}), arcBox = new Ext.form.ComboBox({
 			store : new Ext.data.ArrayStore({
 				fields : ['Archived'],
@@ -913,14 +1047,18 @@ Ext.onReady(function() {
 			forceSelection : true,
 			triggerAction : 'all',
 			emptyText : 'Select Archived...',
+			//disabled : true,
 			selectOnFocus : true
+			//applyTo: 'local-states'
 		}), txtKey = new Ext.form.TextField({
 			fieldLabel : 'Keyword Search'
 		})],
 		buttons : [{
 			text : 'Add a Lead',
+			//text : "Add a Lead",
 			icon : 'add.png',
 			handler : function() {
+				//Ext.example.msg('Click','You clicked on "Action 1".');
 
 				Ext.Msg.show({
 					title : 'Add a Lead',
@@ -1021,6 +1159,7 @@ Ext.onReady(function() {
 							filter = filter + "<PropertyIsGreaterThan><PropertyName>PrSize</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
 						}
 					}
+					//filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin +"%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
 					count = count + 1;
 				}
 				////Tender Date
@@ -1032,6 +1171,8 @@ Ext.onReady(function() {
 				}
 				////Date
 				if (dBeginVal != '') {
+					//var begin = tBeginVal + "/" + tBegin.getValue().DAY + "/" + tBegin.getValue().YEAR;
+					//var end = tEndVal + "/" + tEnd.getValue().DAY + "/" + tEnd.getValue().YEAR;
 					var begin = Ext.util.Format.date(dBeginVal, 'm/d/Y');
 					var end = Ext.util.Format.date(dEndVal, 'm/d/Y');
 					filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + pra + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
@@ -1049,10 +1190,13 @@ Ext.onReady(function() {
 					filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 					count = count + 1;
 				}
+				/////////////////
 				//////Sector
+				//////////////////
 				if (secVal.length > 0) {
 
 					if (secVal.indexOf(",") != -1) {
+						//console.log(eoVal);
 						var parts = secVal.split(",");
 						filter = filter + "<Or>";
 						console.log(filter);
@@ -1068,7 +1212,9 @@ Ext.onReady(function() {
 					}
 					count = count + 1;
 				}
+				///////////////
 				////////Funding Source
+				//////////////
 				if (fsVal.length > 0) {
 					if (fsVal.indexOf(",") != -1) {
 						//console.log(eoVal);
@@ -1087,7 +1233,9 @@ Ext.onReady(function() {
 					}
 					count = count + 1;
 				}
+				/////////////////////
 				//////Entering Officer
+				/////////////////////
 				if (eoVal.length > 0) {
 					if (eoVal.indexOf(",") != -1) {
 						//console.log(eoVal);
@@ -1106,7 +1254,9 @@ Ext.onReady(function() {
 					}
 					count = count + 1;
 				}
+				////////////////////
 				////////Region
+				///////////////////////
 				if (regVal.length > 0) {
 					if (regVal.indexOf(",") != -1) {
 						//console.log(eoVal);
@@ -1125,7 +1275,9 @@ Ext.onReady(function() {
 					}
 					count = count + 1;
 				}
+				///////////////////
 				//////Keyword
+				//////////////////
 				if (keyVal.length > 0) {
 					keyVal = keyVal.replace(" ", "*");
 					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3E" + keyy + "%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"

@@ -79,6 +79,10 @@ div.olLayerDiv {
     filter: alpha(opacity=80);
 }
 
+a {
+	text-decoration: none;
+}
+
 .olLayerGoogleCopyright {
     left: 2px;
     bottom: 2px;
