@@ -452,18 +452,19 @@ Ext.onReady(function() {
 			'default' : new OpenLayers.Style({
 				pointRadius : '${radius}',
 				fillOpacity : 0.7,
-				fillColor : '#0b49d9',
-				strokeWidth: 1,
-				strokeColor : '#063dbf'
+				fillColor : '#FF6600',
+				strokeOpacity: 0.7,
+				strokeWidth: 0.5,
+				strokeColor : '#A24100'
 			}, {
 				context : {
 					radius : function(feature) {
-						return Math.min(feature.attributes.count, 10) * 1.5 + 2;
+						return Math.min(feature.attributes.count, 10) * 1.5 + 4;
 					}
 				}
 			}),
 			'select' : {
-				fillColor : '#8aeeef'
+				fillColor : '#FFCC00'
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
