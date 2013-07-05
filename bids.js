@@ -1,6 +1,6 @@
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
-//OpenLayers.ProxyHost="http://localhost:8080/geoserver/rest/proxy?url="
+//OpenLayers.ProxyHost="http://54.214.19.215:8080/geoserver/rest/proxy?url="
 Ext.onReady(function() {
 
 	var sb, store, grid;
@@ -468,7 +468,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=170&outputformat=json",
+			url : "http://54.214.19.215:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=170&outputformat=json",
 			format : new OpenLayers.Format.JSON()
 		})
 	});
@@ -584,7 +584,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=170&outputformat=json",
+				url : "http://54.214.19.215:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=170&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -1097,7 +1097,7 @@ Ext.onReady(function() {
 				var siz = "PrSize";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=150&outputformat=json";
+				var urlWhole = "http://54.214.19.215:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=150&outputformat=json";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
