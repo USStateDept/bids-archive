@@ -468,7 +468,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS&maxfeatures=170&outputformat=json",
+			url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
 			format : new OpenLayers.Format.JSON()
 		})
 	});
@@ -584,7 +584,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS&maxfeatures=170&outputformat=json",
+				url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -1097,7 +1097,7 @@ Ext.onReady(function() {
 				var siz = "PrSize";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS&maxfeatures=150&outputformat=json";
+				var urlWhole = "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {

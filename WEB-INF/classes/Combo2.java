@@ -29,19 +29,19 @@ public class Combo2 extends HttpServlet {
 			stmt = con.createStatement();
 			
 			if(col.equals("Sector")){
-			rs = stmt.executeQuery("SELECT DISTINCT \"Sector\" FROM Opengeo.\"BIDS\" where \"Sector\" is not null and \"Sector\" <> '' order by \"Sector\" asc");
+			rs = stmt.executeQuery("SELECT DISTINCT \"Sector\" FROM Opengeo.\"DATATABLE\" where \"Sector\" is not null and \"Sector\" <> '' order by \"Sector\" asc");
 			}else if(col.equals("DOS_Region")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"DOS_Region\" FROM Opengeo.\"BIDS\" where \"DOS_Region\" is not null and \"DOS_Region\" <> '' order by \"DOS_Region\" asc");
+				rs = stmt.executeQuery("SELECT DISTINCT \"DOS_Region\" FROM Opengeo.\"DATATABLE\" where \"DOS_Region\" is not null and \"DOS_Region\" <> '' order by \"DOS_Region\" asc");
 			}else if(col.equals("Submitting_Officer")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"Submitting_Officer\" FROM Opengeo.\"BIDS\" where \"Submitting_Officer\" is not null and \"Submitting_Officer\" <> '' order by \"Submitting_Officer\" asc");
+				rs = stmt.executeQuery("SELECT DISTINCT \"Submitting_Officer\" FROM Opengeo.\"DATATABLE\" where \"Submitting_Officer\" is not null and \"Submitting_Officer\" <> '' order by \"Submitting_Officer\" asc");
 			}else if(col.equals("Project_Funding_Source")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"Project_Funding_Source\" FROM Opengeo.\"BIDS\" where \"Project_Funding_Source\" is not null and \"Project_Funding_Source\" <> '' order by \"Project_Funding_Source\" asc");
+				rs = stmt.executeQuery("SELECT DISTINCT \"Project_Funding_Source\" FROM Opengeo.\"DATATABLE\" where \"Project_Funding_Source\" is not null and \"Project_Funding_Source\" <> '' order by \"Project_Funding_Source\" asc");
 			}else if(col.equals("Source")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"Source\" FROM Opengeo.\"BIDS\" where \"Source\" is not null and \"Source\" <> '' order by \"Source\" asc");
+				rs = stmt.executeQuery("SELECT DISTINCT \"Source\" FROM Opengeo.\"DATATABLE\" where \"Source\" is not null and \"Source\" <> '' order by \"Source\" asc");
 			}
 			
 			out.println("<XML>");

@@ -58,7 +58,7 @@ public class LeadAdder extends HttpServlet {
 
 			update = update.substring(0, update.length()-1);
 			update = update + " where fid = " + fid;
-			update = "update Opengeo.\"BIDS\" set " + update;
+			update = "update Opengeo.\"DATATABLE\" set " + update;
 			out.print(update);
 
 		}
@@ -145,13 +145,13 @@ public class LeadAdder extends HttpServlet {
 			if(editType.equals("edit")){
 				rs = stmt.executeQuery(update);
 			}else{
-				String insert = "INSERT INTO Opengeo.\"BIDS\" (" + names
+				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
 						rs = stmt.executeQuery(insert);
 			}
 			/*
 			 * if(col.equals("Sector")){ rs =
-			 * stmt.executeQuery("SELECT DISTINCT \"Sector\" FROM Opengeo.\"BIDS\""
+			 * stmt.executeQuery("SELECT DISTINCT \"Sector\" FROM Opengeo.\"DATATABLE\""
 			 * ); }
 			 */
 
