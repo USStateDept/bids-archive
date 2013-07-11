@@ -29,19 +29,19 @@ public class Combo2 extends HttpServlet {
 			stmt = con.createStatement();
 			
 			if(col.equals("Sector")){
-			rs = stmt.executeQuery("SELECT DISTINCT \"Sector\" FROM Opengeo.\"BIDS3\" where \"Sector\" is not null and \"Sector\" <> '' order by \"Sector\" asc");
-			}else if(col.equals("DOSReg")){
+			rs = stmt.executeQuery("SELECT DISTINCT \"Sector\" FROM Opengeo.\"BIDS\" where \"Sector\" is not null and \"Sector\" <> '' order by \"Sector\" asc");
+			}else if(col.equals("DOS_Region")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"DOSReg\" FROM Opengeo.\"BIDS3\" where \"DOSReg\" is not null and \"DOSReg\" <> '' order by \"DOSReg\" asc");
-			}else if(col.equals("SubOff")){
+				rs = stmt.executeQuery("SELECT DISTINCT \"DOS_Region\" FROM Opengeo.\"BIDS\" where \"DOS_Region\" is not null and \"DOS_Region\" <> '' order by \"DOS_Region\" asc");
+			}else if(col.equals("Submitting_Officer")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"SubOff\" FROM Opengeo.\"BIDS3\" where \"SubOff\" is not null and \"SubOff\" <> '' order by \"SubOff\" asc");
-			}else if(col.equals("PrFSrc")){
+				rs = stmt.executeQuery("SELECT DISTINCT \"Submitting_Officer\" FROM Opengeo.\"BIDS\" where \"Submitting_Officer\" is not null and \"Submitting_Officer\" <> '' order by \"Submitting_Officer\" asc");
+			}else if(col.equals("Project_Funding_Source")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"PrFSrc\" FROM Opengeo.\"BIDS3\" where \"PrFSrc\" is not null and \"PrFSrc\" <> '' order by \"PrFSrc\" asc");
+				rs = stmt.executeQuery("SELECT DISTINCT \"Project_Funding_Source\" FROM Opengeo.\"BIDS\" where \"Project_Funding_Source\" is not null and \"Project_Funding_Source\" <> '' order by \"Project_Funding_Source\" asc");
 			}else if(col.equals("Source")){
 				
-				rs = stmt.executeQuery("SELECT DISTINCT \"Source\" FROM Opengeo.\"BIDS3\" where \"Source\" is not null and \"Source\" <> '' order by \"Source\" asc");
+				rs = stmt.executeQuery("SELECT DISTINCT \"Source\" FROM Opengeo.\"BIDS\" where \"Source\" is not null and \"Source\" <> '' order by \"Source\" asc");
 			}
 			
 			out.println("<XML>");

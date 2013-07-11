@@ -17,7 +17,7 @@ public class LeadAdder extends HttpServlet {
 		PrintWriter out = res.getWriter();
 
 		String query = "";
-		String names = "\"Stamp\",";
+		String names = "\"Timestamp\",";
 		String values = "\'NOW()\',";
 		String sectors = "";		
 		boolean isUpdate=false;
@@ -58,7 +58,7 @@ public class LeadAdder extends HttpServlet {
 
 			update = update.substring(0, update.length()-1);
 			update = update + " where fid = " + fid;
-			update = "update Opengeo.\"BIDS3\" set " + update;
+			update = "update Opengeo.\"BIDS\" set " + update;
 			out.print(update);
 
 		}
@@ -145,7 +145,7 @@ public class LeadAdder extends HttpServlet {
 			if(editType.equals("edit")){
 				rs = stmt.executeQuery(update);
 			}else{
-				String insert = "INSERT INTO Opengeo.\"BIDS3\" (" + names
+				String insert = "INSERT INTO Opengeo.\"BIDS\" (" + names
 						+ ") VALUES(" + values + ")";
 						rs = stmt.executeQuery(insert);
 			}

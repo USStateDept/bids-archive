@@ -1,6 +1,6 @@
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
-//OpenLayers.ProxyHost="http://54.214.19.215:8080/geoserver/rest/proxy?url="
+//OpenLayers.ProxyHost="http://localhost:8080/geoserver/rest/proxy?url="
 Ext.onReady(function() {
 
 	var sb, store, grid;
@@ -44,11 +44,11 @@ Ext.onReady(function() {
 				value : '0'
 			}, {
 				fieldLabel : 'Project Funding Source',
-				name : 'PrFSrc'
+				name : 'Project_Funding_Source'
 			}, {
 
 				fieldLabel : 'Specific Location',
-				name : 'SpecLoc',
+				name : 'Specific_Location',
 				id : 'sspec'
 			}, {
 
@@ -56,12 +56,12 @@ Ext.onReady(function() {
 				name : 'Country'
 			}, new Ext.form.ComboBox({
 				store : new Ext.data.ArrayStore({
-					fields : ['DOSReg'],
+					fields : ['DOS_Region'],
 					data : regions // from states.js
 				}),
-				name : 'DOSReg',
+				name : 'DOS_Region',
 				fieldLabel : 'DOS Region',
-				displayField : 'DOSReg',
+				displayField : 'DOS_Region',
 				typeAhead : true,
 				mode : 'local',
 				forceSelection : true,
@@ -86,51 +86,51 @@ Ext.onReady(function() {
 				//applyTo: 'local-states'
 			}), {
 				fieldLabel : 'Project Title',
-				name : 'PrTitle'
+				name : 'Project_Title'
 			}, {
 				fieldLabel : 'Project Number',
-				name : 'PrNum'
+				name : 'Project_Number'
 			}, {
 				fieldLabel : 'Link to Project',
-				name : 'LinkPr'
+				name : 'Link_To_Project'
 			}, {
 				fieldLabel : 'Keywords',
 				name : 'Keyword'
 			}, {
 				fieldLabel : 'Project Size',
-				name : 'PrSize'
+				name : 'Project_Size'
 			}, new Ext.form.DateField({
 				fieldLabel : 'Project Announced',
-				name : 'PrAnnou',
+				name : 'Project_Announced',
 				width : 190
 			}), new Ext.form.DateField({
 				fieldLabel : 'Expected Tender Date',
-				name : 'TenDate',
+				name : 'Tender_Date',
 				width : 190
 			}), {
 				fieldLabel : 'Borrowing Entity',
-				name : 'BrEnt'
+				name : 'Borrowing_Entity'
 			}, {
 				fieldLabel : 'Implementing Entity',
-				name : 'ImEnt'
+				name : 'Implementing_Entity'
 			}, {
 				fieldLabel : 'Submitting Officer',
-				name : 'SubOff'
+				name : 'Submitting_Officer'
 			}, {
 				fieldLabel : 'Submitting Officer Email',
-				name : 'SubOffC'
+				name : 'Submitting_Officer_Contact'
 			}, {
 				xtype : 'textarea',
 				fieldLabel : 'Implementing Entity POCs & Contact Info',
-				name : 'ImEnPOC'
+				name : 'Project_POCs'
 			}, {
 				xtype : 'textarea',
 				fieldLabel : 'Project Description & Bidding Requirements',
-				name : 'PrDesc'
+				name : 'Project_Description'
 			}, {
 				xtype : 'textarea',
 				fieldLabel : 'Post Comments',
-				name : 'PostCom'
+				name : 'Post_Comments'
 			}, {
 				xtype : 'fieldset',
 				title : 'Sector',
@@ -468,7 +468,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url : "http://54.214.19.215:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=170&outputformat=json",
+			url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS&maxfeatures=170&outputformat=json",
 			format : new OpenLayers.Format.JSON()
 		})
 	});
@@ -481,14 +481,14 @@ Ext.onReady(function() {
 			templates : {
 				// hover: single & list
 				// hover single
-				hover : '<div><font size=\"2\"><b>${.PrTitle}' + '</b></font></div>' + '<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '</font></div>',
+				hover : '<div><font size=\"2\"><b>${.Project_Title}' + '</b></font></div>' + '<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.Project_Funding_Source}' + '</font></div>',
 				// hover list
 				hoverList : '<div><font size=\"2\"><b>${count} leads found</b></font><br><font size=\"1\" color=\"#909090\">Click for more information</font></div>',
 				//hoverItem : '<div style =\"font-size: 10px\"><b>${.SpecLoc}: </b>${.PrTitle}<br></div>',
 				// selected item from single & list
-				single : '<div><font size=\"3\"><b>${.PrTitle}</b></font></div>' +  '<div><font size=\"1\" color=\"#909090\"><b>Country: </b>${.Country}' +'<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}'+'<div><font size=\"1\" color=\"#909090\"><b>Data Added: </b>'  + '<br><b>Funding Source: </b>${.PrFSrc}' + '<br><b>Project Size (USD): </b>${.PrSize}' + '<br><b>Description: </b><br><div style="width: 200px; height: 50px; overflow-y: scroll;">${.PrDesc}</div>' +  '<br><a href=\"${.LinkPr}\">Project Website</a>' + '<br><a href=\"mailto:${.SubOffC}\">Contact Embassy</a>' + '</font></div>',
+				single : '<div><font size=\"3\"><b>${.Project_Title}</b></font></div>' +  '<div><font size=\"1\" color=\"#909090\"><b>Country: </b>${.Country}' +'<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}'+'<div><font size=\"1\" color=\"#909090\"><b>Data Added: </b>'  + '<br><b>Funding Source: </b>${.Project_Funding_Source}' + '<br><b>Project Size (USD): </b>${.Project_Size}' + '<br><b>Description: </b><br><div style="width: 200px; height: 50px; overflow-y: scroll;">${.Project_Description}</div>' +  '<br><a href=\"${.Link_To_Project}\">Project Website</a>' + '<br><a href=\"mailto:${.Submitting_Officer_Contact}\">Contact Embassy</a>' + '</font></div>',
 				// List of clustered items
-				item : '<li><a href=\"#\" ${showPopup()}>${.PrTitle}</a></li>' + '<div><font size = \"1\" color=\"#909090\">' + '<b>Country: </b>${.Country}' + '<br><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '</font></div><br>',
+				item : '<li><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li>' + '<div><font size = \"1\" color=\"#909090\">' + '<b>Country: </b>${.Country}' + '<br><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '</font></div><br>',
 			}
 		}]]
 	});
@@ -502,28 +502,28 @@ Ext.onReady(function() {
 		autoSave : true,
 		layer : sd,
 		fields : [{
-			name : "Timestam",
+			name : "Timestamp",
 			type : "string"
 		}, {
-			name : "PrFSrc",
+			name : "Project_Funding_Source",
 			type : "string"
 		}, {
-			name : "SpecLoc",
+			name : "Specific_Location",
 			type : "string"
 		}, {
 			name : "Country",
 			type : "string"
 		}, {
-			name : "DOSReg",
+			name : "DOS_Region",
 			type : "string"
 		}, {
-			name : "PrTitle",
+			name : "Project_Title",
 			type : "string"
 		}, {
-			name : "PrNum",
+			name : "Project_Number",
 			type : "string"
 		}, {
-			name : "LinkPr",
+			name : "Link_To_Project",
 			type : "string"
 		}, {
 			name : "Sector",
@@ -532,45 +532,45 @@ Ext.onReady(function() {
 			name : "Keyword",
 			type : "string"
 		}, {
-			name : "PrSize",
+			name : "Project_Size",
 			type : "string"
 		}, {
-			name : "PrAnnou",
+			name : "Project_Announced",
 			type : "date",
 			dateFormat : "Y-m-d\\Z"
 		}, {
-			name : "TenDate",
+			name : "Tender_Date",
 			type : "date",
 			dateFormat : "Y-m-d\\Z"
 		}, {
-			name : "BrEnt",
+			name : "Borrowing_Entity",
 			type : "string"
 		}, {
-			name : "ImEnt",
+			name : "Implementing_Entity",
 			type : "string"
 		}, {
-			name : "ImEnPOC",
+			name : "Project_POCs",
 			type : "string"
 		}, {
-			name : "PrDesc",
+			name : "Project_Description",
 			type : "string"
 		}, {
-			name : "PostCom",
+			name : "Post_Comments",
 			type : "string"
 		}, {
-			name : "SubOff",
+			name : "Submitting_Officer",
 			type : "string"
 		}, {
-			name : "SubOffC",
+			name : "Submitting_Officer_Contact",
 			type : "string"
 		}, {
 			name : "Source",
 			type : "string"
 		}, {
-			name : "USFirCo",
+			name : "US_Firm_Contact",
 			type : "string"
 		}, {
-			name : "USFirWi",
+			name : "US_Firm_Wins",
 			type : "string"
 		}, {
 			name : "Marker",
@@ -584,7 +584,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://54.214.19.215:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=170&outputformat=json",
+				url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS&maxfeatures=170&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -610,11 +610,11 @@ Ext.onReady(function() {
 			width : 100
 		},*/ {
 			header : "Project Funding Source",
-			dataIndex : "PrFSrc",
+			dataIndex : "Project_Funding_Source",
 			width : 200
 		}, {
 			header : "Specific Location",
-			dataIndex : "SpecLoc",
+			dataIndex : "Specific_Location",
 			width : 175
 		}, {
 			header : "Country",
@@ -622,19 +622,19 @@ Ext.onReady(function() {
 			width : 100
 		}, {
 			header : "DOS Region",
-			dataIndex : "DOSReg",
+			dataIndex : "DOS_Region",
 			width : 125
 		}, {
 			header : "Project Title",
-			dataIndex : "PrTitle",
+			dataIndex : "Project_Title",
 			width : 125
 		}, {
 			header : "Project Number",
-			dataIndex : "PrNum",
+			dataIndex : "Project_Number",
 			width : 125
 		}, {
 			header : "Link to Project",
-			dataIndex : "LinkPr",
+			dataIndex : "Link_To_Project",
 			width : 125
 		}, {
 			header : "Sector",
@@ -646,47 +646,47 @@ Ext.onReady(function() {
 			width : 125
 		}, {
 			header : "Project Size",
-			dataIndex : "PrSize",
+			dataIndex : "Project_Size",
 			width : 125
 		}, {
 			header : "Project Announced",
-			dataIndex : "PrAnnou",
+			dataIndex : "Project_Announced",
 			width : 125,
 			format : 'm/d/Y',
 			renderer : Ext.util.Format.dateRenderer('m/d/Y')
 		}, {
 			header : "Expected Tender Date",
-			dataIndex : "TenDate",
+			dataIndex : "Tender_Date",
 			width : 125,
 			format : 'm/d/Y',
 			renderer : Ext.util.Format.dateRenderer('m/d/Y')
 		}, {
 			header : "Borrowing Entity",
-			dataIndex : "BrEnt",
+			dataIndex : "Borrowing_Entity",
 			width : 125
 		}, {
 			header : "Implementing Entity",
-			dataIndex : "ImEnt",
+			dataIndex : "Implementing_Entity",
 			width : 125
 		}, {
 			header : "Implementing Entity POC",
-			dataIndex : "ImEnPOC",
+			dataIndex : "Project_POCs",
 			width : 125
 		}, {
 			header : "Proj Descr/Bidding Req",
-			dataIndex : "PrDesc",
+			dataIndex : "Project_Description",
 			width : 125
 		}, {
 			header : "Post Comments",
-			dataIndex : "PostCom",
+			dataIndex : "Post_Comments",
 			width : 125
 		}, {
 			header : "Submitting Officer",
-			dataIndex : "SubOff",
+			dataIndex : "Submitting_Officer",
 			width : 125
 		}, {
 			header : "Submitting Officer Comments",
-			dataIndex : "SubOffC",
+			dataIndex : "Submitting_Officer_Contact",
 			width : 125
 		}, {
 			header : "Source",
@@ -694,11 +694,11 @@ Ext.onReady(function() {
 			width : 125
 		}, {
 			header : "US Firm Contact",
-			dataIndex : "USFirCo",
+			dataIndex : "US_Firm_Contact",
 			width : 125
 		}, {
 			header : "US Firm Wins",
-			dataIndex : "USFirWi",
+			dataIndex : "US_Firm_Wins",
 			width : 125
 		}, /*{
 			header : "Marker",
@@ -855,7 +855,7 @@ Ext.onReady(function() {
 	var enteringStore = new Ext.data.Store({
 		proxy : enteringHttpProxy,
 		baseParams : {
-			col : 'SubOff',
+			col : 'Submitting_Officer',
 			label : 'EnteringOfficer'
 		},
 
@@ -868,7 +868,7 @@ Ext.onReady(function() {
 	var regionStore = new Ext.data.Store({
 		proxy : regionHttpProxy,
 		baseParams : {
-			col : 'DOSReg',
+			col : 'DOS_Region',
 			label : 'Region'
 		},
 
@@ -894,7 +894,7 @@ Ext.onReady(function() {
 	var fundingStore = new Ext.data.Store({
 		proxy : fundingHttpProxy,
 		baseParams : {
-			col : 'PrFSrc',
+			col : 'Project_Funding_Source',
 			label : 'FundingSource'
 		},
 
@@ -1097,7 +1097,7 @@ Ext.onReady(function() {
 				var siz = "PrSize";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://54.214.19.215:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS3&maxfeatures=150&outputformat=json";
+				var urlWhole = "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ABIDS&maxfeatures=150&outputformat=json";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
