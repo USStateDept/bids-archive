@@ -488,7 +488,7 @@ Ext.onReady(function() {
 				// selected item from single & list
 				single : '<div><font size=\"3\"><b>${.Project_Title}</b></font></div>' +  '<div><font size=\"1\" color=\"#909090\"><b>Country: </b>${.Country}' +'<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}'+'<div><font size=\"1\" color=\"#909090\"><b>Data Added: </b>'  + '<br><b>Funding Source: </b>${.Project_Funding_Source}' + '<br><b>Project Size (USD): </b>${.Project_Size}' + '<br><b>Description: </b><br><div style="width: 200px; height: 50px; overflow-y: scroll;">${.Project_Description}</div>' +  '<br><a href=\"${.Link_To_Project}\">Project Website</a>' + '<br><a href=\"mailto:${.Submitting_Officer_Contact}\">Contact Embassy</a>' + '</font></div>',
 				// List of clustered items
-				item : '<li><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li>' + '<div><font size = \"1\" color=\"#909090\">' + '<b>Country: </b>${.Country}' + '<br><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.PrFSrc}' + '</font></div><br>'
+				item : '<li><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li>' + '<div><font size = \"1\" color=\"#909090\">' + '<b>Country: </b>${.Country}' + '<br><b>Sector: </b>${.Sector}' + '<br><b>Funding Source: </b>${.Project_Funding_Source}' + '</font></div><br>'
 			}
 		}]]
 	});
