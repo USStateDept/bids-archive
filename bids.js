@@ -469,7 +469,7 @@ Ext.onReady(function() {
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
 			url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
-			format : new OpenLayers.Format.JSON()
+			format : new OpenLayers.Format.GeoJSON()
 		})
 	});
 
