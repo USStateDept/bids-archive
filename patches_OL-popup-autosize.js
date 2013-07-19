@@ -4,9 +4,9 @@
  * full text of the license. */
 
  /**
- * @requires OpenLayers/Util.js
- * @requires OpenLayers/Popup.js
- * @requires OpenLayers/Popup/FramedCloud.js
+ * @requires ../OpenLayers/Util.js
+ * @requires ../OpenLayers/Popup.js
+ * @requires ../OpenLayers/Popup/FramedCloud.js
  */
 
 /*
