@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   width="237"
+   height="60"
+   sodipodi:docname="bids-logo.svg">
+  <metadata
+     id="metadata2991">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs2989" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1680"
+     inkscape:window-height="988"
+     id="namedview2987"
+     showgrid="false"
+     inkscape:zoom="1.4050633"
+     inkscape:cx="118.5"
+     inkscape:cy="1.5315315"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2985" />
+  <rect
+     id="rect3009"
+     width="101.06306"
+     height="44.126122"
+     x="137.36037"
+     y="0.21621591"
+     style="fill:#001c50;fill-opacity:1" />
+  <text
+     xml:space="preserve"
+     style="font-size:59.15618134000000300px;font-style:normal;font-weight:normal;line-height:92.00000167000000300%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"
+     x="210.71059"
+     y="12.246434"
+     id="text2995"
+     sodipodi:linespacing="92.000002%"
+     transform="scale(0.67617618,1.4789045)"><tspan
+       sodipodi:role="line"
+       id="tspan2997"
+       x="210.71059"
+       y="12.246434"
+       style="font-size:14.78904533000000000px;font-style:oblique;line-height:92.00000167000000300%;-inkscape-font-specification:Sans Oblique;fill:#ffffff">Business Information</tspan><tspan
+       sodipodi:role="line"
+       x="210.71059"
+       y="25.852356"
+       id="tspan2999"
+       style="font-size:14.78904533000000000px;font-style:oblique;line-height:92.00000167000000300%;-inkscape-font-specification:Sans Oblique;fill:#ffffff">Database System</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:57.70183182px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="-4.7435198"
+     y="41.70599"
+     id="text3001"
+     sodipodi:linespacing="125%"
+     transform="scale(0.69321888,1.4425458)"><tspan
+       sodipodi:role="line"
+       id="tspan3003"
+       x="-4.7435198"
+       y="41.70599"
+       style="font-weight:bold;letter-spacing:16.00000013px;-inkscape-font-specification:Sans Bold">BIDS</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#808080;fill-opacity:1;stroke:none;font-family:Sans"
+     x="142.34235"
+     y="57.864864"
+     id="text3005"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3007"
+       x="142.34235"
+       y="57.864864"
+       style="font-size:10px;fill:#808080">an eDiplomacy tool</tspan></text>
+</svg>
