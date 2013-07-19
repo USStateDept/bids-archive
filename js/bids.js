@@ -28,7 +28,7 @@ Ext.onReady(function() {
 		border : false,
 		width : 400,
 		height : 450,
-		url : 'servlet/LeadAdder',
+		url : '..servlet/LeadAdder',
 		autoScroll : true,
 		//extraParams: {"Cleared":0,"Archived":0},
 		items:[
