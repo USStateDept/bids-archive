@@ -4,20 +4,24 @@
         
         <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://extjs.cachefly.net/ext-3.4.0/resources/css/ext-all.css" />
-        <link rel="stylesheet" type="text/css" href="ext-3.4.0.css" />
-		<link rel="stylesheet" href="Ext.ux.form.CheckboxCombo.min.css" />
-        <script src="OpenLayers/lib/OpenLayers.js"></script>
-        <script type="text/javascript" src="GeoExt/script/GeoExt.js"></script>
-
-        <script type="text/javascript" src="bids.js"></script>
-		<!--<script type="text/javascript" src="AnimatedCluster.js"></script>-->
-		<script type="text/javascript" src="FeaturePopups.js"></script>
-		<script type="text/javascript" src="patches_OL-popup-autosize.js"></script>
-		<script type="text/javascript" src="Ext.ux.PanelCollapsedTitle.js"></script>
-		<script type="text/javascript" src="Ext.ux.form.CheckboxCombo.min.js"></script>
-		
-		<script>
+		<script type="text/javascript" src="../OpenLayers/lib/OpenLayers.js"></script>
+        <script type="text/javascript" src="../GeoExt/script/GeoExt.js"></script>
+        <script type="text/javascript" src="js/bids.js"></script>
+		<script type="text/javascript" src="js/FeaturePopups.js"></script>
+		<script type="text/javascript" src="js/patches_OL-popup-autosize.js"></script>
+		<script type="text/javascript" src="js/Ext.ux.PanelCollapsedTitle.js"></script>
+		<script type="text/javascript" src="js/Ext.ux.form.CheckboxCombo.min.js"></script>
+		<script type="text/javascript" src="js/tile.stamen.js?v1.2.2"></script>
+		<script type="text/javascript" src="js/check.js"></script>
+		<script type="text/javascript" src="js/yes.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/ez.css" />
+		<link rel="stylesheet" type="text/css" href="css/olStyle.css" />
+		<link rel="stylesheet" type="text/css" href="../ext-3.4.0/resources/css/ext-all.css" />
+        <link rel="stylesheet" type="text/css" href="css/ext-3.4.0.css" />
+		<link rel="stylesheet" type="text/css" href="css/Ext.ux.form.CheckboxCombo.min.css" />
+		<link rel="stylesheet" type="text/css" id="xtheme-wireframe" href="../ext-3.4.0/resources/css/xtheme-wireframe.css"/> 
+        <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -42,16 +46,25 @@
         .gx-tree-layer-icon {
             display: none;
         }
+		.olControlAttribution {
+			z-index: 0 !important;
+		}
+		
+		.x-form-item {
+			overflow: false !important;
+		}
+		
+		.ext-gecko {
+			overflow: false !important;
+		}
+		
+		.x-window-body {
+			overflow: false !important;
+		}
+}
     </style>
 
     </head>
     <body>
-		<div id="container">
-				<div id="leadAddText"><p>Add your lead!</p></div>
-				<div id="leadAdd"></div>
-				<div id="logo"><p>Business Information Database System</p></div>
-				<div id="credit"><a href="http://www.state.gov/m/irm/ediplomacy/">powered by eDiplomacy</a></div>
-			</div>
-		</div>
 	</body>
 </html>
