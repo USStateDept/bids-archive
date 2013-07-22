@@ -1,6 +1,6 @@
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
-//OpenLayers.ProxyHost="http://localhost:8080/geoserver/rest/proxy?url="
+//OpenLayers.ProxyHost="http://localhost/geoserver/rest/proxy?url="
 function as(n) {
                 var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
                 Ext.util.CSS.swapStyleSheet("theme", themeUrl);
@@ -28,9 +28,8 @@ Ext.onReady(function() {
 		border : false,
 		width : 400,
 		height : 450,
-		url : '..servlet/LeadAdder',
+		url : 'servlet/LeadAdder',
 		autoScroll : true,
-		//extraParams: {"Cleared":0,"Archived":0},
 		items:[
 		{
 				xtype : 'hidden',
@@ -45,19 +44,16 @@ Ext.onReady(function() {
 				name : 'fid',
 				value : '0'
 			}, {
-				//fieldLabel : 'Project Title',
 				name : 'Project_Title',
 				emptyText : 'Project Title',
 				xtype : 'textfield',
 				width : 275
 			}, {
-				//fieldLabel : 'Country or Region',
 				name : 'Country',
 				xtype : 'textfield',
 				emptyText : 'Country',
 				width : 275
 			}, {
-				//fieldLabel : 'Specific Location',
 				name : 'Specific_Location',
 				xtype : 'textfield',
 				emptyText : 'Specific Location',
@@ -70,29 +66,23 @@ Ext.onReady(function() {
 					data : regions // from states.js
 				}),
 				name : 'DOS_Region',
-				//fieldLabel : 'DOS Region',
 				displayField : 'DOS_Region',
 				emptyText : 'DOS Region',
 				typeAhead : true,
 				mode : 'local',
 				forceSelection : true,
 				triggerAction : 'all',
-				//emptyText : 'Select Source',
 				selectOnFocus : true,
 				width : 275
-				//applyTo: 'local-states'
 			}),
 			{
-				//bodyStyle: 'padding-right:5px; border-style:solid; border-width:1px; border-color:#C0C0C0;',
-				//autoHeight: true,
+				
 				autoScroll: false,
-				//setAutoScroll: false,
 				fieldLabel: 'Sector',
 				items: [{
 					layout : 'column',
 					xtype: 'checkboxgroup',
 					columns: 2,
-					//setAutoScroll: false,
 					autoScroll: false,
 					items: [
 						{boxLabel: 'Administration', name: 'chAdmin',autoScroll: true},
@@ -107,24 +97,21 @@ Ext.onReady(function() {
 						{boxLabel: 'Tourism', name: 'chTou',autoScroll: false},
 						{boxLabel: 'Transportation', name: 'chTra',autoScroll: false},
 						{boxLabel: 'Water', name: 'chWa',autoScroll: false}, 
-						{xtype : 'textfield', emptyText : 'Other Sector...', name : 'chOth', anchor:'95%', padding:'10px'}
+						{xtype : 'textfield', fieldLabel : 'Other Sector', name : 'chOth', anchor:'95%', padding:'10px'}
 					]
 				}
 				]
 			}, {
-				//fieldLabel : 'Project Size',
 				name : 'Project_Size',
 				emptyText : 'Project Size',
 				xtype : 'textfield',
 				width : 275
 			}, {
-				//fieldLabel : 'Project Number',
 				name : 'Project_Number',
 				emptyText : 'Project Number',
 				xtype : 'textfield',
 				width : 275
 			}, {
-				//fieldLabel : 'Project Funding Source',
 				name : 'Project_Funding_Source',
 				emptyText : 'Funding Source',
 				xtype : 'textfield',
@@ -135,71 +122,58 @@ Ext.onReady(function() {
 					data : banks // from states.js
 				}),
 				name : 'Source',
-				//fieldLabel : 'Source',
 				displayField : 'Source',
 				emptyText : 'Information Source',
 				typeAhead : true,
 				mode : 'local',
 				forceSelection : true,
 				triggerAction : 'all',
-				//emptyText : 'Select Source',
 				selectOnFocus : true
-				//applyTo: 'local-states'
 			}), {
 				xtype : 'textarea',
-				//fieldLabel : 'Project Description & Bidding Requirements',
 				name : 'Project_Description',
 				emptyText : 'Project Description & Bidding Requirements',
 				xtype : 'textfield',
 				width : 275,
 				height: 140
 			}, {
-				//fieldLabel : 'Keywords',
 				emptyText : 'Keywords',
 				name : 'Keyword'
 			}, new Ext.form.DateField({
-				//fieldLabel : 'Project Announced',
 				emptyText : 'Project Announced',
 				name : 'Project_Announced',
 				width : 275
 			}), new Ext.form.DateField({
-				//fieldLabel : 'Expected Tender Date',
 				name : 'Tender_Date',
 				emptyText : 'Expected Tender Date',
 				width : 275
 			}), {
-				//fieldLabel : 'Borrowing Entity',
 				name : 'Borrowing_Entity',
 				emptyText : 'Borrowing Entity',
 				xtype : 'textfield',
 				width : 275
 			}, {
-				//fieldLabel : 'Implementing Entity',
 				name : 'Implementing_Entity',
 				emptyText : 'Implementing Entity',
 				xtype : 'textfield',
 				width : 275
 			}, {
-				//fieldLabel : 'Link to Project',
 				name : 'Link_To_Project',
 				emptyText : 'Project Website',
 				xtype : 'textfield',
 				width : 275
 			}, {
-				//fieldLabel : 'Submitting Officer',
 				name : 'Submitting_Officer',
 				emptyText : 'Submitting Officer',
 				xtype : 'textfield',
 				width : 275
 			}, {
-				//fieldLabel : 'Submitting Officer Email',
 				name : 'Submitting_Officer_Contact',
 				emptyText : 'Submitting Officer Email',
 				xtype : 'textfield',
 				width : 275
 			}, {
 				xtype : 'textarea',
-				//fieldLabel : 'Implementing Entity POCs & Contact Info',
 				name : 'Project_POCs',
 				emptyText : 'Implementing Entity POCs & Contact Info',
 				xtype : 'textfield',
@@ -207,19 +181,12 @@ Ext.onReady(function() {
 				height: 80
 			}, {
 				xtype : 'textarea',
-				//fieldLabel : 'Post Comments',
 				name : 'Post_Comments',
 				emptyText : 'Post Comments',
 				xtype : 'textfield',
 				width : 275,
 				height: 80
 			}],
-		/*
-		 listeners : {
-		 render : function() {
-		 countryStore.load();
-		 }
-		 },*/
 		buttons : [{
 			text : 'Edit',
 			id : 'btnEdit',
@@ -235,6 +202,7 @@ Ext.onReady(function() {
 			id : 'btnSave',
 			handler : function() {
 				tabs.getForm().submit({
+				submitEmptyText: false,
 					params : {
 						editType : 'insert'
 					},
@@ -259,11 +227,6 @@ Ext.onReady(function() {
 				tabs.getForm().reset();
 			}
 		}]
-		/*buttons : [{
-		 text : 'Save'
-		 }, {
-		 text : 'Cancel'
-		 }]*/
 	});
 
 	tabs.render(document.body);
@@ -283,26 +246,6 @@ Ext.onReady(function() {
 	win.myExtraParams = {
 		e : false
 	};
-
-	/*var action = new GeoExt.Action({
-		//control: new OpenLayers.Control.ZoomToMaxExtent(),
-		//map: map,
-		text : "Add a Lead",
-		icon : 'add.png',
-		handler : function() {
-			//Ext.example.msg('Click','You clicked on "Action 1".');
-
-			Ext.Msg.show({
-				title : 'Add a Lead',
-				msg : 'By clicking okay, you agree that any trade lead added to this system will be unclassified, and that you understand the rules and regulations regarding this site.',
-				width : 300,
-				buttons : Ext.MessageBox.OK,
-				fn : myCallbackFunction
-				//icon : Ext.MessageBox.ERROR
-			})
-		}
-		//tooltip: "zoom to max extent"
-	});*/
 
 	function myCallbackFunction() {
 
@@ -462,7 +405,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+			url : "http://localhost/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
 			format : new OpenLayers.Format.GeoJSON()
 		})
 	});
@@ -576,7 +519,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+				url : "http://localhost/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -596,11 +539,7 @@ Ext.onReady(function() {
 		id : 'gridx',
 		plugins : [Ext.ux.PanelCollapsedTitle],
 
-		columns : [/*{
-			header : "Timestamp",
-			dataIndex : "Timestam",
-			width : 100
-		},*/ {
+		columns : [ {
 			header : "Project Title",
 			dataIndex : "Project_Title",
 			width : 340,
@@ -609,11 +548,7 @@ Ext.onReady(function() {
 			header : "Country",
 			dataIndex : "Country",
 			width : 75
-		}, /*{
-			header : "Specific Location",
-			dataIndex : "Specific_Location",
-			width : 175
-		}, */{
+		}, {
 			header : "Sector",
 			dataIndex : "Sector",
 			width : 125
@@ -642,71 +577,15 @@ Ext.onReady(function() {
 			header : "Project Number",
 			dataIndex : "Project_Number",
 			width : 90
-		}, /*{
-			header : "Link to Project",
-			dataIndex : "Link_To_Project",
-			width : 125
-		},*/ {
+		},  {
 			header : "Keywords",
 			dataIndex : "Keyword",
 			width : 240
-		}, /*{
-			header : "Borrowing Entity",
-			dataIndex : "Borrowing_Entity",
-			width : 125
-		}, */{
+		},{
 			header : "Implementing Entity",
 			dataIndex : "Implementing_Entity",
 			width : 220
-		} /*,{
-			header : "Implementing Entity POC",
-			dataIndex : "Project_POCs",
-			width : 125
-		}, *//*{
-			header : "Proj Descr/Bidding Req",
-			dataIndex : "Project_Description",
-			width : 125
-		}, *//*{
-			header : "Post Comments",
-			dataIndex : "Post_Comments",
-			width : 125
-		}, *//*{
-			header : "Submitting Officer",
-			dataIndex : "Submitting_Officer",
-			width : 125
-		}, {
-			header : "Submitting Officer Comments",
-			dataIndex : "Submitting_Officer_Contact",
-			width : 125
-		}, {
-			header : "DOS Region",
-			dataIndex : "DOS_Region",
-			width : 125
-		}, {
-			header : "Source",
-			dataIndex : "Source",
-			width : 125
-		}, {
-			header : "US Firm Contact",
-			dataIndex : "US_Firm_Contact",
-			width : 125
-		}, {
-			header : "US Firm Wins",
-			dataIndex : "US_Firm_Wins",
-			width : 125
-		} *//*{
-			header : "Marker",
-			dataIndex : "Marker",
-			width : 125
-		}, {
-			header : "Cleared",
-			dataIndex : "Cleared",
-			width : 125
-		}, {
-			header : "ID",
-			dataIndex : "fid",
-			width : 125
-		}*/],
+		} ],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
 
 		height : 200,
@@ -737,17 +616,13 @@ Ext.onReady(function() {
 				var sou = grid.getSelectionModel().getSelected().data.Source;
 				var fid = grid.getSelectionModel().getSelected().data.fid;
 				var ten = grid.getSelectionModel().getSelected().data.Tender_Date;
-				//var us = grid.getSelectionModel().getSelected().data.USFirWi;
-				//var usf = grid.getSelectionModel().getSelected().data.USFirCo;
-				console.log(ten);
-				//console.log(record);
+				
 				tabs.getForm().findField("Specific_Location").setValue(sp);
 				tabs.getForm().findField("Project_Funding_Source").setValue(pr);
 				tabs.getForm().findField("Country").setValue(co);
 				tabs.getForm().findField("Project_Title").setValue(prt);
 				tabs.getForm().findField("Project_Number").setValue(prn);
 				tabs.getForm().findField("Link_To_Project").setValue(li);
-				//tabs.getForm().findField("Sector").setValue(se);
 				tabs.getForm().findField("Keyword").setValue(ke);
 				tabs.getForm().findField("Project_Size").setValue(prs);
 				tabs.getForm().findField("Project_Announced").setValue(pra);
@@ -761,11 +636,7 @@ Ext.onReady(function() {
 				tabs.getForm().findField("Source").setValue(sou);
 				tabs.getForm().findField("fid").setValue(fid);
 
-				//var dt = new Date(ten);
-				//dt.format('m/d/Y');
 				tabs.getForm().findField("Tender_Date").setValue(ten);
-				//tabs.getForm().findField("USFirWi").setValue(us);
-				//tabs.getForm().findField("USFirCo").setValue(usf);
 
 				if (se.indexOf("Water") != -1) {
 					tabs.getForm().findField("chWa").setValue(true);
@@ -822,27 +693,27 @@ Ext.onReady(function() {
 	});
 
 	var enteringHttpProxy = new Ext.data.HttpProxy({
-		url : '../servlet/Combo2',
+		url : 'servlet/Combo2',
 		method : 'GET'
 	});
 
 	var regionHttpProxy = new Ext.data.HttpProxy({
-		url : '../servlet/Combo2',
+		url : 'servlet/Combo2',
 		method : 'GET'
 	});
 
 	var sectorHttpProxy = new Ext.data.HttpProxy({
-		url : '../servlet/Combo2',
+		url : 'servlet/Combo2',
 		method : 'GET'
 	});
 
 	var fundingHttpProxy = new Ext.data.HttpProxy({
-		url : '../servlet/Combo2',
+		url : 'servlet/Combo2',
 		method : 'GET'
 	});
 
 	var sourceHttpProxy = new Ext.data.HttpProxy({
-		url : '../servlet/Combo2',
+		url : 'servlet/Combo2',
 		method : 'GET'
 	});
 
@@ -911,12 +782,10 @@ Ext.onReady(function() {
 		}, ['Source'])
 	});
 
-	//countryStore.load();
 	enteringStore.load();
 	sectorStore.load();
 	regionStore.load();
 	fundingStore.load();
-	//sourceStore.load();
 
 	var categorySelectedId;
 
@@ -935,126 +804,69 @@ Ext.onReady(function() {
 		defaultType : 'textfield',
 
 		items : [ txtKey = new Ext.form.TextField({
-			//fieldLabel : 'Keywords',
 			emptyText : 'Keywords...'
 		}), secBox = new Ext.ux.form.CheckboxCombo({
 			store : sectorStore,
-			//fieldLabel : 'Sector',
 			displayField : 'Sector',
 			valueField : 'Sector',
-			//typeAhead : true,
 			mode : 'local',
-			//forceSelection : true,
-			//triggerAction : 'all',
 			emptyText : 'Select Sector...'
-			//selectOnFocus : true
-			//valueField : 'Water'
-			/*listeners : {
-			select : State_Select
-			}*/
-			//applyTo: 'local-states'
 		}), sizeBox = new Ext.ux.form.CheckboxCombo({
 			store : new Ext.data.ArrayStore({
 				fields : ['PrSize'],
 				data : sizes // from states.js
 			}),
-			//fieldLabel : 'Size',
 			displayField : 'PrSize',
 			valueField : 'PrSize',
-			//typeAhead : true,
 			mode : 'local',
-			//forceSelection : true,
-			//triggerAction : 'all',
 			emptyText : 'Select Size...'
-			//selectOnFocus : true
-			//applyTo: 'local-states'
 		}), regBox = new Ext.ux.form.CheckboxCombo({
 			store : regionStore,
-			//fieldLabel : 'Region',
 			displayField : 'Region',
 			valueField : 'Region',
-			//typeAhead : true,
 			mode : 'local',
-			//forceSelection : true,
-			//triggerAction : 'all',
 			emptyText : 'Select Region...'
-			//selectOnFocus : true
-			//applyTo: 'local-states'
 		}), fsBox = new Ext.ux.form.CheckboxCombo({
 			store : fundingStore,
-			//fieldLabel : 'Funding Source',
 			displayField : 'FundingSource',
 			valueField : 'FundingSource',
-			//typeAhead : true,
 			mode : 'local',
-			//forceSelection : true,
-			//triggerAction : 'all',
 			emptyText : 'Select Funding...'
-			//selectOnFocus : true
-			//applyTo: 'local-states'
 		}), dBegin = new Ext.form.DateField({
 			emptyText : 'Posted Date Begin...',
-			//fieldLabel : 'Date Range',
 			width : 190
-			//allowBlank : false
 		}), dEnd = new Ext.form.DateField({
-			//fieldLabel : 'Tender Date',
 			emptyText : 'Posted Date End...',
 			width : 190
-			//allowBlank : false
 		}), tBegin = new Ext.form.DateField({
 			emptyText : 'Tender Data Begin...',
-			//fieldLabel : 'Tender Date',
-			//disabled : true,
-			//name : 'tBegin',
 			width : 190
-			//allowBlank : false
 		}), tEnd = new Ext.form.DateField({
-			//fieldLabel : 'Date Range',
 			emptyText : 'Tender Date End...',
-			//disabled : true,
-			//name : 'tEnd',
 			width : 190
-			//allowBlank : false
-			//}), eoBox= new Ext.ux.form.LovCombo({
 		}), eoBox = new Ext.ux.form.CheckboxCombo({
-			//xtype: 'checkboxcombo',
-			//name: 'eoBox',
-			//multiSelect: true,
 			store : enteringStore,
-			//fieldLabel : 'Entering Officer',
 			displayField : 'EnteringOfficer',
-			//typeAhead : true,
 			mode : 'local',
-			//allowBlank: false,
 			valueField : 'EnteringOfficer',
-			//forceSelection : true,
-			//triggerAction : 'all',
 			emptyText : 'Select Officer...'
-			//selectOnFocus : true
-			//applyTo: 'local-states'
 		}), arcBox = new Ext.form.ComboBox({
 			store : new Ext.data.ArrayStore({
 				fields : ['Archived'],
 				data : arch // from states.js
 			}),
-			//fieldLabel : 'Archived',
 			displayField : 'Archived',
 			typeAhead : true,
 			mode : 'local',
 			forceSelection : true,
 			triggerAction : 'all',
 			emptyText : 'Select Archived...',
-			//disabled : true,
 			selectOnFocus : true
-			//applyTo: 'local-states'
 		})],
 		buttons : [{
 			text : '<b>Add a Lead</b>',
-			//text : "Add a Lead",
 			icon : 'img/add.png',
 			handler : function() {
-				//Ext.example.msg('Click','You clicked on "Action 1".');
 
 				Ext.Msg.show({
 					title : 'Add a Lead',
@@ -1062,7 +874,6 @@ Ext.onReady(function() {
 					width : 300,
 					buttons : Ext.MessageBox.OK,
 					fn : myCallbackFunction
-					//icon : Ext.MessageBox.ERROR
 				})
 			}
 		}, {
@@ -1092,7 +903,7 @@ Ext.onReady(function() {
 				var siz = "Project_Size";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://localhost:8080/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json";
+				var urlWhole = "http://localhost/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
@@ -1155,7 +966,6 @@ Ext.onReady(function() {
 							filter = filter + "<PropertyIsGreaterThan><PropertyName>PrSize</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
 						}
 					}
-					//filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin +"%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
 					count = count + 1;
 				}
 				////Tender Date
@@ -1167,8 +977,6 @@ Ext.onReady(function() {
 				}
 				////Date
 				if (dBeginVal != '') {
-					//var begin = tBeginVal + "/" + tBegin.getValue().DAY + "/" + tBegin.getValue().YEAR;
-					//var end = tEndVal + "/" + tEnd.getValue().DAY + "/" + tEnd.getValue().YEAR;
 					var begin = Ext.util.Format.date(dBeginVal, 'm/d/Y');
 					var end = Ext.util.Format.date(dEndVal, 'm/d/Y');
 					filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + pra + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
