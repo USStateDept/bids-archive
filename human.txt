@@ -1,0 +1,22 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    U.S. Department of State, Office of eDiplomacy's GIS Team
+	Leroy Bryant -- GIS Developer
+	Brody Dittemore -- GIS Business Analyst / Developer
+	Chris Wilkens -- GIS Business Analyst
+	
+# CLIENT
+	Developed for U.S. Department of State, Economic Bureau
+
+# THANKS
+
+    Office of eDiplomacy
+		http://www.state.gov/m/irm/ediplomacy/
+		@eDipatstate
+
+# TECHNOLOGY COLOPHON
+
+    HTML, CSS3, OpenGeo, OpenLayers, GeoExt, Ext
