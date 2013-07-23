@@ -4,9 +4,9 @@
 # TEAM
 
     U.S. Department of State, Office of eDiplomacy's GIS Team
-	Leroy Bryant -- GIS Developer
-	Brody Dittemore -- GIS Business Analyst / Developer
-	Chris Wilkens -- GIS Business Analyst
+	@eDiper -- GIS Developer
+	@brodydittemore-eDip -- GIS Business Analyst / Developer
+	@wilkic -- GIS Business Analyst
 	
 # CLIENT
 	Developed for U.S. Department of State, Economic Bureau
