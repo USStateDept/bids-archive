@@ -137,8 +137,9 @@ div.olControlMousePosition {
 
 .olPopupContent {
     padding:5px;
-    overflow: auto;
-	border-radius:8px !important;
+    overflow-y: scroll;
+
+	border: 0.5px solid #c0c0c0;;
 }
 
 .olControlNavigationHistory {

@@ -26,10 +26,12 @@ Ext.onReady(function() {
 		layout : 'form',
 		labelWidth : 80,
 		border : false,
-		width : 400,
+		width : 340,
 		height : 450,
 		url : 'servlet/LeadAdder',
 		autoScroll : true,
+		resizable : false,
+		resizeHandles : false,
 		items:[
 		{
 				xtype : 'hidden',
@@ -74,9 +76,7 @@ Ext.onReady(function() {
 				triggerAction : 'all',
 				selectOnFocus : true,
 				width : 275
-			}),
-			{
-				
+			}), {	
 				autoScroll: false,
 				fieldLabel: 'Sector',
 				items: [{
@@ -85,7 +85,7 @@ Ext.onReady(function() {
 					columns: 2,
 					autoScroll: false,
 					items: [
-						{boxLabel: 'Administration', name: 'chAdmin',autoScroll: true},
+						{boxLabel: 'Administration', name: 'chAdmin',autoScroll: false},
 						{boxLabel: 'Agriculture', name: 'chAgr',autoScroll: false},
 						{boxLabel: 'Education', name: 'chEd',autoScroll: false},
 						{boxLabel: 'Energy', name: 'chEn',autoScroll: false},
@@ -97,10 +97,9 @@ Ext.onReady(function() {
 						{boxLabel: 'Tourism', name: 'chTou',autoScroll: false},
 						{boxLabel: 'Transportation', name: 'chTra',autoScroll: false},
 						{boxLabel: 'Water', name: 'chWa',autoScroll: false}, 
-						{xtype : 'textfield', fieldLabel : 'Other Sector', name : 'chOth', anchor:'95%', padding:'10px'}
+						{boxLabel: 'Other', name: 'chOth',autoScroll: false}
 					]
-				}
-				]
+				}]
 			}, {
 				name : 'Project_Size',
 				emptyText : 'Project Size',
@@ -382,7 +381,7 @@ Ext.onReady(function() {
 		}]
 	});
 
-	var sd = new OpenLayers.Layer.Vector('Leads', {
+	var sd = new OpenLayers.Layer.Vector('lead', {
 		//projection: geographicProj,
 		strategies : [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster()],
 		styleMap : new OpenLayers.StyleMap({
@@ -421,9 +420,9 @@ Ext.onReady(function() {
 				// hover list
 				hoverList : '<div><font size=\"2\"><b>${count} leads found</b></font><br><font size=\"1\" color=\"#909090\">Click for more information</font></div>',
 				// selected item from single & list
-				single : '<div><font size=\"3\"><b>${.Project_Title}</b></font></div>' +  '<div><font size=\"1\" color=\"#909090\"><b>Country: </b>${.Country}' +'<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}'+'<div><font size=\"1\" color=\"#909090\"><b>Data Added: </b>'  + '<br><b>Funding Source: </b>${.Project_Funding_Source}/<br><b>Project Size (USD): </b>${.Project_Size}/<br><b>Description: </b><br><div style="width: 200px; height: 50px; overflow-y: scroll;">${.Project_Description}</div>' +  '<br><a href=\"${.Link_To_Project}\">Project Website</a>/<br><a href=\"mailto:${.Submitting_Officer_Contact}\">Contact Embassy</a>/</font></div>',
+				single : '<div><font size=\"3\"><b>${.Project_Title}</b></font></div>' +  '<div class="popupLeadList"><font size=\"1\" color=\"#909090\"><b>Country: </b>${.Country}' +'<div><font size=\"1\" color=\"#909090\"><b>Sector: </b>${.Sector}'+'<div><font size=\"1\" color=\"#909090\"><b>Data Added: </b>'  + '<br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><b>Description: </b><br>${.Project_Description}' +  '<br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div>',
 				// List of clustered items
-				item : '<li><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li>/<div><font size = \"1\" color=\"#909090\">/<b>Country: </b>${.Country}/<br><b>Sector: </b>${.Sector}/<br><b>Funding Source: </b>${.PrFSrc}/</font></div><br>'
+				item : '<li class="leadList"><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li><div><font size = \"1\" color=\"#909090\"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</font></div><br>'
 			}
 		}]]
 	});
@@ -791,7 +790,7 @@ Ext.onReady(function() {
 
 	// SEARCH FILTERS
 	var filterPanel = new Ext.FormPanel({
-		labelWidth : 100, // label settings here cascade unless overridden
+		labelWidth : 0, // label settings here cascade unless overridden
 		frame : false,
 		title : '<style="font-size:12px;">Search Filters</style>',
 		region : 'center',

@@ -182,7 +182,7 @@ OpenLayers.Control.FeaturePopups = OpenLayers.Class(OpenLayers.Control, {
      * Default is
      *    "<h2>${layer.name} - ${count}</h2><ul>${html}</ul>"
      */
-    layerListTemplate: '<h2>${layer.name} - ${count}</h2><ul>${html}</ul>',
+    layerListTemplate: '<h2>${count} ${layer.name}s found</h2><div class="popupLeadList"><ul>${html}</ul></div>',
 
     /**
      * APIProperty: hoverClusterTemplate
