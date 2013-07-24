@@ -841,10 +841,10 @@ Ext.onReady(function() {
 			mode : 'local',
 			emptyText : 'Select Funding...'
 		}), dBegin = new Ext.form.DateField({
-			emptyText : 'Posted Date Begin...',
+			emptyText : 'Announce Date Begin...',
 			width : 190
 		}), dEnd = new Ext.form.DateField({
-			emptyText : 'Posted Date End...',
+			emptyText : 'Announce Date End...',
 			width : 190
 		}), tBegin = new Ext.form.DateField({
 			emptyText : 'Tender Data Begin...',
