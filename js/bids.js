@@ -546,44 +546,53 @@ Ext.onReady(function() {
 		}, {
 			header : "Country",
 			dataIndex : "Country",
-			width : 75
+			width : 75,
+			sortable: true
 		}, {
 			header : "Sector",
 			dataIndex : "Sector",
-			width : 125
+			width : 125,
+			sortable: true
 		}, {
 			header : "Project Funding Source",
 			dataIndex : "Project_Funding_Source",
-			width : 200
+			width : 200,
+			sortable: true
 		}, {
 			header : "Project Size",
 			dataIndex : "Project_Size",
 			renderer: Ext.util.Format.numberRenderer('$0,000'),
-			width : 80
+			width : 80,
+			sortable: true
 		}, {
 			header : "Project Announced",
 			dataIndex : "Project_Announced",
 			width : 110,
 			format : 'm/d/Y',
-			renderer : Ext.util.Format.dateRenderer('m/d/Y')
+			renderer : Ext.util.Format.dateRenderer('m/d/Y'),
+			sortable: true
 		}, {
 			header : "Expected Tender Date",
 			dataIndex : "Tender_Date",
 			width : 125,
 			format : 'm/d/Y',
-			renderer : Ext.util.Format.dateRenderer('m/d/Y')
+			renderer : Ext.util.Format.dateRenderer('m/d/Y'),
+			sortable: true
 		}, {
 			header : "Project Number",
 			dataIndex : "Project_Number",
-			width : 90
+			width : 90,
+			sortable: true
 		},  {
 			header : "Keywords",
 			dataIndex : "Keyword",
-			width : 240
+			width : 240,
+			sortable: true
 		},{
 			header : "Implementing Entity",
 			dataIndex : "Implementing_Entity",
-			width : 220
+			width : 220,
+			sortable: true
 		} ],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
 
