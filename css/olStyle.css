@@ -38,7 +38,6 @@ a {
     bottom: 3px;
     position: absolute;
     display: block;
-	z-index: 0;
 }
 .olControlScale {
     right: 3px;
