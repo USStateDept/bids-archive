@@ -408,9 +408,9 @@ Ext.onReady(function() {
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
 			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json", 
-			attribution : "Report a bug <a href='https://github.com/eDiper/bids/issues' target='_blank'>here</a>",
 			format : new OpenLayers.Format.GeoJSON()
-		})
+		}),
+		attribution : "Report a bug <a href='https://github.com/eDiper/bids/issues' target='_blank'>here</a>"
 	});
 
 	var fpControl = new OpenLayers.Control.FeaturePopups({
