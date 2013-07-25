@@ -1,3 +1,8 @@
+window.onload = function()
+                {
+                   ieCheck();
+                };
+				
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
 //OpenLayers.ProxyHost="http://" + domain + "/geoserver/rest/proxy?url="
@@ -6,7 +11,7 @@ function as(n) {
                 Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 Ext.onReady(function() {
-	
+
 	var domain = 'localhost'
 	var site = '/bids/'
 	
