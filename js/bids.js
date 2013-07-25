@@ -272,12 +272,13 @@ Ext.onReady(function() {
 		},
 		zoom : 3,
 		layers : [
-			new OpenLayers.Layer.Stamen("toner-lite"),
+			new OpenLayers.Layer.Stamen("toner-lite", {
+				attribution: "Base data: OpenStreetMaps"}),
 			new OpenLayers.Layer.XYZ("Physical Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
-				//attribution : "Data, imagery and map information provided by MapQuest, Open Street Map and contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/' target='_blank'>CC-BY-SA.</a>",
+				attribution : "Base data: MapQuest, OpenStreetMaps",
 				transitionEffect : "resize"}),
 			new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
-				//attribution : "Tiles Courtesy of MapQuest. Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency.",
+				attribution : "Imagery: MapQuest",
 				transitionEffect : "resize"})
 		]
 	});
@@ -410,7 +411,7 @@ Ext.onReady(function() {
 			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json", 
 			format : new OpenLayers.Format.GeoJSON()
 		}),
-		attribution : "Report a bug <a href='https://github.com/eDiper/bids/issues' target='_blank'>here</a>"
+		attribution : "<a href='https://github.com/eDiper/bids/issues' target='_blank'><b>Report a bug here</b></a>"
 	});
 
 	var fpControl = new OpenLayers.Control.FeaturePopups({
