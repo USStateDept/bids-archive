@@ -1,11 +1,14 @@
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
-//OpenLayers.ProxyHost="http://edip-maps.net/geoserver/rest/proxy?url="
+//OpenLayers.ProxyHost="http://" + domain + "/geoserver/rest/proxy?url="
 function as(n) {
                 var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
                 Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 Ext.onReady(function() {
+	
+	var domain = 'localhost'
+	var site = '/bids/'
 	
 	var extent = new OpenLayers.Bounds(-20000000,-8000000,20000000,12000000);
 	
@@ -404,7 +407,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url : "http://edip-maps.net/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json", 
 			format : new OpenLayers.Format.GeoJSON()
 		})
 	});
@@ -518,7 +521,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://edip-maps.net/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -911,7 +914,7 @@ Ext.onReady(function() {
 				var siz = "Project_Size";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://edip-maps.net/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json";
+				var urlWhole = "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
