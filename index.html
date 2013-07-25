@@ -16,7 +16,9 @@
 		<script language="Javascript">
 		{
 			if (navigator.appName == "Microsoft Internet Explorer")
-				alert("Please use Chrome or Firefox for full site functionality.");
+				{alert("1 Please use Chrome or Firefox for full site functionality.");}
+			else if (navigator.userAgent.indexOf("MSIE") > -1)
+				{alert("2 Please use Chrome or Firefox for full site functionality.");}
 		}
 		</script>
 	
