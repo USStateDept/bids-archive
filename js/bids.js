@@ -845,12 +845,6 @@ Ext.onReady(function() {
 			valueField : 'PrSize',
 			mode : 'local',
 			emptyText : 'Select Size...'
-		}), regBox = new Ext.ux.form.CheckboxCombo({
-			store : regionStore,
-			displayField : 'Region',
-			valueField : 'Region',
-			mode : 'local',
-			emptyText : 'Select Region...'
 		}), fsBox = new Ext.ux.form.CheckboxCombo({
 			store : fundingStore,
 			displayField : 'FundingSource',
@@ -913,8 +907,6 @@ Ext.onReady(function() {
 				var fsVal = fsBox.getValue();
 				var eo = "Submitting_Officer";
 				var eoVal = eoBox.getValue();
-				var reg = "DOS_Region";
-				var regVal = regBox.getValue();
 				var keyy = "Keyword";
 				var keyVal = txtKey.getValue();
 				var ten = "Tender_Date";
@@ -1080,27 +1072,6 @@ Ext.onReady(function() {
 						console.log(filter);
 					} else {
 						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + eo + "%3C/PropertyName%3E%3CLiteral%3E" + eoVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
-					}
-					count = count + 1;
-				}
-				////////////////////
-				////////Region
-				///////////////////////
-				if (regVal.length > 0) {
-					if (regVal.indexOf(",") != -1) {
-						//console.log(eoVal);
-						var parts = regVal.split(",");
-						filter = filter + "<Or>";
-						console.log(filter);
-						for (var i = 0; i < parts.length; i++) {
-
-							filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + reg + "%3C/PropertyName%3E%3CLiteral%3E" + parts[i] + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
-							console.log(filter);
-						}
-						filter = filter + "</Or>";
-						console.log(filter);
-					} else {
-						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + reg + "%3C/PropertyName%3E%3CLiteral%3E" + regVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 					}
 					count = count + 1;
 				}
