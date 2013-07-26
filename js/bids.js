@@ -11,7 +11,7 @@ function as(n) {
     Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-var domain = 'edip-maps.net'
+var domain = 'localhost'
 var site = '/bids/'
 
 var sd;
