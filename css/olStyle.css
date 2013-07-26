@@ -266,7 +266,7 @@ div.olControlSaveFeaturesItemInactive {
 }
 
 .olPopupCloseBox {
-  background: url("../../ext-3.4.0/resources/images/wireframe/qtip/close.gif") no-repeat !important;
+  background: url("../../lib/ext-3.4.0/resources/images/wireframe/qtip/close.gif") no-repeat !important;
   cursor: pointer;
 }
 
