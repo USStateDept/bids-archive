@@ -530,7 +530,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json&Filter=%3CFilter%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EArchived%3C/PropertyName%3E%3CLiteral%3E0%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -1136,7 +1136,7 @@ Ext.onReady(function() {
 				
 				var tProxy = new GeoExt.data.ProtocolProxy({
 					protocol : new OpenLayers.Protocol.HTTP({
-						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json&Filter=%3CFilter%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EArchived%3C/PropertyName%3E%3CLiteral%3E0%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E",
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
