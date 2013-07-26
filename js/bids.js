@@ -14,10 +14,14 @@ function as(n) {
 var domain = 'localhost'
 var site = '/bids/'
 
-var extent = new OpenLayers.Bounds(-20000000,-8000000,20000000,12000000);
-	
-Ext.onReady(function() {
+var sd;
 
+var initExtent = new OpenLayers.Bounds([-12100000,-5000000,15200000,6000000], true);
+var sdExtent = [-20000000,-16000000,20000000,19000000];
+var initCenter = [1578000,202000];
+
+
+Ext.onReady(function() {
 	
 	var sb, store, grid, check;
 
@@ -275,7 +279,8 @@ Ext.onReady(function() {
 		region : "center",
 		map : {
 			projection : "EPSG:900913",
-			restrictedExtent: extent
+			restrictedExtent: sdExtent,
+			center : initCenter
 		},
 		zoom : 3,
 		layers : [
@@ -392,7 +397,7 @@ Ext.onReady(function() {
 		}]
 	});
 
-	var sd = new OpenLayers.Layer.Vector('lead', {
+	sd = new OpenLayers.Layer.Vector('lead', {
 		//projection: geographicProj,
 		strategies : [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster()],
 		styleMap : new OpenLayers.StyleMap({
@@ -1140,8 +1145,9 @@ Ext.onReady(function() {
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
-
-				map.zoomToExtent(sd.getDataExtent(), true);
+				
+				map.zoomToExtent(initExtent, true);
+				map.setCenter(initCenter);
 
 				store.proxy = tProxy;
 				store.reload();
