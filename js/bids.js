@@ -1,21 +1,23 @@
-window.onload = function()
-                {
-                   ieCheck();
-                };
-				
+window.onload = function() {
+        ieCheck();
+    };
+
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
 //OpenLayers.ProxyHost="http://" + domain + "/geoserver/rest/proxy?url="
+
 function as(n) {
-                var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
-                Ext.util.CSS.swapStyleSheet("theme", themeUrl);
+    var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
+    Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
+
+var domain = 'localhost'
+var site = '/bids/'
+
+var extent = new OpenLayers.Bounds(-20000000,-8000000,20000000,12000000);
+	
 Ext.onReady(function() {
 
-	var domain = 'localhost'
-	var site = '/bids/'
-	
-	var extent = new OpenLayers.Bounds(-20000000,-8000000,20000000,12000000);
 	
 	var sb, store, grid, check;
 
@@ -921,7 +923,7 @@ Ext.onReady(function() {
 				var siz = "Project_Size";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json";
+				var urlWhole = "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
@@ -1121,7 +1123,7 @@ Ext.onReady(function() {
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
-				//
+				
 				store.proxy = tProxy;
 				store.reload();
 				grid.getView().refresh();
@@ -1131,7 +1133,21 @@ Ext.onReady(function() {
 			id : 'btnResetFilter',
 			handler : function() {
 				filterPanel.getForm().reset();
+				
+				var tProxy = new GeoExt.data.ProtocolProxy({
+					protocol : new OpenLayers.Protocol.HTTP({
+						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+						format : new OpenLayers.Format.GeoJSON()
+					})
+				});
+
+				map.zoomToExtent(sd.getDataExtent(), true);
+
+				store.proxy = tProxy;
+				store.reload();
+				grid.getView().refresh();
 			}
+
 		}]
 	});
 
