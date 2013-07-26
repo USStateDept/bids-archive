@@ -863,12 +863,6 @@ Ext.onReady(function() {
 		}), tEnd = new Ext.form.DateField({
 			emptyText : 'Tender Date End...',
 			width : 190
-		}), eoBox = new Ext.ux.form.CheckboxCombo({
-			store : enteringStore,
-			displayField : 'EnteringOfficer',
-			mode : 'local',
-			valueField : 'EnteringOfficer',
-			emptyText : 'Select Officer...'
 		}), arcBox = new Ext.form.ComboBox({
 			store : new Ext.data.ArrayStore({
 				fields : ['Archived'],
@@ -905,8 +899,6 @@ Ext.onReady(function() {
 				var secVal = secBox.getValue();
 				var fs = "Project_Funding_Source";
 				var fsVal = fsBox.getValue();
-				var eo = "Submitting_Officer";
-				var eoVal = eoBox.getValue();
 				var keyy = "Keyword";
 				var keyVal = txtKey.getValue();
 				var ten = "Tender_Date";
@@ -1051,27 +1043,6 @@ Ext.onReady(function() {
 						console.log(filter);
 					} else {
 						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + fs + "%3C/PropertyName%3E%3CLiteral%3E" + fsVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
-					}
-					count = count + 1;
-				}
-				/////////////////////
-				//////Entering Officer
-				/////////////////////
-				if (eoVal.length > 0) {
-					if (eoVal.indexOf(",") != -1) {
-						//console.log(eoVal);
-						var parts = eoVal.split(",");
-						filter = filter + "<Or>";
-						console.log(filter);
-						for (var i = 0; i < parts.length; i++) {
-
-							filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + eo + "%3C/PropertyName%3E%3CLiteral%3E" + parts[i] + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
-							console.log(filter);
-						}
-						filter = filter + "</Or>";
-						console.log(filter);
-					} else {
-						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + eo + "%3C/PropertyName%3E%3CLiteral%3E" + eoVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 					}
 					count = count + 1;
 				}
