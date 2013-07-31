@@ -1,14 +1,14 @@
 window.onload = function() {
-        ieCheck();
-    };
+	ieCheck();
+};
 
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
 //OpenLayers.ProxyHost="http://" + domain + "/geoserver/rest/proxy?url="
 
 function as(n) {
-    var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
-    Ext.util.CSS.swapStyleSheet("theme", themeUrl);
+	var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
+	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
 var domain = 'localhost'
@@ -16,13 +16,12 @@ var site = '/bids/'
 
 var sd;
 
-var initExtent = new OpenLayers.Bounds([-12100000,-5000000,15200000,6000000], true);
-var sdExtent = [-20000000,-16000000,20000000,19000000];
-var initCenter = [1578000,202000];
-
+var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000], true);
+var sdExtent = [-20000000, -16000000, 20000000, 19000000];
+var initCenter = [1578000, 202000];
 
 Ext.onReady(function() {
-	
+
 	var sb, store, grid, check;
 
 	var toolbarItems = [];
@@ -33,6 +32,7 @@ Ext.onReady(function() {
 	var regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
 	var arch = [['Archived'], ['Unarchived']]
 	var sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
+	var sec=[['Ag and Environment'],['Energy'],['ICT'],['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
 
 	// Add a lead Form / Edit a lead Form
 	var tabs = new Ext.FormPanel({
@@ -46,160 +46,196 @@ Ext.onReady(function() {
 		autoScroll : true,
 		resizable : false,
 		resizeHandles : false,
-		items:[
-		{
-				xtype : 'hidden',
-				name : 'Cleared',
-				value : '0'
-			}, {
-				xtype : 'hidden',
-				name : 'Archived',
-				value : '0'
-			}, {
-				xtype : 'hidden',
-				name : 'fid',
-				value : '0'
-			}, {
-				name : 'Project_Title',
-				emptyText : 'Project Title',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				name : 'Country',
-				xtype : 'textfield',
-				emptyText : 'Country',
-				width : 275
-			}, {
-				name : 'Specific_Location',
-				xtype : 'textfield',
-				emptyText : 'Specific Location',
-				width : 275,
-				id : 'sspec'
-			},
-			new Ext.form.ComboBox({
-				store : new Ext.data.ArrayStore({
-					fields : ['DOS_Region'],
-					data : regions // from states.js
-				}),
-				name : 'DOS_Region',
-				displayField : 'DOS_Region',
-				emptyText : 'DOS Region',
-				typeAhead : true,
-				mode : 'local',
-				forceSelection : true,
-				triggerAction : 'all',
-				selectOnFocus : true,
-				width : 275
-			}), {	
-				autoScroll: false,
-				fieldLabel: 'Sector',
-				items: [{
-					layout : 'column',
-					xtype: 'checkboxgroup',
-					columns: 2,
-					autoScroll: false,
-					items: [
-						{boxLabel: 'Administration', name: 'chAdmin',autoScroll: false},
-						{boxLabel: 'Agriculture', name: 'chAgr',autoScroll: false},
-						{boxLabel: 'Education', name: 'chEd',autoScroll: false},
-						{boxLabel: 'Energy', name: 'chEn',autoScroll: false},
-						{boxLabel: 'Finance', name: 'chFin',autoScroll: false},
-						{boxLabel: 'Infrastructure', name: 'chInf',autoScroll: false},
-						{boxLabel: 'Resource Management', name: 'chRes',autoScroll: false},
-						{boxLabel: 'Social Services', name: 'chSoc',autoScroll: false},
-						{boxLabel: 'Telecommunications', name: 'chTel',autoScroll: false},
-						{boxLabel: 'Tourism', name: 'chTou',autoScroll: false},
-						{boxLabel: 'Transportation', name: 'chTra',autoScroll: false},
-						{boxLabel: 'Water', name: 'chWa',autoScroll: false}, 
-						{boxLabel: 'Other', name: 'chOth',autoScroll: false}
-					]
+		items : [{
+			xtype : 'hidden',
+			name : 'Cleared',
+			value : '0'
+		}, {
+			xtype : 'hidden',
+			name : 'Archived',
+			value : '0'
+		}, {
+			xtype : 'hidden',
+			name : 'fid',
+			value : '0'
+		}, {
+			name : 'Project_Title',
+			emptyText : 'Project Title',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			name : 'Country',
+			xtype : 'textfield',
+			emptyText : 'Country',
+			width : 275
+		}, {
+			name : 'Specific_Location',
+			xtype : 'textfield',
+			emptyText : 'Specific Location',
+			width : 275,
+			id : 'sspec'
+		}, new Ext.form.ComboBox({
+			store : new Ext.data.ArrayStore({
+				fields : ['DOS_Region'],
+				data : regions // from states.js
+			}),
+			name : 'DOS_Region',
+			displayField : 'DOS_Region',
+			emptyText : 'DOS Region',
+			typeAhead : true,
+			mode : 'local',
+			forceSelection : true,
+			triggerAction : 'all',
+			selectOnFocus : true,
+			width : 275
+		}), {
+			autoScroll : false,
+			fieldLabel : 'Sector',
+			items : [{
+				layout : 'column',
+				xtype : 'checkboxgroup',
+				columns : 2,
+				autoScroll : false,
+				items : [{
+					boxLabel : 'Administration',
+					name : 'chAdmin',
+					autoScroll : false
+				}, {
+					boxLabel : 'Agriculture',
+					name : 'chAgr',
+					autoScroll : false
+				}, {
+					boxLabel : 'Education',
+					name : 'chEd',
+					autoScroll : false
+				}, {
+					boxLabel : 'Energy',
+					name : 'chEn',
+					autoScroll : false
+				}, {
+					boxLabel : 'Finance',
+					name : 'chFin',
+					autoScroll : false
+				}, {
+					boxLabel : 'Infrastructure',
+					name : 'chInf',
+					autoScroll : false
+				}, {
+					boxLabel : 'Resource Management',
+					name : 'chRes',
+					autoScroll : false
+				}, {
+					boxLabel : 'Social Services',
+					name : 'chSoc',
+					autoScroll : false
+				}, {
+					boxLabel : 'Telecommunications',
+					name : 'chTel',
+					autoScroll : false
+				}, {
+					boxLabel : 'Tourism',
+					name : 'chTou',
+					autoScroll : false
+				}, {
+					boxLabel : 'Transportation',
+					name : 'chTra',
+					autoScroll : false
+				}, {
+					boxLabel : 'Water',
+					name : 'chWa',
+					autoScroll : false
+				}, {
+					boxLabel : 'Other',
+					name : 'chOth',
+					autoScroll : false
 				}]
-			}, {
-				name : 'Project_Size',
-				emptyText : 'Project Size',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				name : 'Project_Number',
-				emptyText : 'Project Number',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				name : 'Project_Funding_Source',
-				emptyText : 'Funding Source',
-				xtype : 'textfield',
-				width : 275
-			}, new Ext.form.ComboBox({
-				store : new Ext.data.ArrayStore({
-					fields : ['Source'],
-					data : banks // from states.js
-				}),
-				name : 'Source',
-				displayField : 'Source',
-				emptyText : 'Information Source',
-				typeAhead : true,
-				mode : 'local',
-				forceSelection : true,
-				triggerAction : 'all',
-				selectOnFocus : true
-			}), {
-				xtype : 'textarea',
-				name : 'Project_Description',
-				emptyText : 'Project Description & Bidding Requirements',
-				xtype : 'textfield',
-				width : 275,
-				height: 140
-			}, {
-				emptyText : 'Keywords',
-				name : 'Keyword'
-			}, new Ext.form.DateField({
-				emptyText : 'Project Announced',
-				name : 'Project_Announced',
-				width : 275
-			}), new Ext.form.DateField({
-				name : 'Tender_Date',
-				emptyText : 'Expected Tender Date',
-				width : 275
-			}), {
-				name : 'Borrowing_Entity',
-				emptyText : 'Borrowing Entity',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				name : 'Implementing_Entity',
-				emptyText : 'Implementing Entity',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				name : 'Link_To_Project',
-				emptyText : 'Project Website',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				name : 'Submitting_Officer',
-				emptyText : 'Submitting Officer',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				name : 'Submitting_Officer_Contact',
-				emptyText : 'Submitting Officer Email',
-				xtype : 'textfield',
-				width : 275
-			}, {
-				xtype : 'textarea',
-				name : 'Project_POCs',
-				emptyText : 'Implementing Entity POCs & Contact Info',
-				xtype : 'textfield',
-				width : 275,
-				height: 80
-			}, {
-				xtype : 'textarea',
-				name : 'Post_Comments',
-				emptyText : 'Post Comments',
-				xtype : 'textfield',
-				width : 275,
-				height: 80
-			}],
+			}]
+		}, {
+			name : 'Project_Size',
+			emptyText : 'Project Size',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			name : 'Project_Number',
+			emptyText : 'Project Number',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			name : 'Project_Funding_Source',
+			emptyText : 'Funding Source',
+			xtype : 'textfield',
+			width : 275
+		}, new Ext.form.ComboBox({
+			store : new Ext.data.ArrayStore({
+				fields : ['Source'],
+				data : banks // from states.js
+			}),
+			name : 'Source',
+			displayField : 'Source',
+			emptyText : 'Information Source',
+			typeAhead : true,
+			mode : 'local',
+			forceSelection : true,
+			triggerAction : 'all',
+			selectOnFocus : true
+		}), {
+			xtype : 'textarea',
+			name : 'Project_Description',
+			emptyText : 'Project Description & Bidding Requirements',
+			xtype : 'textfield',
+			width : 275,
+			height : 140
+		}, {
+			emptyText : 'Keywords',
+			name : 'Keyword'
+		}, new Ext.form.DateField({
+			emptyText : 'Project Announced',
+			name : 'Project_Announced',
+			width : 275
+		}), new Ext.form.DateField({
+			name : 'Tender_Date',
+			emptyText : 'Expected Tender Date',
+			width : 275
+		}), {
+			name : 'Borrowing_Entity',
+			emptyText : 'Borrowing Entity',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			name : 'Implementing_Entity',
+			emptyText : 'Implementing Entity',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			name : 'Link_To_Project',
+			emptyText : 'Project Website',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			name : 'Submitting_Officer',
+			emptyText : 'Submitting Officer',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			name : 'Submitting_Officer_Contact',
+			emptyText : 'Submitting Officer Email',
+			xtype : 'textfield',
+			width : 275
+		}, {
+			xtype : 'textarea',
+			name : 'Project_POCs',
+			emptyText : 'Implementing Entity POCs & Contact Info',
+			xtype : 'textfield',
+			width : 275,
+			height : 80
+		}, {
+			xtype : 'textarea',
+			name : 'Post_Comments',
+			emptyText : 'Post Comments',
+			xtype : 'textfield',
+			width : 275,
+			height : 80
+		}],
 		buttons : [{
 			text : 'Edit',
 			id : 'btnEdit',
@@ -215,7 +251,7 @@ Ext.onReady(function() {
 			id : 'btnSave',
 			handler : function() {
 				tabs.getForm().submit({
-				submitEmptyText: false,
+					submitEmptyText : false,
 					params : {
 						editType : 'insert'
 					},
@@ -272,27 +308,25 @@ Ext.onReady(function() {
 		win.show();
 	}
 
-
 	//toolbarItems.push(action);
 
 	var mapPanel = new GeoExt.MapPanel({
 		region : "center",
 		map : {
 			projection : "EPSG:900913",
-			restrictedExtent: sdExtent,
+			restrictedExtent : sdExtent,
 			center : initCenter
 		},
 		zoom : 3,
-		layers : [
-			new OpenLayers.Layer.Stamen("toner-lite", {
-				attribution: "Base data: OpenStreetMaps"}),
-			new OpenLayers.Layer.XYZ("Physical Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
-				attribution : "Base data: MapQuest, OpenStreetMaps",
-				transitionEffect : "resize"}),
-			new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
-				attribution : "Imagery: MapQuest",
-				transitionEffect : "resize"})
-		]
+		layers : [new OpenLayers.Layer.Stamen("toner-lite", {
+			attribution : "Base data: OpenStreetMaps"
+		}), new OpenLayers.Layer.XYZ("Physical Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
+			attribution : "Base data: MapQuest, OpenStreetMaps",
+			transitionEffect : "resize"
+		}), new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
+			attribution : "Imagery: MapQuest",
+			transitionEffect : "resize"
+		})]
 	});
 
 	var info;
@@ -307,17 +341,17 @@ Ext.onReady(function() {
 		nodeType : "gx_baselayercontainer",
 		expanded : true
 	}/*, {
-		nodeType : "gx_overlaylayercontainer",
-		expanded : true,
-		// render the nodes inside this container with a radio button,
-		// and assign them the group "foo".
-		loader : {
-			baseAttrs : {
-				radioGroup : "foo",
-				uiProvider : "layernodeui"
-			}
-		}
-	}*/];
+	 nodeType : "gx_overlaylayercontainer",
+	 expanded : true,
+	 // render the nodes inside this container with a radio button,
+	 // and assign them the group "foo".
+	 loader : {
+	 baseAttrs : {
+	 radioGroup : "foo",
+	 uiProvider : "layernodeui"
+	 }
+	 }
+	 }*/];
 	// The line below is only needed for this example, because we want to allow
 	// interactive modifications of the tree configuration using the
 	// "Show/Edit Tree Config" button. Don't use this line in your code.
@@ -405,8 +439,8 @@ Ext.onReady(function() {
 				pointRadius : '${radius}',
 				fillOpacity : 0.7,
 				fillColor : '#FF6600',
-				strokeOpacity: 0.7,
-				strokeWidth: 0.5,
+				strokeOpacity : 0.7,
+				strokeWidth : 0.5,
 				strokeColor : '#A24100'
 			}, {
 				context : {
@@ -420,7 +454,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json", 
+			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
 			format : new OpenLayers.Format.GeoJSON()
 		}),
 		attribution : "<a href='http://github.com/eDiper/bids/wiki/Bug-Reports' target='_blank'><b>Report a bug here</b></a>"
@@ -437,7 +471,7 @@ Ext.onReady(function() {
 				// hover list
 				hoverList : '<div><font size=\"2\"><b>${count} leads found</b></font><br><font size=\"1\" color=\"#909090\">Click for more information</font></div>',
 				// selected item from single & list
-				single : '<div><font size=\"3\"><b>${.Project_Title}</b></font></div>' +  '<div class="popupLeadList"><font size=\"1\" color=\"#202020\"><b>Country: </b>${.Country}' +'<div><font size=\"1\" color=\"#202020\"><b>Sector: </b>${.Sector}'+'<div><font size=\"1\" color=\"#202020\"><b>Data Added: </b>'  + '<br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}' +  '<br><br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div>',
+				single : '<div><font size=\"3\"><b>${.Project_Title}</b></font></div>' + '<div class="popupLeadList"><font size=\"1\" color=\"#202020\"><b>Country: </b>${.Country}' + '<div><font size=\"1\" color=\"#202020\"><b>Sector: </b>${.Sector}' + '<div><font size=\"1\" color=\"#202020\"><b>Data Added: </b>' + '<br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}' + '<br><br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div>',
 				// List of clustered items
 				item : '<li class="leadList"><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li><div><font size = \"1\" color=\"#202020\"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</font></div><br>'
 			}
@@ -555,62 +589,62 @@ Ext.onReady(function() {
 		id : 'gridx',
 		plugins : [Ext.ux.PanelCollapsedTitle],
 
-		columns : [ {
+		columns : [{
 			header : "Project Title",
 			dataIndex : "Project_Title",
 			width : 340,
-			sortable: true
+			sortable : true
 		}, {
 			header : "Country",
 			dataIndex : "Country",
 			width : 75,
-			sortable: true
+			sortable : true
 		}, {
 			header : "Sector",
 			dataIndex : "Sector",
 			width : 125,
-			sortable: true
+			sortable : true
 		}, {
 			header : "Project Funding Source",
 			dataIndex : "Project_Funding_Source",
 			width : 200,
-			sortable: true
+			sortable : true
 		}, {
 			header : "Project Size",
 			dataIndex : "Project_Size",
-			renderer: Ext.util.Format.numberRenderer('$0,000'),
+			renderer : Ext.util.Format.numberRenderer('$0,000'),
 			width : 80,
-			sortable: true
+			sortable : true
 		}, {
 			header : "Project Announced",
 			dataIndex : "Project_Announced",
 			width : 110,
 			format : 'm/d/Y',
 			renderer : Ext.util.Format.dateRenderer('m/d/Y'),
-			sortable: true
+			sortable : true
 		}, {
 			header : "Expected Tender Date",
 			dataIndex : "Tender_Date",
 			width : 125,
 			format : 'm/d/Y',
 			renderer : Ext.util.Format.dateRenderer('m/d/Y'),
-			sortable: true
+			sortable : true
 		}, {
 			header : "Project Number",
 			dataIndex : "Project_Number",
 			width : 90,
-			sortable: true
-		},  {
+			sortable : true
+		}, {
 			header : "Keywords",
 			dataIndex : "Keyword",
 			width : 240,
-			sortable: true
-		},{
+			sortable : true
+		}, {
 			header : "Implementing Entity",
 			dataIndex : "Implementing_Entity",
 			width : 220,
-			sortable: true
-		} ],
+			sortable : true
+		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
 
 		height : 200,
@@ -641,7 +675,7 @@ Ext.onReady(function() {
 				var sou = grid.getSelectionModel().getSelected().data.Source;
 				var fid = grid.getSelectionModel().getSelected().data.fid;
 				var ten = grid.getSelectionModel().getSelected().data.Tender_Date;
-				
+
 				tabs.getForm().findField("Specific_Location").setValue(sp);
 				tabs.getForm().findField("Project_Funding_Source").setValue(pr);
 				tabs.getForm().findField("Country").setValue(co);
@@ -831,7 +865,11 @@ Ext.onReady(function() {
 		items : [ txtKey = new Ext.form.TextField({
 			emptyText : 'Keywords...'
 		}), secBox = new Ext.ux.form.CheckboxCombo({
-			store : sectorStore,
+			//store : sectorStore,
+			store : new Ext.data.ArrayStore({
+				fields : ['Sector'],
+				data : sec // from states.js
+			}),
 			displayField : 'Sector',
 			valueField : 'Sector',
 			mode : 'local',
@@ -1070,7 +1108,7 @@ Ext.onReady(function() {
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
-				
+
 				store.proxy = tProxy;
 				store.reload();
 				grid.getView().refresh();
@@ -1080,14 +1118,14 @@ Ext.onReady(function() {
 			id : 'btnResetFilter',
 			handler : function() {
 				filterPanel.getForm().reset();
-				
+
 				var tProxy = new GeoExt.data.ProtocolProxy({
 					protocol : new OpenLayers.Protocol.HTTP({
 						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json&Filter=%3CFilter%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EArchived%3C/PropertyName%3E%3CLiteral%3E0%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E",
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
-				
+
 				map.zoomToExtent(initExtent, true);
 				map.setCenter(initCenter);
 
@@ -1095,35 +1133,31 @@ Ext.onReady(function() {
 				store.reload();
 				grid.getView().refresh();
 			}
-
 		}]
 	});
+
+	//secBox.on('onListClick', yourFunction);
 
 	new Ext.Viewport({
 		layout : "fit",
 		hideBorders : true,
 		items : {
 			layout : "border",
-			items : [
-				mapPanel, 
-				{
+			items : [mapPanel, {
 				layout : 'border',
 				region : 'west',
 				split : true,
 				width : 275,
 				items : [tree, filterPanel]
-				},
-				{
-				region: 'north',
-				html: '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="resources.html">Resources</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQS</a></li></ul></div></header></div>',
-				height: 120,
-				border: false
-				}, 
-				grid
-			]
+			}, {
+				region : 'north',
+				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="resources.html">Resources</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQS</a></li></ul></div></header></div>',
+				height : 120,
+				border : false
+			}, grid]
 		}
 	});
-	
+
 	var filt = new OpenLayers.Filter.Comparison({
 		type : OpenLayers.Filter.Comparison.LIKE,
 		property : "Sector",
