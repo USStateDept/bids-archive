@@ -520,8 +520,9 @@ a.olControlZoomOut {
 }
 .olFramedCloudPopupContent {
     padding: 0px;
-    overflow: auto;
+    overflow-y: visible !important;
 	left: 18px !important;
+	width: 250px !important; 
 }
 
 
