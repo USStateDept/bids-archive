@@ -16,12 +16,11 @@ var site = '/bids/'
 
 var sd;
 
-var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000], true);
-var sdExtent = [-20000000, -16000000, 20000000, 19000000];
-var initCenter = [1578000, 202000];
+var initExtent = new OpenLayers.Bounds([-12100000,-5000000,15200000,6000000], true);
+var sdExtent = [-20000000,-16000000,20000000,19000000];
+var initCenter = [1578000,202000];
 
 Ext.onReady(function() {
-
 	var sb, store, grid, check;
 
 	var toolbarItems = [];
@@ -97,7 +96,30 @@ Ext.onReady(function() {
 				columns : 2,
 				autoScroll : false,
 				items : [{
-					boxLabel : 'Administration',
+					boxLabel : 'Ag and Environment',
+					name : 'chAdmin',
+					autoScroll : false
+				}, {
+					boxLabel : 'Energy',
+					name : 'chAgr',
+					autoScroll : false
+				}, {
+					boxLabel : 'ICT',
+					name : 'chEd',
+					autoScroll : false
+				}, {
+					boxLabel : 'Infrastructure',
+					name : 'chEn',
+					autoScroll : false
+				}, {
+					boxLabel : 'Governance and Services',
+					name : 'chFin',
+					autoScroll : false
+				}, {
+					boxLabel : 'Natural Resources',
+					name : 'chInf',
+					autoScroll : false
+				}, /*boxLabel : 'Administration',
 					name : 'chAdmin',
 					autoScroll : false
 				}, {
@@ -148,7 +170,7 @@ Ext.onReady(function() {
 					boxLabel : 'Other',
 					name : 'chOth',
 					autoScroll : false
-				}]
+				}*/]
 			}]
 		}, {
 			name : 'Project_Size',
@@ -177,7 +199,9 @@ Ext.onReady(function() {
 			mode : 'local',
 			forceSelection : true,
 			triggerAction : 'all',
-			selectOnFocus : true
+			selectOnFocus : true,
+			width : 275,
+			height: 140
 		}), {
 			xtype : 'textarea',
 			name : 'Project_Description',
@@ -307,7 +331,6 @@ Ext.onReady(function() {
 		}
 		win.show();
 	}
-
 	//toolbarItems.push(action);
 
 	var mapPanel = new GeoExt.MapPanel({
@@ -318,15 +341,16 @@ Ext.onReady(function() {
 			center : initCenter
 		},
 		zoom : 3,
-		layers : [new OpenLayers.Layer.Stamen("toner-lite", {
-			attribution : "Base data: OpenStreetMaps"
-		}), new OpenLayers.Layer.XYZ("Physical Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
-			attribution : "Base data: MapQuest, OpenStreetMaps",
-			transitionEffect : "resize"
-		}), new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
-			attribution : "Imagery: MapQuest",
-			transitionEffect : "resize"
-		})]
+		layers : [
+			new OpenLayers.Layer.Stamen("toner-lite", {
+				attribution : "Base data: OpenStreetMaps"}),
+			new OpenLayers.Layer.XYZ("Physical Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
+				attribution : "Base data: MapQuest, OpenStreetMaps",
+				transitionEffect : "resize"}),
+			new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
+				attribution : "Imagery: MapQuest",
+				transitionEffect : "resize"})
+		]
 	});
 
 	var info;
@@ -341,17 +365,17 @@ Ext.onReady(function() {
 		nodeType : "gx_baselayercontainer",
 		expanded : true
 	}/*, {
-	 nodeType : "gx_overlaylayercontainer",
-	 expanded : true,
-	 // render the nodes inside this container with a radio button,
-	 // and assign them the group "foo".
-	 loader : {
-	 baseAttrs : {
-	 radioGroup : "foo",
-	 uiProvider : "layernodeui"
-	 }
-	 }
-	 }*/];
+		nodeType : "gx_overlaylayercontainer",
+		expanded : true,
+		// render the nodes inside this container with a radio button,
+		// and assign them the group "foo".
+		loader : {
+			baseAttrs : {
+				radioGroup : "foo",
+				uiProvider : "layernodeui"
+			}
+		}
+	}*/];
 	// The line below is only needed for this example, because we want to allow
 	// interactive modifications of the tree configuration using the
 	// "Show/Edit Tree Config" button. Don't use this line in your code.
@@ -454,7 +478,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url: "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
+			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json",
 			format : new OpenLayers.Format.GeoJSON()
 		}),
 		attribution : "<a href='http://github.com/eDiper/bids/wiki/Bug-Reports' target='_blank'><b>Report a bug here</b></a>"
@@ -471,7 +495,7 @@ Ext.onReady(function() {
 				// hover list
 				hoverList : '<div><font size=\"2\"><b>${count} leads found</b></font><br><font size=\"1\" color=\"#909090\">Click for more information</font></div>',
 				// selected item from single & list
-				single : '<div><font size=\"3\"><b>${.Project_Title}</b></font></div>' + '<div class="popupLeadList"><font size=\"1\" color=\"#202020\"><b>Country: </b>${.Country}' + '<div><font size=\"1\" color=\"#202020\"><b>Sector: </b>${.Sector}' + '<div><font size=\"1\" color=\"#202020\"><b>Data Added: </b>' + '<br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}' + '<br><br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div>',
+				single : '<div class="popupLeadTitle">${.Project_Title}</div>' +  '<div class="popupLeadDetails"><b>Country: </b>${.Country}<br>' +'<b>Sector: </b>${.Sector}<br>'+'<b>Date Added: </b>'  + '<br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}' +  '<br><br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div>',
 				// List of clustered items
 				item : '<li class="leadList"><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li><div><font size = \"1\" color=\"#202020\"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</font></div><br>'
 			}
@@ -572,7 +596,6 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-			
 				url: "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
 				format : new OpenLayers.Format.GeoJSON()
 			})
@@ -684,7 +707,6 @@ Ext.onReady(function() {
 				var sou = grid.getSelectionModel().getSelected().data.Source;
 				var fid = grid.getSelectionModel().getSelected().data.fid;
 				var ten = grid.getSelectionModel().getSelected().data.Tender_Date;
-
 				tabs.getForm().findField("Specific_Location").setValue(sp);
 				tabs.getForm().findField("Project_Funding_Source").setValue(pr);
 				tabs.getForm().findField("Country").setValue(co);
@@ -921,19 +943,6 @@ Ext.onReady(function() {
 			emptyText : 'Select Status...'
 		})],
 		buttons : [{
-			text : '<b>Add a Lead</b>',
-			icon : 'img/add.png',
-			handler : function() {
-
-				Ext.Msg.show({
-					title : 'Add a Lead',
-					msg : 'By clicking okay, you agree that any trade lead added to this system will be unclassified, and that you understand the rules and regulations regarding this site.',
-					width : 300,
-					buttons : Ext.MessageBox.OK,
-					fn : myCallbackFunction
-				})
-			}
-		}, {
 			text : 'Search',
 			handler : function() {
 
@@ -1065,7 +1074,9 @@ Ext.onReady(function() {
 
 					filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 					count = count + 1;
+
 				}*/
+				
 				/////////////////
 				//////Sector
 				//////////////////
@@ -1150,7 +1161,6 @@ Ext.onReady(function() {
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
-
 				map.zoomToExtent(initExtent, true);
 				map.setCenter(initCenter);
 
@@ -1161,6 +1171,32 @@ Ext.onReady(function() {
 		}]
 	});
 
+	// create the tree with the configuration from above
+	addButton = new Ext.FormPanel({
+		labelWidth : 0, // label settings here cascade unless overridden
+		frame : false,
+		collapsible : false,
+		collapsed : false,
+		collapseMode : "mini",
+		//title : '<style="font-size:12px;">Search Filters</style>',
+		region : 'south',
+		bodyStyle : 'padding:5px 5px 0',
+		buttons : [{
+			text : '<b>Add a Lead</b>',
+			icon : 'img/add.png',
+			handler : function() {
+
+
+				Ext.Msg.show({
+					title : 'Add a Lead',
+					msg : 'By clicking okay, you agree that any trade lead added to this system will be unclassified, and that you understand the rules and regulations regarding this site.',
+					width : 300,
+					buttons : Ext.MessageBox.OK,
+					fn : myCallbackFunction
+				})
+			}
+		}]
+	});
 	//secBox.on('onListClick', yourFunction);
 
 	new Ext.Viewport({
@@ -1168,13 +1204,15 @@ Ext.onReady(function() {
 		hideBorders : true,
 		items : {
 			layout : "border",
-			items : [mapPanel, {
-				layout : 'border',
-				region : 'west',
-				split : true,
-				width : 275,
-				items : [tree, filterPanel]
-			}, {
+			items : [
+				mapPanel, {
+					layout : 'border',
+					region : 'west',
+					split : true,
+					width : 180,
+					items : [tree, filterPanel, addButton]
+				}, 
+				{
 				region : 'north',
 				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="resources.html">Resources</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQS</a></li></ul></div></header></div>',
 				height : 120,
