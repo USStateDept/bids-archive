@@ -11,6 +11,7 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
+//var domain = 'localhost'
 var domain = 'edip-maps.net'
 var site = '/bids/'
 
@@ -97,27 +98,27 @@ Ext.onReady(function() {
 				autoScroll : false,
 				items : [{
 					boxLabel : 'Ag and Environment',
-					name : 'chAdmin',
+					name : 'chAg',
 					autoScroll : false
 				}, {
 					boxLabel : 'Energy',
-					name : 'chAgr',
+					name : 'chEnergy',
 					autoScroll : false
 				}, {
 					boxLabel : 'ICT',
-					name : 'chEd',
+					name : 'chICT',
 					autoScroll : false
 				}, {
 					boxLabel : 'Infrastructure',
-					name : 'chEn',
+					name : 'chInfrastructure',
 					autoScroll : false
 				}, {
 					boxLabel : 'Governance and Services',
-					name : 'chFin',
+					name : 'chGovernance',
 					autoScroll : false
 				}, {
 					boxLabel : 'Natural Resources',
-					name : 'chInf',
+					name : 'chNatural',
 					autoScroll : false
 				}, /*boxLabel : 'Administration',
 					name : 'chAdmin',
@@ -210,6 +211,11 @@ Ext.onReady(function() {
 			width : 275,
 			height : 140
 		}, {
+			name : 'Keyword',
+			emptyText : 'Keywords',
+			xtype : 'textfield',
+			width : 275
+		},{
 			emptyText : 'Keywords',
 			name : 'Keyword'
 		}, new Ext.form.DateField({
@@ -662,7 +668,7 @@ Ext.onReady(function() {
 			width : 90,
 			sortable : true
 		}, {
-			header : "Keywords",
+			header : "Keyword",
 			dataIndex : "Keyword",
 			width : 240,
 			sortable : true
@@ -676,6 +682,36 @@ Ext.onReady(function() {
 			dataIndex : "Status",
 			width : 120,
 			sortable : true
+		},{
+			hidden: true,
+			header : "Specific Location",
+			dataIndex : "Specific_Location",
+			width : 175
+		},{
+			hidden: true,
+			header : "Link to Project",
+			dataIndex : "Link_To_Project",
+			width : 175
+		},{
+			hidden: true,
+			header : "Post Comments",
+			dataIndex : "Post_Comments",
+			width : 175
+		},{
+			hidden: true,
+			header : "Submitting Officer",
+			dataIndex : "Submitting_Officer",
+			width : 175
+		},{
+			hidden: true,
+			header : "Submitting Officer Contact",
+			dataIndex : "Submitting_Officer_Contact",
+			width : 175
+		},{
+			hidden: true,
+			header : "Project Size",
+			dataIndex : "Project_Size",
+			width : 175
 		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
 
@@ -728,7 +764,7 @@ Ext.onReady(function() {
 
 				tabs.getForm().findField("Tender_Date").setValue(ten);
 
-				if (se.indexOf("Water") != -1) {
+				/*if (se.indexOf("Water") != -1) {
 					tabs.getForm().findField("chWa").setValue(true);
 				}
 				if (se.indexOf("Education") != -1) {
@@ -763,6 +799,22 @@ Ext.onReady(function() {
 				}
 				if (se.indexOf("Agriculture") != -1) {
 					tabs.getForm().findField("chAgr").setValue(true);
+				}*/
+				
+				if (se.indexOf("Ag and Environment") != -1) {
+					tabs.getForm().findField("chAg").setValue(true);
+				}
+				if (se.indexOf("Energy") != -1) {
+					tabs.getForm().findField("chEnergy").setValue(true);
+				}
+				if (se.indexOf("ICT") != -1) {
+					tabs.getForm().findField("chICT").setValue(true);
+				}
+				if (se.indexOf("Infrastructure") != -1) {
+					tabs.getForm().findField("chInfrastructure").setValue(true);
+				}
+				if (se.indexOf("Natural Resources") != -1) {
+					tabs.getForm().findField("chNatural").setValue(true);
 				}
 
 				win.myExtraParams.e = true;

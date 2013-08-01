@@ -83,17 +83,17 @@ public class LeadAdder extends HttpServlet {
 
 						if (paramName.startsWith("ch")) {
 
-							if (paramName.equals("chOth")) {
+							/*if (paramName.equals("chOth")) {
 
 								sectors += paramValue + " ";
-							} else {
+							} else {*/
 
 								String newName = checkName(paramName);
 								// names += "\"" + paramName + "\"" + ",";
 								// values += "\'" + paramValue + "\'" + ",";
 
 								sectors += newName + " ";
-							}
+							//}
 						} else {
 
 							if (paramName.startsWith("Spec")) {
@@ -173,7 +173,18 @@ public class LeadAdder extends HttpServlet {
 
 		String newCheck = "";
 
-		if (ch.equals("chAdmin")) {
+		if (ch.equals("chAg")) {
+			newCheck = "Ag and Environment";
+		} else if (ch.equals("chICT")) {
+			newCheck = "ICT";
+		} else if (ch.equals("chGovernance")) {
+			newCheck = "Governance and Services";
+		} else if (ch.equals("chInfrasctructure")) {
+			newCheck = "Infrastructure";
+		} else if (ch.equals("chNatural")) {
+			newCheck = "Natural Resources";
+		}
+		/*if (ch.equals("chAdmin")) {
 			newCheck = "Administration";
 		} else if (ch.equals("chAgr")) {
 			newCheck = "Agriculture";
@@ -199,7 +210,7 @@ public class LeadAdder extends HttpServlet {
 			newCheck = "Water";
 		} else if (ch.equals("chOth")) {
 
-		}
+		}*/
 
 		return newCheck;
 
