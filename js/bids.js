@@ -30,7 +30,7 @@ Ext.onReady(function() {
 
 	var banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
 	var regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
-	var arch = [['Archived'], ['Unarchived']]
+	var arch = [['Archived'], ['In Procurement'], ['Pipeline']]
 	var sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
 	var sec=[['Ag and Environment'],['Energy'],['ICT'],['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
 
@@ -52,8 +52,8 @@ Ext.onReady(function() {
 			value : '0'
 		}, {
 			xtype : 'hidden',
-			name : 'Archived',
-			value : '0'
+			name : 'Status',
+			value : 'Pipeline'
 		}, {
 			xtype : 'hidden',
 			name : 'fid',
@@ -454,7 +454,7 @@ Ext.onReady(function() {
 			}
 		}),
 		protocol : new OpenLayers.Protocol.HTTP({
-			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json",
+			url: "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
 			format : new OpenLayers.Format.GeoJSON()
 		}),
 		attribution : "<a href='http://github.com/eDiper/bids/wiki/Bug-Reports' target='_blank'><b>Report a bug here</b></a>"
@@ -563,13 +563,17 @@ Ext.onReady(function() {
 		}, {
 			name : "Cleared",
 			type : "string"
+		},{
+			name : "Status",
+			type : "string"
 		}, {
 			name : "fid",
 			type : "string"
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json&Filter=%3CFilter%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EArchived%3C/PropertyName%3E%3CLiteral%3E0%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E",
+			
+				url: "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -643,6 +647,11 @@ Ext.onReady(function() {
 			header : "Implementing Entity",
 			dataIndex : "Implementing_Entity",
 			width : 220,
+			sortable : true
+		},{
+			header : "Status",
+			dataIndex : "Status",
+			width : 120,
 			sortable : true
 		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
@@ -901,18 +910,15 @@ Ext.onReady(function() {
 		}), tEnd = new Ext.form.DateField({
 			emptyText : 'Tender Date End...',
 			width : 190
-		}), arcBox = new Ext.form.ComboBox({
+		}), arcBox = new Ext.ux.form.CheckboxCombo({
 			store : new Ext.data.ArrayStore({
-				fields : ['Archived'],
+				fields : ['Status'],
 				data : arch // from states.js
 			}),
-			displayField : 'Archived',
-			typeAhead : true,
+			displayField : 'Status',
+			valueField : 'Status',
 			mode : 'local',
-			forceSelection : true,
-			triggerAction : 'all',
-			emptyText : 'Select Archived...',
-			selectOnFocus : true
+			emptyText : 'Select Status...'
 		})],
 		buttons : [{
 			text : '<b>Add a Lead</b>',
@@ -950,7 +956,7 @@ Ext.onReady(function() {
 				var siz = "Project_Size";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=170&outputformat=json";
+				var urlWhole = "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
@@ -1031,8 +1037,27 @@ Ext.onReady(function() {
 				}
 
 				if (arcVal.length > 0) {
+					if (arcVal.indexOf(",") != -1) {
+						//console.log(eoVal);
+						var parts = arcVal.split(",");
+						filter = filter + "<Or>";
+						console.log(filter);
+						for (var i = 0; i < parts.length; i++) {
 
-					if (arcVal == "Archived") {
+							filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + parts[i] + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
+							console.log(filter);
+						}
+						filter = filter + "</Or>";
+						console.log(filter);
+					} else {
+						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
+					}
+					count = count + 1;
+				}
+				
+				/*if (arcVal.length > 0) {
+
+					/*if (arcVal == "Archived") {
 						arcVal = 1;
 					} else {
 						arcVal = 0;
@@ -1040,7 +1065,7 @@ Ext.onReady(function() {
 
 					filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 					count = count + 1;
-				}
+				}*/
 				/////////////////
 				//////Sector
 				//////////////////
@@ -1121,7 +1146,7 @@ Ext.onReady(function() {
 
 				var tProxy = new GeoExt.data.ProtocolProxy({
 					protocol : new OpenLayers.Protocol.HTTP({
-						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=150&outputformat=json&Filter=%3CFilter%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EArchived%3C/PropertyName%3E%3CLiteral%3E0%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E",
+						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EArchived%3C/PropertyName%3E%3CLiteral%3E0%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Filter%3E",
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
