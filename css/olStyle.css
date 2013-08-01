@@ -136,12 +136,12 @@ div.olControlMousePosition {
     float:left;font-size:1.2em;
 }
 
-.olPopupContent {
-    padding:5px;
-    overflow-y: scroll;
 
-	border: 0.5px solid #c0c0c0;;
-}
+
+
+
+
+
 
 .olControlNavigationHistory {
    background-image: url("img/navigation_history.png");
@@ -265,15 +265,15 @@ div.olControlSaveFeaturesItemInactive {
     font-size: 1px;
 }
 
-.olPopupCloseBox {
-  background: url("../../lib/ext-3.4.0/resources/images/wireframe/qtip/close.gif") no-repeat !important;
-  cursor: pointer;
-}
 
-.olFramedCloudPopupContent {
-    padding: 5px;
-    overflow: auto;
-}
+
+
+
+
+
+
+
+
 
 .olControlNoSelect {
  -moz-user-select: none;
@@ -490,3 +490,38 @@ a.olControlZoomOut {
     -o-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear;
 }
+
+/**
+ * Popups
+ */
+.popupLeadTitle {
+	font-size: 14px;
+	font-weight: bold;
+	width: 220px;
+	padding-bottom: 3px;
+}
+.popupLeadDetails {
+	overflow-y: auto !important;
+	width: 250px !important;
+	height: 160px !important;
+	padding-right: 5px !important;
+	font-size: 10px;
+	color: #202020;
+}
+.olPopupContent {
+    padding:5px;
+    overflow-y: scroll;
+	border: 0.5px solid #c0c0c0;;
+}
+.olPopupCloseBox {
+  background: url("../../lib/ext-3.4.0/resources/images/wireframe/qtip/close.gif") no-repeat !important;
+  cursor: pointer !important;
+  right: 18px !important;
+}
+.olFramedCloudPopupContent {
+    padding: 0px;
+    overflow: auto;
+	left: 18px !important;
+}
+
+
