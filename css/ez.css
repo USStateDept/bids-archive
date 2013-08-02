@@ -89,8 +89,12 @@ h3 {
   margin: 26px 0px 10px 0px; }
 
 .container header {
-  padding: 20px 0px 20px 0px;
-  height: 60px; }
+  padding-top: 60px;
+  padding-bottom: 20px;
+  height: 60px; 
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+  border-bottom-color:#c0c0c0; }
   .container header a.logo {
     float: left; }
   .container header .nav {
@@ -751,8 +755,12 @@ h3 {
 
 @media (min-width: 1281px) {
   .container header {
-    padding: 50px 0px 47px 0px;
-    height: 60px; }
+  padding-top: 60px;
+  padding-bottom: 20px;
+  height: 60px; 
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+  border-bottom-color:#c0c0c0; }
   .container .content .key {
     margin: 15px 0px 0px 0px; }
   .container .content .map {

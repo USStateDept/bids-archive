@@ -11,8 +11,8 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-//var domain = 'localhost'
-var domain = 'edip-maps.net'
+var domain = 'localhost'
+//var domain = 'edip-maps.net'
 var site = '/bids/'
 
 var sd;
@@ -36,7 +36,6 @@ Ext.onReady(function() {
 
 	// Add a lead Form / Edit a lead Form
 	var tabs = new Ext.FormPanel({
-		title : ' ',
 		layout : 'form',
 		labelWidth : 80,
 		border : false,
@@ -92,10 +91,9 @@ Ext.onReady(function() {
 			autoScroll : false,
 			fieldLabel : 'Sector',
 			items : [{
-				layout : 'column',
 				xtype : 'checkboxgroup',
-				columns : 2,
 				autoScroll : false,
+				width : 200,
 				items : [{
 					boxLabel : 'Ag and Environment',
 					name : 'chAg',
@@ -370,18 +368,21 @@ Ext.onReady(function() {
 	var treeConfig = [{
 		nodeType : "gx_baselayercontainer",
 		expanded : true
-	}/*, {
-		nodeType : "gx_overlaylayercontainer",
-		expanded : true,
-		// render the nodes inside this container with a radio button,
-		// and assign them the group "foo".
-		loader : {
-			baseAttrs : {
+	}
+	/*, {
+			nodeType : "gx_overlaylayercontainer",
+			expanded : true,
+			// render the nodes inside this container with a radio button,
+			// and assign them the group "foo".
+			loader : {
+				baseAttrs : {
 				radioGroup : "foo",
 				uiProvider : "layernodeui"
+				}
 			}
-		}
-	}*/];
+		}*/
+	];
+	
 	// The line below is only needed for this example, because we want to allow
 	// interactive modifications of the tree configuration using the
 	// "Show/Edit Tree Config" button. Don't use this line in your code.
@@ -389,16 +390,10 @@ Ext.onReady(function() {
 
 	// create the tree with the configuration from above
 	tree = new Ext.tree.TreePanel({
-		border : true,
-		region : "north",
+		region : "south",
 		title : "Layers",
-		height : 117,
-		width : 200,
-		split : true,
 		collapsible : true,
 		collapsed : true,
-		collapseMode : "mini",
-		autoScroll : false,
 		plugins : [new GeoExt.plugins.TreeNodeRadioButton],
 		loader : new Ext.tree.TreeLoader({
 			// applyLoader has to be set to false to not interfer with loaders
@@ -497,13 +492,13 @@ Ext.onReady(function() {
 		sd, {
 			templates : {
 				// hover single
-				hover : '<div><font size=\"2\"><b>${.Project_Title}</b></font></div><div><font size=\"1\" color=\"#202020\"><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.Project_Funding_Source}</font></div>',
+				hover : '<div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.Project_Funding_Source}</div>',
 				// hover list
-				hoverList : '<div><font size=\"2\"><b>${count} leads found</b></font><br><font size=\"1\" color=\"#909090\">Click for more information</font></div>',
+				hoverList : '<div class="popupLeadCount">${count} leads found</div><div class="popupLead"><div class="popupLeadList">Click for more information</div></div>',
 				// selected item from single & list
-				single : '<div class="popupLeadTitle">${.Project_Title}</div>' +  '<div class="popupLeadDetails"><b>Country: </b>${.Country}<br>' +'<b>Sector: </b>${.Sector}<br>'+'<b>Date Added: </b>'  + '<br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}' +  '<br><br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div>',
+				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div></div>',
 				// List of clustered items
-				item : '<li class="leadList"><a href=\"#\" ${showPopup()}>${.Project_Title}</a></li><div><font size = \"1\" color=\"#202020\"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</font></div><br>'
+				item : '<div class="popupLead"><div class="popupLeadTitle"><a href=\"#\" ${showPopup()}>${.Project_Title}</a></div><div class="popupLeadSummary"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</div></div>'
 			}
 		}]]
 	});
@@ -612,8 +607,6 @@ Ext.onReady(function() {
 	store.load();
 
 	grid = new Ext.grid.GridPanel({
-
-		//id: "grid",
 		title : "Business Lead List",
 		region : "south",
 		collapsible : true,
@@ -621,7 +614,6 @@ Ext.onReady(function() {
 		store : store,
 		id : 'gridx',
 		plugins : [Ext.ux.PanelCollapsedTitle],
-
 		columns : [{
 			header : "Project Title",
 			dataIndex : "Project_Title",
@@ -761,7 +753,6 @@ Ext.onReady(function() {
 				tabs.getForm().findField("Submitting_Officer_Contact").setValue(subo);
 				tabs.getForm().findField("Source").setValue(sou);
 				tabs.getForm().findField("fid").setValue(fid);
-
 				tabs.getForm().findField("Tender_Date").setValue(ten);
 
 				/*if (se.indexOf("Water") != -1) {
@@ -936,7 +927,8 @@ Ext.onReady(function() {
 		labelWidth : 0, // label settings here cascade unless overridden
 		frame : false,
 		title : '<style="font-size:12px;">Search Filters</style>',
-		region : 'center',
+		height : 380,
+		region : 'north',
 		bodyStyle : 'padding:5px 5px 0',
 
 		//width: 210,
@@ -944,60 +936,68 @@ Ext.onReady(function() {
 			width : 135
 		},
 		defaultType : 'textfield',
-
-		items : [ txtKey = new Ext.form.TextField({
-			emptyText : 'Keywords...'
-		}), secBox = new Ext.ux.form.CheckboxCombo({
-			//store : sectorStore,
-			store : new Ext.data.ArrayStore({
-				fields : ['Sector'],
-				data : sec // from states.js
-			}),
-			displayField : 'Sector',
-			valueField : 'Sector',
-			mode : 'local',
-			emptyText : 'Select Sector...'
-		}), sizeBox = new Ext.ux.form.CheckboxCombo({
-			store : new Ext.data.ArrayStore({
-				fields : ['PrSize'],
-				data : sizes // from states.js
-			}),
-			displayField : 'PrSize',
-			valueField : 'PrSize',
-			mode : 'local',
-			emptyText : 'Select Size...'
-		}), fsBox = new Ext.ux.form.CheckboxCombo({
-			store : fundingStore,
-			displayField : 'FundingSource',
-			valueField : 'FundingSource',
-			mode : 'local',
-			emptyText : 'Select Funding...'
-		}), dBegin = new Ext.form.DateField({
-			emptyText : 'Announce Date Begin...',
-			width : 190
-		}), dEnd = new Ext.form.DateField({
-			emptyText : 'Announce Date End...',
-			width : 190
-		}), tBegin = new Ext.form.DateField({
-			emptyText : 'Tender Data Begin...',
-			width : 190
-		}), tEnd = new Ext.form.DateField({
-			emptyText : 'Tender Date End...',
-			width : 190
-		}), arcBox = new Ext.ux.form.CheckboxCombo({
-			store : new Ext.data.ArrayStore({
-				fields : ['Status'],
-				data : arch // from states.js
-			}),
-			displayField : 'Status',
-			valueField : 'Status',
-			mode : 'local',
-			emptyText : 'Select Status...'
-		})],
+		items : [ 
+			txtKey = new Ext.form.TextField({
+				emptyText : 'Keywords...'
+			}), 
+			secBox = new Ext.ux.form.CheckboxCombo({
+				//store : sectorStore,
+				store : new Ext.data.ArrayStore({
+					fields : ['Sector'],
+					data : sec // from states.js
+				}),
+				displayField : 'Sector',
+				valueField : 'Sector',
+				mode : 'local',
+				emptyText : 'Select Sector...'
+			}), 
+			sizeBox = new Ext.ux.form.CheckboxCombo({
+				store : new Ext.data.ArrayStore({
+					fields : ['PrSize'],
+					data : sizes // from states.js
+				}),
+				displayField : 'PrSize',
+				valueField : 'PrSize',
+				mode : 'local',
+				emptyText : 'Select Size...'
+			}), 
+			fsBox = new Ext.ux.form.CheckboxCombo({
+				store : fundingStore,
+				displayField : 'FundingSource',
+				valueField : 'FundingSource',
+				mode : 'local',
+				emptyText : 'Select Funding...'
+			}), 
+			dBegin = new Ext.form.DateField({
+				emptyText : 'Announce Date Begin...',
+				width : 190
+			}), 
+			dEnd = new Ext.form.DateField({
+				emptyText : 'Announce Date End...',
+				width : 190
+			}), 
+			tBegin = new Ext.form.DateField({
+				emptyText : 'Tender Data Begin...',
+				width : 190
+			}), 
+			tEnd = new Ext.form.DateField({
+				emptyText : 'Tender Date End...',
+				width : 190
+			}), 
+			arcBox = new Ext.ux.form.CheckboxCombo({
+				store : new Ext.data.ArrayStore({
+					fields : ['Status'],
+					data : arch // from states.js
+				}),
+				displayField : 'Status',
+				valueField : 'Status',
+				mode : 'local',
+				emptyText : 'Select Status...'
+			})
+		],
 		buttons : [{
 			text : 'Search',
 			handler : function() {
-
 				var count = 0;
 				var filter = "";
 				var sec = secBox.displayField;
@@ -1223,24 +1223,15 @@ Ext.onReady(function() {
 		}]
 	});
 
-	// create the tree with the configuration from above
+	// Create the Add Your Lead button
 	addButton = new Ext.FormPanel({
-		labelWidth : 0, // label settings here cascade unless overridden
-		frame : false,
-		collapsible : false,
-		collapsed : false,
-		collapseMode : "mini",
-		//title : '<style="font-size:12px;">Search Filters</style>',
-		region : 'south',
-		bodyStyle : 'padding:5px 5px 0',
+		region : 'center',
 		buttons : [{
-			text : '<b>Add a Lead</b>',
-			icon : 'img/add.png',
+			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
+			//icon : 'img/add.png',
 			handler : function() {
-
-
 				Ext.Msg.show({
-					title : 'Add a Lead',
+					title : 'Add Your Lead',
 					msg : 'By clicking okay, you agree that any trade lead added to this system will be unclassified, and that you understand the rules and regulations regarding this site.',
 					width : 300,
 					buttons : Ext.MessageBox.OK,
@@ -1249,27 +1240,27 @@ Ext.onReady(function() {
 			}
 		}]
 	});
-	//secBox.on('onListClick', yourFunction);
-
+	
+	// Creates the Layout
 	new Ext.Viewport({
 		layout : "fit",
 		hideBorders : true,
 		items : {
 			layout : "border",
-			items : [
-				mapPanel, {
-					layout : 'border',
-					region : 'west',
-					split : true,
-					width : 180,
-					items : [tree, filterPanel, addButton]
-				}, 
-				{
+			items : [{
 				region : 'north',
-				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="resources.html">Resources</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQS</a></li></ul></div></header></div>',
-				height : 120,
-				border : false
-			}, grid]
+				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li></ul></div></header></div>',
+				height : 141,
+				border : true
+			}, 
+			mapPanel, {
+				layout : 'border',
+				region : 'west',
+				split : true,
+				width : 180,
+				items : [filterPanel, addButton, tree]
+			}, 
+			grid]
 		}
 	});
 
