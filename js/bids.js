@@ -333,6 +333,7 @@ Ext.onReady(function() {
 			Ext.getCmp('btnSave').enable();
 			Ext.getCmp('btnReset').enable();
 		}
+		tabs.getForm().reset();
 		win.show();
 	}
 	//toolbarItems.push(action);
