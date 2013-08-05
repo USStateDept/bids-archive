@@ -390,11 +390,12 @@ Ext.onReady(function() {
 
 	// create the tree with the configuration from above
 	tree = new Ext.tree.TreePanel({
-		region : "south",
-		title : "Layers",
+		region : "north",
+		title : "Layer Options",
 		collapsible : true,
 		collapsed : true,
-		plugins : [new GeoExt.plugins.TreeNodeRadioButton],
+		plugins : new GeoExt.plugins.TreeNodeRadioButton, 
+		plugins: [Ext.ux.PanelCollapsedTitle],
 		loader : new Ext.tree.TreeLoader({
 			// applyLoader has to be set to false to not interfer with loaders
 			// of nodes further down the tree hierarchy
@@ -927,8 +928,8 @@ Ext.onReady(function() {
 		labelWidth : 0, // label settings here cascade unless overridden
 		frame : false,
 		title : '<style="font-size:12px;">Search Filters</style>',
-		height : 380,
-		region : 'north',
+		height : 350,
+		region : 'center',
 		bodyStyle : 'padding:5px 5px 0',
 
 		//width: 210,
@@ -1225,7 +1226,8 @@ Ext.onReady(function() {
 
 	// Create the Add Your Lead button
 	addButton = new Ext.FormPanel({
-		region : 'center',
+		region : 'south',
+		height : 'auto',
 		buttons : [{
 			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
 			//icon : 'img/add.png',
