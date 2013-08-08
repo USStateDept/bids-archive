@@ -51,6 +51,12 @@ public class LeadAdder extends HttpServlet {
 				else if(paramName.startsWith("ch")){
 
 				}
+				else if(paramName.equals("Tender_Date")&&paramValue.equals("")){
+
+				}
+				else if(paramName.equals("Project_Announced")&&paramValue.equals("")){
+
+				}
 				else{
 					update+= "\"" + paramName +"\"=\'" + paramValue + "\',";
 				}
@@ -98,7 +104,7 @@ public class LeadAdder extends HttpServlet {
 
 							if (paramName.startsWith("Spec")) {
 								String wkt = Geocode(paramValue);
-								out.println(wkt);
+								//out.println(wkt);
 								if (wkt.equals("0")) {
 
 								}
@@ -130,7 +136,7 @@ public class LeadAdder extends HttpServlet {
 
 			names = names.substring(0, names.length() - 1);
 			values = values.substring(0, values.length() - 1);
-			out.println(names + ":" + values);
+			//out.println(names + ":" + values);
 		}
 
 		try {
@@ -147,6 +153,7 @@ public class LeadAdder extends HttpServlet {
 			}else{
 				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
+				out.print(insert);
 						rs = stmt.executeQuery(insert);
 			}
 			/*
@@ -258,9 +265,9 @@ public class LeadAdder extends HttpServlet {
 				lon = lon.substring(lon.indexOf(":") + 1);
 				lon = lon.trim();
 
-				System.out.println(snip);
-				System.out.println(lat);
-				System.out.println(lon);
+				//System.out.println(snip);
+				//System.out.println(lat);
+				//System.out.println(lon);
 
 				wkt = "ST_GeomFromText(\'POINT(" + lon + " " + lat
 						+ ")\', 4326)";
