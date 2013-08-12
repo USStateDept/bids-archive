@@ -1,11 +1,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>BIDS: Business Information System Database</title>
+		<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js"></script>
+		<script type="text/javascript" src="../lib/OpenLayers/lib/OpenLayers.js"></script>
+        <script type="text/javascript" src="../lib/GeoExt/script/GeoExt.js"></script>
+        <script type="text/javascript" src="js/bidsGrid.js"></script>
+		<script type="text/javascript" src="js/FeaturePopups.js"></script>
+		<script type="text/javascript" src="js/patches_OL-popup-autosize.js"></script>
+		<script type="text/javascript" src="js/Ext.ux.PanelCollapsedTitle.js"></script>
+		<script type="text/javascript" src="js/Ext.ux.form.CheckboxCombo.min.js"></script>
+		<script type="text/javascript" src="js/tile.stamen.js?v1.2.2"></script>
 		<script type="text/javascript" src="js/check.js"></script>
 		<script type="text/javascript" src="http://tradeleads.state.gov/yes.js"></script>
 		<script type="text/javascript" src="../lib/ieCheck.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/custom.css" />
 		<link rel="stylesheet" type="text/css" href="css/ez.css" />
+		<link rel="stylesheet" type="text/css" href="css/olStyle.css" />
 		<link rel="stylesheet" type="text/css" href="../lib/ext-3.4.0/resources/css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/ext-3.4.0.css" />
 		<link rel="stylesheet" type="text/css" href="css/Ext.ux.form.CheckboxCombo.min.css" />
@@ -20,82 +31,7 @@
 			ga('create', 'UA-42151027-1', 'edip-maps.net');
 			ga('send', 'pageview');
 		</script>
-	</head>
-    <body class="contentBody">
-		<div class="container">
-			<header>
-				<div class="row">
-					<a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a>
-					<ul class="nav">
-						<li>
-							<a href="index.html">Home</a>
-						</li>
-						<li>
-							<a href="javascript:checkTest();">Add a Lead</a>
-						</li>
-						<li>
-							<a href="resources.html">Resources</a>
-						</li>
-						<li>
-							<a href="#">Data</a>
-						</li>
-						<li>
-							<a href="faqs.html">FAQs</a>
-						</li>
-						<li>
-							<a href="help.html">Help</a>
-						</li>
-					</ul>
-				</div>
-			</header>
-			<div class="content">
-				<div class="row">
-					<h1>
-						This will show all of our data in a tabular format, buttons <br>to export to XLS/CSV, and information on our API
-					</h1>
-					<div >
-						<h3>
-							Imagine, with your mind...that you see the table here.							
-						</h3>
-						<div>
-							<p>
-								This table will be a beautiful thing!<br>
-							___________________________________________________________<br>
-							|____|___|_______|___|___|_______|____|___|_______|___|___|_______|<br>
-							|____|___|_______|___|___|_______|____|___|_______|___|___|_______|<br>
-							|____|___|_______|___|___|_______|____|___|_______|___|___|_______|<br>
-							|____|___|_______|___|___|_______|____|___|_______|___|___|_______|<br>
-							|____|___|_______|___|___|_______|____|___|_______|___|___|_______|<br>
-							|____|___|_______|___|___|_______|____|___|_______|___|___|_______|<br>
-							This is an imaginery table, not what we would really do.
-							</p>
-						</div>
-						<h3>
-							And here, will be buttons!
-						</h3>
-						<div>
-							<p>
-								/---------------------\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/---------------------\<br>
-								| Button for XLS! |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Button for CSV! |<br>
-								\---------------------/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\---------------------/<br>
-								<br>
-								Buttons!! YAY!!!
-							</p>
-						</div>
-						<h3>
-							API information shall appear here. And disappear. Yes - we will make it blink on and off.
-						</h3>
-						<div>
-							<p>
-								<blink>Blink</blink>. <blink>Blink</blink>. <blink>Blink</blink>. Ok, maybe no blinks, since the goal of this page is usability compliance. Maybe we can do a little blinking? In the corner<blink>?</blink>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    </head>
+    <body>
 	</body>
 </html>
-
-
-
