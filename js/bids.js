@@ -943,7 +943,7 @@ Ext.onReady(function() {
 		labelWidth : 0, // label settings here cascade unless overridden
 		frame : false,
 		title : '<style="font-size:12px;">Search Filters</style>',
-		height : 350,
+		autoHeight : true,
 		region : 'center',
 		bodyStyle : 'padding:5px 5px 0',
 
@@ -1232,7 +1232,7 @@ Ext.onReady(function() {
 	// Create the Add Your Lead button
 	addButton = new Ext.FormPanel({
 		region : 'south',
-		height : 'auto',
+		autoHeight : true,
 		buttons : [{
 			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
 			//icon : 'img/add.png',
@@ -1252,12 +1252,13 @@ Ext.onReady(function() {
 	new Ext.Viewport({
 		layout : "fit",
 		hideBorders : true,
+		autoHeight: true,
 		items : {
 			layout : "border",
 			items : [{
 				region : 'north',
 				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li></ul></div></header></div>',
-				height : 141,
+				height : 121,
 				border : true
 			}, mapPanel, {
 				layout : 'border',

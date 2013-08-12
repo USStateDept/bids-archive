@@ -1,0 +1,101 @@
+.legend {
+	padding-left: 18px;
+}
+.x-tree-node-el {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 3px;
+}
+.x-tree-ec-icon {
+	width: 3px;
+}
+.gx-tree-layer-icon {
+	display: none;
+}
+.x-form-item {
+	overflow: false !important;
+}
+.ext-gecko {
+	overflow: false !important;
+}
+.x-window-body {
+	overflow: false !important;
+}
+<!--.olControlFeaturePopups_list {
+	width: 250px !important; 
+	height: 200px !important;
+	overflow-y: scroll !important;
+}-->
+a:link {
+	color:#000000;
+	text-decoration:underline;
+}
+a:visited {
+	color:#000000;
+	text-decoration:underline;
+}
+a:hover {
+	color:#707070;
+	text-decoration:none;
+}
+a:active {
+	color:#FF6600;
+	text-decoration:none;
+}
+.leadList {
+	font-weight: bold;
+}
+.x-form-element {
+	padding-left: 5px !important;
+}
+.x-form-el-ext-comp {
+	padding-left: 0px !important;
+}
+.x-checkboxcombo-list {
+	width: auto !important;
+}
+.x-checkboxcombo-list-inner {
+	width: auto !important;
+}
+.x-column {
+	padding-left:10px !important;
+	width: auto !important;
+}
+.x-column-inner {
+	padding-top: 15px !important;
+	width: auto !important;
+}
+.x-form-check-group {
+<!--border: 1px solid #ddd;-->
+	width: auto !important;
+	overflow: visible !important;
+}
+.x-form-item-label {
+	padding-left: 15px !important;
+	width: 0px !important;
+}
+#ext-comp-1011 {
+	width: 285px !important;
+}
+.popupLeadTitle {
+	font-size: 14px;
+	font-weight: bold !important;
+	text-decoration: none !important;
+	width: 220px !important;
+}
+<!-- "Search" and "Reset" buttons -->
+	x-panel-body x-form {
+	height: 310px !important;
+}
+<!-- Add A Lead" Button
+#ext-comp-1061{
+	top: 485px !important;
+} -->
+.x-panel-btns {
+	padding:0px !important;
+}
+.contentBody {
+	padding-top:0px; 
+	padding-left:0px; 
+	padding-right:0px; 
+	padding-bottom:0px
+}

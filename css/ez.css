@@ -89,7 +89,7 @@ h3 {
   margin: 26px 0px 10px 0px; }
 
 .container header {
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 20px;
   height: 60px; 
   border-bottom-width:1px;
@@ -755,7 +755,7 @@ h3 {
 
 @media (min-width: 1281px) {
   .container header {
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 20px;
   height: 60px; 
   border-bottom-width:1px;
