@@ -47,8 +47,8 @@ Ext.onReady(function() {
 		resizeHandles : false,
 		items : [{
 			xtype : 'hidden',
-			name : 'Cleared',
-			value : '0'
+			name : 'Cleared'
+			//value : '0'
 		}, {
 			xtype : 'hidden',
 			name : 'Status',
@@ -263,6 +263,12 @@ Ext.onReady(function() {
 			xtype : 'textfield',
 			width : 275,
 			height : 80
+		}, {
+			xtype : 'checkbox',
+			boxLabel : 'This is a major edit',
+			name : 'chMaj',
+			id : 'chMaj',
+			autoScroll : false
 		}],
 		buttons : [{
 			text : 'Fulfill',
@@ -277,6 +283,20 @@ Ext.onReady(function() {
 			text : 'Edit',
 			id : 'btnEdit',
 			handler : function() {
+
+				if (tabs.getForm().findField("chMaj").getValue() == true) {
+					tabs.getForm().findField('Cleared').setValue('0');
+				} else {
+					var cleared = grid.getSelectionModel().getSelected().data.Cleared;
+
+					if (cleared == '0') {
+						tabs.getForm().findField('Cleared').setValue('0');
+					} else {
+						tabs.getForm().findField('Cleared').setValue('1');
+					}
+
+				}
+
 				tabs.getForm().submit({
 					submitEmptyText : false,
 					params : {
@@ -289,6 +309,7 @@ Ext.onReady(function() {
 			text : 'Save',
 			id : 'btnSave',
 			handler : function() {
+				tabs.getForm().findField('Cleared').setValue('0');
 				tabs.getForm().submit({
 					submitEmptyText : false,
 					params : {
@@ -299,6 +320,7 @@ Ext.onReady(function() {
 					},
 					failure : function(form, action) {
 						//Ext.Msg.alert('Warning', 'Error');
+
 						win.hide();
 						tabs.getForm().reset();
 						grid.getView().refresh();
@@ -344,6 +366,8 @@ Ext.onReady(function() {
 			Ext.getCmp('btnSave').enable();
 			Ext.getCmp('btnReset').enable();
 			Ext.getCmp('btnArchive').disable();
+			Ext.getCmp('chMaj').setDisabled(true);
+			Ext.getCmp('chMaj').checked=false;
 		}
 		tabs.getForm().reset();
 		win.show();
@@ -830,6 +854,7 @@ Ext.onReady(function() {
 					Ext.getCmp('btnReset').disable();
 					Ext.getCmp('btnArchive').enable();
 					Ext.getCmp('btnArchive').toggle(false);
+					Ext.getCmp('chMaj').setDisabled(false);
 					//Ext.getCmp('sspec').disabled=true;
 				}
 
