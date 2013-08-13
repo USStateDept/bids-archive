@@ -2,6 +2,16 @@ window.onload = function() {
 	ieCheck();
 };
 
+var _gaq = _gaq || []; 
+          _gaq.push(['_setAccount', 'UA-42151027-1']); 
+          //_gaq.push(['_trackPageview']);  //This logs the page view 
+
+          (function() { 
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; 
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); 
+          })(); 
+		  
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
 //OpenLayers.ProxyHost="http://" + domain + "/geoserver/rest/proxy?url="
@@ -1207,6 +1217,9 @@ Ext.onReady(function() {
 				store.proxy = tProxy;
 				store.reload();
 				grid.getView().refresh();
+				
+				_gaq.push(['_trackEvent', 'leadSearch']);  //Log customer listing request
+				
 			}
 		}, {
 			text : 'Reset',
