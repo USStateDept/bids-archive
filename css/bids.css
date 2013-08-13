@@ -78,7 +78,7 @@ a:active {
 }
 .popupLeadTitle {
 	font-size: 14px;
-	font-style: bold !important;
+	font-weight: bold !important;
 	text-decoration: none !important;
 	width: 220px !important;
 }
