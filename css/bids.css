@@ -20,11 +20,11 @@
 .x-window-body {
 	overflow: false !important;
 }
-<!--.olControlFeaturePopups_list {
+/*.olControlFeaturePopups_list {
 	width: 250px !important; 
 	height: 200px !important;
 	overflow-y: scroll !important;
-}-->
+}*/
 a:link {
 	color:#000000;
 	text-decoration:underline;
@@ -65,7 +65,7 @@ a:active {
 	width: auto !important;
 }
 .x-form-check-group {
-<!--border: 1px solid #ddd;-->
+	/* border: 1px solid #ddd; */
 	width: auto !important;
 	overflow: visible !important;
 }
@@ -78,18 +78,18 @@ a:active {
 }
 .popupLeadTitle {
 	font-size: 14px;
-	font-weight: bold !important;
+	font-style: bold !important;
 	text-decoration: none !important;
 	width: 220px !important;
 }
-<!-- "Search" and "Reset" buttons -->
-	x-panel-body x-form {
+/* "Search" and "Reset" buttons */
+.x-panel-body x-form {
 	height: 310px !important;
 }
-<!-- Add A Lead" Button
+/* Add A Lead" Button */
 #ext-comp-1061{
 	top: 485px !important;
-} -->
+}
 .x-panel-btns {
 	padding:0px !important;
 }
@@ -98,4 +98,8 @@ a:active {
 	padding-left:0px; 
 	padding-right:0px; 
 	padding-bottom:0px
+}
+.reqField {
+	font-style: bold;
+	color: #F78181;
 }

@@ -11,8 +11,8 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-//var domain = 'localhost'
-var domain = 'edip-maps.net'
+var domain = 'localhost'
+//var domain = 'edip-maps.net'
 var site = '/bids/'
 
 var sd;
@@ -45,6 +45,12 @@ Ext.onReady(function() {
 		autoScroll : true,
 		resizable : false,
 		resizeHandles : false,
+		monitorValid : true,
+		listeners: {
+			clientvalidation : function(form, valid) {
+				Ext.getCmp('btnSave').setDisabled(!valid);
+			}
+		},
 		items : [{
 			xtype : 'hidden',
 			name : 'Cleared'
@@ -61,19 +67,25 @@ Ext.onReady(function() {
 			name : 'Project_Title',
 			emptyText : 'Project Title',
 			xtype : 'textfield',
-			width : 275
+			width : 275,
+			allowBlank: false,
+			blankText: 'a Project Title is required.',
+			emptyClass: 'reqField'
 		}, {
 			name : 'Country',
 			xtype : 'textfield',
 			emptyText : 'Country',
-			width : 275
+			width : 275,
+			allowBlank: false,
+			blankText: 'a Country is required.',
+			emptyClass: 'reqField'
 		}, {
 			name : 'Specific_Location',
 			xtype : 'textfield',
 			emptyText : 'Specific Location',
 			width : 275,
 			id : 'sspec'
-		}, new Ext.form.ComboBox({
+		}, /*new Ext.form.ComboBox({
 			store : new Ext.data.ArrayStore({
 				fields : ['DOS_Region'],
 				data : regions // from states.js
@@ -87,13 +99,17 @@ Ext.onReady(function() {
 			triggerAction : 'all',
 			selectOnFocus : true,
 			width : 275
-		}), {
+		}),*/ {
 			autoScroll : false,
-			fieldLabel : 'Sector',
+			fieldLabel : '<font class="reqField">&nbsp;&nbsp;Sector</font>',
 			items : [{
 				xtype : 'checkboxgroup',
+				allowBlank: false,
+				blankText: 'a Sector is required.',
+				emptyClass: 'reqField',
 				autoScroll : false,
-				width : 200,
+				width : 250,
+				columns: 1,
 				items : [{
 					boxLabel : 'Ag and Environment',
 					name : 'chAg',
@@ -118,64 +134,16 @@ Ext.onReady(function() {
 					boxLabel : 'Natural Resources',
 					name : 'chNatural',
 					autoScroll : false
-				} /*boxLabel : 'Administration',
-				 name : 'chAdmin',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Agriculture',
-				 name : 'chAgr',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Education',
-				 name : 'chEd',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Energy',
-				 name : 'chEn',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Finance',
-				 name : 'chFin',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Infrastructure',
-				 name : 'chInf',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Resource Management',
-				 name : 'chRes',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Social Services',
-				 name : 'chSoc',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Telecommunications',
-				 name : 'chTel',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Tourism',
-				 name : 'chTou',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Transportation',
-				 name : 'chTra',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Water',
-				 name : 'chWa',
-				 autoScroll : false
-				 }, {
-				 boxLabel : 'Other',
-				 name : 'chOth',
-				 autoScroll : false
-				 }*/]
+				}]
 			}]
 		}, {
 			name : 'Project_Size',
 			emptyText : 'Project Size',
 			xtype : 'textfield',
-			width : 275
+			width : 275,
+			allowBlank: false,
+			blankText: 'a Project Size is required.',
+			emptyClass: 'reqField'
 		}, {
 			name : 'Project_Number',
 			emptyText : 'Project Number',
@@ -200,22 +168,28 @@ Ext.onReady(function() {
 			triggerAction : 'all',
 			selectOnFocus : true,
 			width : 275,
-			height : 140
+			height : 140,
+			allowBlank: false,
+			blankText: 'an Information Source is required.',
+			emptyClass: 'reqField'
 		}), {
 			xtype : 'textarea',
 			name : 'Project_Description',
 			emptyText : 'Project Description & Bidding Requirements',
 			xtype : 'textfield',
 			width : 275,
-			height : 140
+			height : 140,
+			allowBlank: false,
+			blankText: 'a Project Description is required.',
+			emptyClass: 'reqField'
 		}, {
 			name : 'Keyword',
 			emptyText : 'Keywords',
 			xtype : 'textfield',
-			width : 275
-		}, {
-			emptyText : 'Keywords',
-			name : 'Keyword'
+			width : 275,
+			allowBlank: false,
+			blankText: 'Keywords are required.',
+			emptyClass: 'reqField'
 		}, new Ext.form.DateField({
 			emptyText : 'Project Announced',
 			name : 'Project_Announced',
@@ -243,7 +217,10 @@ Ext.onReady(function() {
 			name : 'Submitting_Officer',
 			emptyText : 'Submitting Officer',
 			xtype : 'textfield',
-			width : 275
+			width : 275,
+			allowBlank: false,
+			blankText: 'a Submitting Officer is required.',
+			emptyClass: 'reqField'
 		}, {
 			name : 'Submitting_Officer_Contact',
 			emptyText : 'Submitting Officer Email',
@@ -276,7 +253,6 @@ Ext.onReady(function() {
 			enableToggle : true,
 			disabled : true,
 			toggleHandler : function() {
-
 				tabs.getForm().findField('Status').setValue('Fulfilled');
 			}
 		}, {
@@ -346,7 +322,7 @@ Ext.onReady(function() {
 		autoHeight : true,
 		minWidth : 500,
 		plain : true,
-		title : 'Add a Lead',
+		title : 'Add a Lead<br><h3>All <font class="reqField">required </font>fields must be input before you can save.</h3>',
 		border : false,
 		closeAction : 'hide',
 		items : tabs
