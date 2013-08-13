@@ -2,16 +2,7 @@ window.onload = function() {
 	ieCheck();
 };
 
-var _gaq = _gaq || []; 
-          _gaq.push(['_setAccount', 'UA-42151027-1']); 
-          //_gaq.push(['_trackPageview']);  //This logs the page view 
 
-          (function() { 
-                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; 
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); 
-          })(); 
-		  
 //var store;
 var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
 //OpenLayers.ProxyHost="http://" + domain + "/geoserver/rest/proxy?url="
@@ -21,8 +12,8 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-//var domain = 'localhost'
-var domain = 'edip-maps.net'
+var domain = 'localhost'
+//var domain = 'edip-maps.net'
 var site = '/bids/'
 
 var sd;
@@ -264,6 +255,7 @@ Ext.onReady(function() {
 			disabled : true,
 			toggleHandler : function() {
 				tabs.getForm().findField('Status').setValue('Fulfilled');
+				ga('send', 'event', 'Add_Lead', 'Archive_Lead_Details', {'nonInteraction': 1});
 			}
 		}, {
 			text : 'Edit',
@@ -290,6 +282,8 @@ Ext.onReady(function() {
 					}
 				});
 				win.hide();
+				
+				ga('send', 'event', 'Add_Lead', 'Edit_Lead_Details', {'nonInteraction': 1});
 			}
 		}, {
 			text : 'Save',
@@ -315,12 +309,16 @@ Ext.onReady(function() {
 						});
 					}
 				});
+				
+				ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
 			}
 		}, {
 			text : 'Reset',
 			id : 'btnReset',
 			handler : function() {
 				tabs.getForm().reset();
+				
+				ga('send', 'event', 'Add_Lead', 'Reset_Lead_Details', {'nonInteraction': 1});
 			}
 		}]
 	});
@@ -357,6 +355,8 @@ Ext.onReady(function() {
 		}
 		tabs.getForm().reset();
 		win.show();
+		
+		ga('send', 'event', 'Clearance_Popup', 'Add_Clearance_Popup', {'nonInteraction': 1});
 	}
 
 	//toolbarItems.push(action);
@@ -520,9 +520,9 @@ Ext.onReady(function() {
 				// hover list
 				hoverList : '<div class="popupLeadCount">${count} leads found</div><div class="popupLead"><div class="popupLeadList">Click for more information</div></div>',
 				// selected item from single & list
-				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact}">Contact Embassy</a></font></div></div>',
+				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}" onclick=\"javascript:ga(\'send\', \'event\', \'External_Link\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact};\" onclick=\"javascript:ga(\'send\', \'event\', \'Contact\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Contact Embassy</a></font></div></div>',
 				// List of clustered items
-				item : '<div class="popupLead"><div class="popupLeadTitle"><a href=\"#\" ${showPopup()}>${.Project_Title}</a></div><div class="popupLeadSummary"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</div></div>'
+				item : '<div class="popupLead"><div class="popupLeadTitle"><a onclick=\"javascript:ga(\'send\', \'event\', \'Pop-Up_Lead_Details\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\" ${showPopup()}>${.Project_Title}</a></div><div class="popupLeadSummary"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</div></div>'
 			}
 		}]]
 	});
@@ -847,6 +847,8 @@ Ext.onReady(function() {
 				console.log(win.myExtraParams.e);
 
 				win.show();
+				
+				ga('send', 'event', 'Grid_Panel', 'Edit_Grid_Panel', {'nonInteraction': 1});
 			}
 		}]
 
@@ -1218,7 +1220,7 @@ Ext.onReady(function() {
 				store.reload();
 				grid.getView().refresh();
 				
-				_gaq.push(['_trackEvent', 'leadSearch']);  //Log customer listing request
+				ga('send', 'event', 'Search_Panel', 'Search_Search_Panel', {'nonInteraction': 1});
 				
 			}
 		}, {
@@ -1239,6 +1241,8 @@ Ext.onReady(function() {
 				store.proxy = tProxy;
 				store.reload();
 				grid.getView().refresh();
+				
+				ga('send', 'event', 'Search_Panel', 'Reset_Search_Panel', {'nonInteraction': 1});
 			}
 		}]
 	});
@@ -1258,6 +1262,7 @@ Ext.onReady(function() {
 					buttons : Ext.MessageBox.OK,
 					fn : myCallbackFunction
 				})
+				ga('send', 'event', 'Search_Panel', 'Add_Search_Panel', {'nonInteraction': 1});
 			}
 		}]
 	});

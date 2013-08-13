@@ -233,6 +233,7 @@ Ext.onReady(function() {
 			icon : '../img/csv.jpg',
 			handler: function() {
 				window.location.href='http://' + domain + '/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&srsName=EPSG:4326&typeName=opengeo%3ADATATABLE&outputformat=csv';
+				ga('send', 'event', 'Export', 'CSV_Export', {'nonInteraction': 1});
 			}
 		}]
 	});
