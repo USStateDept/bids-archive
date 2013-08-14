@@ -12,24 +12,16 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-var domain = 'localhost'
-//var domain = 'edip-maps.net'
+//var domain = 'localhost'
+var domain = 'edip-maps.net'
 var site = '/bids/'
 
-// API key for http://openlayers.org. Please get your own at
-// http://bingmapsportal.com/ and use that instead.
-var apiKey = "AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf";
-
-var lon = 3000000;
-var lat = 1170000;
-var zoom = 0;
-var map;
-
 var sd;
-var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000], true);
-var initCenter = [3000000, 1170000];
 
-		
+var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000], true);
+var sdExtent = [-20000000, -16000000, 20000000, 19000000];
+var initCenter = [1578000, 202000];
+
 Ext.onReady(function() {
 	var sb, store, grid, check;
 
@@ -373,30 +365,19 @@ Ext.onReady(function() {
 		region : "center",
 		map : {
 			projection : "EPSG:900913",
-			maxExtent: new OpenLayers.Bounds(-20000000, -16000000, 20000000, 19000000),
-			restrictedExtent: new OpenLayers.Bounds(-20000000, -8000000, 20000000, 14370000),
-			center : initCenter,
-			minScale: 55468034.09,
-			numZoomLevels: 13
+			restrictedExtent : sdExtent,
+			center : initCenter
 		},
-		zoom : 0,
-		layers : [
-//			new OpenLayers.Layer.Stamen("toner-lite", {
-//				attribution : "Base data: OpenStreetMaps"
-//			}), 
-			new OpenLayers.Layer.Bing({
-				name: "Road",
-				key: apiKey,
-				type: "Road",
-				attributionTemplate: ''
-			}),
-			new OpenLayers.Layer.Bing({
-				name: "Aerial",
-				key: apiKey,
-				type: "AerialWithLabels",
-				attributionTemplate: ''
-			})
-		],
+		zoom : 3,
+		layers : [new OpenLayers.Layer.Stamen("toner-lite", {
+			attribution : "Base data: OpenStreetMaps"
+		}), new OpenLayers.Layer.XYZ("Physical Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
+			attribution : "Base data: MapQuest, OpenStreetMaps",
+			transitionEffect : "resize"
+		}), new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
+			attribution : "Imagery: MapQuest",
+			transitionEffect : "resize"
+		})]
 	});
 
 	var info;
@@ -1253,7 +1234,6 @@ Ext.onReady(function() {
 			text : 'Reset',
 			id : 'btnResetFilter',
 			handler : function() {
-				//alert('Size: ' + map.getSize() + '\nProjection: ' + map.getProjection() + '\nResolution: ' + map.getResolution() + '\nMax Resolution: ' + map.getMaxResolution() + '\nScale: ' + map.getScale() + '\nUnits: ' + map.getUnits() + '\nExtent: ' + map.getExtent() + '\nMax Extent: ' + map.getMaxExtent() + '\nNum Zoom Levels: ' + map.getNumZoomLevels() + '\nZoom: ' + map.getZoom() + '\nResolution For Zoom: ' + map.getResolutionForZoom() + '\nZoom For Resolution: ' + map.getZoomForResolution() + '\nDPI: ' + OpenLayers.DOTS_PER_INCH);
 				filterPanel.getForm().reset();
 
 				var tProxy = new GeoExt.data.ProtocolProxy({
@@ -1263,11 +1243,12 @@ Ext.onReady(function() {
 					})
 				});
 				map.zoomToExtent(initExtent, true);
-				map.setCenter(initCenter, zoom);
+				map.setCenter(initCenter);
 
 				store.proxy = tProxy;
 				store.reload();
 				grid.getView().refresh();
+				
 				ga('send', 'event', 'Search_Panel', 'Reset_Search_Panel', {'nonInteraction': 1});
 			}
 		}]
