@@ -16,12 +16,20 @@ function as(n) {
 var domain = 'edip-maps.net'
 var site = '/bids/'
 
+// API key for http://openlayers.org. Please get your own at
+// http://bingmapsportal.com/ and use that instead.
+var apiKey = "AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf";
+
+var lon = 3000000;
+var lat = 1170000;
+var zoom = 0;
+var map;
+
 var sd;
-
 var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000], true);
-var sdExtent = [-20000000, -16000000, 20000000, 19000000];
-var initCenter = [1578000, 202000];
+var initCenter = [3000000, 1170000];
 
+		
 Ext.onReady(function() {
 	var sb, store, grid, check;
 
@@ -365,19 +373,30 @@ Ext.onReady(function() {
 		region : "center",
 		map : {
 			projection : "EPSG:900913",
-			restrictedExtent : sdExtent,
-			center : initCenter
+			maxExtent: new OpenLayers.Bounds(-20000000, -16000000, 20000000, 19000000),
+			restrictedExtent: new OpenLayers.Bounds(-20000000, -8000000, 20000000, 14370000),
+			center : initCenter,
+			minScale: 55468034.09,
+			numZoomLevels: 13
 		},
-		zoom : 3,
-		layers : [new OpenLayers.Layer.Stamen("toner-lite", {
-			attribution : "Base data: OpenStreetMaps"
-		}), new OpenLayers.Layer.XYZ("Physical Map", ["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"], {
-			attribution : "Base data: MapQuest, OpenStreetMaps",
-			transitionEffect : "resize"
-		}), new OpenLayers.Layer.XYZ("Imagery", ["http://otile1.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/sat/${z}/${x}/${y}.png"], {
-			attribution : "Imagery: MapQuest",
-			transitionEffect : "resize"
-		})]
+		zoom : 0,
+		layers : [
+//			new OpenLayers.Layer.Stamen("toner-lite", {
+//				attribution : "Base data: OpenStreetMaps"
+//			}), 
+			new OpenLayers.Layer.Bing({
+				name: "Road",
+				key: apiKey,
+				type: "Road",
+				attributionTemplate: ''
+			}),
+			new OpenLayers.Layer.Bing({
+				name: "Aerial",
+				key: apiKey,
+				type: "AerialWithLabels",
+				attributionTemplate: ''
+			})
+		],
 	});
 
 	var info;
@@ -1196,14 +1215,7 @@ Ext.onReady(function() {
 				//////////////////
 				if (keyVal.length > 0) {
 					keyVal = keyVal.replace(" ", "*");
-					filter = filter + "<Or>%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3E" + keyy + "%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3ECountry%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3ESector%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Funding_Source%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EImplementing_Entity%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Title%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Description%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter=filter + "</Or>"
+					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3E" + keyy + "%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
 					count = count + 1;
 				}
 
@@ -1234,6 +1246,7 @@ Ext.onReady(function() {
 			text : 'Reset',
 			id : 'btnResetFilter',
 			handler : function() {
+				//alert('Size: ' + map.getSize() + '\nProjection: ' + map.getProjection() + '\nResolution: ' + map.getResolution() + '\nMax Resolution: ' + map.getMaxResolution() + '\nScale: ' + map.getScale() + '\nUnits: ' + map.getUnits() + '\nExtent: ' + map.getExtent() + '\nMax Extent: ' + map.getMaxExtent() + '\nNum Zoom Levels: ' + map.getNumZoomLevels() + '\nZoom: ' + map.getZoom() + '\nResolution For Zoom: ' + map.getResolutionForZoom() + '\nZoom For Resolution: ' + map.getZoomForResolution() + '\nDPI: ' + OpenLayers.DOTS_PER_INCH);
 				filterPanel.getForm().reset();
 
 				var tProxy = new GeoExt.data.ProtocolProxy({
@@ -1243,12 +1256,11 @@ Ext.onReady(function() {
 					})
 				});
 				map.zoomToExtent(initExtent, true);
-				map.setCenter(initCenter);
+				map.setCenter(initCenter, zoom);
 
 				store.proxy = tProxy;
 				store.reload();
 				grid.getView().refresh();
-				
 				ga('send', 'event', 'Search_Panel', 'Reset_Search_Panel', {'nonInteraction': 1});
 			}
 		}]
