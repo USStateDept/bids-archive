@@ -798,43 +798,15 @@ Ext.onReady(function() {
 				tabs.getForm().findField("fid").setValue(fid);
 				tabs.getForm().findField("Tender_Date").setValue(ten);
 
-				/*if (se.indexOf("Water") != -1) {
-				 tabs.getForm().findField("chWa").setValue(true);
-				 }
-				 if (se.indexOf("Education") != -1) {
-				 tabs.getForm().findField("chEd").setValue(true);
-				 }
-				 if (se.indexOf("Energy") != -1) {
-				 tabs.getForm().findField("chEn").setValue(true);
-				 }
-				 if (se.indexOf("Finance") != -1) {
-				 tabs.getForm().findField("chFin").setValue(true);
-				 }
-				 if (se.indexOf("Infrastructure") != -1) {
-				 tabs.getForm().findField("chInf").setValue(true);
-				 }
-				 if (se.indexOf("Resource Management") != -1) {
-				 tabs.getForm().findField("chRes").setValue(true);
-				 }
-				 if (se.indexOf("Social Services") != -1) {
-				 tabs.getForm().findField("chSoc").setValue(true);
-				 }
-				 if (se.indexOf("Telecommunications") != -1) {
-				 tabs.getForm().findField("chTel").setValue(true);
-				 }
-				 if (se.indexOf("Tourism") != -1) {
-				 tabs.getForm().findField("chTou").setValue(true);
-				 }
-				 if (se.indexOf("Transportation") != -1) {
-				 tabs.getForm().findField("chTra").setValue(true);
-				 }
-				 if (se.indexOf("Administration") != -1) {
-				 tabs.getForm().findField("chAdmin").setValue(true);
-				 }
-				 if (se.indexOf("Agriculture") != -1) {
-				 tabs.getForm().findField("chAgr").setValue(true);
-				 }*/
-
+				//Uncheck all the sector checkboxes
+				tabs.getForm().findField("chAg").setValue(false);
+				tabs.getForm().findField("chEnergy").setValue(false);
+				tabs.getForm().findField("chICT").setValue(false);
+				tabs.getForm().findField("chInfrastructure").setValue(false);
+				tabs.getForm().findField("chNatural").setValue(false);
+				tabs.getForm().findField("chGovernance").setValue(false);
+				
+				//Check the sectpr checkboxes for that record
 				if (se.indexOf("Ag and Environment") != -1) {
 					tabs.getForm().findField("chAg").setValue(true);
 				}
@@ -849,6 +821,9 @@ Ext.onReady(function() {
 				}
 				if (se.indexOf("Natural Resources") != -1) {
 					tabs.getForm().findField("chNatural").setValue(true);
+				}
+				if (se.indexOf("Governance and Services") != -1) {
+					tabs.getForm().findField("chGovernance").setValue(true);
 				}
 
 				win.myExtraParams.e = true;
@@ -1215,7 +1190,14 @@ Ext.onReady(function() {
 				//////////////////
 				if (keyVal.length > 0) {
 					keyVal = keyVal.replace(" ", "*");
-					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3E" + keyy + "%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter = filter + "<Or>%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3E" + keyy + "%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3ECountry%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3ESector%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Funding_Source%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EImplementing_Entity%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Title%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter = filter + "%3CPropertyIsLike wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Description%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
+					filter=filter + "</Or>"
 					count = count + 1;
 				}
 
