@@ -20,9 +20,9 @@ var site = '/bids/'
 // http://bingmapsportal.com/ and use that instead.
 var apiKey = "AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf";
 
-var lon = 3000000;
-var lat = 1170000;
-var zoom = 0;
+//var lon = 3000000;
+//var lat = 1170000;
+var initZoom = 0;
 var map;
 
 var sd;
@@ -31,8 +31,9 @@ var initCenter = [3000000, 1170000];
 
 		
 Ext.onReady(function() {
-	var sb, store, grid, check;
-
+	var store, grid, check;
+	//var sb;
+	
 	var toolbarItems = [];
 
 	var required = '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>';
@@ -216,7 +217,10 @@ Ext.onReady(function() {
 			name : 'Implementing_Entity',
 			emptyText : 'Implementing Entity',
 			xtype : 'textfield',
-			width : 275
+			width : 275,
+			allowBlank: false,
+			blankText: 'a Submitting Officer is required.',
+			emptyClass: 'reqField'
 		}, {
 			name : 'Link_To_Project',
 			emptyText : 'Project Website',
@@ -234,7 +238,10 @@ Ext.onReady(function() {
 			name : 'Submitting_Officer_Contact',
 			emptyText : 'Submitting Officer Email',
 			xtype : 'textfield',
-			width : 275
+			width : 275,
+			allowBlank: false,
+			blankText: 'a Submitting Officer is required.',
+			emptyClass: 'reqField'
 		}, {
 			xtype : 'textarea',
 			name : 'Project_POCs',
@@ -379,7 +386,7 @@ Ext.onReady(function() {
 			minScale: 55468034.09,
 			numZoomLevels: 13
 		},
-		zoom : 0,
+		zoom : initZoom,
 		layers : [
 //			new OpenLayers.Layer.Stamen("toner-lite", {
 //				attribution : "Base data: OpenStreetMaps"
