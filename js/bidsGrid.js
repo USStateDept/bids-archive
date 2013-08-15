@@ -227,7 +227,7 @@ Ext.onReady(function() {
 		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
 
-		fbar : [{
+		tbar : [{
 			text : 'Export to CSV',
 			tooltip : 'Export',
 			icon : '../img/csv.jpg',
