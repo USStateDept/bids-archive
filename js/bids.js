@@ -219,7 +219,7 @@ Ext.onReady(function() {
 			xtype : 'textfield',
 			width : 275,
 			allowBlank: false,
-			blankText: 'a Submitting Officer is required.',
+			blankText: 'an Implementing Entity is required.',
 			emptyClass: 'reqField'
 		}, {
 			name : 'Link_To_Project',
@@ -240,7 +240,7 @@ Ext.onReady(function() {
 			xtype : 'textfield',
 			width : 275,
 			allowBlank: false,
-			blankText: 'a Submitting Officer is required.',
+			blankText: 'a Submitting Officer Email is required.',
 			emptyClass: 'reqField'
 		}, {
 			xtype : 'textarea',
