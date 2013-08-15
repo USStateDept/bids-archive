@@ -1284,7 +1284,7 @@ Ext.onReady(function() {
 			layout : "border",
 			items : [{
 				region : 'north',
-				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li></ul></div></header></div>',
+				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li></ul></div></header></div>',
 				height : 121,
 				border : true
 			}, mapPanel, {
