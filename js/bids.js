@@ -283,7 +283,6 @@ Ext.onReady(function() {
 					} else {
 						tabs.getForm().findField('Cleared').setValue('1');
 					}
-
 				}
 
 				tabs.getForm().submit({
@@ -345,7 +344,6 @@ Ext.onReady(function() {
 		border : false,
 		closeAction : 'hide',
 		items : tabs
-
 	});
 
 	win.myExtraParams = {
@@ -386,23 +384,8 @@ Ext.onReady(function() {
 		},
 		zoom : initZoom,
 		layers : [
-//			new OpenLayers.Layer.Stamen("toner-lite", {
-//				attribution : "Base data: OpenStreetMaps"
-//			}), 
-			/*new OpenLayers.Layer.Bing({
-				name: "Road",
-				key: apiKey,
-				type: "Road",
-				attributionTemplate: ''
-			}),
-			new OpenLayers.Layer.Bing({
-				name: "Aerial",
-				key: apiKey,
-				type: "AerialWithLabels",
-				attributionTemplate: ''
-			})*/
 			new OpenLayers.Layer.Google("Google Streets")
-		],
+		]
 	});
 
 	var info;
