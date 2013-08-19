@@ -12,17 +12,13 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-//var domain = 'localhost'
-var domain = 'edip-maps.net'
-var site = '/bids/'
-
 // API key for http://openlayers.org. Please get your own at
 // http://bingmapsportal.com/ and use that instead.
 // var apiKey = "AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf";
 
 //var lon = 3000000;
 //var lat = 1170000;
-var initZoom = 0;
+var initZoom = 1;
 var map;
 
 var sd;
@@ -384,7 +380,8 @@ Ext.onReady(function() {
 			restrictedExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
                                      20037508.34, 20037508.34),
 			center : initCenter,
-			minScale: 55468034.09,
+			minScale: 110728406.25, <!-- Zoom Level 2 -->
+			//minScale: 55468034.09, <!-- Zoom Level 3 -->
 			numZoomLevels: 13
 		},
 		zoom : initZoom,

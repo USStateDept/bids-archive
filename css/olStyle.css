@@ -537,9 +537,11 @@ a.olControlZoomOut {
   right: 2px !important;
 }
 .olFramedCloudPopupContent {
-    padding: 0px;
+    overflow-y: auto !important;
+	padding: 0px;
     left: 18px !important;
 	width: 250px !important; 
+	height: 250px !important;
 }
 #addBtn {
 	font-size: 13px !important;
