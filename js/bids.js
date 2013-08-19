@@ -18,7 +18,7 @@ function as(n) {
 
 //var lon = 3000000;
 //var lat = 1170000;
-var initZoom = 1;
+var initZoom = 0;
 var map;
 
 var sd;
@@ -380,8 +380,8 @@ Ext.onReady(function() {
 			restrictedExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
                                      20037508.34, 20037508.34),
 			center : initCenter,
-			minScale: 110728406.25, <!-- Zoom Level 2 -->
-			//minScale: 55468034.09, <!-- Zoom Level 3 -->
+			minScale: 110728406.25, /* Zoom Level 2 */
+			//minScale: 55468034.09, /* Zoom Level 3 */
 			numZoomLevels: 13
 		},
 		zoom : initZoom,
@@ -1244,7 +1244,7 @@ Ext.onReady(function() {
 					})
 				});
 				map.zoomToExtent(initExtent, true);
-				map.setCenter(initCenter, zoom);
+				map.setCenter(initCenter, initZoom);
 
 				store.proxy = tProxy;
 				store.reload();
