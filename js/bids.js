@@ -381,7 +381,8 @@ Ext.onReady(function() {
 		map : {
 			projection : "EPSG:900913",
 			maxExtent: new OpenLayers.Bounds(-20000000, -16000000, 20000000, 19000000),
-			restrictedExtent: new OpenLayers.Bounds(-20000000, -8000000, 20000000, 14370000),
+			restrictedExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
+                                     20037508.34, 20037508.34),
 			center : initCenter,
 			minScale: 55468034.09,
 			numZoomLevels: 13
