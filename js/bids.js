@@ -12,8 +12,8 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-//var domain = 'localhost'
-var domain = 'edip-maps.net'
+var domain = 'localhost'
+//var domain = 'edip-maps.net'
 var site = '/bids/'
 
 // API key for http://openlayers.org. Please get your own at
@@ -391,7 +391,7 @@ Ext.onReady(function() {
 //			new OpenLayers.Layer.Stamen("toner-lite", {
 //				attribution : "Base data: OpenStreetMaps"
 //			}), 
-			new OpenLayers.Layer.Bing({
+			/*new OpenLayers.Layer.Bing({
 				name: "Road",
 				key: apiKey,
 				type: "Road",
@@ -402,7 +402,8 @@ Ext.onReady(function() {
 				key: apiKey,
 				type: "AerialWithLabels",
 				attributionTemplate: ''
-			})
+			})*/
+			new OpenLayers.Layer.Google("Google Streets")
 		],
 	});
 
