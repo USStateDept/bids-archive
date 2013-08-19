@@ -320,6 +320,8 @@ Ext.onReady(function() {
 					}
 				});
 				
+				alert('Thanks for submiting your information; we will review it and it should be posted within two business days.');
+				
 				ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
 			}
 		}, {
