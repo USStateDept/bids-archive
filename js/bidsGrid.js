@@ -11,14 +11,8 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-//var domain = 'localhost'
-var domain = 'edip-maps.net'
-var site = '/bids/'
-
-var sd;
-
 Ext.onReady(function() {
-	var sb, store, grid, check;
+	var store, grid, check;
 
 	var toolbarItems = [];
 
@@ -32,7 +26,6 @@ Ext.onReady(function() {
 
 	store = new GeoExt.data.FeatureStore({
 		autoSave : true,
-		layer : sd,
 		fields : [{
 			name : "Timestamp",
 			type : "string"
@@ -145,6 +138,15 @@ Ext.onReady(function() {
 			width : 75,
 			sortable : true
 		}, {
+			header : "Specific Location",
+			dataIndex : "Specific_Location",
+			width : 175
+		}, {
+			header : "Status",
+			dataIndex : "Status",
+			width : 120,
+			sortable : true
+		}, {
 			header : "Sector",
 			dataIndex : "Sector",
 			width : 125,
@@ -190,39 +192,28 @@ Ext.onReady(function() {
 			width : 220,
 			sortable : true
 		}, {
-			header : "Status",
-			dataIndex : "Status",
-			width : 120,
-			sortable : true
-		}, {
-			hidden : true,
-			header : "Specific Location",
-			dataIndex : "Specific_Location",
+			header : "Borrowing Entity",
+			dataIndex : "Borrowing_Entity",
 			width : 175
 		}, {
-			hidden : true,
 			header : "Link to Project",
 			dataIndex : "Link_To_Project",
 			width : 175
+		},{
+			header : "Project Point of Contact",
+			dataIndex : "Project_POCs",
+			width : 175
 		}, {
-			hidden : true,
 			header : "Post Comments",
 			dataIndex : "Post_Comments",
 			width : 175
 		}, {
-			hidden : true,
 			header : "Submitting Officer",
 			dataIndex : "Submitting_Officer",
 			width : 175
 		}, {
-			hidden : true,
 			header : "Submitting Officer Contact",
 			dataIndex : "Submitting_Officer_Contact",
-			width : 175
-		}, {
-			hidden : true,
-			header : "Project Size",
-			dataIndex : "Project_Size",
 			width : 175
 		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
