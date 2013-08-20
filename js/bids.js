@@ -25,11 +25,11 @@ var sd;
 var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000], true);
 var initCenter = [3000000, 1170000];
 var store, grid;
-var win;
-var tabs;
-var check;
-
+		
 Ext.onReady(function() {
+	var check;
+	//var sb;
+	
 	var toolbarItems = [];
 
 	var required = '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>';
@@ -41,7 +41,7 @@ Ext.onReady(function() {
 	var sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
 
 	// Add a lead Form / Edit a lead Form
-	tabs = new Ext.FormPanel({
+	var tabs = new Ext.FormPanel({
 		layout : 'form',
 		labelWidth : 80,
 		border : false,
@@ -337,7 +337,7 @@ Ext.onReady(function() {
 
 	tabs.render(document.body);
 
-	win = new Ext.Window({
+	var win = new Ext.Window({
 		id : 'formanchor-win',
 		autoHeight : true,
 		minWidth : 500,
@@ -351,6 +351,24 @@ Ext.onReady(function() {
 	win.myExtraParams = {
 		e : false
 	};
+
+	function myCallbackFunction() {
+
+		win.myExtraParams.e = false;
+
+		if (win.myExtraParams.e == false) {
+			Ext.getCmp('btnEdit').disable();
+			Ext.getCmp('btnSave').enable();
+			Ext.getCmp('btnReset').enable();
+			Ext.getCmp('btnArchive').disable();
+			Ext.getCmp('chMaj').setDisabled(true);
+			Ext.getCmp('chMaj').checked=false;
+		}
+		tabs.getForm().reset();
+		win.show();
+		
+		ga('send', 'event', 'Clearance_Popup', 'Add_Clearance_Popup', {'nonInteraction': 1});
+	}
 
 	//toolbarItems.push(action);
 
@@ -1016,7 +1034,14 @@ Ext.onReady(function() {
 			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
 			//icon : 'img/add.png',
 			handler : function() {
-				checkTest();
+				Ext.Msg.show({
+					title : 'Add Your Lead',
+					msg : 'By clicking okay, you agree that any trade lead added to this system will be <b>unclassified</b>, no clearances will be necessary to view the information you add, and that you understand the rules and regulations regarding this site. All information you add will become publically available.<br><br>If you have any questions, please refer to our <a href="faqs.html" target="_blank">Frequently Asked Questions</a> and <a href="help.html" target="_blank">Help</a> pages.',
+					width : 300,
+					buttons : Ext.MessageBox.OK,
+					fn : myCallbackFunction
+				})
+				ga('send', 'event', 'Search_Panel', 'Add_Search_Panel', {'nonInteraction': 1});
 			}
 		}]
 	});
@@ -1030,7 +1055,7 @@ Ext.onReady(function() {
 			layout : "border",
 			items : [{
 				region : 'north',
-				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li></ul></div></header></div>',
+				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li></ul></div></header></div>',
 				height : 121,
 				border : true
 			}, mapPanel, {
