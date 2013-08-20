@@ -1249,7 +1249,7 @@ Ext.onReady(function() {
 			handler : function() {
 				Ext.Msg.show({
 					title : 'Add Your Lead',
-					msg : 'By clicking okay, you agree that any trade lead added to this system will be unclassified, and that you understand the rules and regulations regarding this site.',
+					msg : 'By clicking okay, you agree that any trade lead added to this system will be <b>unclassified</b>, no clearances will be necessary to view the information you add, and that you understand the rules and regulations regarding this site. All information you add will become publically available.<br><br>If you have any questions, please refer to our <a href="faqs.html" target="_blank">Frequently Asked Questions</a> and <a href="help.html" target="_blank">Help</a> pages.',
 					width : 300,
 					buttons : Ext.MessageBox.OK,
 					fn : myCallbackFunction
