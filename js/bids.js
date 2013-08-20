@@ -1032,14 +1032,7 @@ Ext.onReady(function() {
 			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
 			//icon : 'img/add.png',
 			handler : function() {
-				Ext.Msg.show({
-					title : 'Add Your Lead',
-					msg : 'By clicking okay, you agree that any trade lead added to this system will be <b>unclassified</b>, no clearances will be necessary to view the information you add, and that you understand the rules and regulations regarding this site. All information you add will become publically available.<br><br>If you have any questions, please refer to our <a href="faqs.html" target="_blank">Frequently Asked Questions</a> and <a href="help.html" target="_blank">Help</a> pages.',
-					width : 300,
-					buttons : Ext.MessageBox.OK,
-					fn : myCallbackFunction
-				})
-				ga('send', 'event', 'Search_Panel', 'Add_Search_Panel', {'nonInteraction': 1});
+				checkTest();
 			}
 		}]
 	});
@@ -1053,7 +1046,7 @@ Ext.onReady(function() {
 			layout : "border",
 			items : [{
 				region : 'north',
-				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li>><li><a href="javascript:checkTest();">Add Your Leads</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li></ul></div></header></div>',
+				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="javascript:checkTest();">Add Your Leads</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li></ul></div></header></div>',
 				height : 121,
 				border : true
 			}, mapPanel, {
