@@ -32,14 +32,6 @@ var win;
 Ext.onReady(function() {
 	var toolbarItems = [];
 
-	var required = '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>';
-
-	var banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
-	var regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
-	var arch = [['Archived'], ['In Procurement'], ['Pipeline']]
-	var sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
-	var sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
-
 	//toolbarItems.push(action);
 
 	var mapPanel = new GeoExt.MapPanel({
