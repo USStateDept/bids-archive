@@ -28,7 +28,8 @@ var store, grid;
 var check;
 var tabs;
 var win;
-	
+var required, banks, regions, arch, sizes, sec;
+
 Ext.onReady(function() {
 	var toolbarItems = [];
 
