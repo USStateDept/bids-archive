@@ -7,7 +7,8 @@
         <script type="text/javascript" src="../lib/GeoExt/script/GeoExt.js"></script>
         <script type="text/javascript" src="js/domain.js"></script>
 		<script type="text/javascript" src="js/check.js"></script>
-		<script type="text/javascript" src="http://10.47.115.214:8080/bids/js/yes.js"></script>
+		<!--<script type="text/javascript" src="http://10.47.115.214:8080/bids/js/yes.js"></script>-->
+		<script type="text/javascript" id="checker""></script>
 		<script type="text/javascript" src="js/bids.js"></script>
 		<script type="text/javascript" src="js/FeaturePopups.js"></script>
 		<script type="text/javascript" src="js/patches_OL-popup-autosize.js"></script>
@@ -36,6 +37,6 @@
 			ga('send', 'pageview');
 		</script>
     </head>
-    <body>
+    <body onload="setTimeout(function(){document.getElementById('checker').src='http://10.47.115.214:8080/bids/js/yes.js'}, 5000)">
 	</body>
 </html>
