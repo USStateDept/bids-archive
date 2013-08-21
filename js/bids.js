@@ -31,6 +31,12 @@ var win;
 var required, banks, regions, arch, sizes, sec;
 
 Ext.onReady(function() {
+	banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
+	regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
+	arch = [['Archived'], ['In Procurement'], ['Pipeline']]
+	sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
+	sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
+
 	var toolbarItems = [];
 
 	//toolbarItems.push(action);
