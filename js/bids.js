@@ -26,6 +26,8 @@ var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000],
 var initCenter = [3000000, 1170000];
 var store, grid;
 var check;
+var tabs;
+var win;
 	
 Ext.onReady(function() {
 	var toolbarItems = [];
@@ -39,7 +41,7 @@ Ext.onReady(function() {
 	var sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
 
 	// Add a lead Form / Edit a lead Form
-	var tabs = new Ext.FormPanel({
+	tabs = new Ext.FormPanel({
 		layout : 'form',
 		labelWidth : 80,
 		border : false,
@@ -335,7 +337,7 @@ Ext.onReady(function() {
 
 	tabs.render(document.body);
 
-	var win = new Ext.Window({
+	win = new Ext.Window({
 		id : 'formanchor-win',
 		autoHeight : true,
 		minWidth : 500,
@@ -350,23 +352,7 @@ Ext.onReady(function() {
 		e : false
 	};
 
-	function myCallbackFunction() {
-
-		win.myExtraParams.e = false;
-
-		if (win.myExtraParams.e == false) {
-			Ext.getCmp('btnEdit').disable();
-			Ext.getCmp('btnSave').enable();
-			Ext.getCmp('btnReset').enable();
-			Ext.getCmp('btnArchive').disable();
-			Ext.getCmp('chMaj').setDisabled(true);
-			Ext.getCmp('chMaj').checked=false;
-		}
-		tabs.getForm().reset();
-		win.show();
-		
-		ga('send', 'event', 'Clearance_Popup', 'Add_Clearance_Popup', {'nonInteraction': 1});
-	}
+	
 
 	//toolbarItems.push(action);
 

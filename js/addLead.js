@@ -15,3 +15,5 @@ function myCallbackFunction() {
 		
 		ga('send', 'event', 'Clearance_Popup', 'Add_Clearance_Popup', {'nonInteraction': 1});
 	}
+	
+	
