@@ -1,5 +1,3 @@
-var check;
-
 function checkTest() {
 	if (check === undefined)
 		{
