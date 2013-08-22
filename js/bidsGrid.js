@@ -332,7 +332,8 @@ Ext.onReady(function() {
 	new Ext.Viewport({
 		layout : "fit",
 		hideBorders : true,
-		autoHeight: true,
+		height : 840,
+		width : 1020,
 		items : {
 			items : [{
 				region : 'north',
