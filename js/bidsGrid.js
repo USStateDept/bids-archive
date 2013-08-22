@@ -126,6 +126,8 @@ Ext.onReady(function() {
 		region: 'south',
 		store : store,
 		height : 700,
+		width : 1000,
+		style: 'margin:0 auto;margin-top:0px;',
 		id : 'gridx',
 		columns : [{
 			header : "Project Title",
