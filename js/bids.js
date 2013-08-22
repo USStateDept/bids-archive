@@ -725,7 +725,7 @@ Ext.onReady(function() {
 				region : 'west',
 				split : true,
 				width : 180,
-				items : [filterPanel, addButton, tree]
+				items : [filterPanel, addButton/*, tree*/]
 			}, grid]
 		}
 	});
