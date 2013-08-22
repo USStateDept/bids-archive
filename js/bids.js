@@ -630,7 +630,7 @@ Ext.onReady(function() {
 			displayField : 'Sector',
 			valueField : 'Sector',
 			mode : 'local',
-			emptyText : 'Select Sector...',
+			emptyText : 'Select Sector...'
 		}), sizeBox = new Ext.ux.form.CheckboxCombo({
 			store : new Ext.data.ArrayStore({
 				fields : ['PrSize'],
