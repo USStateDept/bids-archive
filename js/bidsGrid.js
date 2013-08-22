@@ -334,6 +334,7 @@ Ext.onReady(function() {
 		hideBorders : true,
 		height : 840,
 		width : 1020,
+		autoScroll: true,
 		items : {
 			items : [{
 				region : 'north',
