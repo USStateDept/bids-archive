@@ -1,310 +1,301 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>BIDS: Business Information Database System</title>
-        <script type="text/javascript" src="../lib/ieCheck.js"></script>
-    	<link rel="stylesheet" type="text/css" href="css/custom.css" />
-    	<link rel="stylesheet" type="text/css" href="css/ez.css" />
-    	<link rel="stylesheet" type="text/css" href="../lib/ext-3.4.0/resources/css/ext-all.css" />
-    	<link rel="stylesheet" type="text/css" href="css/ext-3.4.0.css" />
-    	<link rel="stylesheet" type="text/css" href="css/Ext.ux.form.CheckboxCombo.min.css" />
-    	<link rel="stylesheet" type="text/css" id="xtheme-wireframe" href="../lib/ext-3.4.0/resources/css/xtheme-wireframe.css"/> 
-    	<link rel="stylesheet" type="text/css" href="css/bids.css"/>
-    	<script>
-        	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-        	ga('create', 'UA-42151027-1', 'edip-maps.net');
-        	ga('send', 'pageview');
-    	</script>
-	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    	<style>
-    	body {
-    	  background: #eee;
-    	  padding: 20px;
-    	}
-    	
-    	article {
-    	  max-width: 75%;
-    	  background: white;
-    	  padding: 2em;
-    	  margin: 1em auto;
-    	}
-    	
-    	.table-of-contents {
-    	  float: right;
-    	  width: 40%;
-    	  background: #eee;
-    	  font-size: 0.8em;
-    	  padding: 1em 2em;
-    	  margin: 0 0 0.5em 0.5em;
-    	}
-    	.table-of-contents ul {
-    	  padding: 0;
-    	}
-    	.table-of-contents li {
-    	  margin: 0 0 0.25em 0;
-    	}
-    	.table-of-contents a {
-    	  text-decoration: none;
-    	}
-    	.table-of-contents a:hover,
-    	.table-of-contents a:active {
-    	  text-decoration: underline;
-    	}
-    	
-    	h3:target {
-    	  animation: highlight 1s ease;
-    	}
-    	
-    	@keyframes highlight {
-    	  from { background: yellow; }
-    	  to { background: white; }
-    	}
-    	</style>
-    </head>
-    <body class="contentBody">
-        <div class="container">
-            <header>
+	<head>
+		<title>BIDS: Business Information Database System</title>
+		<link rel="stylesheet" type="text/css" href="../lib/ext-3.4.0/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="css/ext-3.4.0.css" />
+		<link rel="stylesheet" type="text/css" href="css/Ext.ux.form.CheckboxCombo.min.css" />
+		<link rel="stylesheet" type="text/css" id="xtheme-wireframe" href="../lib/ext-3.4.0/resources/css/xtheme-wireframe.css"/> 
+		<link rel="stylesheet" type="text/css" href="css/bids.css"/>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+			ga('create', 'UA-42151027-1', 'edip-maps.net');
+			ga('send', 'pageview');
+		</script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		<style>
+		body {
+			background: #eee;
+		}
+		.table-of-contents {
+			float: right;
+			width: 30%;
+			background: #eee;
+			font-size: 10;
+			padding: 0px 10px 20px 10px;
+			margin: 20px -10px 20px 20px;
+		}
+		.table-of-contents ul {
+			padding: 0;
+		}
+		.table-of-contents li {
+			margin: 0 0 0.25em 0;
+		}
+		.table-of-contents a {
+			text-decoration: none;
+		}
+		.table-of-contents a:hover,
+		.table-of-contents a:active {
+			text-decoration: underline;
+		}
+		h3:target {
+			animation: highlight 1s ease;
+		}
+		@keyframes highlight {
+			from { background: yellow; }
+			to { background: white; }
+		}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="header">
 				<div class="row">
-					<a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a>
+					<a class="logo" data-bind="click: showHome" href="#"/>
+						<img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png">
+					</a>
 					<ul class="nav">
 						<li>
-							<a href="index.html">Home</a>
-						</li>
-						<li>
-							<a href="resources.html">Resources</a>
-						</li>
-						<li>
-							<a href="data.html">Data</a>
-						</li>
-						<li>
-							<a href="faqs.html">FAQs</a>
+							<a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a>
 						</li>
 						<li>
 							<a href="#">Help</a>
 						</li>
 						<li>
-							<a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a>
+							<a href="faqs..html">FAQs</a>
+						</li>
+						<li>
+							<a href="data.html">Data</a>
+						</li>
+						<li>
+							<a href="resources.html">Resources</a>
+						</li>
+						<li>
+							<a href="index.html">Home</a>
 						</li>
 					</ul>
 				</div>
-			</header>
-			<div class="content">
-                <article>
-                    <h1>BIDS: A Users Manual</h1>
-                    <h2>The Business Information Database System</h2>
-                    <br>
-                    <div class="helpcontent">
-                        <h3 id="intro">INTRODUCTION</h3>
-                        <p>
-                            Many U.S. businesses -- and in particular, small and medium sized enterprises -- report that a major obstacle to exporting is a lack of actionable market intelligence.  In line with the President's National Export Initiative and with Executive Order 13630 of December 6, 2012, EB IRM's Office of eDiplomacy have developed BIDS -- the Business Information Database System -- as an open, internet-based platform to aggregate information on tender opportunities and trade leads, and make that information available to U.S. business.
-                        </p>
-                        <p>
-                            BIDS is populated by data entered at posts and collected from the Multilateral Development Banks (MDBs).  At present, the focus of BIDS is on major, strategic projects funded by MDBs or governments.  It's not intended to be a comprehensive catalog of the universe of projects; the focus is on projects where U.S. firms can be competitive.
-                        </p>
-                        <p>
-                            BIDS is an open platform, meaning anyone will be able to access its data.  This was a conscious decision made for a number of reasons, not least of which was to lighten the burden of data entry on posts.  <em>Any information you post on BIDS will be visible to anyone, including our foreign competitors.</em>The intent is that U.S. companies will follow up with posts directly for more details on projects that are of interest, providing the opportunity to connect firms to resources and information that may give them the edge in securing the deal.
-                        </p>
-                        <p>
-                            BIDS should not be seen as a standalone project.  It is designed to be an integral part of the broader Department of State and U.S. government effort to promote U.S. exports.  BIDS data will be available through a State Department website, but U.S. firms will also be able to access the information through the Department of Commerce (and its network of U.S. Export Assistance Centers across the U.S.), the U.S. Small Business Administration (and its network of Small Business Development Centers across the U.S.), and other agencies such as the U.S. Trade and Development Agency and the Overseas Private Investment Corporation.  Data from BIDS will also be directly available to organizations such as the American Water Works Association which will be able to package it and push it out to their members.
-                        </p>
-                        <p>
-                            BIDS has been developed with a great deal of input from posts, from other agencies, and from the private sector.  It is and will remain a work in progress.  Your contributions to BIDS -- from adding new leads, to commenting and updating existing leads, to giving constructive feedback on the system -- will be instrumental in building out this tool to support U.S. business.
-                        </p>
-                        <br>
-                        <h3 id="how-it-works">HOW DOES BIDS WORK?</h3>
-                        <h4>Where do I find BIDS?</h4>
-                        <p>
-                            The <a href="http://edip-maps.net/bids/">BIDS Website</a> works in all modern browsers (Internet Explorer < 8 not supported).  For those on the State Department Intranet, BIDS will also be available through the "Econ@State" Portal (econ.state.gov).
-                        </p>
-                        <h4>What does BIDS look like?</h4>
-                        <img src="img/help.jpg" alt="BIDS page screen shot with explanatory text boxes near each key element" height=450 width=700>
-                        <p>
-                            This is the BIDS Webpage.  It consists of four main elements:
-                            <ul>
-                                <li>The Map</li>
-                                <li>The Search/Filter Panel</li>
-                                <li>The Menu Bar</li>
-                                <li>The Business Lead List</li>
-                            </ul>
-                        </p>
-                        <h4>The Map</h4>
-                        <p>
-                            The map is interactive; you can click or scroll to zoom in and out, and click and drag to move the map.  You can also zoom in or out using the (+/-) buttons on the top left corner of the map.
-                        </p>
-                        <p>
-                            Dots on the map indicate projects.  Hovering over a dot will cause a box will appear either referring to a specific project, or indicating the number of projects connected to that location.  Clicking on the individual project brings up the details of the project; if more than one project is represented in a dot, clicking on the dot will open a list of the projects, where you can click on an individual project for more information. 
-                        </p>
-                        <h4>The Search/Filter Table</h4>
-                        <p>
-                            The Search/Filter Table allows users to select parameters to find specific projects.  (The specific data fields are described in detail in the "<strong>Adding A Trade Lead</strong>" section below.)  Most of the search/filter functions are selected by drop-down tables; click on the parameter and select the appropriate criteria. Then click the "Search" button below the tables and the map will show only the projects matching the selected criteria.  You can select as many criteria as you wish.
-                        </p>
-                        <p>
-                            You can also search by keywords.  The key word search will search across all alphanumeric data fields (project description, etc.), not just those in the "keywords" field.
-                        </p>
-                        <p>
-                            Clicking the "Reset" button below the tables clears all the criteria you have selected and resets the map to the original view.
-                        </p>
-                        <p>
-                            At the top of the Search/Filter Table you see "Layer Options."  Clicking on the double arrow on the right opens a panel where you can select a physical map or a photographic map as an alternative to the default grayscale map.
-                        </p>
-                        <h4>The Menu Bar</h4>
-                        <p>
-                            <strong>Home</strong> resets the map and clears any criteria in the search filters.<br>
-                            <strong>Add A Lead</strong> function appears in both the menu bar and the bottom panel of the website.  Add A Lead opens a new window where you can add a new trade lead (see "<strong>Adding A Trade Lead</strong>" below).<br>
-                            <strong>Resources</strong> will take you to a page of government and non-government resources that relate to infrastructure development and business support.  Primarily these consist of links to websites such as those of the multilateral development banks or U.S. government agencies.<br>
-                            <strong>Data</strong> will take you to a page where you can preview and download the full BIDS dataset.<br>
-                            <strong>FAQs</strong> opens a list of Frequently Asked Questions, and also allows you to submit a question about BIDS.<br>
-                            <strong>Help</strong> will lead you to this Standard Operating Procedures document, as well as a list of frequently asked questions (FAQs) and information on how to contact the BIDS developers with questions or comments.
-                        </p>
-                        <h4>The Business Leads List</h4>
-                        <p>
-                            If you click on the double arrow at the right, the Business Leads List will scroll up.  It presents in tabular format the same data that you are looking at on the map.  Use the scroll bar at the bottom and the right of the list to see all the data fields.
-                        </p>
-                        <p>
-                            The list represents filtered data; that is, if you have selected any criteria in the Search/Filter Table, the same criteria are used to populate the Map and the Business Leads List.  Resetting the Search/Filter Table will reset the Business Leads List as it does the Map.
-                        </p>
-                        <p>
-                            When the Business Leads List opens, you will also see an "Edit Entry" button at the top of the list.  Clicking on an entry in the list will highlight that entry; clicking on the "Edit Entry" button opens a new window where you can edit the entry to make corrections or update information (see "<strong>Editing A Trade Lead</strong>" below).
-                        </p>
-                        <h3 id="questions">QUESTIONS ABOUT BIDS?</h3>
-                        <h4>What if I have a problem or a comment about BIDS?</h4>
-                        <p>
-                            Questions or comments about BIDS can be emailed to <a href="BIDS-Mailbox@state.gov">our support team</a>; to report specific technical problems with BIDS, click on "Report a Bug" at the bottom of the BIDS map.  Also check the FAQs on the website.
-                        </p>
-                        <h4>Who reviews entries into BIDS?</h4>
-                        <p>
-                            At the present, we leave it to posts to <strong>develop their own internal clearance and approval systems</strong> for adding information to BIDS.  We expect that Econ related offices (FCS, USAID, etc.) at posts will review proposed entries; at some posts the Econ Counselor or the DCM may want to approve submissions.  We'll be interested to hear your thoughts on this.  In Washington, EB/CBA and EB/IFD/ODF will be reviewing submissions largely for consistency and format.  To ensure information is delivered in a timely manner, it's important the review cycle be quick.  EB expects to be able to clear most entries within one business day.
-                        </p>
-                        <h4>How do I know what I should enter?</h4>
-                        <p>
-                            BIDS is not an encyclopedia of all possible government tenders.  Projects submitted for BIDS should be <strong>selected strategically</strong>, focusing on sectors of particular interest to post and to the USG, and/or on projects or sectors where U.S. firms may have an advantage.  We are looking for quality information, <strong>not quantity</strong>.
-                        </p>
-                        <h3 id="how-to-use">HOW TO USE BIDS</h3>
-                        <p>
-                            Officers overseas will find two primary uses for BIDS.
-                        </p>
-                        <p>
-                            The first is to enter trade leads in country as a way to alert U.S. business to potential new export opportunities.
-                        </p>
-                        <p>
-                            The second is no less important and involves using BIDS to search for MDB or other projects in country that have been entered automatically into BIDS.  Officers can add value to those entries by contacting key ministries or U.S. companies to develop more information and updating the BIDS dataset.
-                        </p>
-                        <h4>Adding a Trade Lead</h4>
-                        <p>
-                            Clicking on either the "Add A Lead" button on the top right of the page or at the bottom of the left panel will open a pop up window where you can enter information about business opportunities.  The data fields are described below. <u>Underlined fields are required</u>, others are optional.
-                        </p>
-                        <dl>
-                            <h4>Project Title</h4>
-                            <p>Please use the official title of the project.  Where there is no official title, please use a brief description, e.g.: Ring Road Project.</p>
-                            <h4>Country</h4>
-                            <p>Please indicate the country where the project will be located.</p>
-                            <h4>Specific Location</h4>
-                            <p>Please indicate the city or a specific landmark such as a university, natural feature, or province.  If the project is nationwide or is not easily connected with a single location, like an electrification project in several different provinces, please indicate geographic area.  Check to make sure that your project will map properly by going to google and attempting to map it there.</p>
-                            <h4>DOS Region</h4>
-                            <p>Choose the appropriate State Department regional bureau from the drop down list.</p>
-                            <h4>Sector</h4>
-                            <p>Check one box indicating the appropriate sector for the project.  <em>For ease of data entry we've established a small number of very broad sectors.  Some projects may bridge two or more sectors, and some may not fit well into any of the six.  Please use the "Keywords" field to add additional information that may help users find your project.</em></p>
-                            <h4>Project Size</h4>
-                            <p>Please enter the U.S. dollar value (or estimate) of the project.</p>
-                            <h4>Project Number</h4>
-                            <p>Many projects have some type of identifying number.  Please indicate the reference number from the government, bank, etc., associated with the project.  If there are two separate funding sources and therefore two different project numbers, please indicate them here.</p>
-                            <h4>Project Funding Source</h4>
-                            <p>Enter the name of the organization or bank providing the funds for this project.  Normally this will be a government ministry, or a MDB.</p>
-                            <h4>Information Source</h4>
-                            <p>Select from the drop down list.  If you are entering a project at an overseas post, select "Post Identified Project."  Projects added to BIDS from MDB sites will be identified with the sponsoring bank.  Offices in Washington can also enter projects and would select "Washington Identified Project.”</p>
-                            <h4>Project Description and Bidding Requirements</h4>
-                            <p>Include as much of the project description as possible so that the prospective bidder will understand what the project is.  Also include any special or specific bidding requirements that the government may have and bid deadline.</p>
-                            <h4>Key Words</h4>
-                            <p>Please enter any combination of key words that describe the project, e.g., Power, Dam, Hydroelectricity, Renewable, Water, and Environment.  Also enter terms that may better define the sector.</p>
-                            <h4>Project Announced</h4>
-                            <p>When was this project publicly announced?  Alternatively, the date entered here may be the date post initially heard about the project if post learned about the project prior to a formal announcement.</p>
-                            <h4>Expected Tender Date</h4>
-                            <p>Indicate when the project sponsor expects to release a tender for the project.  This may need to be updated as new information becomes available.</p>
-                            <h4>Borrowing Entity</h4>
-                            <p>Please indicate the government agency borrowing money for the project. If none, say "none".</p>
-                            <h4>Implementing Entity</h4>
-                            <p>Indicate what government ministry or other entity will be responsible for issuing the project documents an overseeing the project.</p>
-                            <h4>Project Website</h4>
-                            <p>If there is a website link to more information about the project, enter the web address here.</p>
-                            <h4>Submitting Officer</h4>
-                            <p>Please enter the name of the officer submitting the lead, or the name of the person at post who would be the most appropriate point of contact for follow-up questions from Washington or the private sector.</p>
-                            <h4>Submitting Officer Contact</h4>
-                            <p>Please enter the e-mail address of the person named in the "Submitting Officer" box.</p>
-                            <h4>Implementing Entity POC(s) and Contact Information</h4>
-                            <p>Please include the principal and secondary contacts, names, address, email addresses and phone numbers.</p>
-                            <h4>Post Comments</h4>
-                            <p>Include information that will help the bidders understand the dynamics of the bid.  Also, if there will be a Direct Line call, please indicate date, time, number to register and requirements.  <strong>N.B.</strong>  BIDS is not currently designed or authorized to house any classified or sensitive information.  You should <strong>assume any information you enter here will be available to the general public</strong>.</p>
-                        </dl>
-                        <h4>Editing a Trade Lead</h4>
-                        <p>
-                            <u>THIS SECTION IS UNDER DEVELOPMENT</u>
-                        </p>
-                        <p>
-                            BIDS entries that are not edited or updated within 90 days of being entered into BIDS will be automatically archived.
-                        </p>
-                        <h4>Search and Filter Functions</h4>
-                        <p>
-                            <u>THIS SECTION IS UNDER DEVELOPMENT</u>
-                        </p>
-                        <h3 id="future">THE FUTURE OF BIDS</h3>
-                        <p>
-                            We see BIDS as only one small part of a much broader interagency toolkit that can support U.S. business.  Within the Department, BIDS is part of our larger Economic Statecraft toolkit, and should be integrated with Business Tabs, Direct Line, and other programs.  We've been working with the Department of Commerce to ensure it will be able to incorporate BIDS information into its systems as well as with OPIC, USTDA, ExIm, BusinessUSA.gov, and others.
-                        </p>
-                        <p>
-                            We see a future where a U.S. business leader can come into her office, turn on her computer, and get alerts on new projects that are of particular interest to her firm.  Imagine a businessperson logging into a website, calling up a U.S. Government webpage that not only provides details on a major infrastructure opportunity, but also has a link to the relevant Country Commercial Guide, contact information for the appropriate USTDA or Ex-Im Bank representative for the project, and even a notice about a Direct Line call about the project next week.
-                        </p>
-                        <h3 id="glossary">GLOSSARY</h3>
-                        <dl>
-                            <h4>Archived</h4>
-                            <p>BIDS entries will be archived if they move to an "in procurement," "fulfilled," "unfulfilled," or "cancelled" status, or if they have not been edited or updated in the previous 90 days.</p>
-                            <h4>Cancelled</h4>
-                            <p>This indicates that the government or MDB took an active decision to cancel a project.</p>
-                            <h4>Fulfilled</h4>
-                            <p>Fulfilled indicates that a project has been completed.</p>
-                            <h4>In Procurement</h4>
-                            <p>A project is "in procurement" once funding has been approved and tender documents for contractors, subcontractors, and suppliers have been issued, and/or the projects is actively being implemented.</p>
-                            <h4>Pipeline</h4>
-                            <p>A project is said to be in the 'pipeline' from the earliest point of identification through project preparation, appraisal, and final approval.  For a MDB project, 'pipeline' generally refers to any point in the process before the bank's Board of Directors grants final approval.  <strong>This is the period of time when BIDS is most important -- U.S. companies have their best chance at gaining a contract when they are involved in the pipeline</strong>.</p>
-                            <h4>Unfulfilled</h4>
-                            <p>In BIDS, a project will be listed as 'unfulfilled' if we have no information on the status of a project after 90 days.</p>
-                        </dl>
-                    </div>
-                </article>
-	        </div>
+			</div>
+			<div id="main">
+				<article>
+					<h1>BIDS: A Users Manual</h1>
+					<h2>The Business Information Database System</h2>
+					<br>
+					<div class="helpcontent">
+						<h3 id="intro">INTRODUCTION</h3>
+						<p>
+							Many U.S. businesses -- and in particular, small and medium sized enterprises -- report that a major obstacle to exporting is a lack of actionable market intelligence.	 In line with the President's National Export Initiative and with Executive Order 13630 of December 6, 2012, EB IRM's Office of eDiplomacy have developed BIDS -- the Business Information Database System -- as an open, internet-based platform to aggregate information on tender opportunities and trade leads, and make that information available to U.S. business.
+						</p>
+						<p>
+							BIDS is populated by data entered at posts and collected from the Multilateral Development Banks (MDBs).  At present, the focus of BIDS is on major, strategic projects funded by MDBs or governments.	It's not intended to be a comprehensive catalog of the universe of projects; the focus is on projects where U.S. firms can be competitive.
+						</p>
+						<p>
+							BIDS is an open platform, meaning anyone will be able to access its data.  This was a conscious decision made for a number of reasons, not least of which was to lighten the burden of data entry on posts.	 <em>Any information you post on BIDS will be visible to anyone, including our foreign competitors.</em>The intent is that U.S. companies will follow up with posts directly for more details on projects that are of interest, providing the opportunity to connect firms to resources and information that may give them the edge in securing the deal.
+						</p>
+						<p>
+							BIDS should not be seen as a standalone project.  It is designed to be an integral part of the broader Department of State and U.S. government effort to promote U.S. exports.	BIDS data will be available through a State Department website, but U.S. firms will also be able to access the information through the Department of Commerce (and its network of U.S. Export Assistance Centers across the U.S.), the U.S. Small Business Administration (and its network of Small Business Development Centers across the U.S.), and other agencies such as the U.S. Trade and Development Agency and the Overseas Private Investment Corporation.  Data from BIDS will also be directly available to organizations such as the American Water Works Association which will be able to package it and push it out to their members.
+						</p>
+						<p>
+							BIDS has been developed with a great deal of input from posts, from other agencies, and from the private sector.  It is and will remain a work in progress.	 Your contributions to BIDS -- from adding new leads, to commenting and updating existing leads, to giving constructive feedback on the system -- will be instrumental in building out this tool to support U.S. business.
+						</p>
+						<br>
+						<h3 id="how-it-works">HOW DOES BIDS WORK?</h3>
+						<h4>Where do I find BIDS?</h4>
+						<p>
+							The <a href="http://edip-maps.net/bids/">BIDS Website</a> works in all modern browsers (Internet Explorer < 8 not supported).  For those on the State Department Intranet, BIDS will also be available through the "Econ@State" Portal (econ.state.gov).
+						</p>
+						<h4>What does BIDS look like?</h4>
+						<img src="img/help.jpg" alt="BIDS page screen shot with explanatory text boxes near each key element" height=450 width=700>
+						<p>
+							This is the BIDS Webpage.  It consists of four main elements:
+							<ul>
+								<li>The Map</li>
+								<li>The Search/Filter Panel</li>
+								<li>The Menu Bar</li>
+								<li>The Business Lead List</li>
+							</ul>
+						</p>
+						<h4>The Map</h4>
+						<p>
+							The map is interactive; you can click or scroll to zoom in and out, and click and drag to move the map.	 You can also zoom in or out using the (+/-) buttons on the top left corner of the map.
+						</p>
+						<p>
+							Dots on the map indicate projects.	Hovering over a dot will cause a box will appear either referring to a specific project, or indicating the number of projects connected to that location.  Clicking on the individual project brings up the details of the project; if more than one project is represented in a dot, clicking on the dot will open a list of the projects, where you can click on an individual project for more information. 
+						</p>
+						<h4>The Search/Filter Table</h4>
+						<p>
+							The Search/Filter Table allows users to select parameters to find specific projects.  (The specific data fields are described in detail in the "<strong>Adding A Trade Lead</strong>" section below.)  Most of the search/filter functions are selected by drop-down tables; click on the parameter and select the appropriate criteria. Then click the "Search" button below the tables and the map will show only the projects matching the selected criteria.  You can select as many criteria as you wish.
+						</p>
+						<p>
+							You can also search by keywords.  The key word search will search across all alphanumeric data fields (project description, etc.), not just those in the "keywords" field.
+						</p>
+						<p>
+							Clicking the "Reset" button below the tables clears all the criteria you have selected and resets the map to the original view.
+						</p>
+						<p>
+							At the top of the Search/Filter Table you see "Layer Options."	Clicking on the double arrow on the right opens a panel where you can select a physical map or a photographic map as an alternative to the default grayscale map.
+						</p>
+						<h4>The Menu Bar</h4>
+						<p>
+							<strong>Home</strong> resets the map and clears any criteria in the search filters.<br>
+							<strong>Add A Lead</strong> function appears in both the menu bar and the bottom panel of the website.	Add A Lead opens a new window where you can add a new trade lead (see "<strong>Adding A Trade Lead</strong>" below).<br>
+							<strong>Resources</strong> will take you to a page of government and non-government resources that relate to infrastructure development and business support.  Primarily these consist of links to websites such as those of the multilateral development banks or U.S. government agencies.<br>
+							<strong>Data</strong> will take you to a page where you can preview and download the full BIDS dataset.<br>
+							<strong>FAQs</strong> opens a list of Frequently Asked Questions, and also allows you to submit a question about BIDS.<br>
+							<strong>Help</strong> will lead you to this Standard Operating Procedures document, as well as a list of frequently asked questions (FAQs) and information on how to contact the BIDS developers with questions or comments.
+						</p>
+						<h4>The Business Leads List</h4>
+						<p>
+							If you click on the double arrow at the right, the Business Leads List will scroll up.	It presents in tabular format the same data that you are looking at on the map.	 Use the scroll bar at the bottom and the right of the list to see all the data fields.
+						</p>
+						<p>
+							The list represents filtered data; that is, if you have selected any criteria in the Search/Filter Table, the same criteria are used to populate the Map and the Business Leads List.  Resetting the Search/Filter Table will reset the Business Leads List as it does the Map.
+						</p>
+						<p>
+							When the Business Leads List opens, you will also see an "Edit Entry" button at the top of the list.  Clicking on an entry in the list will highlight that entry; clicking on the "Edit Entry" button opens a new window where you can edit the entry to make corrections or update information (see "<strong>Editing A Trade Lead</strong>" below).
+						</p>
+						<h3 id="questions">QUESTIONS ABOUT BIDS?</h3>
+						<h4>What if I have a problem or a comment about BIDS?</h4>
+						<p>
+							Questions or comments about BIDS can be emailed to <a href="BIDS-Mailbox@state.gov">our support team</a>; to report specific technical problems with BIDS, click on "Report a Bug" at the bottom of the BIDS map.  Also check the FAQs on the website.
+						</p>
+						<h4>Who reviews entries into BIDS?</h4>
+						<p>
+							At the present, we leave it to posts to <strong>develop their own internal clearance and approval systems</strong> for adding information to BIDS.	We expect that Econ related offices (FCS, USAID, etc.) at posts will review proposed entries; at some posts the Econ Counselor or the DCM may want to approve submissions.	We'll be interested to hear your thoughts on this.	In Washington, EB/CBA and EB/IFD/ODF will be reviewing submissions largely for consistency and format.	To ensure information is delivered in a timely manner, it's important the review cycle be quick.  EB expects to be able to clear most entries within one business day.
+						</p>
+						<h4>How do I know what I should enter?</h4>
+						<p>
+							BIDS is not an encyclopedia of all possible government tenders.	 Projects submitted for BIDS should be <strong>selected strategically</strong>, focusing on sectors of particular interest to post and to the USG, and/or on projects or sectors where U.S. firms may have an advantage.  We are looking for quality information, <strong>not quantity</strong>.
+						</p>
+						<h3 id="how-to-use">HOW TO USE BIDS</h3>
+						<p>
+							Officers overseas will find two primary uses for BIDS.
+						</p>
+						<p>
+							The first is to enter trade leads in country as a way to alert U.S. business to potential new export opportunities.
+						</p>
+						<p>
+							The second is no less important and involves using BIDS to search for MDB or other projects in country that have been entered automatically into BIDS.	Officers can add value to those entries by contacting key ministries or U.S. companies to develop more information and updating the BIDS dataset.
+						</p>
+						<h4>Adding a Trade Lead</h4>
+						<p>
+							Clicking on either the "Add A Lead" button on the top right of the page or at the bottom of the left panel will open a pop up window where you can enter information about business opportunities.	The data fields are described below. <u>Underlined fields are required</u>, others are optional.
+						</p>
+						<dl>
+							<h4>Project Title</h4>
+							<p>Please use the official title of the project.  Where there is no official title, please use a brief description, e.g.: Ring Road Project.</p>
+							<h4>Country</h4>
+							<p>Please indicate the country where the project will be located.</p>
+							<h4>Specific Location</h4>
+							<p>Please indicate the city or a specific landmark such as a university, natural feature, or province.	If the project is nationwide or is not easily connected with a single location, like an electrification project in several different provinces, please indicate geographic area.  Check to make sure that your project will map properly by going to google and attempting to map it there.</p>
+							<h4>DOS Region</h4>
+							<p>Choose the appropriate State Department regional bureau from the drop down list.</p>
+							<h4>Sector</h4>
+							<p>Check one box indicating the appropriate sector for the project.	 <em>For ease of data entry we've established a small number of very broad sectors.	 Some projects may bridge two or more sectors, and some may not fit well into any of the six.  Please use the "Keywords" field to add additional information that may help users find your project.</em></p>
+							<h4>Project Size</h4>
+							<p>Please enter the U.S. dollar value (or estimate) of the project.</p>
+							<h4>Project Number</h4>
+							<p>Many projects have some type of identifying number.	Please indicate the reference number from the government, bank, etc., associated with the project.	If there are two separate funding sources and therefore two different project numbers, please indicate them here.</p>
+							<h4>Project Funding Source</h4>
+							<p>Enter the name of the organization or bank providing the funds for this project.	 Normally this will be a government ministry, or a MDB.</p>
+							<h4>Information Source</h4>
+							<p>Select from the drop down list.	If you are entering a project at an overseas post, select "Post Identified Project."  Projects added to BIDS from MDB sites will be identified with the sponsoring bank.  Offices in Washington can also enter projects and would select "Washington Identified Project.”</p>
+							<h4>Project Description and Bidding Requirements</h4>
+							<p>Include as much of the project description as possible so that the prospective bidder will understand what the project is.  Also include any special or specific bidding requirements that the government may have and bid deadline.</p>
+							<h4>Key Words</h4>
+							<p>Please enter any combination of key words that describe the project, e.g., Power, Dam, Hydroelectricity, Renewable, Water, and Environment.	Also enter terms that may better define the sector.</p>
+							<h4>Project Announced</h4>
+							<p>When was this project publicly announced?  Alternatively, the date entered here may be the date post initially heard about the project if post learned about the project prior to a formal announcement.</p>
+							<h4>Expected Tender Date</h4>
+							<p>Indicate when the project sponsor expects to release a tender for the project.  This may need to be updated as new information becomes available.</p>
+							<h4>Borrowing Entity</h4>
+							<p>Please indicate the government agency borrowing money for the project. If none, say "none".</p>
+							<h4>Implementing Entity</h4>
+							<p>Indicate what government ministry or other entity will be responsible for issuing the project documents an overseeing the project.</p>
+							<h4>Project Website</h4>
+							<p>If there is a website link to more information about the project, enter the web address here.</p>
+							<h4>Submitting Officer</h4>
+							<p>Please enter the name of the officer submitting the lead, or the name of the person at post who would be the most appropriate point of contact for follow-up questions from Washington or the private sector.</p>
+							<h4>Submitting Officer Contact</h4>
+							<p>Please enter the e-mail address of the person named in the "Submitting Officer" box.</p>
+							<h4>Implementing Entity POC(s) and Contact Information</h4>
+						<p>Please include the principal and secondary contacts, names, address, email addresses and phone numbers.</p>
+						<h4>Post Comments</h4>
+						<p>Include information that will help the bidders understand the dynamics of the bid.  Also, if there will be a Direct Line call, please indicate date, time, number to register and requirements.	<strong>N.B.</strong>  BIDS is not currently designed or authorized to house any classified or sensitive information.  You should <strong>assume any information you enter here will be available to the general public</strong>.</p>
+						</dl>
+						<h4>Editing a Trade Lead</h4>
+						<p>
+							<u>THIS SECTION IS UNDER DEVELOPMENT</u>
+						</p>
+						<p>
+							BIDS entries that are not edited or updated within 90 days of being entered into BIDS will be automatically archived.
+						</p>
+						<h4>Search and Filter Functions</h4>
+						<p>
+							<u>THIS SECTION IS UNDER DEVELOPMENT</u>
+						</p>
+						<h3 id="future">THE FUTURE OF BIDS</h3>
+						<p>
+							We see BIDS as only one small part of a much broader interagency toolkit that can support U.S. business.  Within the Department, BIDS is part of our larger Economic Statecraft toolkit, and should be integrated with Business Tabs, Direct Line, and other programs.	We've been working with the Department of Commerce to ensure it will be able to incorporate BIDS information into its systems as well as with OPIC, USTDA, ExIm, BusinessUSA.gov, and others.
+						</p>
+						<p>
+							We see a future where a U.S. business leader can come into her office, turn on her computer, and get alerts on new projects that are of particular interest to her firm.  Imagine a businessperson logging into a website, calling up a U.S. Government webpage that not only provides details on a major infrastructure opportunity, but also has a link to the relevant Country Commercial Guide, contact information for the appropriate USTDA or Ex-Im Bank representative for the project, and even a notice about a Direct Line call about the project next week.
+						</p>
+						<h3 id="glossary">GLOSSARY</h3>
+						<dl>
+							<h4>Archived</h4>
+							<p>BIDS entries will be archived if they move to an "in procurement," "fulfilled," "unfulfilled," or "cancelled" status, or if they have not been edited or updated in the previous 90 days.</p>
+							<h4>Cancelled</h4>
+							<p>This indicates that the government or MDB took an active decision to cancel a project.</p>
+							<h4>Fulfilled</h4>
+							<p>Fulfilled indicates that a project has been completed.</p>
+							<h4>In Procurement</h4>
+							<p>A project is "in procurement" once funding has been approved and tender documents for contractors, subcontractors, and suppliers have been issued, and/or the projects is actively being implemented.</p>
+							<h4>Pipeline</h4>
+							<p>A project is said to be in the 'pipeline' from the earliest point of identification through project preparation, appraisal, and final approval.	For a MDB project, 'pipeline' generally refers to any point in the process before the bank's Board of Directors grants final approval.	<strong>This is the period of time when BIDS is most important -- U.S. companies have their best chance at gaining a contract when they are involved in the pipeline</strong>.</p>
+							<h4>Unfulfilled</h4>
+							<p>In BIDS, a project will be listed as 'unfulfilled' if we have no information on the status of a project after 90 days.</p>
+						</dl>
+					</div>
+				</article>
+			</div>
 		</div>
-    	<script>
-            var ToC =
-              "<nav role='navigation' class='table-of-contents'>" +
-                "<h2>On this page:</h2>" +
-                "<ul>";
-            
-            var newLine, el, title, link;
-            
-            $("article h3").each(function() {
-            
-              el = $(this);
-              title = el.text();
-              link = "#" + el.attr("id");
-            
-              newLine =
-                "<li>" +
-                  "<a href='" + link + "'>" +
-                    title +
-                  "</a>" +
-                "</li>";
-            
-              ToC += newLine;
-            
-            });
-            
-            ToC +=
-               "</ul>" +
-              "</nav>";
-            
-            $(".helpcontent").prepend(ToC);
-        </script>
+		<div id="footer">
+			Sponsored by: The U.S. Department of State<br>State Department has compiled this information in order to help identify opportunities for U.S. businesses.  It is not intended to be complete and interested parties should not solely rely on the information provided herein, and neither the U.S. Government not its imployees/contractors assume any legal liability for the accuracy, completeness, or  usefulness of any information or process disclosed. It is the sole responsibility of the user of the information to verify its accuracy.
+		</div>
+		<script>
+			var ToC =
+				"<nav role='navigation' class='table-of-contents'>" +
+				"<h2>On this page:</h2>" +
+				"<ul>";
+			
+			var newLine, el, title, link;
+			
+			$("article h3").each(function() {
+			
+				el = $(this);
+				title = el.text();
+				link = "#" + el.attr("id");
+				
+				newLine =
+					"<li>" +
+					"<a href='" + link + "'>" +
+						title +
+					"</a>" +
+					"</li>";
+				
+				ToC += newLine;
+			
+			});
+			
+			ToC +=
+			"</ul>" +
+			"</nav>";
+			
+			$(".helpcontent").prepend(ToC);
+		</script>
 	</body>
 </html>

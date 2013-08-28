@@ -201,7 +201,7 @@ Ext.onReady(function() {
 				// selected item from single & list
 				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}" target="_blank" onclick=\"javascript:ga(\'send\', \'event\', \'External_Link\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact};\" onclick=\"javascript:ga(\'send\', \'event\', \'Contact\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Contact Embassy</a></font></div></div>',
 				// List of clustered items
-				item : '<div class="popupLead"><div class="popupLeadTitle"><a onclick=\"javascript:ga(\'send\', \'event\', \'Pop-Up_Lead_Details\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\" ${showPopup()}>${.Project_Title}</a></div><div class="popupLeadSummary"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</div></div>'
+				item : '<div class="popupLead"><div class="popupLeadTitle"><leadLink onclick=\"javascript:ga(\'send\', \'event\', \'Pop-Up_Lead_Details\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\" ${showPopup()}>${.Project_Title}</leadLink></div><div class="popupLeadSummary"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Funding Source: </b>${.PrFSrc}</div></div>'
 			}
 		}]]
 	});
@@ -717,7 +717,7 @@ Ext.onReady(function() {
 			layout : "border",
 			items : [{
 				region : 'north',
-				html : '<div class="container"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="#">Home</a></li><li><a href="javascript:checkTest();">Add Your Leads</a></li><li><a href="resources.html">Resources</a></li><li><a href="data.html">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li></ul></div></header></div>',
+				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 165px;"><a class="logo" data-bind="click: showHome" href="#"/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="resources.html">Resources</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 				height : 121,
 				border : true
 			}, mapPanel, {

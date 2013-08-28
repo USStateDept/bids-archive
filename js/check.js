@@ -10,5 +10,5 @@ function checkTest() {
 }
 	
 function no() {
-	alert("Adding leads is only available for State Department employees - which could be you! Go to www.usajobs! Be one of us!");
+	alert("Adding leads is only available for State Department employees - which could be you! Go to www.usajobs.gov! Be one of us!");
 }

@@ -107,10 +107,8 @@ body:before {
     background-color: #FF9933; }
   #wrap #header .nav li {
     float: left;
-    border-left: 1px solid #c1c1c1;
     padding: 0px 4px; }
-  #wrap #header .nav li:first-child {
-    border-left: none; }
+  #wrap #header .nav li:first-child {}
 	#row {
   max-width: 1240px;
   min-width: 753px;
