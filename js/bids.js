@@ -620,7 +620,7 @@ Ext.onReady(function() {
 		},
 		defaultType : 'textfield',
 		items : [ txtKey = new Ext.form.TextField({
-			emptyText : 'Keywords...'
+			emptyText : 'Search for...'
 		}), secBox = new Ext.ux.form.CheckboxCombo({
 			//store : sectorStore,
 			store : new Ext.data.ArrayStore({
