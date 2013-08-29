@@ -228,6 +228,12 @@ Ext.onReady(function() {
 
 	var categorySelectedId;
 
+	/*var metricsPanel = new Ext.Container({
+		region : "center",
+		html : '<div id="main"><div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><p><stat>$' + leadsSumValue + '</stat> in leads<br>Leads worth <stat>' + leadsWeekSumValue + '</stat> added in the last week<br></p></div><div style="margin-left: auto; margin-right: auto; width: 220px; padding-top: 50px"><p><stat>' + leadsCount + '</stat> leads in these sectors...<br>Infrastructure: <stat>' + infCount + '</stat><br>ICT: <stat>' + ictCount + '</stat><br>Ag and Environment: <stat>' + ageCount + '</stat><br>Governance and Services: <stat' + gosCount + '</stat><br>Natural Resources: <stat>' + narCount + '</stat><br></p></div></div><div class="mainContent" style="padding-top:50px"><h2>What is BIDS?</h2><p>The Business Information Database System (BIDS) supports U.S. businesses by publishing significant foreign government and multilateral development bank procurements. It is an open data platform, collecting and archiving reported procurement leads to in a database to analyze development and trade related metrics.</p></div></div></div></div><div id="footer">Sponsored by: The U.S. Department of State<br>State Department has compiled this information in order to help identify opportunities for U.S. businesses.  It is not intended to be complete and interested parties should not solely rely on the information provided herein, and neither the U.S. Government not its imployees/contractors assume any legal liability for the accuracy, completeness, or  usefulness of any information or process disclosed. It is the sole responsibility of the user of the information to verify its accuracy.</div>',
+		height : 679
+	});*/
+	/*
 	// Creates the Layout
 	new Ext.Viewport({
 		layout : "fit",
@@ -238,31 +244,51 @@ Ext.onReady(function() {
 		items : {
 			items : [
 			{region : 'north',
-				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 165px;"><a class="logo" data-bind="click: showHome" href="#"/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="resources.html">Resources</a></li><li><a href="index.html">Home</a></li></ul></div></div><div id="main"><div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><p><stat>$' + leadsSumValue + '</stat> in leads<br>Leads worth <stat>' + leadsWeekSumValue + '</stat> added in the last week<br></p></div><div style="margin-left: auto; margin-right: auto; width: 220px; padding-top: 50px"><p><stat>' + leadsCount + '</stat> leads in these sectors...<br>Infrastructure: <stat>' + infCount + '</stat><br>ICT: <stat>' + ictCount + '</stat><br>Ag and Environment: <stat>' + ageCount + '</stat><br>Governance and Services: <stat' + gosCount + '</stat><br>Natural Resources: <stat>' + narCount + '</stat><br></p></div></div><div class="mainContent" style="padding-top:50px"><h2>What is BIDS?</h2><p>The Business Information Database System (BIDS) supports U.S. businesses by publishing significant foreign government and multilateral development bank procurements. It is an open data platform, collecting and archiving reported procurement leads to in a database to analyze development and trade related metrics.</p></div></div></div></div><div id="footer">Sponsored by: The U.S. Department of State<br>State Department has compiled this information in order to help identify opportunities for U.S. businesses.  It is not intended to be complete and interested parties should not solely rely on the information provided herein, and neither the U.S. Government not its imployees/contractors assume any legal liability for the accuracy, completeness, or  usefulness of any information or process disclosed. It is the sole responsibility of the user of the information to verify its accuracy.</div>',
-				height : 800,
-				border : true
-			}
-			
-			
-			
-			/*{
-				region : 'north',
-				html : '<div class="container" style="height:121px"><header><div class="row"><a class="logo" href=""/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="index.html">Home</a></li><li><a href="resources.html">Resources</a></li><li><a href="#">Data</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="help.html">Help</a></li><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li></ul></div></header></div>',
+				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 165px;"><a class="logo" data-bind="click: showHome" href="#"/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="resources.html">Resources</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 				height : 121,
 				border : true
-			},{
-				region : 'center',
-				html : '<div class="content"></div><div class="row" style="height:25%; width:50%"><div><h2>What is BIDS?</h2>The Business Information Database System (BIDS) supports U.S. businesses by publishing significant foreign government and multilateral development bank procurements. It is an open data platform, collecting and archiving reported procurement leads to in a database to analyze development and trade related metrics.</div></div><div class="row" style="height:60%; width:50%"><div><b>$XXX,XXX,XXX</b> in leads<br>Leads worth <b>$XXX,XXX</b> added in the last week: <br><br><b>XXXX</b> leads in these sectors...<br>Infrastructure: <b>XX</b><br>ICT: <b>XX</b><br>Ag and Environment: <b>XX</b><br>Governance and Services: <b>XX</b><br>Natural Resources: <b>XX</b><br></div></div><div class="row" style="height:10%; width:90%"></div></div></div>',
-				height : 700,
-				border : false
-			},{
-				region : 'south',
-				html : '<div style="width:100%"><footer>Sponsored by: The U.S. Department of State<br>State Department has compiled this information in order to help identify opportunities for U.S. businesses.  It is not intended to be complete and interested parties should not solely rely on the information provided herein, and neither the U.S. Government not its imployees/contractors assume any legal liability for the accuracy, completeness, or  usefulness of any information or process disclosed. It is the sole responsibility of the user of the information to verify its accuracy.</footer></div>',
-				height : 100,
-				border : false
-			}*/]
+			}, metricsPanel, 
+			{
+				layout : 'border',
+				region : 'west',
+				split : true,
+				width : 180,
+				html : '<div id="wrap"><div id="header"><div class="row"><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="resources.html">Resources</a></li><li><a href="index.html">Home</a></li></ul></div></div></div></div>',
+			}
+			
+			]
 		}
-	});	
+	});	*/
+	
+	
+	new Ext.Panel({
+		renderTo: document.body,
+		
+		height: 1020,
+		layout: 'border',
+		items: [{
+			region : 'north',
+			html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 165px;"><a class="logo" data-bind="click: showHome" href="#"/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="resources.html">Resources</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
+			height : 121,
+			
+			border : false
+			}, {
+			width : 180,
+			region : 'west',
+			html : '<ul class="sideNav"><li><a href="mailto:BIDS-Mailbox@state.gov">What is BIDS?</a></li><li><a href="help.html">How many opportunities?</a></li><li><a href="faqs.html">Who uses BIDS?</a></li><li><a href="data.html">Getting started</a></li><li><a href="resources.html">Map of leads</a></li></ul></div>',
+			layout: 'fit',
+			unstyled: true
+			},{
+			region : 'center',
+			html : '<div id="main" style="margin-top: 0px;"><div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><p><stat>$' + leadsSumValue + '</stat> in leads<br>Leads worth <stat>' + leadsWeekSumValue + '</stat> added in the last week<br></p></div><div style="margin-left: auto; margin-right: auto; width: 220px; padding-top: 50px"><p><stat>' + leadsCount + '</stat> leads in these sectors...<br>Infrastructure: <stat>' + infCount + '</stat><br>ICT: <stat>' + ictCount + '</stat><br>Ag and Environment: <stat>' + ageCount + '</stat><br>Governance and Services: <stat' + gosCount + '</stat><br>Natural Resources: <stat>' + narCount + '</stat><br></p></div></div><div class="mainContent" style="padding-top:50px"><h2>What is BIDS?</h2><p>The Business Information Database System (BIDS) supports U.S. businesses by publishing significant foreign government and multilateral development bank procurements. It is an open data platform, collecting and archiving reported procurement leads to in a database to analyze development and trade related metrics.</p></div></div></div></div><div id="footer">Sponsored by: The U.S. Department of State<br>State Department has compiled this information in order to help identify opportunities for U.S. businesses.  It is not intended to be complete and interested parties should not solely rely on the information provided herein, and neither the U.S. Government not its imployees/contractors assume any legal liability for the accuracy, completeness, or  usefulness of any information or process disclosed. It is the sole responsibility of the user of the information to verify its accuracy.</div>',
+			height : 679,
+			border : false,
+			xtype: 'container',
+			layout: 'fit'
+		}]
+	});
+
+
 	
 	var filt = new OpenLayers.Filter.Comparison({
 		type : OpenLayers.Filter.Comparison.LIKE,
