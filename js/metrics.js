@@ -268,7 +268,7 @@ Ext.onReady(function() {
 		layout: 'border',
 		items: [{
 			region : 'north',
-			html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 165px;"><a class="logo" data-bind="click: showHome" href="#"/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="resources.html">Resources</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
+			html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 165px;"><a class="logo" data-bind="click: showHome" href="#"/><img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 			height : 121,
 			
 			border : false
