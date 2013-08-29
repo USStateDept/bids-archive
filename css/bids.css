@@ -191,6 +191,10 @@ h6 {
   color: #202020;
   margin: 6px 0px 1px 0px; }  
 
+disclaimer {
+  font: 10px Arial,Helvetica,sans-serif;
+  color: #202020; }  
+  
  p {
   font: 10px Arial,Helvetica,sans-serif;
   margin: 8px 10px 0px 10px; }  

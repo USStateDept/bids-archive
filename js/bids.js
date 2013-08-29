@@ -185,7 +185,7 @@ Ext.onReady(function() {
 			url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json",
 			format : new OpenLayers.Format.GeoJSON()
 		}),
-		attribution : "<a href='http://github.com/eDiper/bids/wiki/Bug-Reports' target='_blank'><b>Report a bug here</b></a>"
+		attribution : "<div><div align='right'><a href='http://github.com/eDiper/bids/wiki/Bug-Reports' target='_blank'><b>Report a bug here</b></a></div><div><disclaimer>Names and boundary representation are not necessarily authoritative.</disclaimer></div>"
 	});
 
 	var fpControl = new OpenLayers.Control.FeaturePopups({
