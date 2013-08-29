@@ -180,7 +180,18 @@ h4 {
   text-transform: uppercase;
   margin: 6px 0px 1px 0px; }  
 
-p {
+h5 {
+  font: 12px Arial,Helvetica,sans-serif;
+  color: #001c50;
+  text-transform: uppercase;
+  margin: 6px 0px 1px 0px; }  
+
+h6 {
+  font: 12px Arial,Helvetica,sans-serif;
+  color: #001c50;
+  margin: 6px 0px 1px 0px; }  
+
+ p {
   font: 10px Arial,Helvetica,sans-serif;
   margin: 8px 10px 0px 10px; }  
 
