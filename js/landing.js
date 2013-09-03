@@ -18,7 +18,7 @@ Ext.onReady(function() {
 
 	var btn_sideNav1, btn_sideNav2, btn_sideNav3, btn_sideNav4, btn_sideNav5, sideNavText;
 	
-	var leadTotalValue;
+	var leadsSumValue, leadsWeekSumValue, leadsCount, infCount, ictCount, ageCount, gosCount, narCount;
 	
 	store = new GeoExt.data.FeatureStore({
 		autoSave : true,
