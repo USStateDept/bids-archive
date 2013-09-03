@@ -707,7 +707,10 @@ leadLink:active {
 	.sideNav #sideNav5 {
 		background-color: #FF8E27;
 	}
-
+	.sideNav #sideNav6 {
+		background-color: #E0E0E0;
+	}
+	
 	#bidsLogo {
 	height: 100px;
 	width: auto;
