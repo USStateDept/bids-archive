@@ -241,7 +241,7 @@ Ext.onReady(function() {
 	var sideNavPanel = new Ext.FormPanel({
 		frame : false,
 		region : 'center',
-		html : '<ul class="sideNav"><li id="sideNav1"><a href="javascript:displaySideNav1Text()">What is BIDS?</a></li><li id="sideNav2"><a href="javascript:displaySideNav2Text()">How many opportunities?</a></li><li id="sideNav3"><a href="javascript:displaySideNav3Text()">Who uses BIDS?</a></li><li id="sideNav4"><a href="javascript:displaySideNav4Text()">Getting started</a></li><li id="sideNav5"><a href="index.html">Map of leads</a></li></ul></div>'
+		html : '<ul class="sideNav"><li id="sideNav1"><a href="javascript:displaySideNav1Text()">What is BIDS?</a></li><li id="sideNav2"><a href="javascript:displaySideNav2Text()">How many opportunities?</a></li><li id="sideNav3"><a href="javascript:displaySideNav3Text()">Who uses BIDS?</a></li><li id="sideNav4"><a href="javascript:displaySideNav4Text()">Getting started</a></li><li id="sideNav5"><a href="map.html">Map of leads</a></li></ul></div>'
 	});
 
 	// Creates the Layout
