@@ -2,11 +2,12 @@
 	<head>
 		<title>BIDS: Business Information Database System</title>
 		<link href="img/bidsIcon.png" rel="shortcut icon">
+		<link rel="stylesheet" type="text/css" href="css/olStyle.css" />
 		<link rel="stylesheet" type="text/css" href="../lib/ext-3.4.0/resources/css/ext-all.css" />
-		<link rel="stylesheet" type="text/css" href="css/ext-3.4.0.css" />
+        <link rel="stylesheet" type="text/css" href="css/ext-3.4.0.css" />
 		<link rel="stylesheet" type="text/css" href="css/Ext.ux.form.CheckboxCombo.min.css" />
 		<link rel="stylesheet" type="text/css" id="xtheme-wireframe" href="../lib/ext-3.4.0/resources/css/xtheme-wireframe.css"/> 
-		<link rel="stylesheet" type="text/css" href="css/bids.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bids.css"/>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -54,9 +55,9 @@
 	<body>
 		<div id="wrap">
 			<div id="header">
-				<div class="row">
+				<div class="row" style="margin: 0px -12px 0px 7px;">
 					<a class="logo" data-bind="click: showHome" href="#"/>
-						<img width="237" height="60" alt="BIDS Logo" src="img/bids-logo.png">
+						<img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png">
 					</a>
 					<ul class="nav">
 						<li>
@@ -66,7 +67,7 @@
 							<a href="#">Help</a>
 						</li>
 						<li>
-							<a href="faqs..html">FAQs</a>
+							<a href="faqs.html">FAQs</a>
 						</li>
 						<li>
 							<a href="data.html">Data</a>
