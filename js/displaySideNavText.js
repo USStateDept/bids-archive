@@ -29,6 +29,6 @@ function displaySideNav6Text() {
 }
 
 function noSideNavText() {
-	sideNavText = '<p><stat>$' + records[0].data.int_allLeadsValueSum + '</stat> in leads<br>Leads worth <stat>' + leadsWeekSumValue + '</stat> added in the last week<br></p></div><div style="margin-left: auto; margin-right: auto; width: 220px; padding-top: 50px"><p><stat>' + leadsCount + '</stat> leads in these sectors...<br>Infrastructure: <stat>' + infCount + '</stat><br>ICT: <stat>' + ictCount + '</stat><br>Ag and Environment: <stat>' + ageCount + '</stat><br>Governance and Services: <stat' + gosCount + '</stat><br>Natural Resources: <stat>' + narCount + '</stat><br></p></div></div>';
+	sideNavText = '<p><stat>$' + leadsSumValue + '</stat> in leads<br>Leads worth <stat>' + leadsWeekSumValue + '</stat> added in the last week<br></p></div><div style="margin-left: auto; margin-right: auto; width: 220px; padding-top: 50px"><p><stat>' + leadsCount + '</stat> leads in these sectors...<br>Infrastructure: <stat>' + infCount + '</stat><br>ICT: <stat>' + ictCount + '</stat><br>Ag and Environment: <stat>' + ageCount + '</stat><br>Governance and Services: <stat' + gosCount + '</stat><br>Natural Resources: <stat>' + narCount + '</stat><br></p></div></div>';
 	document.getElementById("sideNavTextDiv").innerHTML = sideNavText;
 }
