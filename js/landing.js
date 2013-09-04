@@ -18,97 +18,44 @@ Ext.onReady(function() {
 
 	var btn_sideNav1, btn_sideNav2, btn_sideNav3, btn_sideNav4, btn_sideNav5, sideNavText;
 	
-	var leadsSumValue, leadsWeekSumValue, leadsCount, infCount, ictCount, ageCount, gosCount, narCount;
+	var leadsSumValue, leadsWeekSumValue, leadsCount, leadsWeekCount, infCount, ictCount, ageCount, gosCount, narCount, eneCount;
 	
 	store = new GeoExt.data.FeatureStore({
 		autoSave : true,
 		fields : [{
-			name : "Timestamp",
+			name : "int_allLeadsCount",
 			type : "string"
 		}, {
-			name : "Project_Funding_Source",
+			name : "int_allLeadsValueSum",
 			type : "string"
 		}, {
-			name : "Specific_Location",
+			name : "int_weekLeadsCount",
 			type : "string"
 		}, {
-			name : "Country",
+			name : "int_weekSumValueLeads",
 			type : "string"
 		}, {
-			name : "DOS_Region",
+			name : "int_allSecCountInt",
 			type : "string"
 		}, {
-			name : "Project_Title",
+			name : "int_allSecCountIct",
 			type : "string"
 		}, {
-			name : "Project_Number",
+			name : "int_allSecCountAge",
 			type : "string"
 		}, {
-			name : "Link_To_Project",
+			name : "int_allSecCountGos",
 			type : "string"
 		}, {
-			name : "Sector",
+			name : "int_allSecCountNar",
 			type : "string"
 		}, {
-			name : "Keyword",
-			type : "string"
-		}, {
-			name : "Project_Size",
-			type : "string"
-		}, {
-			name : "Project_Announced",
-			type : "date",
-			dateFormat : "Y-m-d\\Z"
-		}, {
-			name : "Tender_Date",
-			type : "date",
-			dateFormat : "Y-m-d\\Z"
-		}, {
-			name : "Borrowing_Entity",
-			type : "string"
-		}, {
-			name : "Implementing_Entity",
-			type : "string"
-		}, {
-			name : "Project_POCs",
-			type : "string"
-		}, {
-			name : "Project_Description",
-			type : "string"
-		}, {
-			name : "Post_Comments",
-			type : "string"
-		}, {
-			name : "Submitting_Officer",
-			type : "string"
-		}, {
-			name : "Submitting_Officer_Contact",
-			type : "string"
-		}, {
-			name : "Source",
-			type : "string"
-		}, {
-			name : "US_Firm_Contact",
-			type : "string"
-		}, {
-			name : "US_Firm_Wins",
-			type : "string"
-		}, {
-			name : "Marker",
-			type : "string"
-		}, {
-			name : "Cleared",
-			type : "string"
-		}, {
-			name : "Status",
-			type : "string"
-		}, {
-			name : "fid",
+			name : "int_allSecCountEne",
 			type : "string"
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
+				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})//,
@@ -116,14 +63,19 @@ Ext.onReady(function() {
 	});
 
 	store.load();
-	leadsSumValue = store.sum('Project_Size');
-	leadsWeekSumValue = store.sum('Project_Size');
-	leadsCount = store.getCount();
-	infCount = store.getCount();
-	ictCount = store.getCount();
-	ageCount = store.getCount();
-	gosCount = store.getCount();
-	narCount = store.getCount();
+	
+	leadsSumValue = store.sum('int_allLeadsValueSum');
+	leadsWeekSumValue = store.sum('int_weekSumValueLeads');
+	leadsCount = store.sum('int_allLeadsCount');
+	leadsWeekCount = store.sum('int_weekLeadsCount');
+	infCount = store.sum('int_allSecCountInt');
+	ictCount = store.sum('int_allSecCountIct');
+	ageCount = store.sum('int_allSecCountAge');
+	gosCount = store.sum('int_allSecCountGos');
+	narCount = store.sum('int_allSecCountNar');
+	eneCount = store.sum('int_allSecCountEne');
+	
+	noSideNavText(); 
 	
 	var enteringHttpProxy = new Ext.data.HttpProxy({
 		url : 'servlet/Combo2',
