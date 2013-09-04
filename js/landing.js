@@ -8,13 +8,7 @@ function as(n) {
 };
 
 Ext.onReady(function() {
-	var store, check;
-
-	var banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
-	var regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
-	var arch = [['Archived'], ['In Procurement'], ['Pipeline']]
-	var sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
-	var sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
+	var storeTest, check;
 
 	var btn_sideNav1, btn_sideNav2, btn_sideNav3, btn_sideNav4, btn_sideNav5, sideNavText;
 	
@@ -55,125 +49,33 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
+				//url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
+				url : "http://edip-maps.net/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
-		})//,
-		//autoLoad : true
+		})
+	});
+	
+	store.load({
+		callback: function(records, operation, success) {
+        	
+			alert(records[0].data.int_allLeadsCount);
+			
+			leadsSumValue = records[0].data.int_allLeadsValueSum;
+			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
+			leadsCount = records[0].data.int_allLeadsCount;
+			leadsWeekCount = records[0].data.int_weekLeadsCount;
+			infCount = records[0].data.int_allSecCountInt;
+			ictCount = records[0].data.int_allSecCountIct;
+			ageCount = records[0].data.int_allSecCountAge;
+			gosCount = records[0].data.int_allSecCountGos;
+			narCount = records[0].data.int_allSecCountNar;
+			eneCount = records[0].data.int_allSecCountEne;
+		}
 	});
 
-	store.load();
-	
-	leadsSumValue = store.sum('int_allLeadsValueSum');
-	leadsWeekSumValue = store.sum('int_weekSumValueLeads');
-	leadsCount = store.sum('int_allLeadsCount');
-	leadsWeekCount = store.sum('int_weekLeadsCount');
-	infCount = store.sum('int_allSecCountInt');
-	ictCount = store.sum('int_allSecCountIct');
-	ageCount = store.sum('int_allSecCountAge');
-	gosCount = store.sum('int_allSecCountGos');
-	narCount = store.sum('int_allSecCountNar');
-	eneCount = store.sum('int_allSecCountEne');
-	
 	noSideNavText(); 
 	
-	var enteringHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var regionHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var sectorHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var fundingHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var sourceHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var enteringStore = new Ext.data.Store({
-		proxy : enteringHttpProxy,
-		baseParams : {
-			col : 'Submitting_Officer',
-			label : 'EnteringOfficer'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['EnteringOfficer'])
-	});
-
-	var regionStore = new Ext.data.Store({
-		proxy : regionHttpProxy,
-		baseParams : {
-			col : 'DOS_Region',
-			label : 'Region'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['Region'])
-	});
-
-	var sectorStore = new Ext.data.Store({
-		proxy : sectorHttpProxy,
-		baseParams : {
-			col : 'Sector',
-			label : 'Sector'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['Sector'])
-	});
-
-	var fundingStore = new Ext.data.Store({
-		proxy : fundingHttpProxy,
-		baseParams : {
-			col : 'Project_Funding_Source',
-			label : 'FundingSource'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['FundingSource'])
-	});
-
-	var sourceStore = new Ext.data.Store({
-		proxy : enteringHttpProxy,
-		baseParams : {
-			col : 'Source',
-			label : 'Source'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['Source'])
-	});
-
-	enteringStore.load();
-	sectorStore.load();
-	regionStore.load();
-	fundingStore.load();
-
-	var categorySelectedId;
-
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
