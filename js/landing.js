@@ -71,10 +71,11 @@ Ext.onReady(function() {
 			gosCount = records[0].data.int_allSecCountGos;
 			narCount = records[0].data.int_allSecCountNar;
 			eneCount = records[0].data.int_allSecCountEne;
+			noSideNavText(); 
 		}
 	});
 
-	noSideNavText(); 
+	
 	
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
