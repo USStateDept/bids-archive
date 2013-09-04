@@ -734,5 +734,5 @@ Ext.onReady(function() {
 
 	function State_Select(box, record, index) {
 	}
-
+	
 });
