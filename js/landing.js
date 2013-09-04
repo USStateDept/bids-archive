@@ -62,7 +62,7 @@ Ext.onReady(function() {
 			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
 			leadsCount = records[0].data.int_allLeadsCount;
 			leadsWeekCount = records[0].data.int_weekLeadsCount;
-			infCount = records[0].data.int_allSecCountInt;
+			infCount = records[0].data.int_allSecCountInf;
 			ictCount = records[0].data.int_allSecCountIct;
 			ageCount = records[0].data.int_allSecCountAge;
 			gosCount = records[0].data.int_allSecCountGos;
