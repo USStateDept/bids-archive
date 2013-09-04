@@ -58,11 +58,7 @@ Ext.onReady(function() {
 	
 	store.load({
 		callback: function(records, operation, success) {
-        	
-			alert(records[0].data.int_allLeadsCount);
-			
-			leadsSumValue = records[0].data.int_allLeadsValueSum;
-			alert(leadsSumValue);
+        	leadsSumValue = records[0].data.int_allLeadsValueSum;
 			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
 			leadsCount = records[0].data.int_allLeadsCount;
 			leadsWeekCount = records[0].data.int_weekLeadsCount;
