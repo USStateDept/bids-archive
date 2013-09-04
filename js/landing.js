@@ -29,7 +29,7 @@ Ext.onReady(function() {
 			name : "int_weekSumValueLeads",
 			type : "string"
 		}, {
-			name : "int_allSecCountInt",
+			name : "int_allSecCountInf",
 			type : "string"
 		}, {
 			name : "int_allSecCountIct",
