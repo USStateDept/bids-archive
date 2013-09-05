@@ -9,16 +9,16 @@ function as(n) {
 
 var leadsSumValue, leadsWeekSumValue, leadsCount, leadsWeekCount, infCount, ictCount, ageCount, gosCount, narCount, eneCount;
 var required, banks, regions, arch, sizes, sec;
+var metricsStore, check;
+var miniGrid, miniSearchFunc;
+var urlWhole;
+	
 
 Ext.onReady(function() {
 	banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
 	regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
 	arch = [['Archived'], ['In Procurement'], ['Pipeline']]
 	sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
-	sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
-
-	var metricsStore, check;
-	
 	sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']];
 
 	var btn_sideNav1, btn_sideNav2, btn_sideNav3, btn_sideNav4, btn_sideNav5, sideNavText;
@@ -84,7 +84,6 @@ Ext.onReady(function() {
 
 	store = new GeoExt.data.FeatureStore({
 		autoSave : true,
-		//layer : sd,
 		fields : [{
 			name : "Timestamp",
 			type : "string"
@@ -174,8 +173,7 @@ Ext.onReady(function() {
 				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
 				format : new OpenLayers.Format.GeoJSON()
 			})
-		})//,
-		//autoLoad : true
+		})
 	});
 
 	store.load();
@@ -277,70 +275,7 @@ Ext.onReady(function() {
 
 	var categorySelectedId;
 
-	// SEARCH FILTERS
-	var mainPanelSearch = new Ext.FormPanel({
-		labelWidth : 0, // label settings here cascade unless overridden
-		frame : false,
-		region : "south",
-		height : 200,
-		width : 180,
-		title : '<div class="content"><div class="mainContent"><div style="text-align:left; padding-top: 20px"><h4>Get Started (select):</h4></div></div></div>',
-		bodyStyle : 'padding:5px 5px 0',
 
-		//width: 210,
-		defaults : {
-			width : 135
-		},
-		defaultType : 'textfield',
-		items : [ txtKey = new Ext.form.TextField({
-			emptyText : 'Search for...'
-		}), secBox = new Ext.ux.form.CheckboxCombo({
-			//store : sectorStore,
-			store : new Ext.data.ArrayStore({
-				fields : ['Sector'],
-				data : sec // from states.js
-			}),
-			displayField : 'Sector',
-			valueField : 'Sector',
-			mode : 'local',
-			emptyText : 'Select Sector...'
-		}), dBegin = new Ext.form.DateField({
-			emptyText : 'Announce Date Begin...',
-			width : 190
-		})],
-		buttons : [{
-			text : 'Search',
-			handler : searchFunc
-		}, {
-			text : 'See All Leads',
-			id : 'btnResetFilter',
-			handler : function() {
-				//alert('Size: ' + map.getSize() + '\nProjection: ' + map.getProjection() + '\nResolution: ' + map.getResolution() + '\nMax Resolution: ' + map.getMaxResolution() + '\nScale: ' + map.getScale() + '\nUnits: ' + map.getUnits() + '\nExtent: ' + map.getExtent() + '\nMax Extent: ' + map.getMaxExtent() + '\nNum Zoom Levels: ' + map.getNumZoomLevels() + '\nZoom: ' + map.getZoom() + '\nResolution For Zoom: ' + map.getResolutionForZoom() + '\nZoom For Resolution: ' + map.getZoomForResolution() + '\nDPI: ' + OpenLayers.DOTS_PER_INCH);
-				filterPanel.getForm().reset();
-
-				var tProxy = new GeoExt.data.ProtocolProxy({
-					protocol : new OpenLayers.Protocol.HTTP({
-						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
-						format : new OpenLayers.Format.GeoJSON()
-					})
-				});
-				map.zoomToExtent(initExtent, true);
-				map.setCenter(initCenter, initZoom);
-
-				store.proxy = tProxy;
-				store.reload();
-				grid.getView().refresh();
-				ga('send', 'event', 'Search_Panel', 'Reset_Search_Panel', {'nonInteraction': 1});
-			}
-		}]
-	});
-	
-	// MAIN PANEL - INFORMATION
-	var mainPanelInfo = new Ext.FormPanel({
-		region : "north",
-		height : 300,			
-		html : '<div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><div id="sideNavTextDiv"></div></div></div></div>'
-	});
 	/*
 	// MAIN PANEL - SEARCH
 	var mainPanelSearch = new Ext.FormPanel({
@@ -373,6 +308,207 @@ Ext.onReady(function() {
 		, {
 			text : 'See All Leads',
 			handler : '<a href=\'map.html\'>See All Leads</a>'
+=======
+		})
+	});
+
+	store.load();
+	
+	var enteringHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var regionHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var sectorHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var fundingHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var sourceHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var enteringStore = new Ext.data.Store({
+		proxy : enteringHttpProxy,
+		baseParams : {
+			col : 'Submitting_Officer',
+			label : 'EnteringOfficer'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['EnteringOfficer'])
+	});
+
+	var regionStore = new Ext.data.Store({
+		proxy : regionHttpProxy,
+		baseParams : {
+			col : 'DOS_Region',
+			label : 'Region'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['Region'])
+	});
+
+	var sectorStore = new Ext.data.Store({
+		proxy : sectorHttpProxy,
+		baseParams : {
+			col : 'Sector',
+			label : 'Sector'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['Sector'])
+	});
+
+	var fundingStore = new Ext.data.Store({
+		proxy : fundingHttpProxy,
+		baseParams : {
+			col : 'Project_Funding_Source',
+			label : 'FundingSource'
+		},
+		
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['FundingSource'])
+	});
+
+	var sourceStore = new Ext.data.Store({
+		proxy : enteringHttpProxy,
+		baseParams : {
+			col : 'Source',
+			label : 'Source'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['Source'])
+	});
+
+	enteringStore.load();
+	sectorStore.load();
+	regionStore.load();
+	fundingStore.load();
+
+	var categorySelectedId;
+	*/
+	// BUTTON LINK TO MAP.HTML
+	var mapLink = function() {
+		window.open("map.html", "_self");
+		ga('send', 'event', 'Metrics_Panel', 'mapLink_Metrics_Panel', {'nonInteraction': 1});
+	};
+	
+	// GRID FOR SEARCH RESULTS
+	miniGrid = new Ext.grid.GridPanel({
+		region : "center",
+		store : store,
+		id : 'gridx',
+		columns : [{
+			header : "Project Title",
+			dataIndex : "Project_Title",
+			width : 340,
+			sortable : true
+		}, {
+			header : "Country",
+			dataIndex : "Country",
+			width : 75,
+			sortable : true
+		}, {
+			header : "Sector",
+			dataIndex : "Sector",
+			width : 125,
+			sortable : true
+		}, {
+			header : "Project Funding Source",
+			dataIndex : "Project_Funding_Source",
+			width : 200,
+			sortable : true
+		}, {
+			header : "Project Size",
+			dataIndex : "Project_Size",
+			renderer : Ext.util.Format.numberRenderer('$0,000'),
+			width : 80,
+			sortable : true
+		}, {
+			header : "Project Announced",
+			dataIndex : "Project_Announced",
+			width : 110,
+			format : 'm/d/Y',
+			renderer : Ext.util.Format.dateRenderer('m/d/Y'),
+			sortable : true
+		}],
+		sm : new GeoExt.grid.FeatureSelectionModel(),
+		height : 265
+	});
+	
+	// SEARCH RESULTS POP-UP
+	winResults = new Ext.Window({
+		id : 'formanchor-win',
+		width : 800,
+		height : 300,
+		autoScroll : true,
+		plain : true,
+		title : 'Search results',
+		border : false,
+		closeAction : 'hide',
+		resizable : false,
+		resizeHandles : false,
+		items : miniGrid
+	});
+/*
+	// MAIN PANEL - SEARCH
+	var mainPanelSearch = new Ext.FormPanel({
+		labelWidth : 0, // label settings here cascade unless overridden
+		region : "center",
+		height : 160,
+		width : 185,
+		defaults : {
+			width : 160
+		},
+		title : '<div class="content"><div class="mainContent"><div style="text-align:left;"><h5 style="font-weight: bold;">Get Started (select):</h5></div></div></div>',
+		items : [ txtKey = new Ext.form.TextField({
+			emptyText : 'Search for...'
+		}), secBox = new Ext.ux.form.CheckboxCombo({
+			//store : sectorStore,
+			store : new Ext.data.ArrayStore({
+				fields : ['Sector'],
+				data : sec // from states.js
+			}),
+			displayField : 'Sector',
+			valueField : 'Sector',
+			mode : 'local',
+			emptyText : 'Select Sector...'
+		}), dBegin = new Ext.form.DateField({
+			emptyText : 'Announce Date Begin...',
+			width : 190
+		})],
+		buttons : [{
+			text : 'Search',
+			handler : miniSearchFunc
+		}, {
+			text : 'See All Leads',
+			id : 'btnMapLink',
+			handler : mapLink
+>>>>>>> 2nd Attempt at Landing Page (#91)
 		}]
 	});*/
 	
@@ -380,8 +516,47 @@ Ext.onReady(function() {
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
 		height : 500,
-		autoWidth : true,
-		items : [mainPanelInfo, mainPanelSearch]
+		width : 800,
+		title : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div><br><h5 style="font-weight: bold;">Get Started (select):</h5></div></div></div>',
+		labelWidth : 0, // label settings here cascade unless overridden
+		defaults : {
+			width : 160
+		},
+		items : [ txtKey = new Ext.form.TextField({
+			emptyText : 'Search for...'
+		}), secBox = new Ext.ux.form.CheckboxCombo({
+			//store : sectorStore,
+			store : new Ext.data.ArrayStore({
+				fields : ['Sector'],
+				data : sec // from states.js
+			}),
+			displayField : 'Sector',
+			valueField : 'Sector',
+			mode : 'local',
+			emptyText : 'Select Sector...'
+		}), dBegin = new Ext.form.DateField({
+			emptyText : 'Announce Date Begin...',
+			width : 190
+		}),
+		{
+			xtype: 'container',
+			autoEl: {tag: 'center'},
+			width : 180,
+			style: {
+				'padding-top' : '5px',
+				'padding-left' : '18px'				
+			},
+			items: { 
+				buttons : [{
+					text : 'Search',
+					handler : miniSearchFunc
+				}, {
+					text : 'See All Leads',
+					id : 'btnMapLink',
+					handler : mapLink
+				}]
+			}
+		}]
 	});
 		
 	// FOOTER PANEL
