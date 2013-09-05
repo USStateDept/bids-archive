@@ -314,7 +314,24 @@ Ext.onReady(function() {
 		}, {
 			text : 'See All Leads',
 			id : 'btnResetFilter',
-			handler : goToMap
+			handler : function() {
+				//alert('Size: ' + map.getSize() + '\nProjection: ' + map.getProjection() + '\nResolution: ' + map.getResolution() + '\nMax Resolution: ' + map.getMaxResolution() + '\nScale: ' + map.getScale() + '\nUnits: ' + map.getUnits() + '\nExtent: ' + map.getExtent() + '\nMax Extent: ' + map.getMaxExtent() + '\nNum Zoom Levels: ' + map.getNumZoomLevels() + '\nZoom: ' + map.getZoom() + '\nResolution For Zoom: ' + map.getResolutionForZoom() + '\nZoom For Resolution: ' + map.getZoomForResolution() + '\nDPI: ' + OpenLayers.DOTS_PER_INCH);
+				filterPanel.getForm().reset();
+
+				var tProxy = new GeoExt.data.ProtocolProxy({
+					protocol : new OpenLayers.Protocol.HTTP({
+						url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
+						format : new OpenLayers.Format.GeoJSON()
+					})
+				});
+				map.zoomToExtent(initExtent, true);
+				map.setCenter(initCenter, initZoom);
+
+				store.proxy = tProxy;
+				store.reload();
+				grid.getView().refresh();
+				ga('send', 'event', 'Search_Panel', 'Reset_Search_Panel', {'nonInteraction': 1});
+			}
 		}]
 	});
 	
