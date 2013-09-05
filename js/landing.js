@@ -8,13 +8,22 @@ function as(n) {
 };
 
 var leadsSumValue, leadsWeekSumValue, leadsCount, leadsWeekCount, infCount, ictCount, ageCount, gosCount, narCount, eneCount;
-	
+var required, banks, regions, arch, sizes, sec;
+
 Ext.onReady(function() {
-	var storeTest, check;
+	banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
+	regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
+	arch = [['Archived'], ['In Procurement'], ['Pipeline']]
+	sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
+	sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
+
+	var metricsStore, check;
+	
+	sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']];
 
 	var btn_sideNav1, btn_sideNav2, btn_sideNav3, btn_sideNav4, btn_sideNav5, sideNavText;
 	
-	store = new GeoExt.data.FeatureStore({
+	metricsStore = new GeoExt.data.FeatureStore({
 		autoSave : true,
 		fields : [{
 			name : "int_allLeadsCount",
@@ -56,7 +65,7 @@ Ext.onReady(function() {
 		})
 	});
 	
-	store.load({
+	metricsStore.load({
 		callback: function(records, operation, success) {
         	leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
 			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
@@ -73,16 +82,291 @@ Ext.onReady(function() {
 		}
 	});
 
+	store = new GeoExt.data.FeatureStore({
+		autoSave : true,
+		//layer : sd,
+		fields : [{
+			name : "Timestamp",
+			type : "string"
+		}, {
+			name : "Project_Funding_Source",
+			type : "string"
+		}, {
+			name : "Specific_Location",
+			type : "string"
+		}, {
+			name : "Country",
+			type : "string"
+		}, {
+			name : "DOS_Region",
+			type : "string"
+		}, {
+			name : "Project_Title",
+			type : "string"
+		}, {
+			name : "Project_Number",
+			type : "string"
+		}, {
+			name : "Link_To_Project",
+			type : "string"
+		}, {
+			name : "Sector",
+			type : "string"
+		}, {
+			name : "Keyword",
+			type : "string"
+		}, {
+			name : "Project_Size",
+			type : "string"
+		}, {
+			name : "Project_Announced",
+			type : "date",
+			dateFormat : "Y-m-d\\Z"
+		}, {
+			name : "Tender_Date",
+			type : "date",
+			dateFormat : "Y-m-d\\Z"
+		}, {
+			name : "Borrowing_Entity",
+			type : "string"
+		}, {
+			name : "Implementing_Entity",
+			type : "string"
+		}, {
+			name : "Project_POCs",
+			type : "string"
+		}, {
+			name : "Project_Description",
+			type : "string"
+		}, {
+			name : "Post_Comments",
+			type : "string"
+		}, {
+			name : "Submitting_Officer",
+			type : "string"
+		}, {
+			name : "Submitting_Officer_Contact",
+			type : "string"
+		}, {
+			name : "Source",
+			type : "string"
+		}, {
+			name : "US_Firm_Contact",
+			type : "string"
+		}, {
+			name : "US_Firm_Wins",
+			type : "string"
+		}, {
+			name : "Marker",
+			type : "string"
+		}, {
+			name : "Cleared",
+			type : "string"
+		}, {
+			name : "Status",
+			type : "string"
+		}, {
+			name : "fid",
+			type : "string"
+		}],
+		proxy : new GeoExt.data.ProtocolProxy({
+			protocol : new OpenLayers.Protocol.HTTP({
+				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
+				format : new OpenLayers.Format.GeoJSON()
+			})
+		})//,
+		//autoLoad : true
+	});
+
+	store.load();
 	
+	var enteringHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var regionHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var sectorHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var fundingHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var sourceHttpProxy = new Ext.data.HttpProxy({
+		url : 'servlet/Combo2',
+		method : 'GET'
+	});
+
+	var enteringStore = new Ext.data.Store({
+		proxy : enteringHttpProxy,
+		baseParams : {
+			col : 'Submitting_Officer',
+			label : 'EnteringOfficer'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['EnteringOfficer'])
+	});
+
+	var regionStore = new Ext.data.Store({
+		proxy : regionHttpProxy,
+		baseParams : {
+			col : 'DOS_Region',
+			label : 'Region'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['Region'])
+	});
+
+	var sectorStore = new Ext.data.Store({
+		proxy : sectorHttpProxy,
+		baseParams : {
+			col : 'Sector',
+			label : 'Sector'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['Sector'])
+	});
+
+	var fundingStore = new Ext.data.Store({
+		proxy : fundingHttpProxy,
+		baseParams : {
+			col : 'Project_Funding_Source',
+			label : 'FundingSource'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['FundingSource'])
+	});
+
+	var sourceStore = new Ext.data.Store({
+		proxy : enteringHttpProxy,
+		baseParams : {
+			col : 'Source',
+			label : 'Source'
+		},
+
+		reader : new Ext.data.XmlReader({
+			record : 'Row',
+			id : 'ID'
+		}, ['Source'])
+	});
+
+	enteringStore.load();
+	sectorStore.load();
+	regionStore.load();
+	fundingStore.load();
+
+	var categorySelectedId;
+
+	// SEARCH FILTERS
+	var mainPanelSearch = new Ext.FormPanel({
+		labelWidth : 0, // label settings here cascade unless overridden
+		frame : false,
+		region : "south",
+		height : 200,
+		width : 180,
+		title : '<div class="content"><div class="mainContent"><div style="text-align:left; padding-top: 20px"><h4>Get Started (select):</h4></div></div></div>',
+		bodyStyle : 'padding:5px 5px 0',
+
+		//width: 210,
+		defaults : {
+			width : 135
+		},
+		defaultType : 'textfield',
+		items : [ txtKey = new Ext.form.TextField({
+			emptyText : 'Search for...'
+		}), secBox = new Ext.ux.form.CheckboxCombo({
+			//store : sectorStore,
+			store : new Ext.data.ArrayStore({
+				fields : ['Sector'],
+				data : sec // from states.js
+			}),
+			displayField : 'Sector',
+			valueField : 'Sector',
+			mode : 'local',
+			emptyText : 'Select Sector...'
+		}), dBegin = new Ext.form.DateField({
+			emptyText : 'Announce Date Begin...',
+			width : 190
+		})],
+		buttons : [{
+			text : 'Search',
+			handler : searchFunc
+		}, {
+			text : 'See All Leads',
+			id : 'btnResetFilter',
+			handler : goToMap
+		}]
+	});
+	
+	// MAIN PANEL - INFORMATION
+	var mainPanelInfo = new Ext.FormPanel({
+		region : "north",
+		height : 300,			
+		html : '<div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><div id="sideNavTextDiv"></div></div></div></div>'
+	});
+	/*
+	// MAIN PANEL - SEARCH
+	var mainPanelSearch = new Ext.FormPanel({
+		region : "south",
+		height : 250,
+		title : '<div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><h3>Get Started (select):</h3></div></div></div>',
+		items : [ txtKey = new Ext.form.TextField({
+			emptyText : 'Country...'
+			}), 
+			secBox = new Ext.ux.form.CheckboxCombo({
+			//store : sectorStore,
+				store : new Ext.data.ArrayStore({
+					fields : ['Sector'],
+					data : sec // from states.js
+				}),
+				displayField : 'Sector',
+				valueField : 'Sector',
+				mode : 'local',
+				emptyText : 'Select Sector...'
+			}),
+			dBegin = new Ext.form.DateField({
+				emptyText : 'Last updated after...',
+				width : 190
+			})
+		],
+		buttons : [{
+			text : 'Search',
+			handler : miniSearchFunc
+		}
+		, {
+			text : 'See All Leads',
+			handler : '<a href=\'map.html\'>See All Leads</a>'
+		}]
+	});*/
 	
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
 		height : 500,
 		autoWidth : true,
-		html : '<div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><div id="sideNavTextDiv"></div></div></div></div>'
+		items : [mainPanelInfo, mainPanelSearch]
 	});
-	
+		
 	// FOOTER PANEL
 	var footerPanel = new Ext.FormPanel({
 		region : "south",
