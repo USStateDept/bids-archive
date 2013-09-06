@@ -345,10 +345,7 @@ Ext.onReady(function() {
 		width: 300,
 		height: 300,
 		autoEl : { tag : 'center'},
-		style: {
-			'margin-left' : 'auto',
-			'margin-right' : 'auto'
-		},
+		
 		items: [
 			new Ext.Container({
 				autoEl : { tag : 'center'},
@@ -357,7 +354,7 @@ Ext.onReady(function() {
 			}),
 			new Ext.Container({
 				autoEl : { tag : 'center'},
-				width : 275,
+				//width : 275,
 				defaults : {
 					style : {
 						'margin-bottom' : '10px'
@@ -367,7 +364,6 @@ Ext.onReady(function() {
 				[ new Ext.Container({
 					html: '<h6 style="font-weight: bold;">Get Started (select):</h6>'
 				}),
-				
 					txtKey = new Ext.form.TextField({
 					emptyText : 'Search for...',
 					width : 200
