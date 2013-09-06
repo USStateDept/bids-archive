@@ -344,8 +344,9 @@ Ext.onReady(function() {
 		region : "center",
 		height : 500,
 		width : 800,
-		title : '<div style="width: 275px; margin-left: auto; margin-right: auto; padding-top: 10px"><h5 style="font-weight: bold;">Get Started (select):</h5></div>',
 		html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div></div></div>',
+		title : '<div style="width: 275px; margin-left: auto; margin-right: auto; padding-top: 10px"><h5 style="font-weight: bold;">Get Started (select):</h5></div>',
+		
 		xtype: 'container',
 		autoEl: {tag: 'center'},
 		width: 275,
