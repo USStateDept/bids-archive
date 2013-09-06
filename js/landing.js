@@ -67,7 +67,8 @@ Ext.onReady(function() {
 	
 	metricsStore.load({
 		callback: function(records, operation, success) {
-        	leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
+		//callback: function(records, operation, failure) {
+        	/*leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
 			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
 			leadsCount = records[0].data.int_allLeadsCount;
 			leadsWeekCount = records[0].data.int_weekLeadsCount;
@@ -77,7 +78,7 @@ Ext.onReady(function() {
 			gosCount = records[0].data.int_allSecCountGos;
 			narCount = records[0].data.int_allSecCountNar;
 			eneCount = records[0].data.int_allSecCountEne;
-			
+			*/
 			noSideNavText(); 
 		}
 	});
@@ -342,15 +343,11 @@ Ext.onReady(function() {
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
-		width: 300,
-		height: 300,
 		autoEl : { tag : 'center'},
-		
 		items: [
 			new Ext.Container({
 				autoEl : { tag : 'center'},
-				width : 275,
-				html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>'
+				html : '<div class="content"><div class="mainContent"><div id="sideNavTextDiv"></div></div></div>'
 			}),
 			new Ext.Container({
 				autoEl : { tag : 'center'},
@@ -428,7 +425,7 @@ Ext.onReady(function() {
 			layout : "border",
 			items : [{
 				region : 'north',
-				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 7px;"><a class="logo" data-bind="click: showHome" href="#"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="map.html">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
+				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 7px;"><a class="logo" data-bind="click: showHome" href="index.html"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="map.html">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 				height : 121,
 				boxMinWidth: 870,
 				border : true

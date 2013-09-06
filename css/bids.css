@@ -382,14 +382,14 @@ body:before {
 		max-width: 1240px;
 		padding: 0px; }
 			
-		
-	.content { }
+	.content {
+	}
 	.content p {
 		font: 14px Arial,Helvetica,sans-serif;
 		color: #58595b;
 		margin-top: 0px;
-		line-height: 1.8; }
-
+		line-height: 1.8;
+	}
 	
 leadCount {
 	font-size:12px;
@@ -710,7 +710,16 @@ leadLink:active {
 	.sideNav #sideNav6 {
 		background-color: #E0E0E0;
 	}
-	
+#sideNavTextContent {
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	background-color: rgba(255,255,255,0.66) !important;
+	border-radius: 10px !important;
+	border-style: solid !important;
+	border-width: 2px !important;
+	border-color: rgba(0,0,0,0.10) !important;
+	filter:alpha(opacity=60) !important; /* For IE8 and earlier */
+ }
 	#bidsLogo {
 	height: 100px;
 	width: auto;
@@ -766,5 +775,12 @@ a.boxclose{
     -khtml-border-top-left-radius: 20px;
     -khtml-border-top-right-radius: 20px;
 }
-	
+
+.x-panel-body {
+	background-color: none !important;
+}
+
+.x-border-layout-ct {
+	background-color: none !important;
+}
 	
