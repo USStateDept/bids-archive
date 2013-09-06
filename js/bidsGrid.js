@@ -153,7 +153,7 @@ Ext.onReady(function() {
 			width : 125,
 			sortable : true
 		}, {
-			header : "Project Funding Source",
+			header : "Primary Funding Source",
 			dataIndex : "Project_Funding_Source",
 			width : 200,
 			sortable : true
