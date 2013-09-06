@@ -1,2 +1,2 @@
-var domain = 'localhost'
+var domain = 'edip-maps.net'
 var site = '/bids/'
