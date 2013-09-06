@@ -275,142 +275,6 @@ Ext.onReady(function() {
 
 	var categorySelectedId;
 
-
-	/*
-	// MAIN PANEL - SEARCH
-	var mainPanelSearch = new Ext.FormPanel({
-		region : "south",
-		height : 250,
-		title : '<div class="content"><div class="mainContent"><div style="text-align:center; padding-top: 20px"><h3>Get Started (select):</h3></div></div></div>',
-		items : [ txtKey = new Ext.form.TextField({
-			emptyText : 'Country...'
-			}), 
-			secBox = new Ext.ux.form.CheckboxCombo({
-			//store : sectorStore,
-				store : new Ext.data.ArrayStore({
-					fields : ['Sector'],
-					data : sec // from states.js
-				}),
-				displayField : 'Sector',
-				valueField : 'Sector',
-				mode : 'local',
-				emptyText : 'Select Sector...'
-			}),
-			dBegin = new Ext.form.DateField({
-				emptyText : 'Last updated after...',
-				width : 190
-			})
-		],
-		buttons : [{
-			text : 'Search',
-			handler : miniSearchFunc
-		}
-		, {
-			text : 'See All Leads',
-			handler : '<a href=\'map.html\'>See All Leads</a>'
-=======
-		})
-	});
-
-	store.load();
-	
-	var enteringHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var regionHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var sectorHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var fundingHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var sourceHttpProxy = new Ext.data.HttpProxy({
-		url : 'servlet/Combo2',
-		method : 'GET'
-	});
-
-	var enteringStore = new Ext.data.Store({
-		proxy : enteringHttpProxy,
-		baseParams : {
-			col : 'Submitting_Officer',
-			label : 'EnteringOfficer'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['EnteringOfficer'])
-	});
-
-	var regionStore = new Ext.data.Store({
-		proxy : regionHttpProxy,
-		baseParams : {
-			col : 'DOS_Region',
-			label : 'Region'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['Region'])
-	});
-
-	var sectorStore = new Ext.data.Store({
-		proxy : sectorHttpProxy,
-		baseParams : {
-			col : 'Sector',
-			label : 'Sector'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['Sector'])
-	});
-
-	var fundingStore = new Ext.data.Store({
-		proxy : fundingHttpProxy,
-		baseParams : {
-			col : 'Project_Funding_Source',
-			label : 'FundingSource'
-		},
-		
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['FundingSource'])
-	});
-
-	var sourceStore = new Ext.data.Store({
-		proxy : enteringHttpProxy,
-		baseParams : {
-			col : 'Source',
-			label : 'Source'
-		},
-
-		reader : new Ext.data.XmlReader({
-			record : 'Row',
-			id : 'ID'
-		}, ['Source'])
-	});
-
-	enteringStore.load();
-	sectorStore.load();
-	regionStore.load();
-	fundingStore.load();
-
-	var categorySelectedId;
-	*/
 	// BUTTON LINK TO MAP.HTML
 	var mapLink = function() {
 		window.open("map.html", "_self");
@@ -474,89 +338,62 @@ Ext.onReady(function() {
 		resizeHandles : false,
 		items : miniGrid
 	});
-/*
-	// MAIN PANEL - SEARCH
-	var mainPanelSearch = new Ext.FormPanel({
-		labelWidth : 0, // label settings here cascade unless overridden
-		region : "center",
-		height : 160,
-		width : 185,
-		defaults : {
-			width : 160
-		},
-		title : '<div class="content"><div class="mainContent"><div style="text-align:left;"><h5 style="font-weight: bold;">Get Started (select):</h5></div></div></div>',
-		items : [ txtKey = new Ext.form.TextField({
-			emptyText : 'Search for...'
-		}), secBox = new Ext.ux.form.CheckboxCombo({
-			//store : sectorStore,
-			store : new Ext.data.ArrayStore({
-				fields : ['Sector'],
-				data : sec // from states.js
-			}),
-			displayField : 'Sector',
-			valueField : 'Sector',
-			mode : 'local',
-			emptyText : 'Select Sector...'
-		}), dBegin = new Ext.form.DateField({
-			emptyText : 'Announce Date Begin...',
-			width : 190
-		})],
-		buttons : [{
-			text : 'Search',
-			handler : miniSearchFunc
-		}, {
-			text : 'See All Leads',
-			id : 'btnMapLink',
-			handler : mapLink
->>>>>>> 2nd Attempt at Landing Page (#91)
-		}]
-	});*/
 	
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
 		height : 500,
 		width : 800,
-		title : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div><br><h5 style="font-weight: bold;">Get Started (select):</h5></div></div></div>',
-		labelWidth : 0, // label settings here cascade unless overridden
-		defaults : {
-			width : 160
+		title : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; margin-left: auto; margin-right: auto; padding-top: 10px"><h5 style="font-weight: bold;">Get Started (select):</h5></div></div></div>',
+		xtype: 'container',
+		autoEl: {tag: 'center'},
+		width: 275,
+		style: {
+			'margin-left' : 'auto',
+			'margin-right' : 'auto'
 		},
-		items : [ txtKey = new Ext.form.TextField({
-			emptyText : 'Search for...'
-		}), secBox = new Ext.ux.form.CheckboxCombo({
-			//store : sectorStore,
-			store : new Ext.data.ArrayStore({
-				fields : ['Sector'],
-				data : sec // from states.js
-			}),
-			displayField : 'Sector',
-			valueField : 'Sector',
-			mode : 'local',
-			emptyText : 'Select Sector...'
-		}), dBegin = new Ext.form.DateField({
-			emptyText : 'Announce Date Begin...',
-			width : 190
-		}),
-		{
-			xtype: 'container',
-			autoEl: {tag: 'center'},
-			width : 180,
-			style: {
-				'padding-top' : '5px',
-				'padding-left' : '18px'				
+		items: {
+			labelWidth : 0, // label settings here cascade unless overridden
+			defaults : {
+				width : 160
 			},
-			items: { 
-				buttons : [{
-					text : 'Search',
-					handler : miniSearchFunc
-				}, {
-					text : 'See All Leads',
-					id : 'btnMapLink',
-					handler : mapLink
-				}]
-			}
-		}]
+			items : [ 
+				txtKey = new Ext.form.TextField({
+				emptyText : 'Search for...'
+			}), secBox = new Ext.ux.form.CheckboxCombo({
+				//store : sectorStore,
+				store : new Ext.data.ArrayStore({
+					fields : ['Sector'],
+					data : sec // from states.js
+				}),
+				displayField : 'Sector',
+				valueField : 'Sector',
+				mode : 'local',
+				emptyText : 'Select Sector...'
+			}), dBegin = new Ext.form.DateField({
+				emptyText : 'Announce Date Begin...',
+				width : 190
+			}),
+			{
+				xtype: 'container',
+				autoEl: {tag: 'center'},
+				width : 180,
+				style: {
+					'padding-top' : '5px',
+					'padding-left' : '18px'
+				},
+				items: { 
+					buttons : [{
+						text : 'Search',
+						handler : miniSearchFunc
+					}, {
+						text : 'See All Leads',
+						id : 'btnMapLink',
+						handler : mapLink
+					}]
+				}
+			}]
+		}
 	});
 		
 	// FOOTER PANEL
