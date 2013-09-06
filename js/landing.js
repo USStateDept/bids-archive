@@ -342,7 +342,6 @@ Ext.onReady(function() {
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
-		html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>',
 		width: 300,
 		height: 300,
 		autoEl : { tag : 'center'},
@@ -350,8 +349,14 @@ Ext.onReady(function() {
 			'margin-left' : 'auto',
 			'margin-right' : 'auto'
 		},
-		title: '<h5 style="font-weight: bold;">Get Started (select):</h5>',
-		items: new Ext.Container({
+		title: '<h6 style="font-weight: bold;">Get Started (select):</h6>',
+		items: [
+			new Ext.Container({
+				autoEl : { tag : 'center'},
+				width : 275,
+				html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>'
+			}),
+			new Ext.Container({
 			autoEl : { tag : 'center'},
 			width : 275,
 			defaults : {
@@ -383,9 +388,7 @@ Ext.onReady(function() {
 				xtype: 'container',
 				autoEl: {tag: 'center'},
 				width : 205,
-				style: {
-					'padding-left' : '30px'
-				},
+				
 				items: { 
 					buttons : [{
 						text : 'Search',
@@ -397,8 +400,8 @@ Ext.onReady(function() {
 					}]
 				}
 			}
-		]})
-		
+		]}) 
+		]
 	});
 		
 	// FOOTER PANEL
