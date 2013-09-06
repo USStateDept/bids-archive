@@ -349,7 +349,6 @@ Ext.onReady(function() {
 			'margin-left' : 'auto',
 			'margin-right' : 'auto'
 		},
-		title: '<h6 style="font-weight: bold;">Get Started (select):</h6>',
 		items: [
 			new Ext.Container({
 				autoEl : { tag : 'center'},
@@ -357,50 +356,52 @@ Ext.onReady(function() {
 				html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>'
 			}),
 			new Ext.Container({
-			autoEl : { tag : 'center'},
-			width : 275,
-			defaults : {
-				style : {
-					'margin-bottom' : '10px'
-				}
-			},
-			items: 
-			[ 
-				txtKey = new Ext.form.TextField({
-				emptyText : 'Search for...',
-				width : 200
-			}), secBox = new Ext.ux.form.CheckboxCombo({
-				//store : sectorStore,
-				store : new Ext.data.ArrayStore({
-					fields : ['Sector'],
-					data : sec // from states.js
+				autoEl : { tag : 'center'},
+				width : 275,
+				defaults : {
+					style : {
+						'margin-bottom' : '10px'
+					}
+				},
+				items: 
+				[ new Ext.Container({
+					html: '<h6 style="font-weight: bold;">Get Started (select):</h6>'
 				}),
-				displayField : 'Sector',
-				valueField : 'Sector',
-				mode : 'local',
-				emptyText : 'Select Sector...',
-				width : 200
-			}), dBegin = new Ext.form.DateField({
-				emptyText : 'Announce Date Begin...',
-				width : 200
-			}),
-			{
-				xtype: 'container',
-				autoEl: {tag: 'center'},
-				width : 205,
 				
-				items: { 
-					buttons : [{
-						text : 'Search',
-						handler : miniSearchFunc
-					}, {
-						text : 'See All Leads',
-						id : 'btnMapLink',
-						handler : mapLink
-					}]
+					txtKey = new Ext.form.TextField({
+					emptyText : 'Search for...',
+					width : 200
+				}), secBox = new Ext.ux.form.CheckboxCombo({
+					//store : sectorStore,
+					store : new Ext.data.ArrayStore({
+						fields : ['Sector'],
+						data : sec // from states.js
+					}),
+					displayField : 'Sector',
+					valueField : 'Sector',
+					mode : 'local',
+					emptyText : 'Select Sector...',
+					width : 200
+				}), dBegin = new Ext.form.DateField({
+					emptyText : 'Announce Date Begin...',
+					width : 200
+				}),
+				{
+					xtype: 'container',
+					autoEl: {tag: 'center'},
+					width : 205,				
+					items: { 
+						buttons : [{
+							text : 'Search',
+							handler : miniSearchFunc
+						}, {
+							text : 'See All Leads',
+							id : 'btnMapLink',
+							handler : mapLink
+						}]
+					}
 				}
-			}
-		]}) 
+			]}) 
 		]
 	});
 		
