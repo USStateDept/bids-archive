@@ -345,12 +345,14 @@ Ext.onReady(function() {
 		html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>',
 		width: 300,
 		height: 300,
+		autoEl : { tag : 'center'},
 		style: {
 			'margin-left' : 'auto',
 			'margin-right' : 'auto'
 		},
 		title: '<h5 style="font-weight: bold;">Get Started (select):</h5>',
 		items: new Ext.Container({
+			autoEl : { tag : 'center'},
 			width : 275,
 			defaults : {
 				style : {
