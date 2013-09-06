@@ -67,8 +67,7 @@ Ext.onReady(function() {
 	
 	metricsStore.load({
 		callback: function(records, operation, success) {
-		//callback: function(records, operation, failure) {
-        	/*leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
+			leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
 			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
 			leadsCount = records[0].data.int_allLeadsCount;
 			leadsWeekCount = records[0].data.int_weekLeadsCount;
@@ -78,7 +77,7 @@ Ext.onReady(function() {
 			gosCount = records[0].data.int_allSecCountGos;
 			narCount = records[0].data.int_allSecCountNar;
 			eneCount = records[0].data.int_allSecCountEne;
-			*/
+			
 			noSideNavText(); 
 		}
 	});
