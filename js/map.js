@@ -7,12 +7,6 @@ function as(n) {
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
 };
 
-// API key for http://openlayers.org. Please get your own at
-// http://bingmapsportal.com/ and use that instead.
-// var apiKey = "AqTGBsziZHIJYYxgivLBf0hVdrAk9mWO5cQcb8Yux8sW5M8c8opEC2lZqKR1ZZXf";
-
-//var lon = 3000000;
-//var lat = 1170000;
 var initZoom = 0;
 var map;
 
@@ -155,7 +149,6 @@ Ext.onReady(function() {
 	});
 
 	sd = new OpenLayers.Layer.Vector('lead', {
-		//projection: geographicProj,
 		strategies : [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster()],
 		styleMap : new OpenLayers.StyleMap({
 			'default' : new OpenLayers.Style({
@@ -201,8 +194,6 @@ Ext.onReady(function() {
 		}]]
 	});
 	map.addControl(fpControl);
-
-	//vecLayer.addFeatures(features);
 
 	map.addLayer(sd);
 
@@ -298,8 +289,7 @@ Ext.onReady(function() {
 				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json&Filter=%3CFilter%3E%3COr%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EIn%20Procurement%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3EStatus%3C/PropertyName%3E%3CLiteral%3EPipeline%3C/Literal%3E%3C/PropertyIsEqualTo%3E%3C/Or%3E%3C/Filter%3E",
 				format : new OpenLayers.Format.GeoJSON()
 			})
-		})//,
-		//autoLoad : true
+		})
 	});
 
 	store.load();
@@ -404,7 +394,6 @@ Ext.onReady(function() {
 			width : 175
 		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
-
 		height : 200,
 
 		tbar : [{
@@ -608,7 +597,6 @@ Ext.onReady(function() {
 		autoHeight : true,
 		region : 'center',
 		bodyStyle : 'padding:5px 5px 0',
-
 		//width: 210,
 		defaults : {
 			width : 135
@@ -670,7 +658,6 @@ Ext.onReady(function() {
 			text : 'Reset',
 			id : 'btnResetFilter',
 			handler : function() {
-				//alert('Size: ' + map.getSize() + '\nProjection: ' + map.getProjection() + '\nResolution: ' + map.getResolution() + '\nMax Resolution: ' + map.getMaxResolution() + '\nScale: ' + map.getScale() + '\nUnits: ' + map.getUnits() + '\nExtent: ' + map.getExtent() + '\nMax Extent: ' + map.getMaxExtent() + '\nNum Zoom Levels: ' + map.getNumZoomLevels() + '\nZoom: ' + map.getZoom() + '\nResolution For Zoom: ' + map.getResolutionForZoom() + '\nZoom For Resolution: ' + map.getZoomForResolution() + '\nDPI: ' + OpenLayers.DOTS_PER_INCH);
 				filterPanel.getForm().reset();
 
 				var tProxy = new GeoExt.data.ProtocolProxy({
@@ -696,7 +683,6 @@ Ext.onReady(function() {
 		autoHeight : true,
 		buttons : [{
 			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
-			//icon : 'img/add.png',
 			handler : function() {
 				checkTest();
 			}
@@ -708,20 +694,21 @@ Ext.onReady(function() {
 		layout : "fit",
 		hideBorders : true,
 		autoHeight: true,
-		minWidth: 1000,
+		autoScroll: false,
 		items : {
 			layout : "border",
 			items : [{
 				region : 'north',
-				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 7px;"><a class="logo" data-bind="click: showHome" href="#"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="#">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
+				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 7px;"><a class="logo" data-bind="click: showHome" href="index.html"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="javascript:checkTest();">Add a Lead</a></li><li><a href="#">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 				height : 121,
+				boxMinWidth: 970,
 				border : true
 			}, mapPanel, {
 				layout : 'border',
 				region : 'west',
 				split : true,
 				width : 180,
-				items : [filterPanel, addButton/*, tree*/]
+				items : [filterPanel, addButton]
 			}, grid]
 		}
 	});
