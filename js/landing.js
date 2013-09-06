@@ -354,7 +354,7 @@ Ext.onReady(function() {
 			}),
 			new Ext.Container({
 				autoEl : { tag : 'center'},
-				//width : 275,
+				width : 275,
 				defaults : {
 					style : {
 						'margin-bottom' : '10px'
