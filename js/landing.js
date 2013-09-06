@@ -342,7 +342,7 @@ Ext.onReady(function() {
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
-		title : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>',
+		html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>',
 		width: 300,
 		height: 300,
 		style: {
