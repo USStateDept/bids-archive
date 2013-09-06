@@ -718,6 +718,7 @@ leadLink:active {
 	border-style: solid !important;
 	border-width: 2px !important;
 	border-color: rgba(0,0,0,0.10) !important;
+	box-shadow: 5px 5px 5px grey !important;
 	filter:alpha(opacity=60) !important; /* For IE8 and earlier */
  }
 	#bidsLogo {
