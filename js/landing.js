@@ -350,7 +350,8 @@ Ext.onReady(function() {
 		width: 275,
 		style: {
 			'margin-left' : 'auto',
-			'margin-right' : 'auto'
+			'margin-right' : 'auto',
+			'padding-left' : '-35px'
 		},
 		items: {
 			labelWidth : 0, // label settings here cascade unless overridden
