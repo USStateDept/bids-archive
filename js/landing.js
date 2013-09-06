@@ -342,23 +342,26 @@ Ext.onReady(function() {
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
-		height : 500,
-		width : 800,
-		title : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"><h5 style="font-weight: bold;">Get Started (select):</h5></div></div></div>',
-		xtype: 'container',
-		width: 275,
+		title : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div><div style="width: 275px; padding-top: 10px"></div></div></div>',
+		width: 300,
+		height: 300,
 		style: {
 			'margin-left' : 'auto',
 			'margin-right' : 'auto'
 		},
-		items: {
-			labelWidth : 0, // label settings here cascade unless overridden
+		title: '<h5 style="font-weight: bold;">Get Started (select):</h5>',
+		items: new Ext.Container({
+			width : 275,
 			defaults : {
-				width : 160
+				style : {
+					'margin-bottom' : '10px'
+				}
 			},
-			items : [ 
+			items: 
+			[ 
 				txtKey = new Ext.form.TextField({
-				emptyText : 'Search for...'
+				emptyText : 'Search for...',
+				width : 200
 			}), secBox = new Ext.ux.form.CheckboxCombo({
 				//store : sectorStore,
 				store : new Ext.data.ArrayStore({
@@ -368,18 +371,18 @@ Ext.onReady(function() {
 				displayField : 'Sector',
 				valueField : 'Sector',
 				mode : 'local',
-				emptyText : 'Select Sector...'
+				emptyText : 'Select Sector...',
+				width : 200
 			}), dBegin = new Ext.form.DateField({
 				emptyText : 'Announce Date Begin...',
-				width : 190
+				width : 200
 			}),
 			{
 				xtype: 'container',
 				autoEl: {tag: 'center'},
-				width : 180,
+				width : 205,
 				style: {
-					'padding-top' : '5px',
-					'padding-left' : '18px'
+					'padding-left' : '30px'
 				},
 				items: { 
 					buttons : [{
@@ -391,8 +394,9 @@ Ext.onReady(function() {
 						handler : mapLink
 					}]
 				}
-			}]
-		}
+			}
+		]})
+		
 	});
 		
 	// FOOTER PANEL
@@ -415,14 +419,13 @@ Ext.onReady(function() {
 		hideBorders : true,
 		autoHeight: true,
 		autoScroll: false,
-		minWidth: 1000,
 		items : {
 			layout : "border",
 			items : [{
 				region : 'north',
 				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 7px;"><a class="logo" data-bind="click: showHome" href="#"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="map.html">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 				height : 121,
-				maxWidth: 1200,
+				boxMinWidth: 870,
 				border : true
 			}, mainPanel, {
 				layout : 'border',
