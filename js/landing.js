@@ -362,7 +362,10 @@ Ext.onReady(function() {
 				},
 				items: 
 				[ new Ext.Container({
-					html: '<h6 style="font-weight: bold;">Get Started (select):</h6>'
+					html: '<h6 style="font-weight: bold;">Get Started (select):</h6>',
+					width : 275,
+					autoEl : { tag : 'left'},
+				
 				}),
 					txtKey = new Ext.form.TextField({
 					emptyText : 'Search for...',
