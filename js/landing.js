@@ -344,9 +344,8 @@ Ext.onReady(function() {
 		region : "center",
 		height : 500,
 		width : 800,
-		html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv"></div></div></div>',
 		title : '<div style="width: 275px; margin-left: auto; margin-right: auto; padding-top: 10px"><h5 style="font-weight: bold;">Get Started (select):</h5></div>',
-		
+		html : '<div class="content"><div class="mainContent" style="margin-left: 0px;"><div id="sideNavTextDiv" style="width: 275px; margin-left: auto; margin-right: auto; padding-top: 10px"></div></div></div>',		
 		xtype: 'container',
 		autoEl: {tag: 'center'},
 		width: 275,
@@ -359,7 +358,7 @@ Ext.onReady(function() {
 			defaults : {
 				width : 160
 			},
-			items : [ 
+			items : [
 				txtKey = new Ext.form.TextField({
 				emptyText : 'Search for...'
 			}), secBox = new Ext.ux.form.CheckboxCombo({
