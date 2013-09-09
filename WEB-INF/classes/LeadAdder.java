@@ -4,8 +4,32 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 import java.net.*;
+//import ShellOut;
 
 public class LeadAdder extends HttpServlet {
+
+public static class ShellOut {
+	
+	
+	
+	//public static void main(String[] args){
+	public void shell(String to,String sub, String text) {  
+        try {  
+            
+			String command = "cmd /C cd C:\\Users\\Administrator\\Downloads && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
+			Process p = Runtime.getRuntime().exec(command); 
+            
+			BufferedReader in = new BufferedReader(  
+                                new InputStreamReader(p.getInputStream()));  
+            String line = null;  
+            while ((line = in.readLine()) != null) {  
+                System.out.println(line);  
+            }  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    } 
+}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -66,7 +90,8 @@ public class LeadAdder extends HttpServlet {
 			update = update + " where fid = " + fid;
 			update = "update Opengeo.\"DATATABLE\" set " + update;
 			out.print(update);
-
+			
+			
 		}
 		else{
 
@@ -149,12 +174,27 @@ public class LeadAdder extends HttpServlet {
 			stmt = con.createStatement();
 
 			if(editType.equals("edit")){
+				String sub = req.getParameter("Project_Title");
+				String em = req.getParameter("Submitting_Officer_Contact");
+				LeadAdder.ShellOut b = new LeadAdder.ShellOut();
+				b.shell(em+",bidsbot@gmail.com","Edited Lead -" + sub,"Your lead \"" + sub + "\" has been edited.");
+				b.shell("bidsbot@gmail.com","Edited Lead ready for Clearance -" + sub,"Lead \"" + sub + "\" is ready to be cleared.");
+			
 				rs = stmt.executeQuery(update);
 			}else{
+			String sub = req.getParameter("Project_Title");
+			String em = req.getParameter("Submitting_Officer_Contact");
+			LeadAdder.ShellOut b = new LeadAdder.ShellOut();
+			b.shell(em+",bidsbot@gmail.com","New Lead - " + sub,"Your new lead " + sub + " has been added into BIDS.");
+			b.shell("bidsbot@gmail.com","New Lead ready for Clearance - " + sub,"Lead \"" + sub + "\" is ready to be cleared.");
+			//String dirry = servletRequest.getSession().getServletContext().getRealPath("/")
+			//out.print(dirry);
 				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
-				out.print(insert);
+				//out.print(insert);
 						rs = stmt.executeQuery(insert);
+						
+				
 			}
 			/*
 			 * if(col.equals("Sector")){ rs =
