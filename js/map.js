@@ -15,8 +15,8 @@ var initExtent = new OpenLayers.Bounds([-12100000, -5000000, 15200000, 6000000],
 var initCenter = [3000000, 1170000];
 var store, grid;
 var check;
-var tabs;
-var win;
+var addForm, editForm;
+var addWin, editWin;
 var required, banks, regions, arch, sizes, sec;
 
 Ext.onReady(function() {
@@ -401,92 +401,7 @@ Ext.onReady(function() {
 			tooltip : 'Edit',
 			icon : 'img/pencil.png',
 			handler : function() {
-
-				var sp = grid.getSelectionModel().getSelected().data.Specific_Location;
-				var pr = grid.getSelectionModel().getSelected().data.Project_Funding_Source;
-				var co = grid.getSelectionModel().getSelected().data.Country;
-				var prt = grid.getSelectionModel().getSelected().data.Project_Title;
-				var prn = grid.getSelectionModel().getSelected().data.Project_Number;
-				var li = grid.getSelectionModel().getSelected().data.Link_To_Project;
-				var se = grid.getSelectionModel().getSelected().data.Sector;
-				var ke = grid.getSelectionModel().getSelected().data.Keyword;
-				var prs = grid.getSelectionModel().getSelected().data.Project_Size;
-				var pra = grid.getSelectionModel().getSelected().data.Project_Announced;
-				var br = grid.getSelectionModel().getSelected().data.Borrowing_Entity;
-				var im = grid.getSelectionModel().getSelected().data.Implementing_Entity;
-				var ime = grid.getSelectionModel().getSelected().data.Project_POCs;
-				var prd = grid.getSelectionModel().getSelected().data.Project_Description;
-				var pos = grid.getSelectionModel().getSelected().data.Post_Comments;
-				var su = grid.getSelectionModel().getSelected().data.Submitting_Officer;
-				var subo = grid.getSelectionModel().getSelected().data.Submitting_Officer_Contact;
-				var sou = grid.getSelectionModel().getSelected().data.Source;
-				var fid = grid.getSelectionModel().getSelected().data.fid;
-				var ten = grid.getSelectionModel().getSelected().data.Tender_Date;
-				tabs.getForm().findField("Specific_Location").setValue(sp);
-				tabs.getForm().findField("Project_Funding_Source").setValue(pr);
-				tabs.getForm().findField("Country").setValue(co);
-				tabs.getForm().findField("Project_Title").setValue(prt);
-				tabs.getForm().findField("Project_Number").setValue(prn);
-				tabs.getForm().findField("Link_To_Project").setValue(li);
-				tabs.getForm().findField("Keyword").setValue(ke);
-				tabs.getForm().findField("Project_Size").setValue(prs);
-				tabs.getForm().findField("Project_Announced").setValue(pra);
-				tabs.getForm().findField("Borrowing_Entity").setValue(br);
-				tabs.getForm().findField("Implementing_Entity").setValue(im);
-				tabs.getForm().findField("Project_POCs").setValue(ime);
-				tabs.getForm().findField("Project_Description").setValue(prd);
-				tabs.getForm().findField("Post_Comments").setValue(pos);
-				tabs.getForm().findField("Submitting_Officer").setValue(su);
-				tabs.getForm().findField("Submitting_Officer_Contact").setValue(subo);
-				tabs.getForm().findField("Source").setValue(sou);
-				tabs.getForm().findField("fid").setValue(fid);
-				tabs.getForm().findField("Tender_Date").setValue(ten);
-
-				//Uncheck all the sector checkboxes
-				tabs.getForm().findField("chAg").setValue(false);
-				tabs.getForm().findField("chEnergy").setValue(false);
-				tabs.getForm().findField("chICT").setValue(false);
-				tabs.getForm().findField("chInfrastructure").setValue(false);
-				tabs.getForm().findField("chNatural").setValue(false);
-				tabs.getForm().findField("chGovernance").setValue(false);
-				
-				//Check the sectpr checkboxes for that record
-				if (se.indexOf("Ag and Environment") != -1) {
-					tabs.getForm().findField("chAg").setValue(true);
-				}
-				if (se.indexOf("Energy") != -1) {
-					tabs.getForm().findField("chEnergy").setValue(true);
-				}
-				if (se.indexOf("ICT") != -1) {
-					tabs.getForm().findField("chICT").setValue(true);
-				}
-				if (se.indexOf("Infrastructure") != -1) {
-					tabs.getForm().findField("chInfrastructure").setValue(true);
-				}
-				if (se.indexOf("Natural Resources") != -1) {
-					tabs.getForm().findField("chNatural").setValue(true);
-				}
-				if (se.indexOf("Governance and Services") != -1) {
-					tabs.getForm().findField("chGovernance").setValue(true);
-				}
-
-				win.myExtraParams.e = true;
-
-				if (win.myExtraParams.e == true) {
-					Ext.getCmp('btnEdit').enable();
-					Ext.getCmp('btnSave').disable();
-					Ext.getCmp('btnReset').disable();
-					Ext.getCmp('btnArchive').enable();
-					Ext.getCmp('btnArchive').toggle(false);
-					Ext.getCmp('chMaj').setDisabled(false);
-					//Ext.getCmp('sspec').disabled=true;
-				}
-
-				console.log(win.myExtraParams.e);
-
-				win.show();
-				
-				ga('send', 'event', 'Grid_Panel', 'Edit_Grid_Panel', {'nonInteraction': 1});
+				checkEditTest();
 			}
 		}]
 
