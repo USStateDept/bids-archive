@@ -342,9 +342,10 @@ body:before {
 		#wrap .full-width {
   max-width: 1240px;
   padding: 0px; }
-.content { }
+.content {}
 .content p {
     font: 14px Arial,Helvetica,sans-serif;
     color: #58595b;
     margin-top: 0px;
-    line-height: 1.8; }
+    line-height: 1.8;
+}

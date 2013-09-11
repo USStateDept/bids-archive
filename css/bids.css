@@ -160,56 +160,60 @@ html, body {
 
 	
 h1 {
-  font: 28px Arial,Helvetica,sans-serif;
-  font-weight: bold;
-  color: #001c50;
-  text-transform: uppercase;
-  margin: 30px 0px 6px 0px; }
+	font: 28px Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 30px 0px 6px 0px; 
+}
 
 h2 {
-  font: 24px Arial,Helvetica,sans-serif;
-  font-weight: bold;
-  color: #001c50;
-  text-transform: uppercase;
-  margin: 20px 0px 4px 0px; }
+	font: 24px Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 20px 0px 4px 0px; 
+}
 
   
 h3 {
-  font: 18px Arial,Helvetica,sans-serif;
-  font-weight: bold;
-  color: #001c50;
-  text-transform: uppercase;
-  margin: 10px 0px 2px 0px; }
+	font: 18px Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 10px 0px 2px 0px; 
+}
 
 h4 {
-  font: 14px Arial,Helvetica,sans-serif;
-  color: #001c50;
-  text-transform: uppercase;
-  margin: 6px 0px 1px 0px; }  
+	font: 14px Arial,Helvetica,sans-serif;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 6px 0px 1px 0px; 
+}  
 
 h5 {
-  font: 12px Arial,Helvetica,sans-serif;
-  color: #001c50;
-  text-transform: uppercase;
-  margin: 6px 0px 1px 0px; }  
+	font: 12px Arial,Helvetica,sans-serif;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 6px 0px 1px 0px; 
+}  
 
 h6 {
-  font: 12px Arial,Helvetica,sans-serif;
-  color: #202020;
-  margin: 6px 0px 1px 0px; }  
+	font: 12px Arial,Helvetica,sans-serif;
+	color: #202020;
+	margin: 6px 0px 1px 0px; 
+}  
 
 disclaimer {
-  font: 10px Arial,Helvetica,sans-serif;
-  color: #202020; }  
-  
- p {
-  font: 10px Arial,Helvetica,sans-serif;
-  margin: 8px 10px 0px 10px; }  
+	font: 10px Arial,Helvetica,sans-serif;
+	color: #202020; 
+}  
 
 stat {
-  font: 24px Arial,Helvetica,sans-serif;
-  color: #000000;
-  margin: 0px 0px 0px 0px; } 
+	font: 24px Arial,Helvetica,sans-serif;
+	color: #000000;
+	margin: 0px 0px 0px 0px; 
+} 
 	
 /*Opera Fix*/
 body:before {
@@ -382,14 +386,15 @@ body:before {
 		max-width: 1240px;
 		padding: 0px; }
 			
-	.content {
-	}
-	.content p {
-		font: 14px Arial,Helvetica,sans-serif;
-		color: #58595b;
-		margin-top: 0px;
-		line-height: 1.8;
-	}
+.content {
+}
+	
+.content p {
+	font: 14px Arial,Helvetica,sans-serif;
+	color: #58595b;
+	margin-top: 0px;
+	line-height: 1.8;
+}
 	
 leadCount {
 	font-size:12px;
@@ -710,9 +715,31 @@ leadLink:active {
 	.sideNav #sideNav6 {
 		background-color: #E0E0E0;
 	}
-#sideNavTextContent {
-	margin-top: 10px !important;
-	margin-bottom: 10px !important;
+	
+#sideNavTextHeader {
+	font: 24px Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 20px 0px 4px 0px;
+	text-align: left;
+}
+
+#sideNavText {
+	font: 24px Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 20px 0px 4px 0px;
+	text-align: left;
+}
+
+.sideNavTextContent {
+	margin-top: 20px !important;
+	margin-bottom: 20px !important;
+	margin-right: 20% !important; 
+	margin-left: 20% !important; 
+	padding-bottom: 10px;
 	background-color: rgba(255,255,255,0.66) !important;
 	border-radius: 10px !important;
 	border-style: solid !important;
@@ -720,16 +747,69 @@ leadLink:active {
 	border-color: rgba(0,0,0,0.10) !important;
 	box-shadow: 5px 5px 5px grey !important;
 	filter:alpha(opacity=60) !important; /* For IE8 and earlier */
- }
-	#bidsLogo {
+	width: 40% !important;
+}
+
+#sideNavTextMetrics {
+	margin-top: 10px !important;
+	margin-bottom: 10px !important;
+	margin-right: 60px !important; 
+	margin-left: 60px !important; 
+	padding-top: 20px;
+	padding-left: 20px;
+	background-color: rgba(255,255,255,0.66) !important;
+	border-radius: 10px !important;
+	border-style: solid !important;
+	border-width: 2px !important;
+	border-color: rgba(0,0,0,0.10) !important;
+	box-shadow: 5px 5px 5px grey !important;
+	filter:alpha(opacity=60) !important; /* For IE8 and earlier */
+	width: 28% !important;
+	text-align: left;
+}
+
+  
+.sideNavTextH2 {
+	font: 18px Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: #001c50;
+	text-transform: uppercase;
+	margin: 8px; 
+	text-align: left;
+}
+
+  
+.sideNavTextH3 {
+	font: 16px Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	color: #001c50;
+	margin: 8px; 
+	text-align: left;
+}
+
+.sideNavTextP {
+	font: 12px Arial,Helvetica,sans-serif;
+	margin: 8px 10px 0px 10px; 
+	text-align: left;
+}  
+
+#bidsLogo {
 	height: 100px;
 	width: auto;
 	padding-bottom: 10px !important;
 	padding-top: 8px !important;
 }
 
+.backgroundDiv {
+	background-image: url('http://localhost/bids/img/BIDS_background.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 %20%;
+}
+
+
 /* Metrics Info Boxes */
-.overlay{
+.overlay {
     background:transparent url(../img/overlay.png) repeat top left;
     position:fixed;
     top:0px;
@@ -739,7 +819,7 @@ leadLink:active {
     z-index:100;
 }
 
-.box{
+.box {
     position:fixed;
     top:-200px;
     left:30%;
@@ -755,7 +835,8 @@ leadLink:active {
     -webkit-box-shadow: 0 1px 5px #333;
     z-index:101;
 }
-a.boxclose{
+
+a.boxclose {
     float:right;
     width:26px;
     height:26px;
@@ -764,6 +845,7 @@ a.boxclose{
     margin-right:-30px;
     cursor:pointer;
 }
+
 .box h1{
     border-bottom: 1px dashed #7F7F7F;
     margin:-20px -20px 0px -20px;
