@@ -64,7 +64,7 @@ Ext.onReady(function() {
 			})
 		})
 	});
-	/*
+	
 	metricsStore.load({
 		callback: function(records, operation, success) {
 			leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
@@ -81,7 +81,7 @@ Ext.onReady(function() {
 			noSideNavText(); 
 		}
 	});
-	*/
+	
 	sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div><p><stat>asdsadsadsadsad</stat> in leads</div></div><br><p><stat>sadasdfdsafdsa</stat> leads in these sectors...<br>Infrastructure: <stat>dsfdsaf dsfdsaf</stat><br>ICT: <stat>45432523</stat><br>Ag and Environment: <stat>23432432</stat><br>Governance and Services: <stat>324324</stat><br>Natural Resources: <stat>234324324</stat><br>Energy: <stat>234324324</stat><br></div></div></div>';
 	store = new GeoExt.data.FeatureStore({
 		autoSave : true,
