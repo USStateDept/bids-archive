@@ -197,6 +197,11 @@ Ext.onReady(function() {
 			dataIndex : "Borrowing_Entity",
 			width : 175
 		}, {
+			header : "Project Description",
+			dataIndex : "Project_Description",
+			width : 175,
+			hidden : true
+		}, {
 			header : "Link to Project",
 			dataIndex : "Link_To_Project",
 			width : 175
