@@ -801,7 +801,7 @@ leadLink:active {
 }
 
 .backgroundDiv {
-	background-image: url('http://localhost/bids/img/BIDS_background.png');
+	background-image: url('http://54.214.19.215/bids/img/BIDS_background.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 %20%;
