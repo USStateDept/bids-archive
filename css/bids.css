@@ -95,8 +95,8 @@ a:active {
 	padding-bottom:0px
 }
 .reqField {
-	font-style: bold;
-	color: #F78181;
+	font-style: bold !important;
+	color: #F78181 !important;
 }
 
 
