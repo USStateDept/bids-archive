@@ -404,8 +404,15 @@ Ext.onReady(function() {
 			handler : function() {
 				checkEditTest();
 			}
+		}, {
+			text : 'Export to CSV',
+			tooltip : 'Export',
+			icon : '../img/csv.jpg',
+			handler: function() {
+				window.location.href='http://' + domain + '/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&srsName=EPSG:4326&typeName=opengeo%3ADATATABLE&outputformat=csv';
+				ga('send', 'event', 'Export', 'CSV_Export', {'nonInteraction': 1});
+			}
 		}]
-
 	});
 
 	var enteringHttpProxy = new Ext.data.HttpProxy({
