@@ -534,7 +534,7 @@ leadLink:active {
 	box-shadow: 0 0 2px #606060;
     display: block;
     width: 134px;
-	height: 67px;
+	height: 55px;
 	padding: 15px 36px 8px 15px;
     color: #FFFFFF;
 	text-shadow: 1px 1px 3px #303030;
@@ -547,7 +547,7 @@ leadLink:active {
 	.sideNav a:hover {
       display: block;
       width: 134px;
-	  height: 67px;
+	  height: 55px;
 	  padding: 15px 36px 8px 15px;
       color: #FFFFFF;
 	  text-shadow: 1px 1px 3px #000000;
