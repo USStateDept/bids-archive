@@ -58,15 +58,18 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				//url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
-				url : "http://edip-maps.net/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
+				// USE THE NEXT LINE FOR PRODUCTION //
+				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
+				// USE THIS LINE FOR LOCAL DEVELOPMENT //
+				//url : "http://edip-maps.net/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&maxfeatures=230&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})
 	});
 	
 	metricsStore.load({
-		callback: function(records, operation, success) {
+		callback: function(records, operation, failure) {
+			// COMMENT THE NEXT 10 LINES OUT FOR LOCAL DEVELOPMENT //
 			leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
 			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
 			leadsCount = records[0].data.int_allLeadsCount;
@@ -82,7 +85,6 @@ Ext.onReady(function() {
 		}
 	});
 	
-	sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div><p><stat>asdsadsadsadsad</stat> in leads</div></div><br><p><stat>sadasdfdsafdsa</stat> leads in these sectors...<br>Infrastructure: <stat>dsfdsaf dsfdsaf</stat><br>ICT: <stat>45432523</stat><br>Ag and Environment: <stat>23432432</stat><br>Governance and Services: <stat>324324</stat><br>Natural Resources: <stat>234324324</stat><br>Energy: <stat>234324324</stat><br></div></div></div>';
 	store = new GeoExt.data.FeatureStore({
 		autoSave : true,
 		fields : [{
