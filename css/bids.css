@@ -209,12 +209,18 @@ disclaimer {
 	color: #202020; 
 }  
 
-stat {
-	font: 24px Arial,Helvetica,sans-serif;
+statText {
+	font: 14px Arial,Helvetica,sans-serif;
 	color: #000000;
 	margin: 0px 0px 0px 0px; 
 } 
 	
+statUnit {
+	font: 24px Arial,Helvetica,sans-serif;
+	color: #000000;
+	margin: 0px 0px 0px 0px; 
+} 
+
 /*Opera Fix*/
 body:before {
 	content:"";
@@ -534,7 +540,7 @@ leadLink:active {
 	box-shadow: 0 0 2px #606060;
     display: block;
     width: 134px;
-	height: 67px;
+	height: 55px;
 	padding: 15px 36px 8px 15px;
     color: #FFFFFF;
 	text-shadow: 1px 1px 3px #303030;
@@ -547,7 +553,7 @@ leadLink:active {
 	.sideNav a:hover {
       display: block;
       width: 134px;
-	  height: 67px;
+	  height: 55px;
 	  padding: 15px 36px 8px 15px;
       color: #FFFFFF;
 	  text-shadow: 1px 1px 3px #000000;
@@ -739,7 +745,6 @@ leadLink:active {
 	margin-bottom: 20px !important;
 	margin-right: 20% !important; 
 	margin-left: 20% !important; 
-	padding-bottom: 10px;
 	background-color: rgba(255,255,255,0.66) !important;
 	border-radius: 10px !important;
 	border-style: solid !important;
@@ -751,12 +756,10 @@ leadLink:active {
 }
 
 #sideNavTextMetrics {
-	margin-top: 10px !important;
-	margin-bottom: 10px !important;
-	margin-right: 60px !important; 
-	margin-left: 60px !important; 
-	padding-top: 20px;
-	padding-left: 20px;
+	margin: 10px 0 30px !important;
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+	padding-left: 20px !important;
 	background-color: rgba(255,255,255,0.66) !important;
 	border-radius: 10px !important;
 	border-style: solid !important;
@@ -764,10 +767,9 @@ leadLink:active {
 	border-color: rgba(0,0,0,0.10) !important;
 	box-shadow: 5px 5px 5px grey !important;
 	filter:alpha(opacity=60) !important; /* For IE8 and earlier */
-	width: 28% !important;
-	text-align: left;
+	width: 21% !important;
+	text-align: left !important;
 }
-
   
 .sideNavTextH2 {
 	font: 18px Arial,Helvetica,sans-serif;
@@ -789,7 +791,7 @@ leadLink:active {
 
 .sideNavTextP {
 	font: 12px Arial,Helvetica,sans-serif;
-	margin: 8px 10px 0px 10px; 
+	margin: 10px; 
 	text-align: left;
 }  
 
