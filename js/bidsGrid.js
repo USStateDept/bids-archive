@@ -341,9 +341,9 @@ Ext.onReady(function() {
 		items : {
 			items : [{
 				region : 'north',
-				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px -12px 0px 7px;"><a class="logo" data-bind="click: showHome" href="index.html"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="map.html">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
+				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px 0px 0px -100px;"><a class="logo" data-bind="click: showHome" href="index.html"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="map.html">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 				height : 121,
-				boxMinWidth: 870,
+				boxMinWidth: 800,
 				border : true
 			}, grid, {style : "margin-top: -70px;position: relative; padding-top: 5px; padding-left: 20px; padding-right: 20px; clear:both; font-size: 10px; font-family: sans-serif; color: #808080; border-top: 1px solid #c0c0c0; background-color: white;", height: 70, html: '<div>Sponsored by: The U.S. Department of State<br>State Department has compiled this information in order to help identify opportunities for U.S. businesses.  It is not intended to be complete and interested parties should not solely rely on the information provided herein, and neither the U.S. Government not its imployees/contractors assume any legal liability for the accuracy, completeness, or  usefulness of any information or process disclosed. It is the sole responsibility of the user of the information to verify its accuracy.</div>'}]
 		}

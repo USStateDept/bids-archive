@@ -104,7 +104,7 @@ html, body {
 	height: 100%; 
 	margin: 0px; 
 	padding: 0px;
-	min-width:925px;
+	min-width:800px;
 	width: auto !important;  /* Firefox will set width as auto */
 	width:925px;             /* As IE ignores !important it will set width as 1000px; */
 }
@@ -127,7 +127,7 @@ html, body {
  
 .mainContent {
 	max-width: 1240px;
-	min-width: 753px;
+	min-width: 700px;
 	margin: 0 auto;
 	min-height: 5px;
 	-webkit-box-sizing: border-box;
