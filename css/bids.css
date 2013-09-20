@@ -115,7 +115,7 @@ html, body {
 
 #main {
 	overflow:auto;
-	margin-top: 120px;
+	margin-top: 100px;
 	padding-bottom: 70px;  /* must be same height as the footer */
 	margin-left: auto;
 	margin-right: auto;
@@ -151,8 +151,8 @@ html, body {
 	
 #header {
 	position: relative;
-	margin-bottom: -120px; /* negative value of footer height */
-	height: 120px;
+	margin-bottom: -100px; /* negative value of footer height */
+	height: 100px;
 	clear:both;
 	border-bottom: 1px solid #c0c0c0;
 	background-color: white;} 	
@@ -231,7 +231,6 @@ body:before {
 }
 
 #wrap #header {
-	padding-bottom: 20px;
 	height: 100px; 
 	border-bottom-width:1px;
 	border-bottom-style:solid;
@@ -796,8 +795,6 @@ leadLink:active {
 }  
 
 #bidsLogo {
-	height: 100px;
-	width: auto;
 	padding-bottom: 10px !important;
 	padding-top: 8px !important;
 }
