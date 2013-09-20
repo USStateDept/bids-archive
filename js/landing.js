@@ -58,10 +58,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				// USE THE NEXT LINE FOR PRODUCTION //
 				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&outputformat=json",
-				// USE THIS LINE FOR LOCAL DEVELOPMENT //
-				//url : "http://edip-maps.net/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&outputformat=json",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})
