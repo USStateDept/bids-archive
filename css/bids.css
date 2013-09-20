@@ -865,4 +865,15 @@ a.boxclose {
 .x-border-layout-ct {
 	background-color: none !important;
 }
-	
+
+#gridTitle {
+	font: 14px Arial,Helvetica,sans-serif !important;
+	font-weight: bold !important;
+	color: #282828 !important;
+}
+
+#gridNote {
+	font: 14px Arial,Helvetica,sans-serif !important;
+	font-weight: bold !important;
+	color: #909090 !important;
+}
