@@ -30,8 +30,25 @@ function displaySideNav6Text() {
 
 function noSideNavText() {
 	// The next line is for production //
-	sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div><statUnit>' + leadsSumValue + '</statUnit><statText> in leads</statText></div><br><statUnit>' + leadsCount + '</statUnit><statText> leads in these sectors...</statText><br><statText>Infrastructure: </statText><statUnit>' + infCount + '</statUnit><statText><br>ICT: </statText><statUnit>' + ictCount + '</statUnit><statText><br>Ag and Environment: </statText><statUnit>' + ageCount + '</statUnit><statText><br>Governance and Services: </statText><statUnit>' + gosCount + '</statUnit><statText><br>Natural Resources: </statText><statUnit>' + narCount + '</statUnit><statText><br>Energy: </statText><statUnit>' + eneCount + '</statUnit></div>';
+	sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div><statUnit>' + leadsSumValue + '</statUnit><statText> in leads</statText></div><br><statUnit>' + leadsCount + '</statUnit><statText> leads in these sectors...</statText><br><statText>Administration and Support and Waste Management and Remediation Services: </statText><statUnit>' + secCountASWMRS + '</statUnit><statText><br>Agriculture, Forestry, Fishing and Hunting: </statText><statUnit>' + secCountAFFH + '</statUnit><statText><br>Construction: </statText><statUnit>' + secCountCon + '</statUnit><statText><br>Educational Services: </statText><statUnit>' + secCountES + '</statUnit><statText><br>Finance and Insurance: </statText><statUnit>' + secCountFI + '</statUnit><statText><br>Health Care and Social Assistance: </statText><statUnit>' + secCountHCSA + '</statUnit><statText><br>Information: </statText><statUnit>' + secCountInf + '</statUnit><statText><br>Manufacturing: </statText><statUnit>' + secCountMan + '</statUnit><statText><br>Mining, Quarrying, and Oil and Has Extraction: </statText><statUnit>' + secCountMQOGE + '</statUnit><statText><br>Professional, Scientific, and Technical Services: </statText><statUnit>' + secCountPSTS + '</statUnit><statText><br>Public Administration: </statText><statUnit>' + secCountPA + '</statUnit><statText><br>Transportation and Warehousing: </statText><statUnit>' + secCountTW + '</statUnit><statText><br>Utilities: </statText><statUnit>' + secCountUtl + '</statUnit></div>';
 	// The next line is for local development //
 	//sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div><statUnit>asdsadsadsadsad</statUnit><statText> in leads</statText></div><br><statUnit>sadasdfdsafdsa</statUnit><statText> leads in these sectors...</statText><br><statText>Infrastructure: </statText><statUnit>dsfdsaf dsfdsaf</statUnit><statText><br>ICT: </statText><statUnit>45432523</statUnit><statText><br>Ag and Environment: </statText><statUnit>23432432</statUnit><statText><br>Governance and Services: </statText><statUnit>324324</statUnit><statText><br>Natural Resources: </statText><statUnit>234324324</statUnit><statText><br>Energy: </statText><statUnit>234324324</statUnit></div>';
 	document.getElementById("sideNavTextDiv").innerHTML = sideNavText;
 }
+
+
+			leadsWeekValueSum = records[0].data.int_weekLeadsValueSum;
+			leadsWeekCount = records[0].data.int_weekLeadsCount;
+			secCountASWMRS = records[0].data.int_secCountASWMRS;
+			 = records[0].data.int_secCountAFFH;
+			 = records[0].data.int_secCountCon;
+			 = records[0].data.int_secCountES;
+			 = records[0].data.int_secCountFI;
+			 = records[0].data.int_secCountHCSA;
+			 = records[0].data.int_secCountInf;
+			 = records[0].data.int_secCountMan;
+			 = records[0].data.int_secCountMQOGE;
+			 = records[0].data.int_secCountPSTS;
+			 = records[0].data.int_secCountPA;
+			 = records[0].data.int_secCountTW;
+			 = records[0].data.int_secCountUtl;
