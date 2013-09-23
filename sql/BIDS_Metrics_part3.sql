@@ -5,7 +5,7 @@
 /*--Start---------------------------------------------------------------- */
 
 /* THIS QUERY UPDATES A TABLE OF DAILY METRICS */
-INSERT INTO opengeo."tbl_dailyMetrics"
+INSERT INTO opengeo."tbl_dailyMetrics" ("int_allLeadsCount", "int_allLeadsValueSum", "int_weekLeadsCount", "int_weekSumValueLeads", "int_allSecCountInf", "int_allSecCountIct", "int_allSecCountAge", "int_allSecCountGos", "int_allSecCountNar", "int_allSecCountEne", "Date", "Lat", "Long")
 Select 
 	"int_allLeadsCount" as "int_allLeadsCount", 
 	"int_allLeadsValueSum" as "int_allLeadsValueSum",
