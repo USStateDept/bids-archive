@@ -766,7 +766,7 @@ leadLink:active {
 	border-color: rgba(0,0,0,0.10) !important;
 	box-shadow: 5px 5px 5px grey !important;
 	filter:alpha(opacity=60) !important; /* For IE8 and earlier */
-	width: 21% !important;
+	width: 26% !important;
 	text-align: left !important;
 }
   
