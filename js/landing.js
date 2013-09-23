@@ -15,18 +15,19 @@ var urlWhole;
 	
 
 Ext.onReady(function() {
-	banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
+	banks = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
 	regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
-	arch = [['Archived'], ['In Procurement'], ['Pipeline']]
+	stat = [['Fulfilled'], ['In Procurement'], ['Pipeline']]
+	arch = [['Active'], ['Archived']]
 	sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
-	sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']];
+	sec = [['Administrative and Support and Waste Management and Remediation Services'],['Agriculture, Forestry, Fishing and Hunting'],['Construction'],['Educational Services'],['Finance and Insurance'],['Health Care and Social Assistance'],['Information'],['Manufacturing'],['Mining, Quarrying, and Oil and Gas Extraction'],['Professional, Scientific, and Technical Services'],['Public Administration'],['Transportation and Warehousing'],['Utilities']]
 
 	var btn_sideNav1, btn_sideNav2, btn_sideNav3, btn_sideNav4, btn_sideNav5, sideNavText;
 	
 	metricsStore = new GeoExt.data.FeatureStore({
 		autoSave : true,
 		fields : [{
-			name : "int_allLeadsCount",
+			name : "int_allLeadsCount", 
 			type : "string"
 		}, {
 			name : "int_allLeadsValueSum",
@@ -35,27 +36,49 @@ Ext.onReady(function() {
 			name : "int_weekLeadsCount",
 			type : "string"
 		}, {
-			name : "int_weekSumValueLeads",
+			name : "int_weekLeadsValueSum",
 			type : "string"
 		}, {
-			name : "int_allSecCountInf",
+			name : "int_secCountASWMRS",
 			type : "string"
 		}, {
-			name : "int_allSecCountIct",
+			name : "int_secCountAFFH",
 			type : "string"
 		}, {
-			name : "int_allSecCountAge",
+			name : "int_secCountCon",
 			type : "string"
 		}, {
-			name : "int_allSecCountGos",
+			name : "int_secCountES",
 			type : "string"
 		}, {
-			name : "int_allSecCountNar",
+			name : "int_secCountFI",
 			type : "string"
 		}, {
-			name : "int_allSecCountEne",
+			name : "int_secCountHCSA",
+			type : "string"
+		}, {
+			name : "int_secCountInf",
+			type : "string"
+		}, {
+			name : "int_secCountMan",
+			type : "string"
+		}, {
+			name : "int_secCountMQOGE",
+			type : "string"
+		}, {
+			name : "int_secCountPSTS",
+			type : "string"
+		}, {
+			name : "int_secCountPA",
+			type : "string"
+		}, {
+			name : "int_secCountTW",
+			type : "string"
+		}, {
+			name : "int_secCountUtl",
 			type : "string"
 		}],
+		
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
 				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&outputformat=json",
@@ -67,17 +90,24 @@ Ext.onReady(function() {
 	metricsStore.load({
 		callback: function(records, operation, failure) {
 			// COMMENT THE NEXT 10 LINES OUT FOR LOCAL DEVELOPMENT //
-			leadsSumValue = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
-			leadsWeekSumValue = records[0].data.int_weekSumValueLeads;
+			leadsValueSum = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
+			leadsWeekValueSum = records[0].data.int_weekLeadsValueSum;
 			leadsCount = records[0].data.int_allLeadsCount;
 			leadsWeekCount = records[0].data.int_weekLeadsCount;
-			infCount = records[0].data.int_allSecCountInf;
-			ictCount = records[0].data.int_allSecCountIct;
-			ageCount = records[0].data.int_allSecCountAge;
-			gosCount = records[0].data.int_allSecCountGos;
-			narCount = records[0].data.int_allSecCountNar;
-			eneCount = records[0].data.int_allSecCountEne;
-			
+			secCountASWMRS = records[0].data.int_secCountASWMRS;
+			secCountAFFH = records[0].data.int_secCountAFFH;
+			secCountCon = records[0].data.int_secCountCon;
+			secCountES = records[0].data.int_secCountES;
+			secCountFI = records[0].data.int_secCountFI;
+			secCountHCSA = records[0].data.int_secCountHCSA;
+			secCountInf = records[0].data.int_secCountInf;
+			secCountMan = records[0].data.int_secCountMan;
+			secCountMQOGE = records[0].data.int_secCountMQOGE;
+			secCountPSTS = records[0].data.int_secCountPSTS;
+			secCountPA = records[0].data.int_secCountPA;
+			secCountTW = records[0].data.int_secCountTW;
+			secCountUtl = records[0].data.int_secCountUtl;
+						
 			noSideNavText(); 
 		}
 	});
