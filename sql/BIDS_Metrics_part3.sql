@@ -5,32 +5,46 @@
 /*--Start---------------------------------------------------------------- */
 
 /* THIS QUERY UPDATES A TABLE OF DAILY METRICS */
-INSERT INTO opengeo."tbl_dailyMetrics" ("int_allLeadsCount", "int_allLeadsValueSum", "int_weekLeadsCount", "int_weekSumValueLeads", "int_allSecCountInf", "int_allSecCountIct", "int_allSecCountAge", "int_allSecCountGos", "int_allSecCountNar", "int_allSecCountEne", "Date", "Lat", "Long")
-Select 
+INSERT INTO opengeo."tbl_dailyMetrics" ("int_allLeadsCount", "int_allLeadsValueSum", "int_weekLeadsCount", "int_weekLeadsValueSum", "int_secCountASWMRS","int_secCountAFFH","int_secCountCon","int_secCountES","int_secCountFI","int_secCountHCSA","int_secCountInf","int_secCountMan","int_secCountMQOGE","int_secCountPSTS","int_secCountPA","int_secCountTW","int_secCountUtl", "Date", "Lat", "Long")
+Select
 	"int_allLeadsCount" as "int_allLeadsCount", 
 	"int_allLeadsValueSum" as "int_allLeadsValueSum",
 	"int_weekLeadsCount" as "int_weekLeadsCount",
-	"int_weekSumValueLeads" as "int_weekSumValueLeads",
-	"int_allSecCountInf" as "int_allSecCountInf",
-	"int_allSecCountIct" as "int_allSecCountIct",
-	"int_allSecCountAge" as "int_allSecCountAge",
-	"int_allSecCountGos" as "int_allSecCountGos",
-	"int_allSecCountNar" as "int_allSecCountNar",
-	"int_allSecCountEne" as "int_allSecCountEne",
+	"int_weekLeadsValueSum" as "int_weekLeadsValueSum",
+	"int_secCountASWMRS" as "int_secCountASWMRS",
+	"int_secCountAFFH" as "int_secCountAFFH",
+	"int_secCountCon" as "int_secCountCon",
+	"int_secCountES" as "int_secCountES",
+	"int_secCountFI" as "int_secCountFI",
+	"int_secCountHCSA" as "int_secCountHCSA",
+	"int_secCountInf" as "int_secCountInf",
+	"int_secCountMan" as "int_secCountMan",
+	"int_secCountMQOGE" as "int_secCountMQOGE",
+	"int_secCountPSTS" as "int_secCountPSTS",
+	"int_secCountPA" as "int_secCountPA",
+	"int_secCountTW" as "int_secCountTW",
+	"int_secCountUtl" as "int_secCountUtl",
 	CURRENT_DATE as "Date",
 	0 as "Lat",
-	0 as "Long"
+	0 as "Long"	
 From 
 	opengeo."vw_allLeadsCount", 
 	opengeo."vw_allLeadsValueSum",
 	opengeo."vw_weekLeadsCount",
-	opengeo."vw_weekSumValueLeads",
-	opengeo."vw_allSecCountInf",
-	opengeo."vw_allSecCountIct",
-	opengeo."vw_allSecCountAge",
-	opengeo."vw_allSecCountGos",
-	opengeo."vw_allSecCountNar",
-	opengeo."vw_allSecCountEne";
+	opengeo."vw_weekLeadsValueSum",
+	opengeo."vw_secCountASWMRS",
+	opengeo."vw_secCountAFFH",
+	opengeo."vw_secCountCon",
+	opengeo."vw_secCountES",
+	opengeo."vw_secCountFI",
+	opengeo."vw_secCountHCSA",
+	opengeo."vw_secCountInf",
+	opengeo."vw_secCountMan",
+	opengeo."vw_secCountMQOGE",
+	opengeo."vw_secCountPSTS",
+	opengeo."vw_secCountPA",
+	opengeo."vw_secCountTW",
+	opengeo."vw_secCountUtl";
 	
 /*--End------------------------------------------------------------------ */
 /*----------------------------------------------------------------------- */
