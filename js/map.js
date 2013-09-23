@@ -298,7 +298,8 @@ Ext.onReady(function() {
 
 	grid = new Ext.grid.GridPanel({
 		// Center title and add "expand text"
-		title : "Business Lead List",
+		//title : "<div style='text-align:center;'><span id='gridTitle'>Click here for List of Business Leads</span></div>",
+		title : "<div style='text-align:center;'><span id='gridTitle'>Business Lead List </span><span id='gridNote'>(click to expand)</span></div>",
 		region : "south",
 		collapsible : true,
 		collapsed : true,
