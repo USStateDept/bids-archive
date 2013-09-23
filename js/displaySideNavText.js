@@ -35,20 +35,3 @@ function noSideNavText() {
 	//sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div><statUnit>asdsadsadsadsad</statUnit><statText> in leads</statText></div><br><statUnit>sadasdfdsafdsa</statUnit><statText> leads in these sectors...</statText><br><statText>Infrastructure: </statText><statUnit>dsfdsaf dsfdsaf</statUnit><statText><br>ICT: </statText><statUnit>45432523</statUnit><statText><br>Ag and Environment: </statText><statUnit>23432432</statUnit><statText><br>Governance and Services: </statText><statUnit>324324</statUnit><statText><br>Natural Resources: </statText><statUnit>234324324</statUnit><statText><br>Energy: </statText><statUnit>234324324</statUnit></div>';
 	document.getElementById("sideNavTextDiv").innerHTML = sideNavText;
 }
-
-
-			leadsWeekValueSum = records[0].data.int_weekLeadsValueSum;
-			leadsWeekCount = records[0].data.int_weekLeadsCount;
-			secCountASWMRS = records[0].data.int_secCountASWMRS;
-			 = records[0].data.int_secCountAFFH;
-			 = records[0].data.int_secCountCon;
-			 = records[0].data.int_secCountES;
-			 = records[0].data.int_secCountFI;
-			 = records[0].data.int_secCountHCSA;
-			 = records[0].data.int_secCountInf;
-			 = records[0].data.int_secCountMan;
-			 = records[0].data.int_secCountMQOGE;
-			 = records[0].data.int_secCountPSTS;
-			 = records[0].data.int_secCountPA;
-			 = records[0].data.int_secCountTW;
-			 = records[0].data.int_secCountUtl;
