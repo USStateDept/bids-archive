@@ -17,16 +17,17 @@ var store, grid;
 var check;
 var addForm, editForm;
 var addWin, editWin;
-var required, banks, regions, arch, sizes, sec;
+var required, banks, regions, stat, arch, sizes, sec;
 var sp, pr, co, prt, prn, li, se, ke, prs, pra, br, im, ime, prd, pos, su, subo, sou, fid, ten;
 var urlWhole;
 
 Ext.onReady(function() {
-	banks = [['African Development Bank'], ['Asian Development Bank'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
+	banks = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
 	regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
-	arch = [['Archived'], ['In Procurement'], ['Pipeline']]
+	stat = [['Fulfilled'], ['In Procurement'], ['Pipeline']]
+	arch = [['Active'], ['Archived']]
 	sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
-	sec = [['Ag and Environment'], ['Energy'], ['ICT'], ['Infrastructure'], ['Governance and Services'], ['Natural Resources']]
+	sec = [['Administrative and Support and Waste Management and Remediation Services'],['Agriculture, Forestry, Fishing and Hunting'],['Construction'],['Educational Services'],['Finance and Insurance'],['Health Care and Social Assistance'],['Information'],['Manufacturing'],['Mining, Quarrying, and Oil and Gas Extraction'],['Professional, Scientific, and Technical Services'],['Public Administration'],['Transportation and Warehousing'],['Utilities']]
 
 	var toolbarItems = [];
 
@@ -189,7 +190,7 @@ Ext.onReady(function() {
 				// hover list
 				hoverList : '<div class="popupLeadCount">${count} leads found</div><div class="popupLead"><div class="popupLeadList">Click for more information</div></div>',
 				// selected item from single & list
-				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Primary Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}" target="_blank" onclick=\"javascript:ga(\'send\', \'event\', \'External_Link\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact};\" onclick=\"javascript:ga(\'send\', \'event\', \'Contact\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Contact Embassy</a></font></div></div>',
+				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Primary Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><b>Status: </b>${.Status}<br><b>Archived: </b>${.Archived}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}" target="_blank" onclick=\"javascript:ga(\'send\', \'event\', \'External_Link\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact};\" onclick=\"javascript:ga(\'send\', \'event\', \'Contact\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Contact Embassy</a></font></div></div>',
 				// List of clustered items
 				item : '<div class="popupLead"><div class="popupLeadTitle"><leadLink onclick=\"javascript:ga(\'send\', \'event\', \'Pop-Up_Lead_Details\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\" ${showPopup()}>${.Project_Title}</leadLink></div><div class="popupLeadSummary"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Primary Funding Source: </b>${.Project_Funding_Source}</div></div>'
 			}
@@ -367,6 +368,11 @@ Ext.onReady(function() {
 			width : 120,
 			sortable : true
 		}, {
+			header : "Archived",
+			dataIndex : "Archived",
+			width : 80,
+			sortable : true
+		}, {
 			hidden : true,
 			header : "Specific Location",
 			dataIndex : "Specific_Location",
@@ -390,11 +396,6 @@ Ext.onReady(function() {
 			hidden : true,
 			header : "Submitting Officer Contact",
 			dataIndex : "Submitting_Officer_Contact",
-			width : 175
-		}, {
-			hidden : true,
-			header : "Project Size",
-			dataIndex : "Project_Size",
 			width : 175
 		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
@@ -568,6 +569,15 @@ Ext.onReady(function() {
 		}), tEnd = new Ext.form.DateField({
 			emptyText : 'Tender Date End...',
 			width : 190
+		}), statBox = new Ext.ux.form.CheckboxCombo({
+			store : new Ext.data.ArrayStore({
+				fields : ['Status'],
+				data : stat // from states.js
+			}),
+			displayField : 'Status',
+			valueField : 'Status',
+			mode : 'local',
+			emptyText : 'Select Status...'
 		}), arcBox = new Ext.ux.form.CheckboxCombo({
 			store : new Ext.data.ArrayStore({
 				fields : ['Status'],
@@ -576,7 +586,7 @@ Ext.onReady(function() {
 			displayField : 'Status',
 			valueField : 'Status',
 			mode : 'local',
-			emptyText : 'Select Status...'
+			emptyText : 'Select Active...'
 		})],
 		buttons : [{
 			text : 'Search',
