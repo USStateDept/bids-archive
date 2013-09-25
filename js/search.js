@@ -13,6 +13,8 @@
 				var pra = "Project_Announced";
 				var dBeginVal = dBegin.getValue();
 				var dEndVal = dEnd.getValue();
+				var stat = statBox.displayField;
+				var statVal = statBox.getValue();
 				var arc = arcBox.displayField;
 				var arcVal = arcBox.getValue();
 				var siz = "Project_Size";
@@ -98,28 +100,28 @@
 					count = count + 1;
 				}
 
-				if (arcVal.length > 0) {
-					if (arcVal.indexOf(",") != -1) {
+				if (statVal.length > 0) {
+					if (statVal.indexOf(",") != -1) {
 						//console.log(eoVal);
-						var parts = arcVal.split(",");
+						var parts = statVal.split(",");
 						filter = filter + "<Or>";
 						console.log(filter);
 						for (var i = 0; i < parts.length; i++) {
 
-							filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + parts[i] + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
+							filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + stat + "%3C/PropertyName%3E%3CLiteral%3E" + parts[i] + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 							console.log(filter);
 						}
 						filter = filter + "</Or>";
 						console.log(filter);
 					} else {
-						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
+						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + stat + "%3C/PropertyName%3E%3CLiteral%3E" + statVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 					}
 					count = count + 1;
 				}
 
-				/*if (arcVal.length > 0) {
+				if (arcVal.length > 0) {
 
-				/*if (arcVal == "Archived") {
+				if (arcVal == "Archived") {
 				arcVal = 1;
 				} else {
 				arcVal = 0;
@@ -128,7 +130,7 @@
 				filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 				count = count + 1;
 
-				}*/
+				}
 
 				/////////////////
 				//////Sector

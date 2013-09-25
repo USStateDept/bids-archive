@@ -284,6 +284,9 @@ Ext.onReady(function() {
 			name : "Status",
 			type : "string"
 		}, {
+			name : "Archived",
+			type : "string"
+		}, {
 			name : "fid",
 			type : "string"
 		}],
@@ -370,6 +373,16 @@ Ext.onReady(function() {
 		}, {
 			header : "Archived",
 			dataIndex : "Archived",
+			renderer: function(dataIndex){
+				switch(dataIndex) {
+					case '1':
+					return 'Archived';
+					break;
+					case '0':
+					return 'Active';
+					break;
+				}
+			},
 			width : 80,
 			sortable : true
 		}, {
@@ -580,11 +593,11 @@ Ext.onReady(function() {
 			emptyText : 'Select Status...'
 		}), arcBox = new Ext.ux.form.CheckboxCombo({
 			store : new Ext.data.ArrayStore({
-				fields : ['Status'],
-				data : arch // from states.js
+				fields : ['Archived'],
+				data : arch
 			}),
-			displayField : 'Status',
-			valueField : 'Status',
+			displayField : 'Archived',
+			valueField : 'Archived',
 			mode : 'local',
 			emptyText : 'Select Active...'
 		})],
