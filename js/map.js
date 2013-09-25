@@ -136,7 +136,7 @@ Ext.onReady(function() {
 						root.attributes.children = Ext.decode(value);
 						tree.getLoader().load(root);
 					} catch(e) {
-						alert("Invalid JSON");
+						Ext.Msg.alert('Error', 'Invalid JSON');
 						return;
 					}
 					treeConfig = value;
