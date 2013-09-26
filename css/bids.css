@@ -201,7 +201,7 @@ h5 {
 h6 {
 	font: 12px Arial,Helvetica,sans-serif;
 	color: #202020;
-	margin: 6px 0px 1px 0px; 
+	margin: 0px 0px 1px 0px; 
 }  
 
 disclaimer {
@@ -769,9 +769,9 @@ leadLink:active {
 }
 
 #sideNavTextMetrics {
-	margin: 10px 0 30px !important;
-	padding-top: 10px !important;
-	padding-bottom: 10px !important;
+	margin: 10px 0 20px !important;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
 	padding-left: 20px !important;
 	background-color: rgba(255,255,255,0.66) !important;
 	border-radius: 10px !important;
@@ -813,12 +813,12 @@ leadLink:active {
 	padding-top: 8px !important;
 }
 
-.backgroundDiv {
+/*.backgroundDiv {
 	background-image: url('http://54.214.19.215/bids/img/BIDS_background.png');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 %20%;
-}
+}*/
 
 
 /* Metrics Info Boxes */
@@ -890,4 +890,16 @@ a.boxclose {
 	font: 14px Arial,Helvetica,sans-serif !important;
 	font-weight: bold !important;
 	color: #909090 !important;
+}
+
+#innerTop {
+	width: 80%;
+    margin: 0 auto;
+	margin-bottom: -15px !important;
+}
+
+#innerBottom {
+	width: 70%;
+    margin: 0 auto;
+	margin-bottom: -5px !important;
 }

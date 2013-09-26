@@ -1,6 +1,7 @@
 window.onload = function() {
 	ieCheck();
 };
+Ext.chart.Chart.CHART_URL = 'lib/ext-3.4.0/resources/charts.swf';
 
 function as(n) {
 	var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
@@ -9,10 +10,10 @@ function as(n) {
 
 var leadsSumValue, leadsWeekSumValue, leadsCount, leadsWeekCount, infCount, ictCount, ageCount, gosCount, narCount, eneCount;
 var required, banks, regions, arch, sizes, sec;
-var metricsStore, check;
+var metricsStore, metricsChartStore, metricsChart;
+var check;
 var miniGrid, miniSearchFunc;
-var urlWhole;
-	
+var urlWhole;	
 
 Ext.onReady(function() {
 	banks = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
@@ -38,45 +39,6 @@ Ext.onReady(function() {
 		}, {
 			name : "int_weekLeadsValueSum",
 			type : "string"
-		}, {
-			name : "int_secCountASWMRS",
-			type : "string"
-		}, {
-			name : "int_secCountAFFH",
-			type : "string"
-		}, {
-			name : "int_secCountCon",
-			type : "string"
-		}, {
-			name : "int_secCountES",
-			type : "string"
-		}, {
-			name : "int_secCountFI",
-			type : "string"
-		}, {
-			name : "int_secCountHCSA",
-			type : "string"
-		}, {
-			name : "int_secCountInf",
-			type : "string"
-		}, {
-			name : "int_secCountMan",
-			type : "string"
-		}, {
-			name : "int_secCountMQOGE",
-			type : "string"
-		}, {
-			name : "int_secCountPSTS",
-			type : "string"
-		}, {
-			name : "int_secCountPA",
-			type : "string"
-		}, {
-			name : "int_secCountTW",
-			type : "string"
-		}, {
-			name : "int_secCountUtl",
-			type : "string"
 		}],
 		
 		proxy : new GeoExt.data.ProtocolProxy({
@@ -89,26 +51,77 @@ Ext.onReady(function() {
 	
 	metricsStore.load({
 		callback: function(records, operation, failure) {
-			// COMMENT THE NEXT 10 LINES OUT FOR LOCAL DEVELOPMENT //
 			leadsValueSum = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
 			leadsWeekValueSum = records[0].data.int_weekLeadsValueSum;
 			leadsCount = records[0].data.int_allLeadsCount;
 			leadsWeekCount = records[0].data.int_weekLeadsCount;
-			secCountASWMRS = records[0].data.int_secCountASWMRS;
-			secCountAFFH = records[0].data.int_secCountAFFH;
-			secCountCon = records[0].data.int_secCountCon;
-			secCountES = records[0].data.int_secCountES;
-			secCountFI = records[0].data.int_secCountFI;
-			secCountHCSA = records[0].data.int_secCountHCSA;
-			secCountInf = records[0].data.int_secCountInf;
-			secCountMan = records[0].data.int_secCountMan;
-			secCountMQOGE = records[0].data.int_secCountMQOGE;
-			secCountPSTS = records[0].data.int_secCountPSTS;
-			secCountPA = records[0].data.int_secCountPA;
-			secCountTW = records[0].data.int_secCountTW;
-			secCountUtl = records[0].data.int_secCountUtl;
 						
 			noSideNavText(); 
+		}
+	});
+	
+	metricsChartStore = new GeoExt.data.FeatureStore({
+		autoSave : true,
+		fields : [{
+			name : "Sector", 
+			type : "string"
+		}, {
+			name : "Count",
+			type : "string"
+		}],
+		
+		proxy : new GeoExt.data.ProtocolProxy({
+			protocol : new OpenLayers.Protocol.HTTP({
+				url : "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetricsChart&outputformat=json",
+				format : new OpenLayers.Format.GeoJSON()
+			})
+		})
+	});
+	
+	metricsChartStore.load({
+		callback: function(records, operation, failure) {
+			Sector = records[0].data.Sector;
+			Count = records[0].data.Count;
+		}
+	});
+	
+	metricsChart = new Ext.Panel({
+		autoEl : { tag : 'left'},
+		width: 700,
+		height: 255,
+		//title: 'Leads by Sector',
+		items: {
+			xtype: 'stackedbarchart',
+			store: metricsChartStore,
+			yField: 'Sector',
+			xAxis: new Ext.chart.NumericAxis({
+				displayName: 'Count',
+				labelRenderer : Ext.util.Format.numberRenderer('0,0')
+			}),
+			extraStyle: {
+				padding: 0,
+				animationEnabled: true,
+				xAxis: {
+					majorGridLines: {size: 0, color: 0xdddddd},
+					majorTicks: {color: 0x3366cc, length: 0},
+					minorTicks: {color: 0x3366cc, length: 0},
+					showLabels: false,
+					lineSize: 0
+				},
+				yAxis: {
+					majorTicks: {color: 0x3366cc, length: 4},
+					minorTicks: {color: 0x3366cc, length: 2},
+					showLabels: true
+				}
+			},
+			series: [{
+				xField: 'Count',
+				style: {
+					size: 14,
+					borderColor: '#9EBEA6',
+					fillColor:'#9EBEA6 '
+				}
+			}]
 		}
 	});
 	
@@ -368,7 +381,7 @@ Ext.onReady(function() {
 		resizeHandles : false,
 		items : miniGrid
 	});
-	
+		
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
@@ -380,52 +393,54 @@ Ext.onReady(function() {
 			}),
 			new Ext.Container({
 				autoEl : { tag : 'center'},
-				width : 275,
+				width : 700,
 				defaults : {
 					style : {
 						'margin-bottom' : '10px'
 					}
 				},
-				items: 
-				[ new Ext.Container({
-					html: '<h6 style="font-weight: bold;">Get Started (select):</h6>',
-					width : 275,
-					autoEl : { tag : 'left'}
-				}),
-					txtKey = new Ext.form.TextField({
-					emptyText : 'Search for...',
-					width : 200
-				}), secBox = new Ext.ux.form.CheckboxCombo({
-					//store : sectorStore,
-					store : new Ext.data.ArrayStore({
-						fields : ['Sector'],
-						data : sec // from states.js
+				items: [ 
+					metricsChart,
+					new Ext.Container({
+						html: '<h6 style="font-weight: bold;">Get Started (select):</h6>',
+						width : 275,
+						autoEl : { tag : 'left'}
 					}),
-					displayField : 'Sector',
-					valueField : 'Sector',
-					mode : 'local',
-					emptyText : 'Select Sector...',
-					width : 200
-				}), dBegin = new Ext.form.DateField({
-					emptyText : 'Announce Date Begin...',
-					width : 200
-				}),
-				{
-					xtype: 'container',
-					autoEl: {tag: 'center'},
-					width : 205,				
-					items: { 
-						buttons : [{
-							text : 'Search',
-							handler : miniSearchFunc
-						}, {
-							text : 'See All Leads',
-							id : 'btnMapLink',
-							handler : mapLink
-						}]
+						txtKey = new Ext.form.TextField({
+						emptyText : 'Search for...',
+						width : 200
+					}), secBox = new Ext.ux.form.CheckboxCombo({
+						//store : sectorStore,
+						store : new Ext.data.ArrayStore({
+							fields : ['Sector'],
+							data : sec // from states.js
+						}),
+						displayField : 'Sector',
+						valueField : 'Sector',
+						mode : 'local',
+						emptyText : 'Select Sector...',
+						width : 200
+					}), dBegin = new Ext.form.DateField({
+						emptyText : 'Announce Date Begin...',
+						width : 200
+					}),
+					{
+						xtype: 'container',
+						autoEl: {tag: 'center'},
+						width : 205,				
+						items: { 
+							buttons : [{
+								text : 'Search',
+								handler : miniSearchFunc
+							}, {
+								text : 'See All Leads',
+									id : 'btnMapLink',
+								handler : mapLink
+							}]
+						}
 					}
-				}
-			]}) 
+				]
+			}) 
 		]
 	});
 		
@@ -448,13 +463,13 @@ Ext.onReady(function() {
 		layout : "fit",
 		hideBorders : true,
 		autoHeight: true,
-		autoScroll: false,
+		autoScroll: true,
 				cls : 'backgroundDiv',
 		items : {
 			layout : "border",
 			items : [{
 				region : 'north',
-				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px 0px 0px -100px;"><a class="logo" data-bind="click: showHome" href="index.html"/><img id="bidsLogo" alt="BIDS Logo" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="map.html">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
+				html : '<div id="wrap"><div id="header"><div class="row" style="margin: 0px 0px 0px -100px;"><a class="logo" data-bind="click: showHome" href="index.html"><img id="bidsLogo" alt="BIDS: Business Information Database System, United States Department of State" src="img/bidsLogo.png"></a><ul class="nav"><li><a href="mailto:BIDS-Mailbox@state.gov">Contact Us</a></li><li><a href="help.html">Help</a></li><li><a href="faqs.html">FAQs</a></li><li><a href="data.html">Data</a></li><li><a href="map.html">Map</a></li><li><a href="index.html">Home</a></li></ul></div></div>',
 				height : 101,
 				boxMinWidth: 800,
 				border : true
