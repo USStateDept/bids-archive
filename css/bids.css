@@ -214,11 +214,25 @@ statText {
 	color: #000000;
 	margin: 0px 0px 0px 0px; 
 } 
+
+statTextBold {
+	font: 14px Arial,Helvetica,sans-serif;
+	color: #000000;
+	margin: 0px 0px 0px 0px; 
+	font-weight: bold;
+} 
 	
 statUnit {
 	font: 24px Arial,Helvetica,sans-serif;
 	color: #000000;
 	margin: 0px 0px 0px 0px; 
+} 
+
+statUnitBold {
+	font: 24px Arial,Helvetica,sans-serif;
+	color: #000000;
+	margin: 0px 0px 0px 0px; 
+	font-weight: bold;
 } 
 
 /*Opera Fix*/
