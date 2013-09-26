@@ -4,38 +4,46 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 import java.net.*;
+
+//import java.io.FileInputStream;
+//import java.io.IOException;
+import java.util.Properties;
+
 //import ShellOut;
 
 public class LeadAdder extends HttpServlet {
+	
+	List<String> myList = new ArrayList<String>();
+	
+	public static class ShellOut {
 
-public static class ShellOut {
-	
-	
-	
-	//public static void main(String[] args){
-	public void shell(String to,String sub, String text) {  
-        try {  
-            
-			String command = "cmd /C cd C:\\Users\\Administrator\\Downloads && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
-			Process p = Runtime.getRuntime().exec(command); 
-            
-			BufferedReader in = new BufferedReader(  
-                                new InputStreamReader(p.getInputStream()));  
-            String line = null;  
-            while ((line = in.readLine()) != null) {  
-                System.out.println(line);  
-            }  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-    } 
-}
+		
+
+		//public static void main(String[] args){
+		public void shell(String to,String sub, String text) {  
+			try {  
+
+				String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
+				Process p = Runtime.getRuntime().exec(command); 
+
+				BufferedReader in = new BufferedReader(  
+						new InputStreamReader(p.getInputStream()));  
+				String line = null;  
+				while ((line = in.readLine()) != null) {  
+					System.out.println(line);  
+				}  
+			} catch (IOException e) {  
+				e.printStackTrace();  
+			}  
+		} 
+	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		
 
 		res.setContentType("text/html");
 		PrintWriter out = res.getWriter();
@@ -49,15 +57,17 @@ public static class ShellOut {
 		Enumeration paramNames = req.getParameterNames();
 
 		String editType = req.getParameter("editType");
+		String lat = req.getParameter("Lat");
+		String lon = req.getParameter("Lon");
 		String fid = req.getParameter("fid");
 		String update="";
-		
+
 		fid = fid.substring(fid.indexOf('.')+1);
 
 		if(editType.equals("edit")){
 			isUpdate=true;
 
-
+			myList.clear();
 
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
@@ -65,8 +75,13 @@ public static class ShellOut {
 
 
 				String paramValue = paramValues[0];
+				
+				myList.add(paramName + " : " + paramValue);
 
 				if(paramName.equals("editType")){
+
+				}
+				else if(paramName.equals("Clear")){
 
 				}
 				else if(paramName.equals("fid")){
@@ -90,19 +105,21 @@ public static class ShellOut {
 			update = update + " where fid = " + fid;
 			update = "update Opengeo.\"DATATABLE\" set " + update;
 			out.print(update);
-			
-			
+
+
 		}
 		else{
-
+			
+			myList.clear();
+			
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
 				String[] paramValues = req.getParameterValues(paramName);
-				
+
 				if(paramName.equals("editType")){
 
 				}
-				
+	
 				else if(paramName.equals("fid")){
 
 				}
@@ -110,6 +127,9 @@ public static class ShellOut {
 				else if (paramValues.length > 0) {
 
 					String paramValue = paramValues[0];
+					
+					myList.add(paramName + " : " + paramValue);
+					
 					if (paramValue.length() > 0) {
 
 						if (paramName.startsWith("ch")) {
@@ -119,17 +139,18 @@ public static class ShellOut {
 								sectors += paramValue + " ";
 							} else {*/
 
-								String newName = checkName(paramName);
-								// names += "\"" + paramName + "\"" + ",";
-								// values += "\'" + paramValue + "\'" + ",";
+							String newName = checkName(paramName);
+							// names += "\"" + paramName + "\"" + ",";
+							// values += "\'" + paramValue + "\'" + ",";
 
-								sectors += newName + " ";
+							sectors += newName + " ";
 							//}
 						} else {
 
 							if (paramName.startsWith("Spec")) {
-								String wkt = Geocode(paramValue);
-								//out.println(wkt);
+								
+								String wkt = Geocode(lat, lon);
+								out.println(wkt);
 								if (wkt.equals("0")) {
 
 								}
@@ -172,29 +193,53 @@ public static class ShellOut {
 					"jdbc:postgresql://localhost:54321/geoserver", "postgres",
 					"postgres");
 			stmt = con.createStatement();
-
-			if(editType.equals("edit")){
-				String sub = req.getParameter("Project_Title");
-				String em = req.getParameter("Submitting_Officer_Contact");
-				LeadAdder.ShellOut b = new LeadAdder.ShellOut();
-				b.shell(em+",bidsbot@gmail.com","Edited Lead -" + sub,"Your lead \"" + sub + "\" has been edited.");
-				b.shell("bidsbot@gmail.com","Edited Lead ready for Clearance -" + sub,"Lead \"" + sub + "\" is ready to be cleared.");
 			
+			String poc = req.getParameter("Submitting_Officer_Contact");
+			String fs = req.getParameter("Source");
+			String mid = req.getParameter("fid");
+			String pt = req.getParameter("Project_Title");
+			
+			if(editType.equals("clear")){
+			
+			send(poc,fs,mid,pt,"clear");
+			}
+			else if(editType.equals("edit")){
+				//String sub = req.getParameter("Project_Title");
+				//String em = req.getParameter("Submitting_Officer_Contact");
+				//LeadAdder.ShellOut b = new LeadAdder.ShellOut();
+				//b.shell(em+",bidsbot@gmail.com","Edited Lead -" + sub,"Your lead \"" + sub + "\" has been edited.");
+				//b.shell("bidsbot@gmail.com","Edited Lead ready for Clearance -" + sub,"Lead \"" + sub + "\" is ready to be cleared.");
+				send(poc,fs,mid,pt,"edit");
+				out.print(update);
 				rs = stmt.executeQuery(update);
 			}else{
-			String sub = req.getParameter("Project_Title");
-			String em = req.getParameter("Submitting_Officer_Contact");
-			LeadAdder.ShellOut b = new LeadAdder.ShellOut();
-			b.shell(em+",bidsbot@gmail.com","New Lead - " + sub,"Your new lead " + sub + " has been added into BIDS.");
-			b.shell("bidsbot@gmail.com","New Lead ready for Clearance - " + sub,"Lead \"" + sub + "\" is ready to be cleared.");
-			//String dirry = servletRequest.getSession().getServletContext().getRealPath("/")
-			//out.print(dirry);
+				
+				
+				//String dirry = servletRequest.getSession().getServletContext().getRealPath("/")
+				//out.print(dirry);
+				
+				String f = "select max(fid) from Opengeo.\"DATATABLE\"";
+				rs = stmt.executeQuery(f);
+				
+				while (rs.next()) {
+    mid = rs.getString(1);
+}
+
+				int hid = Integer.parseInt(mid);
+				hid++;
+				mid = Integer.toString(hid);
+				
+				out.print(f);
+				out.print(mid);
+				send(poc,fs,mid,pt,"insert");
+				
 				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
-				//out.print(insert);
-						rs = stmt.executeQuery(insert);
-						
+				out.print(insert);
+				rs = stmt.executeQuery(insert);
 				
+				
+
 			}
 			/*
 			 * if(col.equals("Sector")){ rs =
@@ -216,6 +261,72 @@ public static class ShellOut {
 		}
 	}
 
+	public void send(String em, String fs, String mid, String pt, String edit){
+		//String sub = req.getParameter("Project_Title");
+
+		Properties prop = new Properties();
+		//mid = "327";
+
+		String m1sub="";
+		String m1text="";
+		String m1to="";
+		String m2sub="";
+		String m2esub=""; 
+		String m3sub="";
+		String m2text="";
+		String m3text="";
+		String m3text2="";
+		
+		try {
+
+			String propertiesFilePath = getServletContext().getRealPath("WEB-INF/config.properties");
+			prop.load(new FileInputStream(propertiesFilePath));
+			//load a properties file
+			//prop.load(new FileInputStream("config.properties"));
+
+			//get the property value and print it out
+
+			m1sub = prop.getProperty("m1sub");
+			m1text = prop.getProperty("m1text");
+			m1to = prop.getProperty("m1to");
+			m2sub = prop.getProperty("m2sub");
+			m2esub = prop.getProperty("m2esub");
+			m2text = prop.getProperty("m2text");
+			m3sub = prop.getProperty("m3sub");
+			m3text = prop.getProperty("m3text");
+			m3text2 = prop.getProperty("m3text2");
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		m1text+="<br/>";
+		m2esub+=fs;
+		m2sub+=fs;
+		m2text+="<br/>";
+		
+		//em = em + "," + m1to;
+		for (String s : myList){
+			m1text+=s+"<br/>";
+			m2text+=s+"<br/>";
+		}
+		
+		m2text+="<br/><form name=\"myform\" action=\"http://edip-maps.net/bids/servlet/LeadAdder\" method=\"POST\"><input type=\"hidden\" name=\"editType\" value=\"clear\"><input type=\"hidden\" name=\"Project_Title\" value=\"" + pt +"\"><input type=\"hidden\" name=\"Cleared\" value=\"1\"><input type=\"hidden\" name=\"fid\" value=\""+mid+"\"><input type=\"submit\" value=\"Clear\"></form>";
+		
+		m3text = m3text + " " + pt + " " + m3text2;
+		
+		LeadAdder.ShellOut b = new LeadAdder.ShellOut();
+		if(edit.equals("edit")||edit.equals("insert"))
+		b.shell(em+","+m1to,m1sub,m1text);
+		if(edit.equals("edit"))
+		b.shell(m1to,m2esub,m2text);
+		else if(edit.equals("insert"))
+		b.shell(m1to,m2sub,m2text);
+		else if(edit.equals("clear"))
+		b.shell(m1to,m3sub,m3text);
+		//b.shell("bidsbot@gmail.com","New Lead ready for Clearance - " + sub,"Lead \"" + sub + "\" is ready to be cleared.");
+	}
+
 	public String checkName(String ch) {
 
 		String newCheck = "";
@@ -231,93 +342,14 @@ public static class ShellOut {
 		} else if (ch.equals("chNatural")) {
 			newCheck = "Natural Resources";
 		}
-		/*if (ch.equals("chAdmin")) {
-			newCheck = "Administration";
-		} else if (ch.equals("chAgr")) {
-			newCheck = "Agriculture";
-		} else if (ch.equals("chEd")) {
-			newCheck = "Education";
-		} else if (ch.equals("chEn")) {
-			newCheck = "Energy";
-		} else if (ch.equals("chFin")) {
-			newCheck = "Finance";
-		} else if (ch.equals("chInf")) {
-			newCheck = "Infrastructure";
-		} else if (ch.equals("chRes")) {
-			newCheck = "Resource Management";
-		} else if (ch.equals("chSoc")) {
-			newCheck = "Social Services";
-		} else if (ch.equals("chTel")) {
-			newCheck = "Telecommunications";
-		} else if (ch.equals("chTou")) {
-			newCheck = "Tourism";
-		} else if (ch.equals("chTra")) {
-			newCheck = "Transportation";
-		} else if (ch.equals("chWa")) {
-			newCheck = "Water";
-		} else if (ch.equals("chOth")) {
-
-		}*/
-
 		return newCheck;
-
 	}
 
-	public String Geocode(String line) {
+	public String Geocode(String lat, String lon) {
 		//PrintWriter out = res.getWriter();
 		//line = "dfae";
-		String wkt = "";
-
-		line = line.replace(' ', '+');
-		System.out.println(line);
-
-		try {
-			URL google = new URL(
-					"http://maps.googleapis.com/maps/api/geocode/json?address="
-							+ line + "&sensor=false");
-			URLConnection gc = google.openConnection();
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					gc.getInputStream()));
-
-			String inputLine;
-			String json = "";
-
-			while ((inputLine = in.readLine()) != null) {
-
-				json += inputLine;
-			}
-
-			in.close();
-
-			String snip = "";
-
-			if (json.contains("ZERO_RESULTS")) {
-				wkt = "0";
-			} else {
-				snip = json.substring(json.indexOf("\"location\""),
-						json.indexOf("location_type"));
-				snip = snip.substring(snip.indexOf("lat"));
-				String lat = snip.substring(snip.indexOf(':') + 1,
-						snip.indexOf(','));
-				lat = lat.trim();
-				String lon = snip.substring(snip.indexOf("lng"),
-						snip.indexOf('}') - 1);
-				lon = lon.substring(lon.indexOf(":") + 1);
-				lon = lon.trim();
-
-				//System.out.println(snip);
-				//System.out.println(lat);
-				//System.out.println(lon);
-
-				wkt = "ST_GeomFromText(\'POINT(" + lon + " " + lat
-						+ ")\', 4326)";
-
-			}
-		} catch (MalformedURLException e) {
-			//out.println(e.getMessage());
-		} catch (IOException e) {
-			//out.println(e.getMessage());
-		}
+		String wkt = "ST_GeomFromText(\'POINT(" + lon + " " + lat + ")\', 4326)";
+		
 		return wkt;
 	}
 
