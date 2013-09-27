@@ -647,7 +647,7 @@ Ext.onReady(function() {
 		}]
 	});
 	
-	// Create the Add Your Lead button
+	// Create the Edit Lead button
 	editButton = new Ext.FormPanel({
 		region : 'south',
 		autoHeight : true,
