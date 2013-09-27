@@ -20,7 +20,7 @@
 				var siz = "Project_Size";
 				var sizeVal = sizeBox.getValue();
 
-				urlWhole = "http://" + domain + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
+				urlWhole = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
 
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
