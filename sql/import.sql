@@ -36,7 +36,7 @@ CREATE TABLE "DATATABLE"
 
 set client_encoding to 'latin1';
 
-COPY "DATATABLE" FROM 'C:\Users\brody\downloads\txtcsv2.csv' DELIMITER ',' CSV;
+COPY "DATATABLE" FROM 'C:\Program Files (x86)\OpenGeo\OpenGeo Suite\webapps\bids\sql\txtcsv2.csv' DELIMITER ',' CSV;
 
 SELECT AddGeometryColumn( 'public', 'DATATABLE', 'the_geom', 4326, 'POINT', 2 );
 
