@@ -13,7 +13,8 @@ var required, banks, regions, arch, sizes, sec;
 var metricsStore, metricsChartStore, metricsChart;
 var check;
 var miniGrid, miniSearchFunc;
-var urlWhole;	
+var urlWhole;
+var startSearch;
 
 Ext.onReady(function() {
 	banks = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
@@ -381,7 +382,58 @@ Ext.onReady(function() {
 		resizeHandles : false,
 		items : miniGrid
 	});
-		
+	
+	startSearch = new Ext.Window({
+		id : 'startSearch-win',
+		//autoHeight : true,
+		width : 220,
+		height : 150,
+		autoScroll : true,
+		plain : true,
+		title : 'Get Started',
+		border : false,
+		closeAction : 'hide',
+		resizable : false,
+		resizeHandles : false,
+		items : [new Ext.Container({
+			width : 275,
+			autoEl : { tag : 'left'}
+		}),
+			txtKey = new Ext.form.TextField({
+			emptyText : 'Search for...',
+			width : 200
+		}), secBox = new Ext.ux.form.CheckboxCombo({
+			//store : sectorStore,
+			store : new Ext.data.ArrayStore({
+				fields : ['Sector'],
+				data : sec // from states.js
+			}),
+			displayField : 'Sector',
+			valueField : 'Sector',
+			mode : 'local',
+			emptyText : 'Select Sector...',
+			width : 200
+		}), dBegin = new Ext.form.DateField({
+			emptyText : 'Announce Date Begin...',
+			width : 200
+		}),
+		{
+			xtype: 'container',
+			autoEl: {tag: 'center'},
+			width : 205,				
+			items: { 
+				buttons : [{
+					text : 'Search',
+					handler : miniSearchFunc
+				}, {
+					text : 'See All Leads',
+					id : 'btnMapLink',
+					handler : mapLink
+				}]
+			}
+		}]
+	});
+								
 	// MAIN PANEL
 	var mainPanel = new Ext.FormPanel({
 		region : "center",
@@ -401,44 +453,24 @@ Ext.onReady(function() {
 				},
 				items: [ 
 					metricsChart,
-					new Ext.Container({
-						html: '<h6 style="font-weight: bold;">Get Started (select):</h6>',
-						width : 275,
-						autoEl : { tag : 'left'}
-					}),
-						txtKey = new Ext.form.TextField({
-						emptyText : 'Search for...',
-						width : 200
-					}), secBox = new Ext.ux.form.CheckboxCombo({
-						//store : sectorStore,
-						store : new Ext.data.ArrayStore({
-							fields : ['Sector'],
-							data : sec // from states.js
-						}),
-						displayField : 'Sector',
-						valueField : 'Sector',
-						mode : 'local',
-						emptyText : 'Select Sector...',
-						width : 200
-					}), dBegin = new Ext.form.DateField({
-						emptyText : 'Announce Date Begin...',
-						width : 200
-					}),
-					{
-						xtype: 'container',
-						autoEl: {tag: 'center'},
-						width : 205,				
-						items: { 
-							buttons : [{
-								text : 'Search',
-								handler : miniSearchFunc
-							}, {
-								text : 'See All Leads',
-									id : 'btnMapLink',
-								handler : mapLink
-							}]
-						}
-					}
+					// Create the Edit Lead button
+					getStartedButton = new Ext.FormPanel({
+						//region : 'center',
+						autoHeight : true,
+						buttons : [{ 
+							text : '<div id="startBtn">&nbsp;Get Started!&nbsp;</div>',
+							handler : function(){
+								startSearch.show();
+							}
+						}]
+					})
+					
+					
+					
+					
+					
+					
+					
 				]
 			}) 
 		]
