@@ -51,6 +51,9 @@ Ext.onReady(function() {
 			name : "Link_To_Project",
 			type : "string"
 		}, {
+			name : "Business_URL",
+			type : "string"
+		}, {
 			name : "Sector",
 			type : "string"
 		}, {
@@ -206,7 +209,11 @@ Ext.onReady(function() {
 			header : "Link to Project",
 			dataIndex : "Link_To_Project",
 			width : 175
-		},{
+		}, {
+			header : "Embassy Website",
+			dataIndex : "Business_URL",
+			width : 175
+		}, {
 			header : "Project Point of Contact",
 			dataIndex : "Project_POCs",
 			width : 175
@@ -227,7 +234,7 @@ Ext.onReady(function() {
 
 		tbar : [{
 			text : 'Export to CSV',
-			tooltip : 'Export',
+			tooltip : 'Download the list below to a CSV/spreadsheet file.',
 			icon : '../img/csv.jpg',
 			handler: function() {
 				window.location.href='http://' + host + '/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&outputformat=csv&Filter=%3CFilter%3E%0A%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%3C%2FFilter%3E';
@@ -358,4 +365,6 @@ Ext.onReady(function() {
 
 	function State_Select(box, record, index) {
 	}
+	
+	Ext.QuickTips.init();
 });

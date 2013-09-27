@@ -190,7 +190,7 @@ Ext.onReady(function() {
 				// hover list
 				hoverList : '<div class="popupLeadCount">${count} leads found</div><div class="popupLead"><div class="popupLeadList">Click for more information</div></div>',
 				// selected item from single & list
-				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Primary Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><b>Status: </b>${.Status}<br><b>Archived: </b>${.Archived}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}" target="_blank" onclick=\"javascript:ga(\'send\', \'event\', \'External_Link\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Project Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact};\" onclick=\"javascript:ga(\'send\', \'event\', \'Contact\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Contact Embassy</a></font></div></div>',
+				single : '<div class="popupLead"><div class="popupLeadTitle">${.Project_Title}</div><div class="popupLeadDetails"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Date Added: </b><br><b>Primary Funding Source: </b>${.Project_Funding_Source}<br><b>Project Size (USD): </b>${.Project_Size}<br><b>Status: </b>${.Status}<br><b>Archived: </b>${.Archived}<br><br><b>Description: </b><br>${.Project_Description}<br><br><a href=\"${.Link_To_Project}" target="_blank" onclick=\"javascript:ga(\'send\', \'event\', \'External_Link\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Project Website</a>&nbsp;<br><a href=\"${.Business_URL}" target="_blank" onclick=\"javascript:ga(\'send\', \'event\', \'Business_Tab_Link\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Embassy Website</a><br><a href=\"mailto:${.Submitting_Officer_Contact};\" onclick=\"javascript:ga(\'send\', \'event\', \'Contact\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\">Contact Embassy</a></font></div></div>',
 				// List of clustered items
 				item : '<div class="popupLead"><div class="popupLeadTitle"><leadLink onclick=\"javascript:ga(\'send\', \'event\', \'Pop-Up_Lead_Details\', \'${.Project_Title}_Lead_Details\', {\'nonInteraction\': 1});\" ${showPopup()}>${.Project_Title}</leadLink></div><div class="popupLeadSummary"><b>Country: </b>${.Country}<br><b>Sector: </b>${.Sector}<br><b>Primary Funding Source: </b>${.Project_Funding_Source}</div></div>'
 			}
@@ -226,6 +226,9 @@ Ext.onReady(function() {
 			type : "string"
 		}, {
 			name : "Link_To_Project",
+			type : "string"
+		}, {
+			name : "Business_URL",
 			type : "string"
 		}, {
 			name : "Sector",
@@ -397,6 +400,11 @@ Ext.onReady(function() {
 			width : 175
 		}, {
 			hidden : true,
+			header : "Embassy Website",
+			dataIndex : "Business_URL",
+			width : 175
+		}, {
+			hidden : true,
 			header : "Post Comments",
 			dataIndex : "Post_Comments",
 			width : 175
@@ -413,21 +421,20 @@ Ext.onReady(function() {
 		}],
 		sm : new GeoExt.grid.FeatureSelectionModel(),
 		height : 200,
-
 		tbar : [{
+			id : 'btnEditEntry',
 			text : 'Edit Entry',
-			tooltip : 'Edit',
+			tooltip : 'To Edit, select a lead in the list below, then click this button.',
 			icon : 'img/pencil.png',
 			handler : function() {
 				checkEditTest();
 			}
 		}, {
 			text : 'Export to CSV',
-			tooltip : 'Export',
+			tooltip : 'Download the list below to a CSV/spreadsheet file.',
 			icon : '../img/csv.jpg',
 			handler: function() {
 				window.location.href= urlWhole + '&outputformat=csv';
-				//window.location.href='http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&outputformat=csv&Filter=%3CFilter%3E%0A%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%3C%2FFilter%3E';
 				ga('send', 'event', 'Export', 'CSV_Export', {'nonInteraction': 1});
 			}
 		}]
@@ -633,6 +640,7 @@ Ext.onReady(function() {
 		autoHeight : true,
 		buttons : [{
 			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
+			tooltip : 'Access restriced to State Department employees.',
 			handler : function() {
 				checkTest();
 			}
@@ -672,4 +680,5 @@ Ext.onReady(function() {
 	function State_Select(box, record, index) {
 	}
 	
+	Ext.QuickTips.init();
 });
