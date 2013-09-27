@@ -10,7 +10,7 @@ tmp/
 *.tmp
 *.bak
 *.swp
-*~.nib
+*~.nibsq
 local.properties
 .classpath
 .settings/
@@ -140,7 +140,7 @@ csx
 AppPackages/
 
 # Others
-sql/
+#sql/
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
