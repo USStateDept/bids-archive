@@ -427,7 +427,7 @@ Ext.onReady(function() {
 			tooltip : 'To Edit, select a lead in the list below, then click this button.',
 			icon : 'img/pencil.png',
 			handler : function() {
-				checkEditTest();
+				checkTestEditGrid();
 			}
 		}, {
 			text : 'Export to CSV',
@@ -636,7 +636,7 @@ Ext.onReady(function() {
 
 	// Create the Add Your Lead button
 	addButton = new Ext.FormPanel({
-		region : 'south',
+		region : 'north',
 		autoHeight : true,
 		buttons : [{
 			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
@@ -646,7 +646,27 @@ Ext.onReady(function() {
 			}
 		}]
 	});
+	
+	// Create the Add Your Lead button
+	editButton = new Ext.FormPanel({
+		region : 'south',
+		autoHeight : true,
+		buttons : [{
+			text : '<div id="addBtn">&nbsp;Edit a Lead&nbsp;</div>',
+			handler : function() {
+				Ext.getCmp('gridx').getEl().show();
+				checkTestEditMap();
+			}
+		}]
+	});
 
+	// Holds the buttons
+	buttonPanel = new Ext.FormPanel({
+		region : 'south',
+		autoHeight : true,
+		items : [addButton, editButton]
+	});
+	
 	// Creates the Layout
 	new Ext.Viewport({
 		layout : "fit",
@@ -666,7 +686,7 @@ Ext.onReady(function() {
 				region : 'west',
 				split : true,
 				width : 180,
-				items : [filterPanel, addButton]
+				items : [filterPanel, buttonPanel]
 			}, grid]
 		}
 	});
