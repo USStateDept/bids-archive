@@ -625,7 +625,7 @@ Ext.onReady(function() {
 					},
 					items: [{
 						xtype:'button',
-						text : 'Reset',
+						text : '<div id="resetBtn">Reset</div>',
 						id : 'btnResetFilter',
 						handler : function() {
 							filterPanel.getForm().reset();

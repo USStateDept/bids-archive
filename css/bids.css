@@ -501,11 +501,12 @@ leadLink:active {
 	width: 250px !important; 
 	height: 250px !important;
 }
+#resetBtn {
+	color: #606060 !important;
+}
 
 #searchBtn {
-	font-size: 13px !important;
 	font-weight: bold !important;
-	color: #C80000 !important;
 }
 
 #addBtn {
