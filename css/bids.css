@@ -223,13 +223,13 @@ statTextBold {
 } 
 	
 statUnit {
-	font: 24px Arial,Helvetica,sans-serif;
+	font: 18px Arial,Helvetica,sans-serif;
 	color: #000000;
 	margin: 0px 0px 0px 0px; 
 } 
 
 statUnitBold {
-	font: 24px Arial,Helvetica,sans-serif;
+	font: 18px Arial,Helvetica,sans-serif;
 	color: #000000;
 	margin: 0px 0px 0px 0px; 
 	font-weight: bold;
@@ -784,7 +784,7 @@ leadLink:active {
 #sideNavTextMetrics {
 	margin: 10px 0 20px !important;
 	padding-top: 10px !important;
-	padding-bottom: 10px !important;
+	padding-bottom: 5px !important;
 	padding-left: 0px !important;
 	background-color: rgba(255,255,255,0.66) !important;
 	border-radius: 10px !important;
@@ -793,7 +793,7 @@ leadLink:active {
 	border-color: rgba(0,0,0,0.10) !important;
 	box-shadow: 5px 5px 5px grey !important;
 	filter:alpha(opacity=60) !important; /* For IE8 and earlier */
-	width: 310px !important;
+	width: 280px !important;
 	text-align: left !important;
 }
   
@@ -906,13 +906,13 @@ a.boxclose {
 }
 
 #innerTop {
-	width: 80%;
+	width: 85%;
     margin: 0 auto;
-	margin-bottom: -15px !important;
+	margin-bottom: 0px !important;
 }
 
 #innerBottom {
-	width: 70%;
+	width: 85%;
     margin: 0 auto;
-	margin-bottom: -5px !important;
+	margin-bottom: 5px !important;
 }

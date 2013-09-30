@@ -52,7 +52,7 @@ Ext.onReady(function() {
 	
 	metricsStore.load({
 		callback: function(records, operation, failure) {
-			leadsValueSum = numeral(records[0].data.int_allLeadsValueSum).format('$ 0,0[.]00');
+			leadsValueSum = numeral(records[0].data.int_allLeadsValueSum).format('$0,0[.]00');
 			leadsWeekValueSum = records[0].data.int_weekLeadsValueSum;
 			leadsCount = records[0].data.int_allLeadsCount;
 			leadsWeekCount = records[0].data.int_weekLeadsCount;
