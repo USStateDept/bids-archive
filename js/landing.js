@@ -385,7 +385,6 @@ Ext.onReady(function() {
 	
 	startSearch = new Ext.Window({
 		id : 'startSearch-win',
-		//autoHeight : true,
 		width : 220,
 		height : 150,
 		autoScroll : true,
@@ -403,10 +402,9 @@ Ext.onReady(function() {
 			emptyText : 'Search for...',
 			width : 200
 		}), secBox = new Ext.ux.form.CheckboxCombo({
-			//store : sectorStore,
 			store : new Ext.data.ArrayStore({
 				fields : ['Sector'],
-				data : sec // from states.js
+				data : sec
 			}),
 			displayField : 'Sector',
 			valueField : 'Sector',
@@ -452,25 +450,31 @@ Ext.onReady(function() {
 					}
 				},
 				items: [ 
-					metricsChart,
-					// Create the Edit Lead button
-					getStartedButton = new Ext.FormPanel({
-						//region : 'center',
-						autoHeight : true,
-						buttons : [{ 
-							text : '<div id="startBtn">&nbsp;Get Started!&nbsp;</div>',
-							handler : function(){
-								startSearch.show();
-							}
+					metricsChart, {
+						region:'center',
+						layout:'anchor',
+						items:[{
+							anchor:'100%',
+							baseCls:'x-plain',
+							layout:'hbox',
+							layoutConfig: {
+								padding: '0 0 0 380'
+							},
+							defaults:{
+								margins:'0 0 0 0',
+								width: 100,
+								pressed: false,
+								allowDepress: false
+							},
+							items: [{
+								xtype:'button',
+								text : '<div id="startBtn">Get Started!</div>',
+								handler : function(){
+									startSearch.show();
+								}
+							}]
 						}]
-					})
-					
-					
-					
-					
-					
-					
-					
+					}
 				]
 			}) 
 		]

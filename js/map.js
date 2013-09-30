@@ -39,7 +39,7 @@ Ext.onReady(function() {
 			projection : "EPSG:900913",
 			maxExtent: new OpenLayers.Bounds(-20000000, -16000000, 20000000, 19000000),
 			restrictedExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34,
-                                     20037508.34, 20037508.34),
+									 20037508.34, 20037508.34),
 			center : initCenter,
 			minScale: 110728406.25, /* Zoom Level 2 */
 			//minScale: 55468034.09, /* Zoom Level 3 */
@@ -304,8 +304,6 @@ Ext.onReady(function() {
 	store.load();
 
 	grid = new Ext.grid.GridPanel({
-		// Center title and add "expand text"
-		//title : "<div style='text-align:center;'><span id='gridTitle'>Click here for List of Business Leads</span></div>",
 		title : "<div style='text-align:center;'><span id='gridTitle'>Business Lead List </span><span id='gridNote'>(click to expand)</span></div>",
 		region : "south",
 		collapsible : true,
@@ -536,7 +534,7 @@ Ext.onReady(function() {
 	fundingStore.load();
 
 	var categorySelectedId;
-
+	
 	// SEARCH FILTERS
 	var filterPanel = new Ext.FormPanel({
 		labelWidth : 0, // label settings here cascade unless overridden
@@ -545,128 +543,159 @@ Ext.onReady(function() {
 		autoHeight : true,
 		region : 'center',
 		bodyStyle : 'padding:5px 5px 0',
-		//width: 210,
 		defaults : {
 			width : 135
 		},
-		defaultType : 'textfield',
-		items : [ txtKey = new Ext.form.TextField({
-			emptyText : 'Search for...'
-		}), secBox = new Ext.ux.form.CheckboxCombo({
-			//store : sectorStore,
-			store : new Ext.data.ArrayStore({
-				fields : ['Sector'],
-				data : sec // from states.js
-			}),
-			displayField : 'Sector',
-			valueField : 'Sector',
-			mode : 'local',
-			emptyText : 'Select Sector...'
-		}), sizeBox = new Ext.ux.form.CheckboxCombo({
-			store : new Ext.data.ArrayStore({
-				fields : ['PrSize'],
-				data : sizes // from states.js
-			}),
-			displayField : 'PrSize',
-			valueField : 'PrSize',
-			mode : 'local',
-			emptyText : 'Select Size...'
-		}), fsBox = new Ext.ux.form.CheckboxCombo({
-			store : fundingStore,
-			displayField : 'FundingSource',
-			valueField : 'FundingSource',
-			mode : 'local',
-			emptyText : 'Select Funding Source...'
-		}), dBegin = new Ext.form.DateField({
-			emptyText : 'Announce Date Begin...',
-			width : 190
-		}), dEnd = new Ext.form.DateField({
-			emptyText : 'Announce Date End...',
-			width : 190
-		}), tBegin = new Ext.form.DateField({
-			emptyText : 'Tender Data Begin...',
-			width : 190
-		}), tEnd = new Ext.form.DateField({
-			emptyText : 'Tender Date End...',
-			width : 190
-		}), statBox = new Ext.ux.form.CheckboxCombo({
-			store : new Ext.data.ArrayStore({
-				fields : ['Status'],
-				data : stat // from states.js
-			}),
-			displayField : 'Status',
-			valueField : 'Status',
-			mode : 'local',
-			emptyText : 'Select Status...'
-		}), arcBox = new Ext.ux.form.CheckboxCombo({
-			store : new Ext.data.ArrayStore({
-				fields : ['Archived'],
-				data : arch
-			}),
-			displayField : 'Archived',
-			valueField : 'Archived',
-			mode : 'local',
-			emptyText : 'Select Active...'
-		})],
-		buttons : [{
-			text : 'Search',
-			handler : searchFunc
-		}, {
-			text : 'Reset',
-			id : 'btnResetFilter',
-			handler : function() {
-				filterPanel.getForm().reset();
-
-				var tProxy = new GeoExt.data.ProtocolProxy({
-					protocol : new OpenLayers.Protocol.HTTP({
-						url : "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&outputformat=json&Filter=%3CFilter%3E%0A%09%3CAnd%3E%0A%09%09%3COr%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EIn%20Procurement%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EPipeline%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%3C%2FOr%3E%0A%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FAnd%3E%0A%3C%2FFilter%3E",
-						format : new OpenLayers.Format.GeoJSON()
-					})
-				});
-				map.zoomToExtent(initExtent, true);
-				map.setCenter(initCenter, initZoom);
-
-				store.proxy = tProxy;
-				store.reload();
-				grid.getView().refresh();
-				ga('send', 'event', 'Search_Panel', 'Reset_Search_Panel', {'nonInteraction': 1});
-			}
-		}]
-	});
-
-	// Create the Add Your Lead button
-	addButton = new Ext.FormPanel({
-		region : 'north',
-		autoHeight : true,
-		buttons : [{
-			text : '<div id="addBtn">&nbsp;Add Your Leads!&nbsp;</div>',
-			tooltip : 'Access restriced to State Department employees.',
-			handler : function() {
-				checkTest();
-			}
-		}]
-	});
+		items : [
+			txtKey = new Ext.form.TextField({
+				emptyText : 'Search for...'
+			}), 
+			secBox = new Ext.ux.form.CheckboxCombo({
+				store : new Ext.data.ArrayStore({
+					fields : ['Sector'],
+					data : sec
+				}),
+				displayField : 'Sector',
+				valueField : 'Sector',
+				mode : 'local',
+				emptyText : 'Select Sector...'
+			}), sizeBox = new Ext.ux.form.CheckboxCombo({
+				store : new Ext.data.ArrayStore({
+					fields : ['PrSize'],
+					data : sizes
+				}),
+				displayField : 'PrSize',
+				valueField : 'PrSize',
+				mode : 'local',
+				emptyText : 'Select Size...'
+			}), fsBox = new Ext.ux.form.CheckboxCombo({
+				store : fundingStore,
+				displayField : 'FundingSource',
+				valueField : 'FundingSource',
+				mode : 'local',
+				emptyText : 'Select Funding Source...'
+			}), dBegin = new Ext.form.DateField({
+				emptyText : 'Announce Date Begin...',
+				width : 190
+			}), dEnd = new Ext.form.DateField({
+				emptyText : 'Announce Date End...',
+				width : 190
+			}), tBegin = new Ext.form.DateField({
+				emptyText : 'Tender Data Begin...',
+				width : 190
+			}), tEnd = new Ext.form.DateField({
+				emptyText : 'Tender Date End...',
+				width : 190
+			}), statBox = new Ext.ux.form.CheckboxCombo({
+				store : new Ext.data.ArrayStore({
+					fields : ['Status'],
+					data : stat
+				}),
+				displayField : 'Status',
+				valueField : 'Status',
+				mode : 'local',
+				emptyText : 'Select Status...'
+			}), arcBox = new Ext.ux.form.CheckboxCombo({
+				store : new Ext.data.ArrayStore({
+					fields : ['Archived'],
+					data : arch
+				}),
+				displayField : 'Archived',
+				valueField : 'Archived',
+				mode : 'local',
+				emptyText : 'Select Active...'
+			}), {
+				region:'center',
+				margins: '0 5 5 5',
+				width: 190,
+				layout:'anchor',
+				items:[{
+					anchor:'100%',
+					baseCls:'x-plain',
+					layout:'hbox',
+					layoutConfig: {
+						padding: '0 0 20 20'
+					},
+					defaults:{
+						margins:'0 20 0 0',
+						width: 58,
+						pressed: false,
+						toggleGroup:'btns',
+						allowDepress: false
+					},
+					items: [{
+						xtype:'button',
+						text : 'Reset',
+						id : 'btnResetFilter',
+						handler : function() {
+							filterPanel.getForm().reset();
 	
-	// Create the Edit Lead button
-	editButton = new Ext.FormPanel({
-		region : 'south',
-		autoHeight : true,
-		buttons : [{
-			text : '<div id="addBtn">&nbsp;Edit a Lead&nbsp;</div>',
-			handler : function() {
-				Ext.getCmp('gridx').getEl().show();
-				checkTestEditMap();
+							var tProxy = new GeoExt.data.ProtocolProxy({
+								protocol : new OpenLayers.Protocol.HTTP({
+									url : "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&outputformat=json&Filter=%3CFilter%3E%0A%09%3CAnd%3E%0A%09%09%3COr%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EIn%20Procurement%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EPipeline%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%3C%2FOr%3E%0A%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FAnd%3E%0A%3C%2FFilter%3E",
+									format : new OpenLayers.Format.GeoJSON()
+								})
+							});
+							map.zoomToExtent(initExtent, true);
+							map.setCenter(initCenter, initZoom);
+	
+							store.proxy = tProxy;
+							store.reload();
+							grid.getView().refresh();
+							ga('send', 'event', 'Search_Panel', 'Reset_Search_Panel', {'nonInteraction': 1});
+						}
+					}, {
+						xtype:'button',
+						text: '<div id="searchBtn">Search</div>',
+						handler: searchFunc
+					}]
+				}, {
+					anchor:'100%',
+					baseCls:'x-plain',
+					layout:'hbox',
+					layoutConfig: {
+						padding: '0 0 5 20'
+					},
+					defaults:{
+						margins:'0 5 0 0',
+						width: 135,
+						pressed: false,
+						allowDepress: false
+					},
+					items: [{
+						xtype:'button',
+						text: '<div id="addBtn">Add Your Leads!</div>',
+						tooltip : 'Access restricted to State Department employees.',
+						handler : function() {
+							checkTest();
+						}
+					}]
+				}, {
+					anchor:'100%',
+					baseCls:'x-plain',
+					layout:'hbox',
+					layoutConfig: {
+						padding: '0 0 0 20'
+					},
+					defaults:{
+						margins:'0 5 0 0',
+						width: 135,
+						pressed: false,
+						allowDepress: false
+					},
+					items: [{
+						xtype:'button',
+						text : '<div id="editBtn">Edit a Lead</div>',
+						handler : function() {
+							Ext.getCmp('gridx').getEl().show();
+							checkTestEditMap();
+						}
+					}]
+				}]
 			}
-		}]
+		]
 	});
 
-	// Holds the buttons
-	buttonPanel = new Ext.FormPanel({
-		region : 'south',
-		autoHeight : true,
-		items : [addButton, editButton]
-	});
-	
 	// Creates the Layout
 	new Ext.Viewport({
 		layout : "fit",
@@ -686,7 +715,7 @@ Ext.onReady(function() {
 				region : 'west',
 				split : true,
 				width : 180,
-				items : [filterPanel, buttonPanel]
+				items : [filterPanel]
 			}, grid]
 		}
 	});
