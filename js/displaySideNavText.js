@@ -29,6 +29,6 @@ function displaySideNav6Text() {
 }
 
 function noSideNavText() {
-	sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div id=\'innerTop\'><statText>BIDS contains </statText><statUnitBold>' + leadsCount + '</statUnitBold><statText> leads across the <br>globe, amounting to a total value<br>of </statText><statUnitBold>' + leadsValueSum + '</statUnitBold><statText>.</statText></div><br><div id=\'innerBottom\'><statText>These business leads represent<br>potential projects in these sectors...</statText></div></div>';
+	sideNavText = '<div class=\'sideNavTextContent\' id=\'sideNavTextMetrics\'><div id=\'innerTop\'><statText>BIDS contains </statText><statUnitBold>' + leadsCount + '</statUnitBold><statText> leads across the <br>globe, amounting to a total value<br>of </statText><statUnitBold>' + leadsValueSum + '</statUnitBold><statText>.</statText></div><br><div id=\'innerBottom\'><statText>These business leads represent<br>potential projects in many sectors...</statText></div></div>';
 	document.getElementById("sideNavTextDiv").innerHTML = sideNavText;
 }
