@@ -19,7 +19,7 @@ var addForm, editForm;
 var addWin, editWin;
 var required, banks, regions, stat, arch, sizes, sec;
 var sp, pr, co, prt, prn, li, se, ke, prs, pra, br, im, ime, prd, pos, su, subo, sou, fid, ten;
-var urlWhole;
+var urlWhole = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";				
 
 Ext.onReady(function() {
 	banks = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
