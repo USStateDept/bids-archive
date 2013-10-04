@@ -22,9 +22,10 @@ var sp, pr, co, prt, prn, li, se, ke, prs, pra, br, im, ime, prd, pos, su, subo,
 var urlWhole = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";				
 
 Ext.onReady(function() {
-	banks = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Interamerican Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
+	funding = [['Development Banks'], ['Government'], ['Private'], ['Self Financed'], ['Other']]
+	sources = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Inter-American Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
 	regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
-	stat = [['Fulfilled'], ['In Procurement'], ['Pipeline']]
+	stat = [['In Procurement'], ['Pipeline'], ['Fulfilled']]
 	arch = [['Active'], ['Archived']]
 	sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
 	sec = [['Administrative and Support and Waste Management and Remediation Services'],['Agriculture, Forestry, Fishing and Hunting'],['Construction'],['Educational Services'],['Finance and Insurance'],['Health Care and Social Assistance'],['Information'],['Manufacturing'],['Mining, Quarrying, and Oil and Gas Extraction'],['Professional, Scientific, and Technical Services'],['Public Administration'],['Transportation and Warehousing'],['Utilities']]
