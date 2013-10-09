@@ -5,28 +5,34 @@
 /*--Start---------------------------------------------------------------- */
 
 /* DROP TABLE public."tbl_dailyMetrics"; */
-CREATE TABLE public."tbl_dailyMetrics" as
-Select 
-	"int_allLeadsCount" as "int_allLeadsCount", 
-	"int_allLeadsValueSum" as "int_allLeadsValueSum",
-	"int_weekLeadsCount" as "int_weekLeadsCount",
-	"int_weekLeadsValueSum" as "int_weekLeadsValueSum",
-	"int_secCountASWMRS" as "int_secCountASWMRS",
-	"int_secCountAFFH" as "int_secCountAFFH",
+CREATE TABLE public."tbl_dailyMetricsChart" as
+Select
+	"Administrative and Support and Waste Management and Remediation Services" as "Sector",
+	"int_secCountASWMRS" as "Count",
+	"Agriculture, Forestry, Fishing and Hunting" as "Sector",
+	"int_secCountAFFH" as "Count",
+	"Construction" as "Sector",
 	"int_secCountCon" as "int_secCountCon",
+	"Educational Services" as "Sector",
 	"int_secCountES" as "int_secCountES",
+	"Finance and Insurance" as "Sector",
 	"int_secCountFI" as "int_secCountFI",
+	"Health Care and Social Assistance" as "Sector",
 	"int_secCountHCSA" as "int_secCountHCSA",
+	"Information" as "Sector",
 	"int_secCountInf" as "int_secCountInf",
+	"Management" as "Sector",
 	"int_secCountMan" as "int_secCountMan",
+	"Mining, Quarrying, and Oil and Gas Extraction" as "Sector",
 	"int_secCountMQOGE" as "int_secCountMQOGE",
+	"Professional, Scientific, and Technical Services" as "Sector",
 	"int_secCountPSTS" as "int_secCountPSTS",
+	"Public Administration" as "Sector",
 	"int_secCountPA" as "int_secCountPA",
+	"Transportation and Warehousing" as "Sector",
 	"int_secCountTW" as "int_secCountTW",
-	"int_secCountUtl" as "int_secCountUtl",
-	CURRENT_DATE as "Date",
-	0 as "Lat",
-	0 as "Long"
+	"Utilities" as "Sector",
+	"int_secCountUtl" as "int_secCountUtl"
 From 
 	opengeo."vw_allLeadsCount", 
 	opengeo."vw_allLeadsValueSum",
