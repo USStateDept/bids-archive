@@ -1,12 +1,641 @@
 check = 0;
+//var lat,lon;
 
-function yes() {
-	function myFunction() {
+function yes() {	
 		var x;
-		var r=confirm("By clicking okay, you agree that any trade lead added to this system will be <b>unclassified</b>, no clearances will be necessary to view the information you add, and that you understand the rules and regulations regarding this site. All information you add will become publically available.<br><br>If you have any questions, please refer to our <a href='/faqs.html'/ target='/_blank'/>Frequently Asked Questions</a> and <a href='/help.html'/ target='/_blank'/>Help</a> pages.");
+		var r=confirm('By clicking okay, you agree that any trade lead added to this system will be unclassified, no additional clearances will be necessary to publish or view the information you add, and that you understand the rules and regulations regarding this site. All information you add will become publically available.\n\nIf you have any questions, please refer to our Frequently Asked Questions and Help pages.');
+
 		if (r==true)
 		{
-			myCallbackFunction();
+			x=myCallbackFunction();
 		}
+		else
+		{
+			x="Cancelled.";
+		}	
+}
+
+function yesEdit() {	
+		var x;
+		var r=confirm('By clicking okay, you agree that any trade lead information added to this system will be unclassified, no additional clearances will be necessary to publish or view the information you add, and that you understand the rules and regulations regarding this site. All information you add will become publically available.\n\nIf you have any questions, please refer to our Frequently Asked Questions and Help pages.');
+
+		if (r==true)
+		{
+			x=editEntryFunction();
+		}
+		else
+		{
+			x="Cancelled.";
+		}	
+}
+
+function codeAddress() {
+  var geocoder = new google.maps.Geocoder();	
+  var address = tabs.getForm().findField("Specific_Location").getValue();//'Washington, DC'; 
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+	  //var result = results[0].geometry.location;
+	  var lat = results[0].geometry.location.lat();
+	  alert(lat);
+	/*var parts=result.split(",");
+	  var lat =parts[0];
+	  var lon = parts[1];
+	  alert(lat);
+	  alert(lon);*/
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+function editEntryFunction() {
+	sp = grid.getSelectionModel().getSelected().data.Specific_Location;
+	pr = grid.getSelectionModel().getSelected().data.Project_Funding_Source;
+	co = grid.getSelectionModel().getSelected().data.Country;
+	prt = grid.getSelectionModel().getSelected().data.Project_Title;
+	prn = grid.getSelectionModel().getSelected().data.Project_Number;
+	li = grid.getSelectionModel().getSelected().data.Link_To_Project;
+	bt = grid.getSelectionModel().getSelected().data.Business_URL;
+	se = grid.getSelectionModel().getSelected().data.Sector;
+	ke = grid.getSelectionModel().getSelected().data.Keyword;
+	prs = grid.getSelectionModel().getSelected().data.Project_Size;
+	pra = grid.getSelectionModel().getSelected().data.Project_Announced;
+	br = grid.getSelectionModel().getSelected().data.Borrowing_Entity;
+	im = grid.getSelectionModel().getSelected().data.Implementing_Entity;
+	ime = grid.getSelectionModel().getSelected().data.Project_POCs;
+	prd = grid.getSelectionModel().getSelected().data.Project_Description;
+	pos = grid.getSelectionModel().getSelected().data.Post_Comments;
+	su = grid.getSelectionModel().getSelected().data.Submitting_Officer;
+	subo = grid.getSelectionModel().getSelected().data.Submitting_Officer_Contact;
+	sou = grid.getSelectionModel().getSelected().data.Source;
+	fid = grid.getSelectionModel().getSelected().data.fid;
+	ten = grid.getSelectionModel().getSelected().data.Tender_Date;
+	sta = grid.getSelectionModel().getSelected().data.Status;
+	
+	tabs.getForm().findField("Specific_Location").setValue(sp);
+	tabs.getForm().findField("Project_Funding_Source").setValue(pr);
+	tabs.getForm().findField("Country").setValue(co);
+	tabs.getForm().findField("Project_Title").setValue(prt);
+	tabs.getForm().findField("Project_Number").setValue(prn);
+	tabs.getForm().findField("Link_To_Project").setValue(li);
+	tabs.getForm().findField("Business_URL").setValue(bt);
+	tabs.getForm().findField("Sector").setValue(se);
+	tabs.getForm().findField("Keyword").setValue(ke);
+	tabs.getForm().findField("Project_Size").setValue(prs);
+	tabs.getForm().findField("Project_Announced").setValue(pra);
+	tabs.getForm().findField("Borrowing_Entity").setValue(br);
+	tabs.getForm().findField("Implementing_Entity").setValue(im);
+	tabs.getForm().findField("Project_POCs").setValue(ime);
+	tabs.getForm().findField("Project_Description").setValue(prd);
+	tabs.getForm().findField("Post_Comments").setValue(pos);
+	tabs.getForm().findField("Submitting_Officer").setValue(su);
+	tabs.getForm().findField("Submitting_Officer_Contact").setValue(subo);
+	tabs.getForm().findField("Source").setValue(sou);
+	tabs.getForm().findField("fid").setValue(fid);
+	tabs.getForm().findField("Tender_Date").setValue(ten);
+	tabs.getForm().findField("Status").setValue(sta);
+	
+	//Uncheck Archive checkbox
+	tabs.getForm().findField("chArc").setValue(false);
+
+	//Check the Archive checkbox for that record
+	if (se.indexOf("Archived") != -1) {
+		tabs.getForm().findField("chArc").setValue(true);
 	}
+
+	win.myExtraParams.e = true;
+
+	if (win.myExtraParams.e == true) {
+		Ext.getCmp('btnEdit').enable();
+		Ext.getCmp('btnEdit').show();
+		Ext.getCmp('btnClone').enable();
+		Ext.getCmp('btnClone').show();
+		Ext.getCmp('btnSave').hide();
+		Ext.getCmp('btnCancel').enable();
+		Ext.getCmp('btnCancel').show();
+		Ext.getCmp('chArc').setDisabled(false);
+		Ext.getCmp('chArc').checked=false;
+		Ext.getCmp('chArc').show();
+		Ext.getCmp('chMaj').setDisabled(false);
+		Ext.getCmp('chMaj').checked=true;
+		Ext.getCmp('chMaj').show();
+		//Ext.getCmp('sspec').disabled=true;
+	}
+
+	console.log(win.myExtraParams.e);
+	win.show();
+	
+	ga('send', 'event', 'Grid_Panel', 'Edit_Grid_Panel', {'nonInteraction': 1});
+}
+
+required = '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>';
+funding = [['Development Banks'], ['Government'], ['Private'], ['Self Financed'], ['Other']]
+sources = [['African Development Bank'], ['Asian Development Bank'], ['European Bank for Reconstruction and Development'], ['Inter-American Development Bank'], ['Post Identified Project'], ['Washington Identified Project'], ['World Bank']]
+regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
+stat = [['In Procurement'], ['Pipeline'], ['Fulfilled']]
+arch = [['Active'], ['Archived']]
+sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
+sec = [['Administrative and Support and Waste Management and Remediation Services'],['Agriculture, Forestry, Fishing and Hunting'],['Construction'],['Educational Services'],['Finance and Insurance'],['Health Care and Social Assistance'],['Information'],['Manufacturing'],['Mining, Quarrying, and Oil and Gas Extraction'],['Professional, Scientific, and Technical Services'],['Public Administration'],['Transportation and Warehousing'],['Utilities']]
+
+// Add a lead Form / Edit a lead Form
+tabs = new Ext.FormPanel({
+	layout : 'form',
+	labelWidth : 80,
+	border : false,
+	width : 340,
+	height : 1020,
+	url : 'servlet/LeadAdder',
+	//autoScroll : true,
+	monitorValid : true,
+	listeners: {
+		clientvalidation : function(form, valid) {
+			Ext.getCmp('btnSave').setDisabled(!valid);
+			Ext.getCmp('btnEdit').setDisabled(!valid);
+			Ext.getCmp('btnClone').setDisabled(!valid);
+		}
+	},
+	items : [/*{
+		xtype : 'hidden',
+		name : 'Lat'
+		//value : '0'
+	},{
+		xtype : 'hidden',
+		name : 'Lon'
+		//value : '0'
+	},*/{
+		xtype : 'hidden',
+		name : 'Cleared'
+		//value : '0'
+	}, {
+		xtype : 'hidden',
+		name : 'fid',
+		value : '0'
+	}, {
+		name : 'Project_Title',
+		emptyText : 'Project Title',
+		xtype : 'textfield',
+		width : 275,
+		allowBlank: false,
+		blankText: 'a Project Title is required.',
+		emptyClass: 'reqField'
+	}, {
+		name : 'Specific_Location',
+		xtype : 'textfield',
+		emptyText : 'Specific Location',
+		width : 275
+		//id : 'sspec'
+	}, {
+		name : 'Country',
+		xtype : 'textfield',
+		emptyText : 'Country',
+		width : 275,
+		allowBlank: false,
+		blankText: 'a Country is required.',
+		emptyClass: 'reqField'
+	}, new Ext.form.ComboBox({
+		store : new Ext.data.ArrayStore({
+			fields : ['Sector'],
+			data : sec
+		}),
+		name : 'Sector',
+		displayField : 'Sector',
+		emptyText : 'Primary Sector',
+		typeAhead : true,
+		editable : false,
+		mode : 'local',
+		forceSelection : true,
+		triggerAction : 'all',
+		selectOnFocus : true,
+		width : 275,
+		height : 140,
+		allowBlank: false,
+		blankText: 'a Primary Sector is required.',
+		emptyClass: 'reqField'
+	}), {
+		name : 'Project_Size',
+		emptyText : 'Project Value (in US$)',
+		xtype : 'numberfield',
+		maxValue : 999999999999,
+		// Suggest changing minValue to 1000. Logic being our FSOs should be able to ballpark a value, and 1000 is high enough to prevent "2.5" being entered instead of "2,500,000".
+		minValue : 1000,
+		autoStripChars: true,
+		width : 275,
+		allowBlank: false,
+		blankText: 'a Project Value is required.',
+		emptyClass: 'reqField'
+	}, new Ext.form.ComboBox({
+		store : new Ext.data.ArrayStore({
+			fields : ['Status'],
+			data : stat
+		}),
+		name : 'Status',
+		displayField : 'Status',
+		emptyText : 'Status',
+		typeAhead : true,
+		editable : false,
+		mode : 'local',
+		forceSelection : true,
+		triggerAction : 'all',
+		selectOnFocus : true,
+		width : 275,
+		height : 140,
+		allowBlank: false,
+		blankText: 'a Status is required.',
+		emptyClass: 'reqField'
+	}), {
+		name : 'Project_Number',
+		emptyText : 'Project Number',
+		xtype : 'textfield',
+		width : 275
+	}, new Ext.form.ComboBox({
+		store : new Ext.data.ArrayStore({
+			fields : ['Project_Funding_Source'],
+			data : funding
+		}),
+		name : 'Project_Funding_Source',
+		displayField : 'Project_Funding_Source',
+		emptyText : 'Primary Funding Source',
+		typeAhead : true,
+		editable : false,
+		mode : 'local',
+		forceSelection : true,
+		triggerAction : 'all',
+		selectOnFocus : true,
+		width : 275,
+		height : 140,
+		allowBlank: false,
+		blankText: 'a Primary Funding Source is required.',
+		emptyClass: 'reqField'
+	}), new Ext.form.ComboBox({
+		store : new Ext.data.ArrayStore({
+			fields : ['Source'],
+			data : sources
+		}),
+		name : 'Source',
+		displayField : 'Source',
+		emptyText : 'Information Source',
+		typeAhead : true,
+		editable : false,
+		mode : 'local',
+		forceSelection : true,
+		triggerAction : 'all',
+		selectOnFocus : true,
+		width : 275,
+		height : 140,
+		allowBlank: false,
+		blankText: 'an Information Source is required.',
+		emptyClass: 'reqField'
+	}), {
+		name : 'Project_Description',
+		emptyText : 'Project Description & Bidding Requirements',
+		xtype : 'textarea',
+		width : 275,
+		height : 140,
+		allowBlank: false,
+		blankText: 'a Project Description is required.',
+		emptyClass: 'reqField'
+	}, {
+		name : 'Keyword',
+		emptyText : 'Keywords',
+		xtype : 'textfield',
+		width : 275,
+		allowBlank: false,
+		blankText: 'Keywords are required.',
+		emptyClass: 'reqField'
+	}, new Ext.form.DateField({
+		emptyText : 'Project Announced  (mm/dd/yyyy)',
+		name : 'Project_Announced',
+		width : 275
+	}), new Ext.form.DateField({
+		name : 'Tender_Date',
+		emptyText : 'Expected Tender Date (mm/dd/yyyy)',
+		width : 275
+	}), {
+		name : 'Borrowing_Entity',
+		emptyText : 'Borrowing Entity',
+		xtype : 'textfield',
+		width : 275
+	}, {
+		name : 'Implementing_Entity',
+		emptyText : 'Implementing Entity',
+		xtype : 'textfield',
+		width : 275,
+		allowBlank: false,
+		blankText: 'an Implementing Entity is required.',
+		emptyClass: 'reqField'
+	}, {
+		name : 'Link_To_Project',
+		emptyText : 'Project Website (http://www.example.gov/)',
+		xtype : 'textfield',
+		vtype : 'url',
+		width : 275
+	}, {
+		name : 'Business_URL',
+		emptyText : 'Post Business Tab (http://www.example.gov/business/)',
+		xtype : 'textfield',
+		vtype : 'url',
+		width : 275
+	}, {
+		name : 'Submitting_Officer',
+		emptyText : 'Submitting Officer',
+		xtype : 'textfield',
+		width : 275,
+		allowBlank: false,
+		blankText: 'a Submitting Officer is required.',
+		emptyClass: 'reqField'
+	}, {
+		name : 'Submitting_Officer_Contact',
+		emptyText : 'Submitting Officer Email',
+		xtype : 'textfield',
+		vtype : 'email',
+		width : 275,
+		allowBlank: false,
+		blankText: 'a Submitting Officer Email is required.',
+		emptyClass: 'reqField'
+	}, {
+		xtype : 'textarea',
+		name : 'Project_POCs',
+		emptyText : 'Implementing Entity POCs & Contact Info',
+		xtype : 'textfield',
+		width : 275,
+		height : 80
+	}, {
+		xtype : 'textarea',
+		name : 'Post_Comments',
+		emptyText : 'Post Comments',
+		xtype : 'textfield',
+		width : 275,
+		height : 80
+	}, {
+		xtype : 'checkbox',
+		boxLabel : 'This is a major edit',
+		name : 'chMaj',
+		id : 'chMaj',
+		autoScroll : false
+	}, {
+		xtype : 'checkbox',
+		boxLabel : 'Archive this lead',
+		name : 'chArc',
+		id : 'chArc',
+		autoScroll : false
+	}, {
+		html: '<div style="margin-left: 10px; margin-right: 10px;"><h6>All <font class="reqField">required</font> fields must be input before you can save.<br>Information must be unclassified.</h6></div>'
+	}],
+	buttons : [{
+		text : 'Save Edits',
+		id : 'btnEdit',
+		handler : function() {
+				if (tabs.getForm().findField("chMaj").getValue() == true) {
+				tabs.getForm().findField('Cleared').setValue('0');
+			} else {
+				var cleared = grid.getSelectionModel().getSelected().data.Cleared;
+					if (cleared == '0') {
+					tabs.getForm().findField('Cleared').setValue('0');
+				} else {
+					tabs.getForm().findField('Cleared').setValue('1');
+				}
+			}
+				tabs.getForm().submit({
+				submitEmptyText : false,
+				params : {
+					editType : 'edit'
+				}
+			});
+			win.hide();
+			
+			Ext.Msg.alert('Submission Successful', 'Thanks for revising your information! If this was a major edit, we will review it and it should be posted within two business days. Otherwise, the edits will appear immediately.');
+			
+			ga('send', 'event', 'Add_Lead', 'Edit_Lead_Details', {'nonInteraction': 1});
+		}
+	}, {
+		text : 'Save as New Lead',
+		id : 'btnClone',
+		handler : function() {
+			tabs.getForm().findField('Cleared').setValue('0');
+			tabs.getForm().submit({
+				submitEmptyText : false,
+				params : {
+					editType : 'insert'
+				},
+				success : function(form, action) {
+					Ext.Msg.alert('Success', 'It worked');
+				},
+				failure : function(form, action) {
+					//Ext.Msg.alert('Warning', 'Error');
+						win.hide();
+					tabs.getForm().reset();
+					grid.getView().refresh();
+					sd.refresh({
+						force : true
+					});
+				}
+			});
+			
+			Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+			
+			ga('send', 'event', 'Add_Lead', 'Clone_Lead_Details', {'nonInteraction': 1});
+		}
+	}, {
+		text : 'Save',
+		id : 'btnSave',
+		handler : function() 
+			{
+				//codeAddress();
+				var lon='0';
+				var geocoder = new google.maps.Geocoder();
+				var address;
+				
+				if (tabs.getForm().findField("Specific_Location").getValue() != '') {
+					address = tabs.getForm().findField("Specific_Location").getValue(); //'Washington, DC';
+					
+					//alert(address);
+					geocoder.geocode( { 'address': address}, function(results, status) {
+						if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+							address = tabs.getForm().findField("Country").getValue(); //'Washington, DC';
+					
+							//alert(address);
+							geocoder.geocode( { 'address': address}, function(results, status) {
+								if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+									// On failure to Geocode, return is: ZERO_RESULTS
+									Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Specific Location and/or Country information again.');
+								
+									ga('send', 'event', 'Add_Lead', 'Geocode_SpecLoc_Failure', {'nonInteraction': 1});
+								}
+								else {
+					
+									lat = results[0].geometry.location.lat().toString();
+									lon = results[0].geometry.location.lng().toString();
+									//alert(lon);
+									
+									tabs.getForm().findField('Cleared').setValue('0');
+									//tabs.getForm().findField('Lat').setValue(lat);
+									//tabs.getForm().findField('Lon').setValue(lon);
+									tabs.getForm().submit({
+									
+										submitEmptyText : false,
+										params : {
+											editType : 'insert',
+											Lat: lat,
+											Lon: lon
+										},
+										success : function(form, action) {
+											Ext.Msg.alert('Success', 'It worked');
+										},
+										failure : function(form, action) {
+											//Ext.Msg.alert('Warning', 'Error');
+											win.hide();
+											tabs.getForm().reset();
+											grid.getView().refresh();
+											sd.refresh({
+												force : true
+											});
+										}
+									});
+						
+									Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+							
+									ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
+								} 
+							});
+						}
+						else {
+			
+							lat = results[0].geometry.location.lat().toString();
+							lon = results[0].geometry.location.lng().toString();
+							//alert(lon);
+							
+							tabs.getForm().findField('Cleared').setValue('0');
+							//tabs.getForm().findField('Lat').setValue(lat);
+							//tabs.getForm().findField('Lon').setValue(lon);
+							tabs.getForm().submit({
+							
+								submitEmptyText : false,
+								params : {
+									editType : 'insert',
+									Lat: lat,
+									Lon: lon
+								},
+								success : function(form, action) {
+									Ext.Msg.alert('Success', 'It worked');
+								},
+								failure : function(form, action) {
+									//Ext.Msg.alert('Warning', 'Error');
+									win.hide();
+									tabs.getForm().reset();
+									grid.getView().refresh();
+									sd.refresh({
+										force : true
+									});
+								}
+							});
+						
+							Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+					
+							ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
+						} 
+					});		
+				}
+				else {
+					address = tabs.getForm().findField("Country").getValue(); //'Washington, DC';
+					
+					//alert(address);
+					geocoder.geocode( { 'address': address}, function(results, status) {
+						if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+							// On failure to Geocode, return is: ZERO_RESULTS
+							Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Specific Location and/or Country information again.');
+						
+							ga('send', 'event', 'Add_Lead', 'Geocode_Country_Failure', {'nonInteraction': 1});
+						}
+						else {
+			
+							lat = results[0].geometry.location.lat().toString();
+							lon = results[0].geometry.location.lng().toString();
+							//alert(lon);
+							
+							tabs.getForm().findField('Cleared').setValue('0');
+							//tabs.getForm().findField('Lat').setValue(lat);
+							//tabs.getForm().findField('Lon').setValue(lon);
+							tabs.getForm().submit({
+							
+								submitEmptyText : false,
+								params : {
+									editType : 'insert',
+									Lat: lat,
+									Lon: lon
+								},
+								success : function(form, action) {
+									Ext.Msg.alert('Success', 'It worked');
+								},
+								failure : function(form, action) {
+									//Ext.Msg.alert('Warning', 'Error');
+									win.hide();
+									tabs.getForm().reset();
+									grid.getView().refresh();
+									sd.refresh({
+										force : true
+									});
+								}
+							});
+						
+							Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+					
+							ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
+						} 
+					});
+				}
+			}
+	}, {
+		text : 'Cancel',
+		id : 'btnCancel',
+		handler : function() {
+			tabs.getForm().reset();
+			
+			ga('send', 'event', 'Add_Lead', 'Reset_Lead_Details', {'nonInteraction': 1});
+		}
+	}]
+});
+
+//tabs.render(document.body);
+
+win = new Ext.Window({
+	id : 'formanchor-win',
+	//autoHeight : true,
+	width : 380,
+	height : 460,
+	autoScroll : true,
+	plain : true,
+	title : 'Lead Information',
+	border : false,
+	closeAction : 'hide',
+	resizable : false,
+	resizeHandles : false,
+	items : tabs
+});
+
+win.myExtraParams = {
+	e : false
+};
+
+function myCallbackFunction() {
+	win.myExtraParams.e = false;
+
+	if (win.myExtraParams.e == false) {
+		Ext.getCmp('btnEdit').hide();
+		Ext.getCmp('btnClone').hide();
+		Ext.getCmp('btnSave').enable();
+		Ext.getCmp('btnSave').show();
+		Ext.getCmp('btnCancel').enable();
+		Ext.getCmp('btnCancel').show();
+		Ext.getCmp('chArc').setDisabled(true);
+		Ext.getCmp('chArc').checked=false;
+		Ext.getCmp('chArc').hide();
+		Ext.getCmp('chMaj').setDisabled(true);
+		Ext.getCmp('chMaj').checked=false;
+		Ext.getCmp('chMaj').hide();
+	}
+	
+	tabs.getForm().reset();
+	win.show();
+	
+	ga('send', 'event', 'Clearance_Popup', 'Add_Clearance_Popup', {'nonInteraction': 1});
 }
