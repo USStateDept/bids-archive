@@ -130,8 +130,8 @@ function editEntryFunction() {
 		Ext.getCmp('btnClone').enable();
 		Ext.getCmp('btnClone').show();
 		Ext.getCmp('btnSave').hide();
-		Ext.getCmp('btnCancel').enable();
-		Ext.getCmp('btnCancel').show();
+		Ext.getCmp('btnReset').enable();
+		Ext.getCmp('btnReset').show();
 		Ext.getCmp('chArc').setDisabled(false);
 		Ext.getCmp('chArc').checked=false;
 		Ext.getCmp('chArc').show();
@@ -607,8 +607,8 @@ tabs = new Ext.FormPanel({
 				}
 			}
 	}, {
-		text : 'Cancel',
-		id : 'btnCancel',
+		text : 'Reset',
+		id : 'btnReset',
 		handler : function() {
 			tabs.getForm().reset();
 			
@@ -646,8 +646,8 @@ function myCallbackFunction() {
 		Ext.getCmp('btnClone').hide();
 		Ext.getCmp('btnSave').enable();
 		Ext.getCmp('btnSave').show();
-		Ext.getCmp('btnCancel').enable();
-		Ext.getCmp('btnCancel').show();
+		Ext.getCmp('btnReset').enable();
+		Ext.getCmp('btnReset').show();
 		Ext.getCmp('chArc').setDisabled(true);
 		Ext.getCmp('chArc').checked=false;
 		Ext.getCmp('chArc').hide();
