@@ -582,7 +582,7 @@ Ext.onReady(function() {
 				emptyText : 'Announce Date End...',
 				width : 190
 			}), tBegin = new Ext.form.DateField({
-				emptyText : 'Tender Data Begin...',
+				emptyText : 'Tender Date Begin...',
 				width : 190
 			}), tEnd = new Ext.form.DateField({
 				emptyText : 'Tender Date End...',
