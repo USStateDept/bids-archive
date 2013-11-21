@@ -621,7 +621,6 @@ Ext.onReady(function() {
 						margins:'0 20 0 0',
 						width: 58,
 						pressed: false,
-						toggleGroup:'btns',
 						allowDepress: false
 					},
 					items: [{
