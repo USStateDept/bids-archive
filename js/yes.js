@@ -29,6 +29,25 @@ function yesEdit() {
 		}	
 }
 
+
+function test(){
+    Ext.Ajax.request({
+        url: "servlet/Ho?to=lala",
+        method:'POST',
+        param:{
+            to:"lala"
+        },
+        success: function(response, opts){
+            //do what you want with the response here
+            console.log("hiiiiiiiiiiii");
+        },
+        failure: function(response, opts) {
+            alert("server-side failure with status code " + response.status);
+        }
+
+    });
+}
+
 function codeAddress() {
   var geocoder = new google.maps.Geocoder();	
   var address = tabs.getForm().findField("Specific_Location").getValue();//'Washington, DC'; 
@@ -143,7 +162,8 @@ tabs = new Ext.FormPanel({
 	labelWidth : 80,
 	border : false,
 	width : 340,
-	height : 1020,
+//	height : 1375,
+//	height : 1020,
 	url : 'servlet/LeadAdder',
 	//autoScroll : true,
 	monitorValid : true,
@@ -337,20 +357,20 @@ tabs = new Ext.FormPanel({
 		width : 275
 	}, {
 		name : 'Submitting_Officer',
-		emptyText : 'Submitting Officer',
+		emptyText : 'USG Submitting Officer',
 		xtype : 'textfield',
 		width : 275,
 		allowBlank: false,
-		blankText: 'a Submitting Officer is required.',
+		blankText: 'a USG Submitting Officer is required.',
 		emptyClass: 'reqField'
 	}, {
 		name : 'Submitting_Officer_Contact',
-		emptyText : 'Submitting Officer Email',
+		emptyText : 'USG Submitting Officer Email',
 		xtype : 'textfield',
 		vtype : 'email',
 		width : 275,
 		allowBlank: false,
-		blankText: 'a Submitting Officer Email is required.',
+		blankText: 'a USG Submitting Officer Email is required.',
 		emptyClass: 'reqField'
 	}, {
 		xtype : 'textarea',
@@ -568,8 +588,10 @@ tabs = new Ext.FormPanel({
 								},
 								failure : function(form, action) {
 									//Ext.Msg.alert('Warning', 'Error');
+
 									win.hide();
 									tabs.getForm().reset();
+									test();
 									grid.getView().refresh();
 									sd.refresh({
 										force : true
