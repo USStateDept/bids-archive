@@ -25,59 +25,47 @@
 						//console.log(eoVal);
 						var parts = sizeVal.split(",");
 						filter = filter + "<Or>";
-
 						for (var i = 0; i < parts.length; i++) {
-
-							if (parts[i] == '0-25M') {
+							if (parts[i] == 'Less than $25M') {
 								begin = '0';
-								end = '25000000';
+								end = '24999999';
 								filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
-
 							}
-							if (parts[i] == '25-50M') {
+							if (parts[i] == '$25-49M') {
 								begin = '25000000';
-								end = '50000000';
+								end = '49999999';
 								filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
-
 							}
-							if (parts[i] == '50-100M') {
+							if (parts[i] == '$50-99M') {
 								begin = '50000000';
-								end = '100000000';
+								end = '99999999';
 								filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
-
 							}
-							if (parts[i] == '>100M') {
+							if (parts[i] == '$100M or more') {
 								begin = '100000000';
-
 								filter = filter + "<PropertyIsGreaterThan><PropertyName>PrSize</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
 							}
-
 						}
 						filter = filter + "</Or>";
 						console.log(filter);
 					} else {
-
-						if (sizeVal == '0-25M') {
+						if (sizeVal == 'Less than $25M') {
 							begin = '0';
-							end = '25000000';
+							end = '24999999';
 							filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
-
 						}
-						if (sizeVal == '25-50M') {
+						if (sizeVal == '$25-49M') {
 							begin = '25000000';
-							end = '50000000';
+							end = '49999999';
 							filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
-
 						}
-						if (sizeVal == '50-100M') {
+						if (sizeVal == '$50-99M') {
 							begin = '50000000';
-							end = '100000000';
+							end = '99999999';
 							filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + siz + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
-
 						}
-						if (sizeVal == '>100M') {
+						if (sizeVal == '$100M or more') {
 							begin = '100000000';
-
 							filter = filter + "<PropertyIsGreaterThan><PropertyName>PrSize</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
 						}
 					}
