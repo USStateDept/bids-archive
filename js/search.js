@@ -43,7 +43,7 @@
 							}
 							if (parts[i] == '$100M or more') {
 								begin = '100000000';
-								filter = filter + "<PropertyIsGreaterThan><PropertyName>PrSize</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
+								filter = filter + "<PropertyIsGreaterThan><PropertyName>" + siz + "</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
 							}
 						}
 						filter = filter + "</Or>";
@@ -66,7 +66,7 @@
 						}
 						if (sizeVal == '$100M or more') {
 							begin = '100000000';
-							filter = filter + "<PropertyIsGreaterThan><PropertyName>PrSize</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
+							filter = filter + "<PropertyIsGreaterThan><PropertyName>" + siz + "</PropertyName><Literal>" + begin + "</Literal></PropertyIsGreaterThan>";
 						}
 					}
 					count = count + 1;
