@@ -154,7 +154,7 @@ sources = [['African Development Bank'], ['Asian Development Bank'], ['European 
 regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
 stat = [['In Procurement'], ['Pipeline'], ['Fulfilled']]
 arch = [['Active'], ['Archived']]
-sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
+sizes = [['Less than $25M'], ['$25-49M'], ['$50-99M'], ['$100M or more']]
 sec = [['Administrative and Support and Waste Management and Remediation Services'],['Agriculture, Forestry, Fishing and Hunting'],['Construction'],['Educational Services'],['Finance and Insurance'],['Health Care and Social Assistance'],['Information'],['Manufacturing'],['Mining, Quarrying, and Oil and Gas Extraction'],['Professional, Scientific, and Technical Services'],['Public Administration'],['Transportation and Warehousing'],['Utilities']]
 
 // Add a lead Form / Edit a lead Form
@@ -242,6 +242,7 @@ tabs = new Ext.FormPanel({
 		autoStripChars: true,
 		width : 275,
 		allowBlank: false,
+		allowDecimals: false,
 		blankText: 'a Project Value is required.',
 		emptyClass: 'reqField'
 	}, new Ext.form.ComboBox({

@@ -239,7 +239,7 @@ Ext.onReady(function() {
 			type : "string"
 		}, {
 			name : "Project_Size",
-			type : "string"
+			type : "integer"
 		}, {
 			name : "Project_Announced",
 			type : "date",
