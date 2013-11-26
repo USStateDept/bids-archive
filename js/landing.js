@@ -44,7 +44,7 @@ Ext.onReady(function() {
 		
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&outputformat=json",
+				url : "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3Atbl_dailyMetrics&outputformat=json&maxFeatures=1&sortBy=Date+D",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})
