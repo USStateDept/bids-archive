@@ -20,8 +20,11 @@
 				var siz = "Project_Size";
 				var sizeVal = sizeBox.getValue();
 
-				var urlWhole = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
+				urlWhole = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
 				
+				/////////////////
+				//////Size
+				//////////////////
 				if (sizeVal != '') {
 					if (sizeVal.indexOf(",") != -1) {
 						//console.log(eoVal);
@@ -73,14 +76,20 @@
 					}
 					count = count + 1;
 				}
-				////Tender Date
+				
+				/////////////////
+				//////Tender Date
+				//////////////////
 				if (tBeginVal != '') {
 					var begin = Ext.util.Format.date(tBeginVal, 'm/d/Y');
 					var end = Ext.util.Format.date(tEndVal, 'm/d/Y');
 					filter = filter + "%3CPropertyIsBetween%3E%3CPropertyName%3E" + ten + "%3C/PropertyName%3E%3CLowerBoundary%3E%3CLiteral%3E" + begin + "%3C/Literal%3E%3C/LowerBoundary%3E%3CUpperBoundary%3E%3CLiteral%3E" + end + "%3C/Literal%3E%3C/UpperBoundary%3E%3C/PropertyIsBetween%3E"
 					count = count + 1;
 				}
-				////Date
+				
+				/////////////////
+				//////Announced Date
+				//////////////////
 				if (dBeginVal != '') {
 					var begin = Ext.util.Format.date(dBeginVal, 'm/d/Y');
 					var end = Ext.util.Format.date(dEndVal, 'm/d/Y');
@@ -88,6 +97,9 @@
 					count = count + 1;
 				}
 
+				/////////////////
+				//////Status
+				//////////////////
 				if (statVal.length > 0) {
 					if (statVal.indexOf(",") != -1) {
 						//console.log(eoVal);
@@ -107,24 +119,25 @@
 					count = count + 1;
 				}
 
+				/////////////////
+				//////Archived
+				//////////////////
 				if (arcVal.length > 0) {
-
-				if (arcVal == "Archived") {
-				arcVal = 1;
+					if (arcVal == "Archived") {
+						arcVal = 1;
+					} else {
+						arcVal = 0;
+					}
 				} else {
-				arcVal = 0;
+					arcVal = 0;
 				}
-
 				filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 				count = count + 1;
-
-				}
 
 				/////////////////
 				//////Sector
 				//////////////////
 				if (secVal.length > 0) {
-
 					if (secVal.indexOf(",") != -1) {
 						//console.log(eoVal);
 						var parts = secVal.split(",");
@@ -142,6 +155,7 @@
 					}
 					count = count + 1;
 				}
+				
 				///////////////
 				////////Funding Source
 				//////////////
@@ -163,6 +177,7 @@
 					}
 					count = count + 1;
 				}
+				
 				///////////////////
 				//////Keyword
 				//////////////////
@@ -175,7 +190,7 @@
 					filter = filter + "%3CPropertyIsLike matchCase=\"false\" wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EImplementing_Entity%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
 					filter = filter + "%3CPropertyIsLike matchCase=\"false\" wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Title%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
 					filter = filter + "%3CPropertyIsLike matchCase=\"false\" wildCard=\"*\" singleChar=\".\" escape=\"!\"%3E%3CPropertyName%3EProject_Description%3C/PropertyName%3E%3CLiteral%3E*" + keyVal + "*%3C/Literal%3E%3C/PropertyIsLike%3E"
-					filter=filter + "</Or>"
+					filter = filter + "</Or>"
 					count = count + 1;
 				}
 
@@ -190,7 +205,7 @@
 
 				var tProxy = new GeoExt.data.ProtocolProxy({
 					protocol : new OpenLayers.Protocol.HTTP({
-						url : urlWhole + "&outputformat=json",
+						url : urlWhole + "&outputformat=json&Filter%3D%3CFilter%3E%3CAnd%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3ECleared%3C%2FPropertyName%3E%3CLiteral%3E1%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E%3C%2FAnd%3E%3C%2FFilter%3E",
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
