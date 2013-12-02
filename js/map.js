@@ -435,7 +435,7 @@ Ext.onReady(function() {
 			tooltip : 'Download the list below to a CSV/spreadsheet file.',
 			icon : '../img/csv.jpg',
 			handler: function() {
-				searchFunc();
+				//searchFunc();
 				window.location.href = urlWhole + filter + '&outputformat=csv';
 				ga('send', 'event', 'Export', 'CSV_Export', {'nonInteraction': 1});
 			}
