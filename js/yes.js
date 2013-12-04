@@ -30,23 +30,7 @@ function yesEdit() {
 }
 
 
-function test(){
-    Ext.Ajax.request({
-        url: "servlet/Ho?to=lala",
-        method:'POST',
-        param:{
-            to:"lala"
-        },
-        success: function(response, opts){
-            //do what you want with the response here
-            console.log("hiiiiiiiiiiii");
-        },
-        failure: function(response, opts) {
-            alert("server-side failure with status code " + response.status);
-        }
 
-    });
-}
 
 function codeAddress() {
   var geocoder = new google.maps.Geocoder();	
@@ -154,7 +138,7 @@ sources = [['African Development Bank'], ['Asian Development Bank'], ['European 
 regions = [['Africa'], ['East Asia and the Pacific'], ['Europe'], ['Middle East and North Africa'], ['South and Central Asia'], ['Western Hemisphere']]
 stat = [['In Procurement'], ['Pipeline'], ['Fulfilled']]
 arch = [['Active'], ['Archived']]
-sizes = [['Less than $25M'], ['$25-49M'], ['$50-99M'], ['$100M or more']]
+sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
 sec = [['Administrative and Support and Waste Management and Remediation Services'],['Agriculture, Forestry, Fishing and Hunting'],['Construction'],['Educational Services'],['Finance and Insurance'],['Health Care and Social Assistance'],['Information'],['Manufacturing'],['Mining, Quarrying, and Oil and Gas Extraction'],['Professional, Scientific, and Technical Services'],['Public Administration'],['Transportation and Warehousing'],['Utilities']]
 
 // Add a lead Form / Edit a lead Form
@@ -184,6 +168,10 @@ tabs = new Ext.FormPanel({
 		name : 'Lon'
 		//value : '0'
 	},*/{
+		xtype : 'hidden',
+		name : 'Archived'
+		//value : '0'
+	},{
 		xtype : 'hidden',
 		name : 'Cleared'
 		//value : '0'
@@ -242,7 +230,6 @@ tabs = new Ext.FormPanel({
 		autoStripChars: true,
 		width : 275,
 		allowBlank: false,
-		allowDecimals: false,
 		blankText: 'a Project Value is required.',
 		emptyClass: 'reqField'
 	}, new Ext.form.ComboBox({
@@ -490,6 +477,7 @@ tabs = new Ext.FormPanel({
 									//alert(lon);
 									
 									tabs.getForm().findField('Cleared').setValue('0');
+									tabs.getForm().findField('Archived').setValue('0');
 									//tabs.getForm().findField('Lat').setValue(lat);
 									//tabs.getForm().findField('Lon').setValue(lon);
 									tabs.getForm().submit({
@@ -527,6 +515,7 @@ tabs = new Ext.FormPanel({
 							//alert(lon);
 							
 							tabs.getForm().findField('Cleared').setValue('0');
+							tabs.getForm().findField('Archived').setValue('0');
 							//tabs.getForm().findField('Lat').setValue(lat);
 							//tabs.getForm().findField('Lon').setValue(lon);
 							tabs.getForm().submit({
@@ -575,6 +564,7 @@ tabs = new Ext.FormPanel({
 							//alert(lon);
 							
 							tabs.getForm().findField('Cleared').setValue('0');
+							tabs.getForm().findField('Archived').setValue('0');
 							//tabs.getForm().findField('Lat').setValue(lat);
 							//tabs.getForm().findField('Lon').setValue(lon);
 							tabs.getForm().submit({
@@ -593,7 +583,6 @@ tabs = new Ext.FormPanel({
 
 									win.hide();
 									tabs.getForm().reset();
-									test();
 									grid.getView().refresh();
 									sd.refresh({
 										force : true
