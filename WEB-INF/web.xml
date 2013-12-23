@@ -14,6 +14,11 @@
     <servlet-name>LeadAdder</servlet-name>
     <servlet-class>LeadAdder</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>Clear</servlet-name>
+    <servlet-class>Clear</servlet-class>
+  </servlet>
 
   <!-- Map URLs to that servlet. -->
   
@@ -26,6 +31,11 @@
     <servlet-name>LeadAdder</servlet-name>
 	<http-method>POST</http-method>  
     <url-pattern>/servlet/LeadAdder</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Clear</servlet-name>
+    <url-pattern>/servlet/Clear</url-pattern>
   </servlet-mapping>
   
 </web-app>

@@ -23,7 +23,7 @@ public class LeadAdder extends HttpServlet {
 		public void shell(String to,String sub, String text) {  
 			try {  
 
-				String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
+String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\root\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
 				Process p = Runtime.getRuntime().exec(command); 
 
 				BufferedReader in = new BufferedReader(  
@@ -49,8 +49,8 @@ public class LeadAdder extends HttpServlet {
 		PrintWriter out = res.getWriter();
 
 		String query = "";
-		String names = "\"Timestamp\",";
-		String values = "\'NOW()\',";
+		String names = "\"Timestamp\",\"Contact_Timestamp\",";
+		String values = "\'NOW()\',\'NOW()\',";
 		String sectors = "";		
 		boolean isUpdate=false;
 
@@ -182,7 +182,7 @@ public class LeadAdder extends HttpServlet {
 
 			names = names.substring(0, names.length() - 1);
 			values = values.substring(0, values.length() - 1);
-			//out.println(names + ":" + values);
+			out.println(names + ":" + values);
 		}
 
 		try {
@@ -197,11 +197,12 @@ public class LeadAdder extends HttpServlet {
 			String poc = req.getParameter("Submitting_Officer_Contact");
 			String fs = req.getParameter("Source");
 			String mid = req.getParameter("fid");
-			String pt = req.getParameter("Project_Title");
+			//String pt = req.getParameter("Project_Title");
+			
 			
 			if(editType.equals("clear")){
 			
-			send(poc,fs,mid,pt,"clear");
+			send(poc,fs,mid,"clear");
 			}
 			else if(editType.equals("edit")){
 				//String sub = req.getParameter("Project_Title");
@@ -209,7 +210,7 @@ public class LeadAdder extends HttpServlet {
 				//LeadAdder.ShellOut b = new LeadAdder.ShellOut();
 				//b.shell(em+",bidsbot@gmail.com","Edited Lead -" + sub,"Your lead \"" + sub + "\" has been edited.");
 				//b.shell("bidsbot@gmail.com","Edited Lead ready for Clearance -" + sub,"Lead \"" + sub + "\" is ready to be cleared.");
-				send(poc,fs,mid,pt,"edit");
+				send(poc,fs,mid,"edit");
 				out.print(update);
 				rs = stmt.executeQuery(update);
 			}else{
@@ -222,8 +223,8 @@ public class LeadAdder extends HttpServlet {
 				rs = stmt.executeQuery(f);
 				
 				while (rs.next()) {
-    mid = rs.getString(1);
-}
+				mid = rs.getString(1);
+				}
 
 				int hid = Integer.parseInt(mid);
 				hid++;
@@ -231,7 +232,32 @@ public class LeadAdder extends HttpServlet {
 				
 				out.print(f);
 				out.print(mid);
-				send(poc,fs,mid,pt,"insert");
+				send(poc,fs,mid,"insert");
+				//out.println("***fjeklei*********");
+				/*try {  
+				//ProcessBuilder pr = new ProcessBuilder(new String[]{"java", "C:\\SendMail\\SendMail","lbryant77@gmail.com","i","need"});
+String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\root\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail lbryant77@gmail.com oh goshh";
+				out.println(command);
+				//Process p = pr.start();
+				Process p = Runtime.getRuntime().exec(command); 
+				int exitv = p.waitFor();
+				out.println(exitv);
+				BufferedReader in = new BufferedReader(  
+						new InputStreamReader(p.getInputStream()));  
+				String line = null;  
+				while ((line = in.readLine()) != null) {  
+					out.println(line);  
+				}  
+			}
+			
+			catch (Exception e) {  
+				
+					StringWriter errors = new StringWriter();
+					e.printStackTrace(new PrintWriter(errors));
+					out.println(errors.toString());
+				out.println(e.getMessage());
+				out.println(e.toString());
+			}*/
 				
 				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
@@ -261,7 +287,7 @@ public class LeadAdder extends HttpServlet {
 		}
 	}
 
-	public void send(String em, String fs, String mid, String pt, String edit){
+	public void send(String em, String fs, String mid, String edit){
 		//String sub = req.getParameter("Project_Title");
 
 		Properties prop = new Properties();
@@ -311,9 +337,14 @@ public class LeadAdder extends HttpServlet {
 			m2text+=s+"<br/>";
 		}
 		
-		m2text+="<br/><form name=\"myform\" action=\"http://edip-maps.net/bids/servlet/LeadAdder\" method=\"POST\"><input type=\"hidden\" name=\"editType\" value=\"clear\"><input type=\"hidden\" name=\"Project_Title\" value=\"" + pt +"\"><input type=\"hidden\" name=\"Cleared\" value=\"1\"><input type=\"hidden\" name=\"fid\" value=\""+mid+"\"><input type=\"submit\" value=\"Clear\"></form>";
+		//m2text+="<br/><form name=\"myform\" action=\"http:/bids.state.gov/bids/servlet/LeadAdder\" method=\"POST\"><input type=\"hidden\" name=\"editType\" value=\"clear\"><input type=\"hidden\" name=\"Cleared\" value=\"1\"><input type=\"hidden\" name=\"fid\" value=\""+mid+"\"><input type=\"button\" value=\"Clear\"></form>";
+		m2text+="<a href=\"http://bids.state.gov/servlet/Clear?fid="+mid+"\">Click here to Clear</a>";
+		//<input type=\"hidden\" name=\"Project_Title\" value=\"" + pt +"\">
+		//m3text = m3text + " " + pt + " " + m3text2;
 		
-		m3text = m3text + " " + pt + " " + m3text2;
+		m3text = m3text + " " + m3text2;
+		
+		 
 		
 		LeadAdder.ShellOut b = new LeadAdder.ShellOut();
 		if(edit.equals("edit")||edit.equals("insert"))
