@@ -30,11 +30,11 @@
 				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-			ga('create', gaID, gaSite);
+			gaParams();
+			ga('create', gaID, host);
 			ga('send', 'pageview');
 		</script>
     </head>
-	<body onload="setTimeout(function(){document.getElementById('checker').src='http://10.47.115.214:8080/lib/bids/js/yes.js'}, 5000); ieCheck();">
+	<body onload="setTimeout(function(){document.getElementById('checker').src='http://' + host + '/lib/bids/js/yes.js'}, 5000); ieCheck();">
 	</body>
 </html>

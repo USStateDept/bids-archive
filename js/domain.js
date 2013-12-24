@@ -1,2 +1,2 @@
-var domain = 'edip-maps.net'
+var domain = 'dev.edip-maps.net'
 var site = '/bids/'
