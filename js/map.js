@@ -180,7 +180,7 @@ Ext.onReady(function() {
 			url : "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&outputformat=json&Filter=%3CFilter%3E%0A%09%3CAnd%3E%0A%09%09%3COr%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EIn%20Procurement%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EPipeline%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%3C%2FOr%3E%0A%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FAnd%3E%0A%3C%2FFilter%3E",
 			format : new OpenLayers.Format.GeoJSON()
 		}),
-		attribution : "<div><div align='right'><a href='http://github.com/eDiper/bids/wiki/Bug-Reports' target='_blank'><b>Report a bug here</b></a></div><div><disclaimer>Names and boundary representation are not necessarily authoritative.</disclaimer></div>"
+		attribution : "<div><div align='right'><a href='http://github.com/USStateDept/bids/wiki/Bug-Reports' target='_blank'><b>Report a bug here</b></a></div><div><disclaimer>Names and boundary representation are not necessarily authoritative.</disclaimer></div>"
 	});
 
 	var fpControl = new OpenLayers.Control.FeaturePopups({

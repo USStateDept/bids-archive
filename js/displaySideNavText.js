@@ -14,7 +14,7 @@ function displaySideNav3Text() {
 }
 
 function displaySideNav4Text() {
-	sideNavText = "<div class=\'sideNavTextContent\'><div class=\'sideNavTextH2\'>Getting started with BIDS</div><div class=\'sideNavTextH3\'>Accessing BIDS</div><div class=\'sideNavTextP\'>Users can interact directly with the BIDS website to find project data and information to follow up.  BIDS data is also available for <a href=\'data.html\'>download directly from BIDS</a>, <a href=\'http://github.com/eDiper/bids/wiki#api-details'\>via API from BIDS</a>, and through the <a href=\'http://www.commerce.gov/'\>Department of Commerce</a> and other U.S. Government agencies.</div><div class=\'sideNavTextH3\'>Inputting Data</div><div class=\'sideNavTextP\'>U.S. Government officials can add data to BIDS and edit project information as outlined in the <a href=\'help.html\'>BIDS operating manual</a>.</div></div>";
+	sideNavText = "<div class=\'sideNavTextContent\'><div class=\'sideNavTextH2\'>Getting started with BIDS</div><div class=\'sideNavTextH3\'>Accessing BIDS</div><div class=\'sideNavTextP\'>Users can interact directly with the BIDS website to find project data and information to follow up.  BIDS data is also available for <a href=\'data.html\'>download directly from BIDS</a>, <a href=\'http://github.com/USStateDept/bids/wiki#api-details'\>via API from BIDS</a>, and through the <a href=\'http://www.commerce.gov/'\>Department of Commerce</a> and other U.S. Government agencies.</div><div class=\'sideNavTextH3\'>Inputting Data</div><div class=\'sideNavTextP\'>U.S. Government officials can add data to BIDS and edit project information as outlined in the <a href=\'help.html\'>BIDS operating manual</a>.</div></div>";
 	document.getElementById("sideNavTextDiv").innerHTML = sideNavText;
 }
 
