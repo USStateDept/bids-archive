@@ -56,7 +56,7 @@ public class Combo2 extends HttpServlet {
 		} catch (SQLException e) {
 			out.println("SQLException caught: " + e.getMessage());
 		} finally {
-			// Always close the database connection.
+			
 			try {
 				if (con != null)
 					con.close();

@@ -4,12 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 import java.net.*;
-
-//import java.io.FileInputStream;
-//import java.io.IOException;
 import java.util.Properties;
-
-//import ShellOut;
 
 public class LeadAdder extends HttpServlet {
 	
@@ -17,13 +12,10 @@ public class LeadAdder extends HttpServlet {
 	
 	public static class ShellOut {
 
-		
-
-		//public static void main(String[] args){
 		public void shell(String to,String sub, String text) {  
 			try {  
 
-String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\root\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
+				String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\root\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
 				Process p = Runtime.getRuntime().exec(command); 
 
 				BufferedReader in = new BufferedReader(  
@@ -134,17 +126,10 @@ String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 
 						if (paramName.startsWith("ch")) {
 
-							/*if (paramName.equals("chOth")) {
-
-								sectors += paramValue + " ";
-							} else {*/
-
 							String newName = checkName(paramName);
-							// names += "\"" + paramName + "\"" + ",";
-							// values += "\'" + paramValue + "\'" + ",";
 
 							sectors += newName + " ";
-							//}
+							
 						} else {
 
 							if (paramName.startsWith("Spec")) {
@@ -161,10 +146,6 @@ String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 									values +=  wkt +  ",";
 								}
 							} else {
-								// String paramValue = paramValues[0];
-
-								// query+= ""
-
 								names += "\"" + paramName + "\"" + ",";
 								values += "\'" + paramValue + "\'" + ",";
 							}
@@ -197,27 +178,17 @@ String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 			String poc = req.getParameter("Submitting_Officer_Contact");
 			String fs = req.getParameter("Source");
 			String mid = req.getParameter("fid");
-			//String pt = req.getParameter("Project_Title");
-			
 			
 			if(editType.equals("clear")){
 			
 			send(poc,fs,mid,"clear");
 			}
 			else if(editType.equals("edit")){
-				//String sub = req.getParameter("Project_Title");
-				//String em = req.getParameter("Submitting_Officer_Contact");
-				//LeadAdder.ShellOut b = new LeadAdder.ShellOut();
-				//b.shell(em+",bidsbot@gmail.com","Edited Lead -" + sub,"Your lead \"" + sub + "\" has been edited.");
-				//b.shell("bidsbot@gmail.com","Edited Lead ready for Clearance -" + sub,"Lead \"" + sub + "\" is ready to be cleared.");
+				
 				send(poc,fs,mid,"edit");
 				out.print(update);
 				rs = stmt.executeQuery(update);
 			}else{
-				
-				
-				//String dirry = servletRequest.getSession().getServletContext().getRealPath("/")
-				//out.print(dirry);
 				
 				String f = "select max(fid) from Opengeo.\"DATATABLE\"";
 				rs = stmt.executeQuery(f);
@@ -233,52 +204,19 @@ String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 				out.print(f);
 				out.print(mid);
 				send(poc,fs,mid,"insert");
-				//out.println("***fjeklei*********");
-				/*try {  
-				//ProcessBuilder pr = new ProcessBuilder(new String[]{"java", "C:\\SendMail\\SendMail","lbryant77@gmail.com","i","need"});
-String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\root\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail lbryant77@gmail.com oh goshh";
-				out.println(command);
-				//Process p = pr.start();
-				Process p = Runtime.getRuntime().exec(command); 
-				int exitv = p.waitFor();
-				out.println(exitv);
-				BufferedReader in = new BufferedReader(  
-						new InputStreamReader(p.getInputStream()));  
-				String line = null;  
-				while ((line = in.readLine()) != null) {  
-					out.println(line);  
-				}  
-			}
-			
-			catch (Exception e) {  
-				
-					StringWriter errors = new StringWriter();
-					e.printStackTrace(new PrintWriter(errors));
-					out.println(errors.toString());
-				out.println(e.getMessage());
-				out.println(e.toString());
-			}*/
 				
 				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
 				out.print(insert);
 				rs = stmt.executeQuery(insert);
-				
-				
-
 			}
-			/*
-			 * if(col.equals("Sector")){ rs =
-			 * stmt.executeQuery("SELECT DISTINCT \"Sector\" FROM Opengeo.\"DATATABLE\""
-			 * ); }
-			 */
 
 		} catch (ClassNotFoundException e) {
 			out.println("Couldn't load database driver: " + e.getMessage());
 		} catch (SQLException e) {
 			out.println("SQLException caught: " + e.getMessage());
 		} finally {
-			// Always close the database connection.
+			
 			try {
 				if (con != null)
 					con.close();
@@ -288,10 +226,8 @@ String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 	}
 
 	public void send(String em, String fs, String mid, String edit){
-		//String sub = req.getParameter("Project_Title");
 
 		Properties prop = new Properties();
-		//mid = "327";
 
 		String m1sub="";
 		String m1text="";
@@ -307,10 +243,6 @@ String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 
 			String propertiesFilePath = getServletContext().getRealPath("WEB-INF/config.properties");
 			prop.load(new FileInputStream(propertiesFilePath));
-			//load a properties file
-			//prop.load(new FileInputStream("config.properties"));
-
-			//get the property value and print it out
 
 			m1sub = prop.getProperty("m1sub");
 			m1text = prop.getProperty("m1text");
@@ -331,20 +263,13 @@ String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 		m2sub+=fs;
 		m2text+="<br/>";
 		
-		//em = em + "," + m1to;
 		for (String s : myList){
 			m1text+=s+"<br/>";
 			m2text+=s+"<br/>";
 		}
 		
-		//m2text+="<br/><form name=\"myform\" action=\"http:/bids.state.gov/bids/servlet/LeadAdder\" method=\"POST\"><input type=\"hidden\" name=\"editType\" value=\"clear\"><input type=\"hidden\" name=\"Cleared\" value=\"1\"><input type=\"hidden\" name=\"fid\" value=\""+mid+"\"><input type=\"button\" value=\"Clear\"></form>";
 		m2text+="<a href=\"http://bids.state.gov/servlet/Clear?fid="+mid+"\">Click here to Clear</a>";
-		//<input type=\"hidden\" name=\"Project_Title\" value=\"" + pt +"\">
-		//m3text = m3text + " " + pt + " " + m3text2;
-		
 		m3text = m3text + " " + m3text2;
-		
-		 
 		
 		LeadAdder.ShellOut b = new LeadAdder.ShellOut();
 		if(edit.equals("edit")||edit.equals("insert"))
@@ -355,7 +280,6 @@ String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 		b.shell(m1to,m2sub,m2text);
 		else if(edit.equals("clear"))
 		b.shell(m1to,m3sub,m3text);
-		//b.shell("bidsbot@gmail.com","New Lead ready for Clearance - " + sub,"Lead \"" + sub + "\" is ready to be cleared.");
 	}
 
 	public String checkName(String ch) {
@@ -377,10 +301,8 @@ String command = "cmd /C cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Progra
 	}
 
 	public String Geocode(String lat, String lon) {
-		//PrintWriter out = res.getWriter();
-		//line = "dfae";
-		String wkt = "ST_GeomFromText(\'POINT(" + lon + " " + lat + ")\', 4326)";
 		
+		String wkt = "ST_GeomFromText(\'POINT(" + lon + " " + lat + ")\', 4326)";
 		return wkt;
 	}
 

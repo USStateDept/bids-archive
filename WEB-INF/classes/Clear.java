@@ -4,12 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 import java.net.*;
-
-//import java.io.FileInputStream;
-//import java.io.IOException;
 import java.util.Properties;
-
-//import ShellOut;
 
 public class Clear extends HttpServlet {
 	
@@ -38,7 +33,6 @@ public class Clear extends HttpServlet {
 				
 			String update="update Opengeo.\"DATATABLE\" set \"Cleared\" = 1 where fid =" + fid;
 				
-			//out.print(update);
 			out.print("Lead Cleared");
 			rs = stmt.executeQuery(update);
 
@@ -47,7 +41,7 @@ public class Clear extends HttpServlet {
 		} catch (SQLException e) {
 			//out.println("SQLException caught: " + e.getMessage());
 		} finally {
-			// Always close the database connection.
+			
 			try {
 				if (con != null)
 					con.close();
