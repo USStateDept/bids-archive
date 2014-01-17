@@ -190,7 +190,7 @@ tabs = new Ext.FormPanel({
 	}, {
 		name : 'Specific_Location',
 		xtype : 'textfield',
-		emptyText : 'Specific Location',
+		emptyText : 'Geographic Location',
 		width : 275
 		//id : 'sspec'
 	}, {
@@ -222,7 +222,7 @@ tabs = new Ext.FormPanel({
 		emptyClass: 'reqField'
 	}), {
 		name : 'Project_Size',
-		emptyText : 'Project Value (in US$)',
+		emptyText : 'Estimated Project Value (in US$)',
 		xtype : 'numberfield',
 		maxValue : 999999999999,
 		// Suggest changing minValue to 1000. Logic being our FSOs should be able to ballpark a value, and 1000 is high enough to prevent "2.5" being entered instead of "2,500,000".
@@ -466,7 +466,7 @@ tabs = new Ext.FormPanel({
 							geocoder.geocode( { 'address': address}, function(results, status) {
 								if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 									// On failure to Geocode, return is: ZERO_RESULTS
-									Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Specific Location and/or Country information again.');
+									Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
 								
 									ga('send', 'event', 'Add_Lead', 'Geocode_SpecLoc_Failure', {'nonInteraction': 1});
 								}
@@ -553,7 +553,7 @@ tabs = new Ext.FormPanel({
 					geocoder.geocode( { 'address': address}, function(results, status) {
 						if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 							// On failure to Geocode, return is: ZERO_RESULTS
-							Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Specific Location and/or Country information again.');
+							Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
 						
 							ga('send', 'event', 'Add_Lead', 'Geocode_Country_Failure', {'nonInteraction': 1});
 						}
