@@ -10,7 +10,7 @@ function checkTest() {
 }
 	
 function no() {
-	Ext.Msg.alert('Access Denied','Adding leads is only available for State Department employees - which could be you! Go to www.usajobs.gov! Be one of us!<br><br>If you are a State Department employee and are currently using an OpenNet computer, please try again.');
+	Ext.Msg.alert('Access Denied','Adding leads is only available for US government employees working at the State Department and/or who have access to an OpenNet computer.');
 }
 
 function checkTestEditMap() {
@@ -29,7 +29,7 @@ function yesEditMap() {
 }
 
 function noEditMap() {
-	Ext.Msg.alert('Access Denied','Editing leads is only available for State Department employees - which could be you! Go to www.usajobs.gov! Be one of us!<br><br>If you are a State Department employee and are currently using an OpenNet computer, please try again.');
+	Ext.Msg.alert('Access Denied','Editing leads is only available for US government employees working at the State Department and/or who have access to an OpenNet computer.');
 }
 
 function checkTestEditGrid() {
@@ -44,5 +44,5 @@ function checkTestEditGrid() {
 }
 	
 function noEditGrid() {
-	Ext.Msg.alert('Access Denied','Editing leads is only available for State Department employees - which could be you! Go to www.usajobs.gov! Be one of us!<br><br>If you are a State Department employee and are currently using an OpenNet computer, please try again.');
+	Ext.Msg.alert('Access Denied','Editing leads is only available for US government employees working at the State Department and/or who have access to an OpenNet computer.');
 }
