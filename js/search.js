@@ -107,7 +107,6 @@
 						filter = filter + "<Or>";
 						console.log(filter);
 						for (var i = 0; i < parts.length; i++) {
-
 							filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + stat + "%3C/PropertyName%3E%3CLiteral%3E" + parts[i] + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 							console.log(filter);
 						}
@@ -120,9 +119,9 @@
 				}
 
 				/////////////////
-				//////Archived
+				//////Archived OLD
 				//////////////////
-				if (arcVal.length > 0) {
+			/*	if (arcVal.length > 0) {
 					if (arcVal == "Archived") {
 						arcVal = 1;
 					} else {
@@ -133,6 +132,37 @@
 				}
 				filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 				count = count + 1;
+*/
+				/////////////////
+				//////Archived NEW
+				//////////////////
+				if (arcVal.length > 0) {
+					if (arcVal.indexOf(",") != -1) {
+						//console.log(eoVal);
+						var parts = arcVal.split(",");
+						filter = filter + "<Or>";
+						console.log(filter);
+						for (var i = 0; i < parts.length; i++) {
+							if (parts[i] == "Archived") {
+								parts[i] = 1;
+							} else {
+								parts[i] = 0;
+							}
+							filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + parts[i] + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
+							console.log(filter);
+						}
+						filter = filter + "</Or>";
+						console.log(filter);
+					} else {
+						if (arcVal == "Archived") {
+							arcVal = 1;
+						} else {
+							arcVal = 0;
+						}
+						filter = filter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
+					}
+					count = count + 1;
+				}
 
 				/////////////////
 				//////Sector
