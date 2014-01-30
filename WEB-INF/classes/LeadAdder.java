@@ -8,15 +8,14 @@ import java.util.Properties;
 
 public class LeadAdder extends HttpServlet {
 	
-	List<String> myList = new ArrayList<String>();
+	Hashtable<String,Object> myList = new Hashtable<String,Object>();
 	
 	public static class ShellOut {
 
 		public void shell(String to,String sub, String text) {  
 			try {  
 
-				//String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\root\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
-				String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\\\OpenGeo\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
+				String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\OpenGeo\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
 				Process p = Runtime.getRuntime().exec(command); 
 
 				BufferedReader in = new BufferedReader(  
@@ -49,25 +48,43 @@ public class LeadAdder extends HttpServlet {
 
 		Enumeration paramNames = req.getParameterNames();
 
-		myList.clear();
-		
 		String editType = req.getParameter("editType");
-		//REPEAT these next three lines per field in table
 		String lat = req.getParameter("Lat");
-		String[] latValues = req.getParameterValues("Lat");
-		String latVal = latValues[0];
-		myList.add(lat);
-		//Those 3 lines
 		String lon = req.getParameter("Lon");
 		String fid = req.getParameter("fid");
 		String update="";
 
 		fid = fid.substring(fid.indexOf('.')+1);
 
-		
+		myList.put("Project_Title", req.getParameter("Project_Title"));
+		myList.put("Specific_Location", req.getParameter("Specific_Location"));
+		myList.put("Country", req.getParameter("Country"));
+		myList.put("Lat", req.getParameter("Lat"));
+		myList.put("Lon", req.getParameter("Lon"));
+		myList.put("Sector", req.getParameter("Sector"));
+		myList.put("Project_Size", req.getParameter("Project_Size"));
+		myList.put("Status", req.getParameter("Status"));
+		myList.put("Project_Number", req.getParameter("Project_Number"));
+		myList.put("Project_Funding_Source", req.getParameter("Project_Funding_Source"));
+		myList.put("Source", req.getParameter("Source"));
+		myList.put("Project_Description", req.getParameter("Project_Description"));
+		myList.put("Keyword", req.getParameter("Keyword"));
+		myList.put("Project_Announced", req.getParameter("Project_Announced"));
+		myList.put("Tender_Date", req.getParameter("Tender_Date"));
+		myList.put("Borrowing_Entity", req.getParameter("Borrowing_Entity"));
+		myList.put("Implementing_Entity", req.getParameter("Implementing_Entity"));
+		myList.put("Link_To_Project", req.getParameter("Link_To_Project"));
+		myList.put("Business_URL", req.getParameter("Business_URL"));
+		myList.put("Submitting_Officer", req.getParameter("Submitting_Officer"));
+		myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact"));
+		myList.put("Project_POCs", req.getParameter("Project_POCs"));
+		myList.put("Post_Comments", req.getParameter("Post_Comments"));
+				
 		if(editType.equals("edit")){
 			isUpdate=true;
-			
+
+			myList.clear();
+
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
 				String[] paramValues = req.getParameterValues(paramName);
@@ -113,9 +130,10 @@ public class LeadAdder extends HttpServlet {
 			update = "update Opengeo.\"DATATABLE\" set " + update;
 			out.print(update);
 
-
 		}
 		else{
+			
+			//myList.clear();
 			
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
@@ -141,19 +159,18 @@ public class LeadAdder extends HttpServlet {
 					paramValue = paramValue.replace("\t", " ");
 					paramValue = paramValue.replace("\f", " ");
 					
-					myList.add(paramName + " : " + paramValue);
+					//myList.add(paramName + " : " + paramValue);
 					
 					if (paramValue.length() > 0) {
 
 						if (paramName.startsWith("ch")) {
 
 							String newName = checkName(paramName);
-
 							sectors += newName + " ";
-							
+		
 						} else {
 
-							if (paramName.startsWith("Spec")) {
+							if (paramName.startsWith("Country")) {
 								
 								String wkt = Geocode(lat, lon);
 								out.println(wkt);
@@ -167,6 +184,7 @@ public class LeadAdder extends HttpServlet {
 									values +=  wkt +  ",";
 								}
 							} else {
+								
 								names += "\"" + paramName + "\"" + ",";
 								values += "\'" + paramValue + "\'" + ",";
 							}
@@ -230,8 +248,11 @@ public class LeadAdder extends HttpServlet {
 						+ ") VALUES(" + values + ")";
 				out.print(insert);
 				rs = stmt.executeQuery(insert);
-			}
+				
+				
 
+			}
+			
 		} catch (ClassNotFoundException e) {
 			out.println("Couldn't load database driver: " + e.getMessage());
 		} catch (SQLException e) {
@@ -247,9 +268,9 @@ public class LeadAdder extends HttpServlet {
 	}
 
 	public void send(String em, String fs, String mid, String edit){
-
+		
 		Properties prop = new Properties();
-
+		
 		String m1sub="";
 		String m1text="";
 		String m1to="";
@@ -284,113 +305,36 @@ public class LeadAdder extends HttpServlet {
 		m2sub+=fs;
 		m2text+="<br/>";
 		
-		myList.add("Project_Title");
-		myList.add("Specific_Location");
-		myList.add("Country");
-		myList.add("Lat");
-		myList.add("Lon");
-		myList.add("Sector");
-		myList.add("Project_Size");
-		myList.add("Status");
-		myList.add("Project_Number");
-		myList.add("Project_Funding_Source");
-		myList.add("Source");
-		myList.add("Project_Description");
-		myList.add("Keyword");
-		myList.add("Project_Announced");
-		myList.add("Tender_Date");
-		myList.add("Borrowing_Entity");
-		myList.add("Implementing_Entity");
-		myList.add("Link_To_Project");
-		myList.add("Business_URL");
-		myList.add("Submitting_Officer");
-		myList.add("Submitting_Officer_Contact");
-		myList.add("Project_POCs");
-		myList.add("Post_Comments");
-		myList.add("fid");
+		String title = (String)myList.get("Project_Title");
+		String spec = (String)myList.get("Specific_Location");
+		String country = (String)myList.get("Country");
+		String lat = (String)myList.get("Lat");
+		String lon = (String)myList.get("Lon");
+		String sector = (String)myList.get("Sector");
+		String size = (String)myList.get("Project_Size");
+		String status = (String)myList.get("Status");
+		String number = (String)myList.get("Project_Number");
+		String fundSource = (String)myList.get("Project_Funding_Source");
+		String source = (String)myList.get("Source");
+		String descrip = (String)myList.get("Project_Description");
+		String keywords = (String)myList.get("Keyword");
+		String announDate = (String)myList.get("Project_Announced");
+		String tenderDate = (String)myList.get("Tender_Date");
+		String borrowEntity = (String)myList.get("Borrowing_Entity");
+		String impleEntity = (String)myList.get("Implementing_Entity");
+		String projLink = (String)myList.get("Link_To_Project");
+		String busURL = (String)myList.get("Business_URL");
+		String subOff = (String)myList.get("Submitting_Officer");
+		String subOffEmail = (String)myList.get("Submitting_Officer_Contact");
+		String pocs = (String)myList.get("Project_POCs");
+		String comments = (String)myList.get("Post_Comments");
 		
-		int titleIndex = myList.indexOf("Project_Title");
-		String title = myList.get(titleIndex);
+		m1text+="<br/>Project Title: <b>"+title+"</b><br/>Sector: <b>"+sector+"</b><br/>Project Size: US$<b>"+size+"</b><br/>Status: <b>"+status+"</b><br/>Project Number: <b>"+number+"</b><br/>Funding Source: <b>"+fundSource+"</b><br/>Information Source: <b>"+source+"</b><br/>Project Description: <b>"+descrip+"</b><br/>Keywords: <b>"+keywords+"</b><br/>Announced Date: <b>"+announDate+"</b><br/>Tender Date: <b>"+tenderDate+"</b><br/>Borrowing Entity: <b>"+borrowEntity+"</b><br/>Implementing Entity: <b>"+impleEntity+"</b><br/>Project Website: <b>"+projLink+"</b><br/>Business Tab: <b>"+busURL+"</b><br/>Submitting Officer: <b>"+subOff+"</b><br/>Submitting Officer Email: <b>"+subOffEmail+"</b><br/>Project Point of Contacts: <b>"+pocs+"</b><br/>Post Comments: <b>"+comments+"</b><br/>Tracking ID: <b>"+mid+"</b><br/><p>Please also confirm the location details. You entered: <br/>Country: <b>"+country+"</b><br/><br/>Geographic Location: <b>"+spec+"</b><br/></p>";
+		m2text+="<br/>Project Title: <b>"+title+"</b><br/>Sector: <b>"+sector+"</b><br/>Project Size: US$<b>"+size+"</b><br/>Status: <b>"+status+"</b><br/>Project Number: <b>"+number+"</b><br/>Funding Source: <b>"+fundSource+"</b><br/>Information Source: <b>"+source+"</b><br/>Project Description: <b>"+descrip+"</b><br/>Keywords: <b>"+keywords+"</b><br/>Announced Date: <b>"+announDate+"</b><br/>Tender Date: <b>"+tenderDate+"</b><br/>Borrowing Entity: <b>"+borrowEntity+"</b><br/>Implementing Entity: <b>"+impleEntity+"</b><br/>Project Website: <b>"+projLink+"</b><br/>Business Tab: <b>"+busURL+"</b><br/>Submitting Officer: <b>"+subOff+"</b><br/>Submitting Officer Email: <b>"+subOffEmail+"</b><br/>Project Point of Contacts: <b>"+pocs+"</b><br/>Post Comments: <b>"+comments+"</b><br/>Tracking ID: <b>"+mid+"</b><br/><p>Please also confirm the location details. You entered: <br/>Country: <b>"+country+"</b><br/><br/>Geographic Location: <b>"+spec+"</b><br/></p><a href=\"http://bids.state.gov/servlet/Clear?fid="+mid+"\">Click here to Clear</a>";
 		
-		int specIndex = myList.indexOf("Specific_Location");
-		String spec = myList.get(specIndex);
-		
-		int countryIndex = myList.indexOf("Country");
-		String country = myList.get(countryIndex);
-		
-		int latIndex = myList.indexOf("Lat");
-		String lat = myList.get(latIndex);
-		
-		int lonIndex = myList.indexOf("Lon");
-		String lon = myList.get(lonIndex);
-		
-		int sectorIndex = myList.indexOf("Sector");
-		String sector = myList.get(sectorIndex);
-		
-		int sizeIndex = myList.indexOf("Project_Size");
-		String size = myList.get(sizeIndex);
-		
-		int statusIndex = myList.indexOf("Status");
-		String status = myList.get(statusIndex);
-		
-		int numberIndex = myList.indexOf("Project_Number");
-		String number = myList.get(numberIndex);
-		
-		int fundSourceIndex = myList.indexOf("Project_Funding_Source");
-		String fundSource = myList.get(fundSourceIndex);
-		
-		int sourceIndex = myList.indexOf("Source");
-		String source = myList.get(sourceIndex);
-		
-		int descripIndex = myList.indexOf("Project_Description");
-		String descrip = myList.get(descripIndex);
-		
-		int keywordsIndex = myList.indexOf("Keyword");
-		String keywords = myList.get(keywordsIndex);
-		
-		int announDateIndex = myList.indexOf("Project_Announced");
-		String announDate = myList.get(announDateIndex);
-		
-		int tenderDateIndex = myList.indexOf("Tender_Date");
-		String tenderDate = myList.get(tenderDateIndex);
-		
-		int borrowEntityIndex = myList.indexOf("Borrowing_Entity");
-		String borrowEntity = myList.get(borrowEntityIndex);
-		
-		int impleEntityIndex = myList.indexOf("Implementing_Entity");
-		String impleEntity = myList.get(impleEntityIndex);
-		
-		int projLinkIndex = myList.indexOf("Link_To_Project");
-		String projLink = myList.get(projLinkIndex);
-		
-		int busURLIndex = myList.indexOf("Business_URL");
-		String busURL = myList.get(busURLIndex);
-		
-		int subOffIndex = myList.indexOf("Submitting_Officer");
-		String subOff = myList.get(subOffIndex);
-		
-		int subOffEmailIndex = myList.indexOf("Submitting_Officer_Contact");
-		String subOffEmail = myList.get(subOffEmailIndex);
-		
-		int pocsIndex = myList.indexOf("Project_POCs");
-		String pocs = myList.get(pocsIndex);
-		
-		int commentsIndex = myList.indexOf("Post_Comments");
-		String comments = myList.get(commentsIndex);
-		
-		int fidIndex = myList.indexOf("fid");
-		String fid = myList.get(fidIndex);
-		
-		m1text+="<br/>Project Title: <b>"+title+"</b><br/>Sector: <b>"+sector+"</b><br/>Project Size: US$<b>"+size+"</b><br/>Status: <b>"+status+"</b><br/>Project Number: <b>"+number+"</b><br/>Funding Source: <b>"+fundSource+"</b><br/>Information Source: <b>"+source+"</b><br/>Project Description: <b>"+descrip+"</b><br/>Keywords: <b>"+keywords+"</b><br/>Announced Date: <b>"+announDate+"</b><br/>Tender Date: <b>"+tenderDate+"</b><br/>Borrowing Entity: <b>"+borrowEntity+"</b><br/>Implementing Entity: <b>"+impleEntity+"</b><br/>Project Website: <b>"+projLink+"</b><br/>Business Tab: <b>"+busURL+"</b><br/>Submitting Officer: <b>"+subOff+"</b><br/>Submitting Officer Email: <b>"+subOffEmail+"</b><br/>Project Point of Contacts: <b>"+pocs+"</b><br/>Post Comments: <b>"+comments+"</b><br/>Tracking ID: <b>"+fid+"</b><br/><p>Please also confirm the location details. You entered: <br/>Country: <b>"+country+"</b><br/><br/>Geographic Location: <b>"+spec+"</b><br/></p>";
-		m2text+="<br/>Project Title: <b>"+title+"</b><br/>Sector: <b>"+sector+"</b><br/>Project Size: US$<b>"+size+"</b><br/>Status: <b>"+status+"</b><br/>Project Number: <b>"+number+"</b><br/>Funding Source: <b>"+fundSource+"</b><br/>Information Source: <b>"+source+"</b><br/>Project Description: <b>"+descrip+"</b><br/>Keywords: <b>"+keywords+"</b><br/>Announced Date: <b>"+announDate+"</b><br/>Tender Date: <b>"+tenderDate+"</b><br/>Borrowing Entity: <b>"+borrowEntity+"</b><br/>Implementing Entity: <b>"+impleEntity+"</b><br/>Project Website: <b>"+projLink+"</b><br/>Business Tab: <b>"+busURL+"</b><br/>Submitting Officer: <b>"+subOff+"</b><br/>Submitting Officer Email: <b>"+subOffEmail+"</b><br/>Project Point of Contacts: <b>"+pocs+"</b><br/>Post Comments: <b>"+comments+"</b><br/>Tracking ID: <b>"+fid+"</b><br/><p>Please also confirm the location details. You entered: <br/>Country: <b>"+country+"</b><br/><br/>Geographic Location: <b>"+spec+"</b><br/></p><a href=\"http://bids.state.gov/servlet/Clear?fid="+mid+"\">Click here to Clear</a>";
-		
-		/*for (String s : myList){
-			m1text+=s+"<br/>";
-			m2text+=s+"<br/>";
-		}*/
-		
-		//m2text+="<a href=\"http://bids.state.gov/servlet/Clear?fid="+mid+"\">Click here to Clear</a>";
 		m3text = m3text + " " + m3text2;
+		
+		myList.clear();
 		
 		LeadAdder.ShellOut b = new LeadAdder.ShellOut();
 		if(edit.equals("edit")||edit.equals("insert"))
@@ -401,6 +345,7 @@ public class LeadAdder extends HttpServlet {
 		b.shell(m1to,m2sub,m2text);
 		else if(edit.equals("clear"))
 		b.shell(m1to,m3sub,m3text);
+		
 	}
 
 	public String checkName(String ch) {
@@ -424,6 +369,7 @@ public class LeadAdder extends HttpServlet {
 	public String Geocode(String lat, String lon) {
 		
 		String wkt = "ST_GeomFromText(\'POINT(" + lon + " " + lat + ")\', 4326)";
+		
 		return wkt;
 	}
 
