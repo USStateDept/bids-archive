@@ -235,7 +235,8 @@
 
 				var tProxy = new GeoExt.data.ProtocolProxy({
 					protocol : new OpenLayers.Protocol.HTTP({
-						url : urlWhole + "&outputformat=json&Filter%3D%3CFilter%3E%3CAnd%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3ECleared%3C%2FPropertyName%3E%3CLiteral%3E1%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E%3C%2FAnd%3E%3C%2FFilter%3E",
+						//url : urlWhole + "&outputformat=json&Filter%3D%3CFilter%3E%3CAnd%3E%3CPropertyIsEqualTo%3E%3CPropertyName%3ECleared%3C%2FPropertyName%3E%3CLiteral%3E1%3C%2FLiteral%3E%3C%2FPropertyIsEqualTo%3E%3C%2FAnd%3E%3C%2FFilter%3E",
+						url : urlWhole + "&outputformat=json",
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
