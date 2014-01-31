@@ -16,7 +16,7 @@ public class LeadAdder extends HttpServlet {
 		public void shell(String to,String sub, String text) {  
 			try {  
 
-				String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\OpenGeo\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
+				String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\Program Files (x86)\\OpenGeo\\OpenGeo Suite\\webapps\\root\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
 				Process p = Runtime.getRuntime().exec(command); 
 
 				BufferedReader in = new BufferedReader(  
