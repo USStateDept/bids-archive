@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import java.util.*;
 import java.net.*;
 import java.util.Properties;
+import java.text.SimpleDateFormat;
 
 public class LeadAdder extends HttpServlet {
 	
@@ -35,7 +36,6 @@ public class LeadAdder extends HttpServlet {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
 
 		res.setContentType("text/html");
 		PrintWriter out = res.getWriter();
@@ -47,7 +47,12 @@ public class LeadAdder extends HttpServlet {
 		boolean isUpdate=false;
 
 		Enumeration paramNames = req.getParameterNames();
-
+		
+		PrintWriter printWriter = new PrintWriter(new FileWriter("LeadLog.txt", true));
+		
+		java.util.Date date = new java.util.Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		
 		String editType = req.getParameter("editType");
 		String lat = req.getParameter("Lat");
 		String lon = req.getParameter("Lon");
@@ -56,29 +61,7 @@ public class LeadAdder extends HttpServlet {
 
 		fid = fid.substring(fid.indexOf('.')+1);
 
-		myList.put("Project_Title", req.getParameter("Project_Title"));
-		myList.put("Specific_Location", req.getParameter("Specific_Location"));
-		myList.put("Country", req.getParameter("Country"));
-		myList.put("Lat", req.getParameter("Lat"));
-		myList.put("Lon", req.getParameter("Lon"));
-		myList.put("Sector", req.getParameter("Sector"));
-		myList.put("Project_Size", req.getParameter("Project_Size"));
-		myList.put("Status", req.getParameter("Status"));
-		myList.put("Project_Number", req.getParameter("Project_Number"));
-		myList.put("Project_Funding_Source", req.getParameter("Project_Funding_Source"));
-		myList.put("Source", req.getParameter("Source"));
-		myList.put("Project_Description", req.getParameter("Project_Description"));
-		myList.put("Keyword", req.getParameter("Keyword"));
-		myList.put("Project_Announced", req.getParameter("Project_Announced"));
-		myList.put("Tender_Date", req.getParameter("Tender_Date"));
-		myList.put("Borrowing_Entity", req.getParameter("Borrowing_Entity"));
-		myList.put("Implementing_Entity", req.getParameter("Implementing_Entity"));
-		myList.put("Link_To_Project", req.getParameter("Link_To_Project"));
-		myList.put("Business_URL", req.getParameter("Business_URL"));
-		myList.put("Submitting_Officer", req.getParameter("Submitting_Officer"));
-		myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact"));
-		myList.put("Project_POCs", req.getParameter("Project_POCs"));
-		myList.put("Post_Comments", req.getParameter("Post_Comments"));
+		
 				
 		if(editType.equals("edit")){
 			isUpdate=true;
@@ -128,12 +111,33 @@ public class LeadAdder extends HttpServlet {
 			update = update.substring(0, update.length()-1);
 			update = update + " where fid = " + fid;
 			update = "update Opengeo.\"DATATABLE\" set " + update;
-			out.print(update);
-
+			  
 		}
 		else{
 			
-			//myList.clear();
+			myList.put("Project_Title", req.getParameter("Project_Title"));
+			myList.put("Specific_Location", req.getParameter("Specific_Location"));
+			myList.put("Country", req.getParameter("Country"));
+			myList.put("Lat", req.getParameter("Lat"));
+			myList.put("Lon", req.getParameter("Lon"));
+			myList.put("Sector", req.getParameter("Sector"));
+			myList.put("Project_Size", req.getParameter("Project_Size"));
+			myList.put("Status", req.getParameter("Status"));
+			myList.put("Project_Number", req.getParameter("Project_Number"));
+			myList.put("Project_Funding_Source", req.getParameter("Project_Funding_Source"));
+			myList.put("Source", req.getParameter("Source"));
+			myList.put("Project_Description", req.getParameter("Project_Description"));
+			myList.put("Keyword", req.getParameter("Keyword"));
+			myList.put("Project_Announced", req.getParameter("Project_Announced"));
+			myList.put("Tender_Date", req.getParameter("Tender_Date"));
+			myList.put("Borrowing_Entity", req.getParameter("Borrowing_Entity"));
+			myList.put("Implementing_Entity", req.getParameter("Implementing_Entity"));
+			myList.put("Link_To_Project", req.getParameter("Link_To_Project"));
+			myList.put("Business_URL", req.getParameter("Business_URL"));
+			myList.put("Submitting_Officer", req.getParameter("Submitting_Officer"));
+			myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact"));
+			myList.put("Project_POCs", req.getParameter("Project_POCs"));
+			myList.put("Post_Comments", req.getParameter("Post_Comments"));
 			
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
@@ -159,8 +163,6 @@ public class LeadAdder extends HttpServlet {
 					paramValue = paramValue.replace("\t", " ");
 					paramValue = paramValue.replace("\f", " ");
 					
-					//myList.add(paramName + " : " + paramValue);
-					
 					if (paramValue.length() > 0) {
 
 						if (paramName.startsWith("ch")) {
@@ -173,7 +175,8 @@ public class LeadAdder extends HttpServlet {
 							if (paramName.startsWith("Country")) {
 								
 								String wkt = Geocode(lat, lon);
-								out.println(wkt);
+								printWriter.println("*********WKT"+sdf.format(date));
+								printWriter.println (wkt);
 								if (wkt.equals("0")) {
 
 								}
@@ -202,7 +205,6 @@ public class LeadAdder extends HttpServlet {
 
 			names = names.substring(0, names.length() - 1);
 			values = values.substring(0, values.length() - 1);
-			out.println(names + ":" + values);
 		}
 
 		try {
@@ -224,9 +226,12 @@ public class LeadAdder extends HttpServlet {
 			}
 			else if(editType.equals("edit")){
 				
+				printWriter.println("*********UPDATE"+sdf.format(date));
+				printWriter.println (update);
+				int resUpdate = stmt.executeUpdate(update);
 				send(poc,fs,mid,"edit");
-				out.print(update);
-				rs = stmt.executeQuery(update);
+				
+				printWriter.close (); 
 			}else{
 				
 				String f = "select max(fid) from Opengeo.\"DATATABLE\"";
@@ -239,24 +244,25 @@ public class LeadAdder extends HttpServlet {
 				int hid = Integer.parseInt(mid);
 				hid++;
 				mid = Integer.toString(hid);
-				
-				out.print(f);
-				out.print(mid);
-				send(poc,fs,mid,"insert");
-				
+								
 				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
-				out.print(insert);
-				rs = stmt.executeQuery(insert);
 				
+				int result = stmt.executeUpdate(insert);
 				
-
+				printWriter.println("*********INSERT"+sdf.format(date));
+				printWriter.println (insert);
+				send(poc,fs,mid,"insert");
+				printWriter.println("Email sent");
+				printWriter.close (); 
 			}
 			
 		} catch (ClassNotFoundException e) {
 			out.println("Couldn't load database driver: " + e.getMessage());
+			printWriter.println ("Couldn't load database driver: " + e.getMessage());
 		} catch (SQLException e) {
-			out.println("SQLException caught: " + e.getMessage());
+			out.println ("SQLException caught: " + e.getMessage());
+			printWriter.println ("SQLException caught: " + e.getMessage());
 		} finally {
 			
 			try {
