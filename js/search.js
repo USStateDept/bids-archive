@@ -225,11 +225,11 @@
 				}
 
 				if (count == 1) {
-					urlWhole = urlWhole + "&Filter=%3CFilter%3E%3CAnd%3E" + filter + "%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%3CNot%3E%0A%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3EProject_Title%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FNot%3E%3C%2FAnd%3E%3C%2FFilter%3E";
+					urlWhole = urlWhole + "&Filter=%3CFilter%3E%3CAnd%3E" + filter + "%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FAnd%3E%3C/Filter%3E";
 				}
 
 				if (count > 1) {
-					filter = "&Filter=%3CFilter%3E%3CAnd%3E" + filter + "%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%3CNot%3E%0A%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3EProject_Title%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FNot%3E%3C%2FAnd%3E%3C%2FFilter%3E";
+					filter = "&Filter=%3CFilter%3E%3CAnd%3E" + filter + "%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FAnd%3E%3C/Filter%3E";
 					urlWhole = urlWhole + filter;
 				}
 
