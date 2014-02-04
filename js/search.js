@@ -206,21 +206,22 @@
 				}
 
 				if (count < 1) {
-					searchURL = defaultWhole + defaultFilter;
+					searchFilter = defaultFilter;
+					//alert(searchFilter);
 				}
 
-				if (count == 1) {
-					searchURL = searchURL + "&Filter=%3CFilter%3E%3CAnd%3E" + searchFilter + "%0A%09%3C%2FAnd%3E%3C%2FFilter%3E";
+				if (count >= 1) {
+					searchFilter = "&Filter=%3CFilter%3E%3CAnd%3E" + searchFilter + "%0A%09%3C%2FAnd%3E%3C%2FFilter%3E";
 				}
-
+/*
 				if (count > 1) {
 					searchFilter = "&Filter=%3CFilter%3E%3CAnd%3E" + searchFilter + "%0A%09%3C%2FAnd%3E%3C%2FFilter%3E";
-					searchURL = searchURL + searchFilter;
 				}
-
+*/
+				//alert(searchFilter);
 				var tProxy = new GeoExt.data.ProtocolProxy({
 					protocol : new OpenLayers.Protocol.HTTP({
-						url : searchURL + " &outputformat=json",
+						url : searchURL + searchFilter + " &outputformat=json",
 						format : new OpenLayers.Format.GeoJSON()
 					})
 				});
@@ -228,6 +229,11 @@
 				store.proxy = tProxy;
 				store.reload();
 				grid.getView().refresh();
+				
+				//defaultURL = searchURL;
+				//defaultFilter = searchFilter;
+				csvFilter = searchFilter;
+				//csvURL = searchFilter = "";
 				
 				ga('send', 'event', 'Search_Panel', 'Search_Search_Panel', {'nonInteraction': 1});
 				
