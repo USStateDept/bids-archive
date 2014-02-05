@@ -126,7 +126,7 @@ function editEntryFunction() {
 		//Ext.getCmp('sspec').disabled=true;
 	}
 
-	console.log(win.myExtraParams.e);
+	//console.log(win.myExtraParams.e);
 	win.show();
 	
 	ga('send', 'event', 'Grid_Panel', 'Edit_Grid_Panel', {'nonInteraction': 1});
@@ -394,208 +394,22 @@ tabs = new Ext.FormPanel({
 		text : 'Save Edits',
 		id : 'btnEdit',
 		handler : function() {
-				if (tabs.getForm().findField("chMaj").getValue() == true) {
-				tabs.getForm().findField('Cleared').setValue('0');
-			} else {
-				var cleared = grid.getSelectionModel().getSelected().data.Cleared;
-					if (cleared == '0') {
-					tabs.getForm().findField('Cleared').setValue('0');
-				} else {
-					tabs.getForm().findField('Cleared').setValue('1');
-				}
-			}
-				tabs.getForm().submit({
-				submitEmptyText : false,
-				params : {
-					editType : 'edit'
-				}
-			});
-			win.hide();
-			
-			Ext.Msg.alert('Submission Successful', 'Thanks for revising your information! If this was a major edit, we will review it and it should be posted within two business days. Otherwise, the edits will appear immediately.');
-			
-			ga('send', 'event', 'Add_Lead', 'Edit_Lead_Details', {'nonInteraction': 1});
+				
+			geo('edit','edit');
 		}
 	}, {
 		text : 'Save as New Lead',
 		id : 'btnClone',
 		handler : function() {
-			tabs.getForm().findField('Cleared').setValue('0');
-			tabs.getForm().submit({
-				submitEmptyText : false,
-				params : {
-					editType : 'insert'
-				},
-				success : function(form, action) {
-					Ext.Msg.alert('Success', 'It worked');
-				},
-				failure : function(form, action) {
-					//Ext.Msg.alert('Warning', 'Error');
-						win.hide();
-					tabs.getForm().reset();
-					grid.getView().refresh();
-					sd.refresh({
-						force : true
-					});
-				}
-			});
-			
-			Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
-			
-			ga('send', 'event', 'Add_Lead', 'Clone_Lead_Details', {'nonInteraction': 1});
+		
+			geo('clone','insert');
 		}
 	}, {
 		text : 'Save',
 		id : 'btnSave',
 		handler : function() 
 			{
-				//codeAddress();
-				var lon='0';
-				var geocoder = new google.maps.Geocoder();
-				var address;
-				
-				if (tabs.getForm().findField("Specific_Location").getValue() != '') {
-					address = tabs.getForm().findField("Specific_Location").getValue(); //'Washington, DC';
-					
-					//alert(address);
-					geocoder.geocode( { 'address': address}, function(results, status) {
-						if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-							address = tabs.getForm().findField("Country").getValue(); //'Washington, DC';
-					
-							//alert(address);
-							geocoder.geocode( { 'address': address}, function(results, status) {
-								if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-									// On failure to Geocode, return is: ZERO_RESULTS
-									Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
-								
-									ga('send', 'event', 'Add_Lead', 'Geocode_SpecLoc_Failure', {'nonInteraction': 1});
-								}
-								else {
-					
-									lat = results[0].geometry.location.lat().toString();
-									lon = results[0].geometry.location.lng().toString();
-									//alert(lon);
-									
-									tabs.getForm().findField('Cleared').setValue('0');
-									tabs.getForm().findField('Archived').setValue('0');
-									//tabs.getForm().findField('Lat').setValue(lat);
-									//tabs.getForm().findField('Lon').setValue(lon);
-									tabs.getForm().submit({
-									
-										submitEmptyText : false,
-										params : {
-											editType : 'insert',
-											Lat: lat,
-											Lon: lon
-										},
-										success : function(form, action) {
-											Ext.Msg.alert('Success', 'It worked');
-										},
-										failure : function(form, action) {
-											//Ext.Msg.alert('Warning', 'Error');
-											win.hide();
-											tabs.getForm().reset();
-											grid.getView().refresh();
-											sd.refresh({
-												force : true
-											});
-										}
-									});
-						
-									Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
-							
-									ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
-								} 
-							});
-						}
-						else {
-			
-							lat = results[0].geometry.location.lat().toString();
-							lon = results[0].geometry.location.lng().toString();
-							//alert(lon);
-							
-							tabs.getForm().findField('Cleared').setValue('0');
-							tabs.getForm().findField('Archived').setValue('0');
-							//tabs.getForm().findField('Lat').setValue(lat);
-							//tabs.getForm().findField('Lon').setValue(lon);
-							tabs.getForm().submit({
-							
-								submitEmptyText : false,
-								params : {
-									editType : 'insert',
-									Lat: lat,
-									Lon: lon
-								},
-								success : function(form, action) {
-									Ext.Msg.alert('Success', 'It worked');
-								},
-								failure : function(form, action) {
-									//Ext.Msg.alert('Warning', 'Error');
-									win.hide();
-									tabs.getForm().reset();
-									grid.getView().refresh();
-									sd.refresh({
-										force : true
-									});
-								}
-							});
-						
-							Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
-					
-							ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
-						} 
-					});		
-				}
-				else {
-					address = tabs.getForm().findField("Country").getValue(); //'Washington, DC';
-					
-					//alert(address);
-					geocoder.geocode( { 'address': address}, function(results, status) {
-						if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
-							// On failure to Geocode, return is: ZERO_RESULTS
-							Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
-						
-							ga('send', 'event', 'Add_Lead', 'Geocode_Country_Failure', {'nonInteraction': 1});
-						}
-						else {
-			
-							lat = results[0].geometry.location.lat().toString();
-							lon = results[0].geometry.location.lng().toString();
-							//alert(lon);
-							
-							tabs.getForm().findField('Cleared').setValue('0');
-							tabs.getForm().findField('Archived').setValue('0');
-							//tabs.getForm().findField('Lat').setValue(lat);
-							//tabs.getForm().findField('Lon').setValue(lon);
-							tabs.getForm().submit({
-							
-								submitEmptyText : false,
-								params : {
-									editType : 'insert',
-									Lat: lat,
-									Lon: lon
-								},
-								success : function(form, action) {
-									Ext.Msg.alert('Success', 'It worked');
-								},
-								failure : function(form, action) {
-									//Ext.Msg.alert('Warning', 'Error');
-
-									win.hide();
-									tabs.getForm().reset();
-									grid.getView().refresh();
-									sd.refresh({
-										force : true
-									});
-								}
-							});
-						
-							Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
-					
-							ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
-						} 
-					});
-				}
+				geo('save','insert');
 			}
 	}, {
 		text : 'Cancel',
@@ -617,7 +431,207 @@ tabs = new Ext.FormPanel({
 	}]
 });
 
-//tabs.render(document.body);
+function geo(type,eType) 
+{
+	//codeAddress();
+	var lon='0';
+	var geocoder = new google.maps.Geocoder();
+	var address;
+	
+	if(type=='edit'||type=='clone'){
+	
+	if (tabs.getForm().findField("chArc").getValue() == true){
+		tabs.getForm().findField('Archived').setValue('1');
+	}
+	else{
+		tabs.getForm().findField('Archived').setValue('0');
+	}
+	
+	if (tabs.getForm().findField("chMaj").getValue() == true) {
+				tabs.getForm().findField('Cleared').setValue('0');
+			} else {
+				var cleared = grid.getSelectionModel().getSelected().data.Cleared;
+					if (cleared == '0') {
+					tabs.getForm().findField('Cleared').setValue('0');
+				} else {
+					tabs.getForm().findField('Cleared').setValue('1');
+				}
+			}
+	}
+	
+	if (tabs.getForm().findField("Specific_Location").getValue() != '') {
+		address = tabs.getForm().findField("Specific_Location").getValue(); //'Washington, DC';
+		
+		geocoder.geocode( { 'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+				address = tabs.getForm().findField("Country").getValue(); //'Washington, DC';
+		
+				geocoder.geocode( { 'address': address}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+						// On failure to Geocode, return is: ZERO_RESULTS
+						Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
+					
+						ga('send', 'event', 'Add_Lead', 'Geocode_SpecLoc_Failure', {'nonInteraction': 1});
+					}
+					else {
+		
+						lat = results[0].geometry.location.lat().toString();
+						lon = results[0].geometry.location.lng().toString();
+						
+						
+						if(type=='insert'){
+						tabs.getForm().findField('Cleared').setValue('0');
+						tabs.getForm().findField('Archived').setValue('0');
+						}
+						
+						tabs.getForm().submit({
+						
+							submitEmptyText : false,
+							params : {
+								editType : eType,
+								Lat: lat,
+								Lon: lon
+							},
+							success : function(form, action) {
+								
+								win.hide();
+								tabs.getForm().reset();
+								grid.getView().refresh();
+								sd.refresh({
+									force : true
+								});
+							},
+							failure : function(form, action) {
+								//Ext.Msg.alert('Warning', 'Error');
+								
+							}
+						});
+			
+						Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+						
+						if(type=='save'){
+						ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
+						}
+						else if(type=='clone'){
+						ga('send', 'event', 'Add_Lead', 'Clone_Lead_Details', {'nonInteraction': 1});
+						}
+						else{
+						ga('send', 'event', 'Add_Lead', 'Edit_Lead_Details', {'nonInteraction': 1});
+						}
+					} 
+				});
+			}
+			else {
+
+				lat = results[0].geometry.location.lat().toString();
+				lon = results[0].geometry.location.lng().toString();
+				//alert(lon);
+				
+				if(type=='insert'){
+				tabs.getForm().findField('Cleared').setValue('0');
+				tabs.getForm().findField('Archived').setValue('0');
+				}
+				
+				tabs.getForm().submit({
+				
+					submitEmptyText : false,
+					params : {
+						editType : eType,
+						Lat: lat,
+						Lon: lon
+					},
+					success : function(form, action) {
+						win.hide();
+						tabs.getForm().reset();
+						grid.getView().refresh();
+						sd.refresh({
+							force : true
+						});
+					},
+					failure : function(form, action) {
+						
+					}
+				});
+			
+				Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+				
+				if(type=='save'){
+				ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
+				}
+				else if(type=='clone'){
+				ga('send', 'event', 'Add_Lead', 'Clone_Lead_Details', {'nonInteraction': 1});
+				}
+				else{
+				ga('send', 'event', 'Add_Lead', 'Edit_Lead_Details', {'nonInteraction': 1});
+				}
+			} 
+		});		
+	}
+	else {
+		address = tabs.getForm().findField("Country").getValue(); //'Washington, DC';
+		
+		geocoder.geocode( { 'address': address}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+				
+				Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
+			
+				ga('send', 'event', 'Add_Lead', 'Geocode_Country_Failure', {'nonInteraction': 1});
+			}
+			else {
+
+				lat = results[0].geometry.location.lat().toString();
+				lon = results[0].geometry.location.lng().toString();
+				
+				if(type=='insert'){
+				tabs.getForm().findField('Cleared').setValue('0');
+				tabs.getForm().findField('Archived').setValue('0');
+				}
+
+				tabs.getForm().submit({
+				
+					submitEmptyText : false,
+					params : {
+						editType : eType,
+						Lat: lat,
+						Lon: lon
+					},
+					success : function(form, action) {
+						//Ext.Msg.alert('Success', 'It worked');
+						
+						win.hide();
+						tabs.getForm().reset();
+						grid.getView().refresh();
+						sd.refresh({
+							force : true
+						});
+					},
+					failure : function(form, action) {
+						//Ext.Msg.alert('Warning', 'Error');
+
+						win.hide();
+						tabs.getForm().reset();
+						grid.getView().refresh();
+						sd.refresh({
+							force : true
+						});
+					}
+				});
+				
+				if(type=='save'){
+				ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
+				Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+				}
+				else if(type=='clone'){
+				ga('send', 'event', 'Add_Lead', 'Clone_Lead_Details', {'nonInteraction': 1});
+				Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
+				}else {
+				Ext.Msg.alert('Submission Successful', 'Thanks for revising your information! If this was a major edit, we will review it and it should be posted within two business days. Otherwise, the edits will appear immediately.');
+				ga('send', 'event', 'Add_Lead', 'Edit_Lead_Details', {'nonInteraction': 1});
+				}
+			} 
+		});
+	}
+}
 
 win = new Ext.Window({
 	id : 'formanchor-win',

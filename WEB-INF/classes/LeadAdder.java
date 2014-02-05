@@ -103,6 +103,24 @@ public class LeadAdder extends HttpServlet {
 				else if(paramName.equals("Project_Announced")&&paramValue.equals("")){
 
 				}
+				else if (paramName.startsWith("Country")) {
+								
+								String wkt = Geocode(lat, lon);
+								printWriter.println("*********WKT"+sdf.format(date));
+								printWriter.println (wkt);
+								if (wkt.equals("0")) {
+
+								}
+								else{
+									/*names += "\"" + paramName + "\"" + ",";
+									values += "\'" + paramValue + "\'" + ",";
+									names += "\"" + "the_geom" + "\"" + ",";
+									values +=  wkt +  ",";*/
+									
+									update+= "\"" + paramName +"\"=\'" + paramValue + "\',";
+									update+= "\"" + "the_geom" +"\"=" + wkt + ",";
+								}
+							}
 				else{
 					update+= "\"" + paramName +"\"=\'" + paramValue + "\',";
 				}
@@ -111,10 +129,11 @@ public class LeadAdder extends HttpServlet {
 			update = update.substring(0, update.length()-1);
 			update = update + " where fid = " + fid;
 			update = "update Opengeo.\"DATATABLE\" set " + update;
-			  
+			out.println(update);
 		}
 		else{
 			
+			myList.clear();
 			myList.put("Project_Title", req.getParameter("Project_Title"));
 			myList.put("Specific_Location", req.getParameter("Specific_Location"));
 			myList.put("Country", req.getParameter("Country"));
@@ -167,8 +186,8 @@ public class LeadAdder extends HttpServlet {
 
 						if (paramName.startsWith("ch")) {
 
-							String newName = checkName(paramName);
-							sectors += newName + " ";
+							//String newName = checkName(paramName);
+							//sectors += newName + " ";
 		
 						} else {
 
@@ -198,10 +217,10 @@ public class LeadAdder extends HttpServlet {
 
 			}
 
-			if (sectors.length() > 0) {
+			/*if (sectors.length() > 0) {
 				names += "\"Sector\"" + ",";
 				values += "\'" + sectors + "\'" + ",";
-			}
+			}*/
 
 			names = names.substring(0, names.length() - 1);
 			values = values.substring(0, values.length() - 1);
@@ -231,7 +250,7 @@ public class LeadAdder extends HttpServlet {
 				int resUpdate = stmt.executeUpdate(update);
 				send(poc,fs,mid,"edit");
 				
-				printWriter.close (); 
+				//printWriter.close (); 
 			}else{
 				
 				String f = "select max(fid) from Opengeo.\"DATATABLE\"";
@@ -254,7 +273,7 @@ public class LeadAdder extends HttpServlet {
 				printWriter.println (insert);
 				send(poc,fs,mid,"insert");
 				printWriter.println("Email sent");
-				printWriter.close (); 
+				//printWriter.close (); 
 			}
 			
 		} catch (ClassNotFoundException e) {
