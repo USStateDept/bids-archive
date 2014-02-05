@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="js/host.js"></script>
 		<script type="text/javascript" src="js/check.js"></script>
 		<script type="text/javascript" id="checker"></script>
+		<script type="text/javascript" src="js/yes.js"></script>
 		<script type="text/javascript" src="../lib/ieCheck.js"></script>
 		<script type="text/javascript" src="../lib/ext-3.4.0/adapter/ext/ext-base.js"></script>
         <script type="text/javascript" src="../lib/ext-3.4.0/ext-all.js"></script>
@@ -40,6 +41,7 @@
 			ga('send', 'pageview');
 		</script>
     </head>
-	<body onload="setTimeout(function(){document.getElementById('checker').src='http://' + formSite + '/lib/bids/js/yes.js'}, 0001); ieCheck();">
+	<!--<body onload="setTimeout(function(){document.getElementById('checker').src='http://' + formSite + '/lib/bids/js/yes.js'}, 0001); ieCheck();">-->
+	<body onload="ieCheck();">
 	</body>
 </html>
