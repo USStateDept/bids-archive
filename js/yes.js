@@ -479,7 +479,7 @@ function geo(type,eType)
 						lon = results[0].geometry.location.lng().toString();
 						
 						
-						if(type=='insert'){
+						if(type=='save'){
 						tabs.getForm().findField('Cleared').setValue('0');
 						tabs.getForm().findField('Archived').setValue('0');
 						}
@@ -503,6 +503,12 @@ function geo(type,eType)
 							},
 							failure : function(form, action) {
 								//Ext.Msg.alert('Warning', 'Error');
+								win.hide();
+								tabs.getForm().reset();
+								grid.getView().refresh();
+								sd.refresh({
+									force : true
+								});
 								
 							}
 						});
@@ -527,7 +533,7 @@ function geo(type,eType)
 				lon = results[0].geometry.location.lng().toString();
 				//alert(lon);
 				
-				if(type=='insert'){
+				if(type=='save'){
 				tabs.getForm().findField('Cleared').setValue('0');
 				tabs.getForm().findField('Archived').setValue('0');
 				}
@@ -549,7 +555,12 @@ function geo(type,eType)
 						});
 					},
 					failure : function(form, action) {
-						
+						win.hide();
+						tabs.getForm().reset();
+						grid.getView().refresh();
+						sd.refresh({
+							force : true
+						});
 					}
 				});
 			
@@ -582,7 +593,7 @@ function geo(type,eType)
 				lat = results[0].geometry.location.lat().toString();
 				lon = results[0].geometry.location.lng().toString();
 				
-				if(type=='insert'){
+				if(type=='save'){
 				tabs.getForm().findField('Cleared').setValue('0');
 				tabs.getForm().findField('Archived').setValue('0');
 				}
