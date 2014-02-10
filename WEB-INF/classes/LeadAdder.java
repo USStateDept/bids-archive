@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 
 public class LeadAdder extends HttpServlet {
 	
-	Hashtable<String,Object> myList = new Hashtable<String,Object>();
+	Hashtable<String,String> myList = new Hashtable<String,String>();
 	
 	public static class ShellOut {
 
@@ -157,6 +157,17 @@ public class LeadAdder extends HttpServlet {
 			myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact"));
 			myList.put("Project_POCs", req.getParameter("Project_POCs"));
 			myList.put("Post_Comments", req.getParameter("Post_Comments"));
+			
+			Set<String> keys = myList.keySet();
+			
+			for(String key: keys){
+				
+				String val = myList.get(key);
+				val = val.replace("'", "&#39;");
+				val = val.replace("\"", "&#34;");
+				val = val.replace("\\", "&#92;");
+				myList.put(key, val);
+			}
 			
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
