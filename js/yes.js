@@ -454,7 +454,7 @@ function geo(type,eType)
 					if (cleared == '0') {
 					tabs.getForm().findField('Cleared').setValue('0');
 				} else {
-					tabs.getForm().findField('Cleared').setValue('0');
+					tabs.getForm().findField('Cleared').setValue('1');
 				}
 			}
 	}
