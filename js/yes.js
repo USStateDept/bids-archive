@@ -438,25 +438,16 @@ function geo(type,eType)
 	var geocoder = new google.maps.Geocoder();
 	var address;
 	
-	if(type=='edit'||type=='clone'){
+	if(type=='edit'||type=='clone') {
 	
-	if (tabs.getForm().findField("chArc").getValue() == true){
-		tabs.getForm().findField('Archived').setValue('1');
-	}
-	else{
-		tabs.getForm().findField('Archived').setValue('0');
-	}
+		if (tabs.getForm().findField("chArc").getValue() == true) {
+			tabs.getForm().findField('Archived').setValue('1');
+		}
+		else {
+			tabs.getForm().findField('Archived').setValue('0');
+		}
 	
-	if (tabs.getForm().findField("chMaj").getValue() == true) {
-				tabs.getForm().findField('Cleared').setValue('0');
-			} else {
-				var cleared = grid.getSelectionModel().getSelected().data.Cleared;
-					if (cleared == '0') {
-					tabs.getForm().findField('Cleared').setValue('0');
-				} else {
-					tabs.getForm().findField('Cleared').setValue('1');
-				}
-			}
+		tabs.getForm().findField('Cleared').setValue('0');
 	}
 	
 	if (tabs.getForm().findField("Specific_Location").getValue() != '') {
@@ -473,11 +464,11 @@ function geo(type,eType)
 					
 						ga('send', 'event', 'Add_Lead', 'Geocode_SpecLoc_Failure', {'nonInteraction': 1});
 					}
+					
 					else {
 		
 						lat = results[0].geometry.location.lat().toString();
 						lon = results[0].geometry.location.lng().toString();
-						
 						
 						if(type=='save'){
 						tabs.getForm().findField('Cleared').setValue('0');
