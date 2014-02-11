@@ -1,5 +1,4 @@
 check = 0;
-//var lat,lon;
 
 function yes() {	
 		var x;
@@ -29,22 +28,13 @@ function yesEdit() {
 		}	
 }
 
-
-
-
 function codeAddress() {
   var geocoder = new google.maps.Geocoder();	
   var address = tabs.getForm().findField("Specific_Location").getValue();//'Washington, DC'; 
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-	  //var result = results[0].geometry.location;
 	  var lat = results[0].geometry.location.lat();
 	  alert(lat);
-	/*var parts=result.split(",");
-	  var lat =parts[0];
-	  var lon = parts[1];
-	  alert(lat);
-	  alert(lon);*/
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -123,10 +113,8 @@ function editEntryFunction() {
 		Ext.getCmp('chMaj').setDisabled(false);
 		Ext.getCmp('chMaj').checked=true;
 		Ext.getCmp('chMaj').show();
-		//Ext.getCmp('sspec').disabled=true;
 	}
 
-	//console.log(win.myExtraParams.e);
 	win.show();
 	
 	ga('send', 'event', 'Grid_Panel', 'Edit_Grid_Panel', {'nonInteraction': 1});
@@ -159,15 +147,7 @@ tabs = new Ext.FormPanel({
 			Ext.getCmp('btnClone').setDisabled(!valid);
 		}
 	},
-	items : [/*{
-		xtype : 'hidden',
-		name : 'Lat'
-		//value : '0'
-	},{
-		xtype : 'hidden',
-		name : 'Lon'
-		//value : '0'
-	},*/{
+	items : [{
 		xtype : 'hidden',
 		name : 'Archived'
 		//value : '0'
@@ -188,18 +168,18 @@ tabs = new Ext.FormPanel({
 		blankText: 'a Project Title is required.',
 		emptyClass: 'reqField'
 	}, {
-		name : 'Specific_Location',
-		xtype : 'textfield',
-		emptyText : 'Geographic Location',
-		width : 275
-		//id : 'sspec'
-	}, {
 		name : 'Country',
 		xtype : 'textfield',
 		emptyText : 'Country',
 		width : 275,
 		allowBlank: false,
 		blankText: 'a Country is required.',
+		emptyClass: 'reqField'
+	}, {
+		name : 'Specific_Location',
+		xtype : 'textfield',
+		emptyText : 'City, Province, or Region',
+		width : 275,
 		emptyClass: 'reqField'
 	}, new Ext.form.ComboBox({
 		store : new Ext.data.ArrayStore({
@@ -433,34 +413,55 @@ tabs = new Ext.FormPanel({
 
 function geo(type,eType) 
 {
-	//codeAddress();
 	var lon='0';
 	var geocoder = new google.maps.Geocoder();
 	var address;
+	var components;
 	
-	if(type=='edit'||type=='clone') {
+	if (type=='edit') {
 	
 		if (tabs.getForm().findField("chArc").getValue() == true) {
 			tabs.getForm().findField('Archived').setValue('1');
 		}
 		else {
 			tabs.getForm().findField('Archived').setValue('0');
-		}
-	
-		tabs.getForm().findField('Cleared').setValue('0');
+		}	
+		if (tabs.getForm().findField("chMaj").getValue() == true) {
+ 			tabs.getForm().findField('Cleared').setValue('0');
+ 		} else {
+ 			var cleared = grid.getSelectionModel().getSelected().data.Cleared;
+ 				if (cleared == '0') {
+ 				tabs.getForm().findField('Cleared').setValue('0');
+ 			} else {
+ 				tabs.getForm().findField('Cleared').setValue('1');
+ 			}
+ 		}
+		//tabs.getForm().findField('Cleared').setValue('1');
 	}
 	
+	if (type=='clone') {
+	
+		if (tabs.getForm().findField("chArc").getValue() == true) {
+			tabs.getForm().findField('Archived').setValue('1');
+		}
+		else {
+			tabs.getForm().findField('Archived').setValue('0');
+		}	
+		tabs.getForm().findField('Cleared').setValue('0');
+	}
+
 	if (tabs.getForm().findField("Specific_Location").getValue() != '') {
 		address = tabs.getForm().findField("Specific_Location").getValue(); //'Washington, DC';
+		componenst = tabs.getForm().findField("Country").getValue(); //'United States of America';
 		
-		geocoder.geocode( { 'address': address}, function(results, status) {
+		geocoder.geocode({ 'address': address, 'componentRestrictions':{'country': components}}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 				address = tabs.getForm().findField("Country").getValue(); //'Washington, DC';
 		
 				geocoder.geocode( { 'address': address}, function(results, status) {
 					if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 						// On failure to Geocode, return is: ZERO_RESULTS
-						Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
+						Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the "Country" or "City, Province, or Region" information again.');
 					
 						ga('send', 'event', 'Add_Lead', 'Geocode_SpecLoc_Failure', {'nonInteraction': 1});
 					}
@@ -470,7 +471,7 @@ function geo(type,eType)
 						lat = results[0].geometry.location.lat().toString();
 						lon = results[0].geometry.location.lng().toString();
 						
-						if(type=='save'){
+						if(type=='save') {
 						tabs.getForm().findField('Cleared').setValue('0');
 						tabs.getForm().findField('Archived').setValue('0');
 						}
@@ -524,7 +525,6 @@ function geo(type,eType)
 
 				lat = results[0].geometry.location.lat().toString();
 				lon = results[0].geometry.location.lng().toString();
-				//alert(lon);
 				
 				if(type=='save'){
 				tabs.getForm().findField('Cleared').setValue('0');
@@ -561,10 +561,10 @@ function geo(type,eType)
 			
 				Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
 				
-				if(type=='save'){
+				if(type=='save') {
 				ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
 				}
-				else if(type=='clone'){
+				else if(type=='clone') {
 				ga('send', 'event', 'Add_Lead', 'Clone_Lead_Details', {'nonInteraction': 1});
 				}
 				else{
@@ -579,7 +579,7 @@ function geo(type,eType)
 		geocoder.geocode( { 'address': address}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
 				
-				Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the Geographic Location and/or Country information again.');
+				Ext.Msg.alert('Geocoding Failed','Geocoding was not able to return any results.<br>Please enter the "Country" or "City, Province, or Region" information again.');
 			
 				ga('send', 'event', 'Add_Lead', 'Geocode_Country_Failure', {'nonInteraction': 1});
 			}
@@ -588,13 +588,12 @@ function geo(type,eType)
 				lat = results[0].geometry.location.lat().toString();
 				lon = results[0].geometry.location.lng().toString();
 				
-				if(type=='save'){
+				if(type=='save') {
 				tabs.getForm().findField('Cleared').setValue('0');
 				tabs.getForm().findField('Archived').setValue('0');
 				}
 
 				tabs.getForm().submit({
-				
 					submitEmptyText : false,
 					params : {
 						editType : eType,
@@ -602,8 +601,6 @@ function geo(type,eType)
 						Lon: lon
 					},
 					success : function(form, action) {
-						//Ext.Msg.alert('Success', 'It worked');
-						
 						win.hide();
 						tabs.getForm().reset();
 						store.load();
@@ -613,8 +610,6 @@ function geo(type,eType)
 						});
 					},
 					failure : function(form, action) {
-						//Ext.Msg.alert('Warning', 'Error');
-
 						win.hide();
 						tabs.getForm().reset();
 						store.load();
@@ -625,14 +620,15 @@ function geo(type,eType)
 					}
 				});
 				
-				if(type=='save'){
+				if(type=='save') {
 				ga('send', 'event', 'Add_Lead', 'Save_Lead_Details', {'nonInteraction': 1});
 				Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
 				}
-				else if(type=='clone'){
+				else if(type=='clone') {
 				ga('send', 'event', 'Add_Lead', 'Clone_Lead_Details', {'nonInteraction': 1});
 				Ext.Msg.alert('Submission Successful', 'Thanks for submiting your information; we will review it and it should be posted within two business days.');
-				}else {
+				}
+				else {
 				Ext.Msg.alert('Submission Successful', 'Thanks for revising your information! If this was a major edit, we will review it and it should be posted within two business days. Otherwise, the edits will appear immediately.');
 				ga('send', 'event', 'Add_Lead', 'Edit_Lead_Details', {'nonInteraction': 1});
 				}
