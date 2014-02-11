@@ -496,6 +496,7 @@ function geo(type,eType)
 								
 								win.hide();
 								tabs.getForm().reset();
+								store.load();
 								grid.getView().refresh();
 								sd.refresh({
 									force : true
@@ -505,6 +506,7 @@ function geo(type,eType)
 								//Ext.Msg.alert('Warning', 'Error');
 								win.hide();
 								tabs.getForm().reset();
+								store.load();
 								grid.getView().refresh();
 								sd.refresh({
 									force : true
@@ -549,6 +551,7 @@ function geo(type,eType)
 					success : function(form, action) {
 						win.hide();
 						tabs.getForm().reset();
+						store.load();
 						grid.getView().refresh();
 						sd.refresh({
 							force : true
@@ -557,6 +560,7 @@ function geo(type,eType)
 					failure : function(form, action) {
 						win.hide();
 						tabs.getForm().reset();
+						store.load();
 						grid.getView().refresh();
 						sd.refresh({
 							force : true
@@ -611,6 +615,7 @@ function geo(type,eType)
 						
 						win.hide();
 						tabs.getForm().reset();
+						store.load();
 						grid.getView().refresh();
 						sd.refresh({
 							force : true
@@ -621,6 +626,7 @@ function geo(type,eType)
 
 						win.hide();
 						tabs.getForm().reset();
+						store.load();
 						grid.getView().refresh();
 						sd.refresh({
 							force : true
