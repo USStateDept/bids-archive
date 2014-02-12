@@ -9,12 +9,14 @@
 		<script type="text/javascript" src="js/host.js"></script>
 		<script type="text/javascript" src="js/check.js"></script>
 		<script type="text/javascript" id="checker"></script>
-		<script type="text/javascript" src="http://10.47.115.214:8080/lib/bids/js/yes.js"></script>
-		<script type="text/javascript" src="../lib/ieCheck.js"></script>
 		<script type="text/javascript" src="../lib/ext-3.4.0/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="../lib/ext-3.4.0/ext-all.js"></script>
 		<script type="text/javascript" src="../lib/OpenLayers/lib/OpenLayers.js"></script>
 		<script type="text/javascript" src="../lib/GeoExt/script/GeoExt.js"></script>
+		<!-- yes.js calls on ExtJS, so ExtJS must load first -->
+		<script type="text/javascript" src="http://10.47.115.214:8080/lib/bids/js/yes.js"></script>
+		<!--<script type="text/javascript" src="http://localhost/bids/js/yes.js"></script>-->
+		<script type="text/javascript" src="../lib/ieCheck.js"></script>
 		<script type="text/javascript" src="js/map.js"></script>
 		<script type="text/javascript" src="js/FeaturePopups.js"></script>
 		<script type="text/javascript" src="js/patches_OL-popup-autosize.js"></script>
