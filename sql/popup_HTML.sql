@@ -16,7 +16,7 @@ UPDATE "opengeo"."DATATABLE"
 		|| '<b>Status: </b>' || "Status" || '<br>'
 		|| CASE WHEN "Archived" = '0' THEN '' ELSE '<br><b>Archived: </b>' END || CASE WHEN "Archived" = '0' THEN '' ELSE 'Yes' END || CASE WHEN "Archived" IS NULL THEN '<br>' ELSE '<br>' END
 		|| CASE WHEN "Project_Description" IS NULL THEN '' ELSE '<b>Description: </b><br>' END || CASE WHEN "Project_Description" IS NULL THEN '' ELSE "Project_Description" END || CASE WHEN "Project_Description" IS NULL THEN '<br>' ELSE '<br>' END
-		|| CASE WHEN "Post_Comments" IS NULL THEN '' ELSE '<br><b>Post Comments: </b><br>' END || CASE WHEN "Post_Comments" IS NULL THEN '' ELSE "Post_Comments" END || CASE WHEN "Post_Comments" IS NULL THEN '<br>' ELSE '<br>' END
+		|| CASE WHEN "Post_Comments" IS NULL THEN '' ELSE '<br><b>Post Comments: </b><br>' END || CASE WHEN "Post_Comments" IS NULL THEN '' ELSE "Post_Comments" END || CASE WHEN "Post_Comments" IS NULL THEN '<br>' ELSE '<br><br>' END
 		|| CASE WHEN "Link_To_Project" IS NULL THEN '' ELSE '<a href="' END || CASE WHEN "Link_To_Project" IS NULL THEN '' ELSE "Link_To_Project" END || CASE WHEN "Link_To_Project" IS NULL THEN '' ELSE '" target="_blank" ' END 
 			|| CASE WHEN "Link_To_Project" IS NULL THEN '' ELSE ' onclick="javascript:ga(''send'', ''event'', ''External_Link'', ''' END || CASE WHEN "Link_To_Project" IS NULL THEN '' ELSE "Project_Title" END || CASE WHEN "Link_To_Project" IS NULL THEN '' ELSE '_Lead_Details'', {''nonInteraction'': 1});">Project Website</a>&nbsp;&nbsp;&nbsp;' END
 		|| CASE WHEN "Business_URL" IS NULL THEN '' ELSE '<a href="' END || CASE WHEN "Business_URL" IS NULL THEN '' ELSE "Business_URL" END || CASE WHEN "Business_URL" IS NULL THEN '' ELSE '" target="_blank" ' END 
