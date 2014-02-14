@@ -213,7 +213,7 @@
 				}
 
 				if (count >= 1) {
-					searchFilter = "&Filter=%3CFilter%3E%3CAnd%3E" + searchFilter + "%0A%09%3C%2FAnd%3E%3C%2FFilter%3E";
+					searchFilter = "&Filter=%3CFilter%3E%3CAnd%3E" + searchFilter + "%0A%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3EArchived%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E0%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FAnd%3E%3C%2FFilter%3E";
 				}
 /*
 				if (count > 1) {
