@@ -200,7 +200,7 @@ Ext.onReady(function() {
 		}],
 		proxy : new GeoExt.data.ProtocolProxy({
 			protocol : new OpenLayers.Protocol.HTTP({
-				url : defaultURL + defaultFilter + "&outputformat=json",
+				url : defaultURL + defaultFilter + "&outputformat=json&sortBy=Project_Title+A",
 				format : new OpenLayers.Format.GeoJSON()
 			})
 		})
