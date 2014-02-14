@@ -145,6 +145,8 @@
 						searchFilter = searchFilter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + arcVal + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 					}
 					count = count + 1;
+				} else {
+					searchFilter = searchFilter + "%3CPropertyIsEqualTo%3E%3CPropertyName%3E" + arc + "%3C/PropertyName%3E%3CLiteral%3E" + 0 + "%3C/Literal%3E%3C/PropertyIsEqualTo%3E"
 				}
 
 				/////////////////
