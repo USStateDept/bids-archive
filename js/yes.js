@@ -342,6 +342,15 @@ tabs = new Ext.FormPanel({
 		blankText: 'a USG Submitting Officer Email is required.',
 		emptyClass: 'reqField'
 	}, {
+		name : 'Submitting_Officer_Contact2',
+		emptyText : 'Please reenter your email for validation.',
+		xtype : 'textfield',
+		vtype : 'email',
+		width : 275,
+		allowBlank: false,
+		blankText: 'Please reenter your email for validation.',
+		emptyClass: 'reqField'
+	}, {
 		xtype : 'textarea',
 		name : 'Project_POCs',
 		emptyText : 'Implementing Entity POCs & Contact Info',
@@ -374,23 +383,56 @@ tabs = new Ext.FormPanel({
 		text : 'Save Edits',
 		id : 'btnEdit',
 		handler : function() {
-				
-			geo('edit','edit');
+			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue() === tabs.getForm().findField("Submitting_Officer_Contact2").getValue()) {
+				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue())[0]);
+				if (emailDomain === 'state.gov') {
+					geo('edit','edit');
+				} else if (emailDomain === 'commerce.gov') {
+					geo('edit','edit');
+				} else {
+					Ext.Msg.alert('Invalid email address','BIDS only accepts submissions from users with a state.gov or commerce.gov email address.');
+				}
+			}
+			else {
+				Ext.Msg.alert('Email address not verified','Please reenter your email address.');
+			}
 		}
 	}, {
 		text : 'Save as New Lead',
 		id : 'btnClone',
 		handler : function() {
-		
-			geo('clone','insert');
+			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue() === tabs.getForm().findField("Submitting_Officer_Contact2").getValue()) {
+				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue())[0]);
+				if (emailDomain === 'state.gov') {
+					geo('clone','insert');
+				} else if (emailDomain === 'commerce.gov') {
+					geo('clone','insert');
+				} else {
+					Ext.Msg.alert('Invalid email address','BIDS only accepts submissions from users with a state.gov or commerce.gov email address.');
+				}
+			}
+			else {
+				Ext.Msg.alert('Email address not verified','Please reenter your email address.');
+			}
 		}
 	}, {
 		text : 'Save',
 		id : 'btnSave',
-		handler : function() 
-			{
-				geo('save','insert');
+		handler : function() {
+			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue() === tabs.getForm().findField("Submitting_Officer_Contact2").getValue()) {
+				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue())[0]);
+				if (emailDomain === 'state.gov') {
+					geo('save','insert');
+				} else if (emailDomain === 'commerce.gov') {
+					geo('save','insert');
+				} else {
+					Ext.Msg.alert('Invalid email address','BIDS only accepts submissions from users with a state.gov or commerce.gov email address.');
+				}
 			}
+			else {
+				Ext.Msg.alert('Email address not verified','Please reenter your email address.');
+			}
+		}
 	}, {
 		text : 'Cancel',
 		id : 'btnCancel',
