@@ -73,6 +73,40 @@ public class LeadAdder extends HttpServlet {
 			isUpdate=true;
 
 			myList.clear();
+			myList.put("Project_Title", req.getParameter("Project_Title"));
+			myList.put("Specific_Location", req.getParameter("Specific_Location"));
+			myList.put("Country", req.getParameter("Country"));
+			myList.put("Lat", req.getParameter("Lat"));
+			myList.put("Lon", req.getParameter("Lon"));
+			myList.put("Sector", req.getParameter("Sector"));
+			myList.put("Project_Size", req.getParameter("Project_Size"));
+			myList.put("Status", req.getParameter("Status"));
+			myList.put("Project_Number", req.getParameter("Project_Number"));
+			myList.put("Project_Funding_Source", req.getParameter("Project_Funding_Source"));
+			myList.put("Source", req.getParameter("Source"));
+			myList.put("Project_Description", req.getParameter("Project_Description"));
+			myList.put("Keyword", req.getParameter("Keyword"));
+			myList.put("Project_Announced", req.getParameter("Project_Announced"));
+			myList.put("Tender_Date", req.getParameter("Tender_Date"));
+			myList.put("Borrowing_Entity", req.getParameter("Borrowing_Entity"));
+			myList.put("Implementing_Entity", req.getParameter("Implementing_Entity"));
+			myList.put("Link_To_Project", req.getParameter("Link_To_Project"));
+			myList.put("Business_URL", req.getParameter("Business_URL"));
+			myList.put("Submitting_Officer", req.getParameter("Submitting_Officer"));
+			myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact"));
+			myList.put("Project_POCs", req.getParameter("Project_POCs"));
+			myList.put("Post_Comments", req.getParameter("Post_Comments"));
+			
+			Set<String> keys = myList.keySet();
+			
+			for(String key: keys){
+				
+				String val = myList.get(key);
+				val = val.replace("'", "&#39;");
+				val = val.replace("\"", "&#34;");
+				val = val.replace("\\", "&#92;");
+				myList.put(key, val);
+			}
 
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
@@ -372,7 +406,7 @@ public class LeadAdder extends HttpServlet {
 		String comments = (String)myList.get("Post_Comments");
 		
 		m1text+="<br/>Project Title: <b>"+title+"</b><br/>Sector: <b>"+sector+"</b><br/>Project Size: US$<b>"+size+"</b><br/>Status: <b>"+status+"</b><br/>Project Number: <b>"+number+"</b><br/>Funding Source: <b>"+fundSource+"</b><br/>Information Source: <b>"+source+"</b><br/>Project Description: <b>"+descrip+"</b><br/>Keywords: <b>"+keywords+"</b><br/>Announced Date: <b>"+announDate+"</b><br/>Tender Date: <b>"+tenderDate+"</b><br/>Borrowing Entity: <b>"+borrowEntity+"</b><br/>Implementing Entity: <b>"+impleEntity+"</b><br/>Project Website: <b>"+projLink+"</b><br/>Business Tab: <b>"+busURL+"</b><br/>Submitting Officer: <b>"+subOff+"</b><br/>Submitting Officer Email: <b>"+subOffEmail+"</b><br/>Project Point of Contacts: <b>"+pocs+"</b><br/>Post Comments: <b>"+comments+"</b><br/>Tracking ID: <b>"+mid+"</b><br/><p>Please also confirm the location details. You entered: <br/>Country: <b>"+country+"</b><br/><br/>Geographic Location: <b>"+spec+"</b><br/></p>";
-		m2text+="<br/>Project Title: <b>"+title+"</b><br/>Sector: <b>"+sector+"</b><br/>Project Size: US$<b>"+size+"</b><br/>Status: <b>"+status+"</b><br/>Project Number: <b>"+number+"</b><br/>Funding Source: <b>"+fundSource+"</b><br/>Information Source: <b>"+source+"</b><br/>Project Description: <b>"+descrip+"</b><br/>Keywords: <b>"+keywords+"</b><br/>Announced Date: <b>"+announDate+"</b><br/>Tender Date: <b>"+tenderDate+"</b><br/>Borrowing Entity: <b>"+borrowEntity+"</b><br/>Implementing Entity: <b>"+impleEntity+"</b><br/>Project Website: <b>"+projLink+"</b><br/>Business Tab: <b>"+busURL+"</b><br/>Submitting Officer: <b>"+subOff+"</b><br/>Submitting Officer Email: <b>"+subOffEmail+"</b><br/>Project Point of Contacts: <b>"+pocs+"</b><br/>Post Comments: <b>"+comments+"</b><br/>Tracking ID: <b>"+mid+"</b><br/><p>Please also confirm the location details. You entered: <br/>Country: <b>"+country+"</b><br/><br/>Geographic Location: <b>"+spec+"</b><br/></p><a href=\"http://bids.state.gov/servlet/Clear?fid="+mid+"\">Click here to Clear</a>";
+		m2text+="<br/>Project Title: <b>"+title+"</b><br/>Sector: <b>"+sector+"</b><br/>Project Size: US$<b>"+size+"</b><br/>Status: <b>"+status+"</b><br/>Project Number: <b>"+number+"</b><br/>Funding Source: <b>"+fundSource+"</b><br/>Information Source: <b>"+source+"</b><br/>Project Description: <b>"+descrip+"</b><br/>Keywords: <b>"+keywords+"</b><br/>Announced Date: <b>"+announDate+"</b><br/>Tender Date: <b>"+tenderDate+"</b><br/>Borrowing Entity: <b>"+borrowEntity+"</b><br/>Implementing Entity: <b>"+impleEntity+"</b><br/>Project Website: <b>"+projLink+"</b><br/>Business Tab: <b>"+busURL+"</b><br/>Submitting Officer: <b>"+subOff+"</b><br/>Submitting Officer Email: <b>"+subOffEmail+"</b><br/>Project Point of Contacts: <b>"+pocs+"</b><br/>Post Comments: <b>"+comments+"</b><br/>Tracking ID: <b>"+mid+"</b><br/><p>Please also confirm the location details. You entered: <br/>Country: <b>"+country+"</b><br/><br/>Geographic Location: <b>"+spec+"</b><br/></p><a href=\"http://bids.state.gov/servlet/Clear?fid="+mid+"&amp;type=clear\">Click here to Clear</a>";
 		
 		m3text = m3text + " " + m3text2;
 		
