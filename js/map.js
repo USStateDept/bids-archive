@@ -1,7 +1,3 @@
-//var store;
-var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
-//OpenLayers.ProxyHost="http://" + host + "/geoserver/rest/proxy?url="
-
 function as(n) {
 	var themeUrl = "../ext-3.4.0/resources/css/xtheme-wireframe.css";
 	Ext.util.CSS.swapStyleSheet("theme", themeUrl);
@@ -39,8 +35,6 @@ Ext.onReady(function() {
 
 	var toolbarItems = [];
 
-	//toolbarItems.push(action);
-
 	var mapPanel = new GeoExt.MapPanel({
 		region : "center",
 		map : {
@@ -61,103 +55,6 @@ Ext.onReady(function() {
 
 	var info;
 	var map = mapPanel.map;
-
-	// create our own layer node UI class, using the TreeNodeUIEventMixin
-	var LayerNodeUI = Ext.extend(GeoExt.tree.LayerNodeUI, new GeoExt.tree.TreeNodeUIEventMixin());
-
-	// using OpenLayers.Format.JSON to create a nice formatted string of the
-	// configuration for editing it in the UI
-	var treeConfig = [{
-		nodeType : "gx_baselayercontainer",
-		expanded : true
-	}
-	/*, {
-	 nodeType : "gx_overlaylayercontainer",
-	 expanded : true,
-	 // render the nodes inside this container with a radio button,
-	 // and assign them the group "foo".
-	 loader : {
-	 baseAttrs : {
-	 radioGroup : "foo",
-	 uiProvider : "layernodeui"
-	 }
-	 }
-	 }*/
-	];
-
-	// The line below is only needed for this example, because we want to allow
-	// interactive modifications of the tree configuration using the
-	// "Show/Edit Tree Config" button. Don't use this line in your code.
-	treeConfig = new OpenLayers.Format.JSON().write(treeConfig, true);
-
-	// create the tree with the configuration from above
-	tree = new Ext.tree.TreePanel({
-		region : "north",
-		title : "Layer Options",
-		collapsible : true,
-		collapsed : true,
-		plugins : new GeoExt.plugins.TreeNodeRadioButton,
-		plugins : [Ext.ux.PanelCollapsedTitle],
-		loader : new Ext.tree.TreeLoader({
-			// applyLoader has to be set to false to not interfer with loaders
-			// of nodes further down the tree hierarchy
-			applyLoader : false,
-			uiProviders : {
-				"layernodeui" : LayerNodeUI
-			}
-		}),
-		root : {
-			nodeType : "async",
-			// the children property of an Ext.tree.AsyncTreeNode is used to
-			// provide an initial set of layer nodes. We use the treeConfig
-			// from above, that we created with OpenLayers.Format.JSON.write.
-			children : Ext.decode(treeConfig)
-			// Don't use the line above in your application. Instead, use
-			//children: treeConfig
-
-		},
-		rootVisible : false,
-		lines : false
-	});
-
-	// dialog for editing the tree configuration
-	var treeConfigWin = new Ext.Window({
-		layout : "fit",
-		hideBorders : true,
-		closeAction : "hide",
-		width : 300,
-		height : 400,
-		title : "Tree Configuration",
-		items : [{
-			xtype : "form",
-			layout : "fit",
-			items : [{
-				id : "treeconfig",
-				xtype : "textarea"
-			}],
-			buttons : [{
-				text : "Save",
-				handler : function() {
-					var value = Ext.getCmp("treeconfig").getValue()
-					try {
-						var root = tree.getRootNode();
-						root.attributes.children = Ext.decode(value);
-						tree.getLoader().load(root);
-					} catch(e) {
-						Ext.Msg.alert('Error', 'Invalid JSON');
-						return;
-					}
-					treeConfig = value;
-					treeConfigWin.hide();
-				}
-			}, {
-				text : "Cancel",
-				handler : function() {
-					treeConfigWin.hide();
-				}
-			}]
-		}]
-	});
 
 	sd = new OpenLayers.Layer.Vector('lead', {
 		strategies : [new OpenLayers.Strategy.Fixed(), new OpenLayers.Strategy.Cluster()],
@@ -425,7 +322,6 @@ Ext.onReady(function() {
 			dataIndex : "Submitting_Officer_Contact",
 			width : 175
 		}],
-		sm : new GeoExt.grid.FeatureSelectionModel(),
 		height : 200,
 		tbar : [{
 			id : 'btnEditEntry',
@@ -727,14 +623,5 @@ Ext.onReady(function() {
 		}
 	});
 
-	var filt = new OpenLayers.Filter.Comparison({
-		type : OpenLayers.Filter.Comparison.LIKE,
-		property : "Sector",
-		value : "Water"//this.getValue()
-	});
-
-	function State_Select(box, record, index) {
-	}
-	
 	Ext.QuickTips.init();
 });
