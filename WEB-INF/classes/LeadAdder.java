@@ -12,10 +12,8 @@ public class LeadAdder extends HttpServlet {
 	Hashtable<String,String> myList = new Hashtable<String,String>();
 	
 	public static class ShellOut {
-
 		public void shell(String to,String sub, String text) {  
 			try {  
-
 				String command = "cmd /c cd C:\\SendMail && set CLASSPATH=%CLASSPATH%;C:\\OpenGeo\\webapps\\bids\\WEB-INF\\lib\\javax.mail.jar;. && java SendMail " + to + " \"" + sub + "\" \"" + text + "\"";
 				Process p = Runtime.getRuntime().exec(command); 
 
@@ -32,13 +30,12 @@ public class LeadAdder extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
-			
-			doPost(req,res);
+		throws ServletException, IOException {			
+		doPost(req,res);
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+		throws ServletException, IOException {
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -64,12 +61,12 @@ public class LeadAdder extends HttpServlet {
 		String lon = req.getParameter("Lon");
 		String fid = req.getParameter("fid");
 		String update="";
+		String popupUpdateAdd="";
+		String popupUpdateEdit="";
 
 		fid = fid.substring(fid.indexOf('.')+1);
-
-		
 				
-		if(editType.equals("edit")){
+		if(editType.equals("edit")) {
 			isUpdate=true;
 
 			myList.clear();
@@ -94,13 +91,13 @@ public class LeadAdder extends HttpServlet {
 			myList.put("Business_URL", req.getParameter("Business_URL"));
 			myList.put("Submitting_Officer", req.getParameter("Submitting_Officer"));
 			myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact"));
+			myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact2"));
 			myList.put("Project_POCs", req.getParameter("Project_POCs"));
 			myList.put("Post_Comments", req.getParameter("Post_Comments"));
 			
 			Set<String> keys = myList.keySet();
 			
-			for(String key: keys){
-				
+			for(String key: keys) {			
 				String val = myList.get(key);
 				val = val.replace("'", "&#39;");
 				val = val.replace("\"", "&#34;");
@@ -111,7 +108,6 @@ public class LeadAdder extends HttpServlet {
 			while (paramNames.hasMoreElements()) {
 				String paramName = (String) paramNames.nextElement();
 				String[] paramValues = req.getParameterValues(paramName);
-
 
 				String paramValue = paramValues[0];
 				
@@ -125,42 +121,38 @@ public class LeadAdder extends HttpServlet {
 				
 				//myList.add(paramName + " : " + paramValue);
 
-				if(paramName.equals("editType")){
-
+				if(paramName.equals("editType")) {
 				}
-				else if(paramName.equals("Clear")){
-
+				else if(paramName.equals("Clear")) {
 				}
-				else if(paramName.equals("fid")){
-
+				else if(paramName.equals("fid")) {
 				}
-				else if(paramName.startsWith("ch")){
-
+				else if(paramName.startsWith("ch")) {
 				}
-				else if(paramName.equals("Tender_Date")&&paramValue.equals("")){
-
+				else if(paramName.equals("Tender_Date")&&paramValue.equals("")) {
 				}
-				else if(paramName.equals("Project_Announced")&&paramValue.equals("")){
-
+				else if(paramName.equals("Project_Announced")&&paramValue.equals("")) {
 				}
 				else if (paramName.startsWith("Country")) {
 								
-								String wkt = Geocode(lat, lon);
-								printWriter.println("*********WKT"+sdf.format(date));
-								printWriter.println (wkt);
-								if (wkt.equals("0")) {
+					String wkt = Geocode(lat, lon);
+					printWriter.println("*********WKT"+sdf.format(date));
+					printWriter.println (wkt);
 
-								}
-								else{
-									/*names += "\"" + paramName + "\"" + ",";
-									values += "\'" + paramValue + "\'" + ",";
-									names += "\"" + "the_geom" + "\"" + ",";
-									values +=  wkt +  ",";*/
-									
-									update+= "\"" + paramName +"\"=\'" + paramValue + "\',";
-									update+= "\"" + "the_geom" +"\"=" + wkt + ",";
-								}
-							}
+					if (wkt.equals("0")) {
+					}
+					else {
+						/*names += "\"" + paramName + "\"" + ",";
+						values += "\'" + paramValue + "\'" + ",";
+						names += "\"" + "the_geom" + "\"" + ",";
+						values +=  wkt +  ",";*/
+						
+						update+= "\"" + paramName +"\"=\'" + paramValue + "\',";
+						update+= "\"" + "the_geom" +"\"=" + wkt + ",";
+					}
+				}
+				else if(paramName.equals("Submitting_Officer_Contact2")) {
+				}
 				else{
 					update+= "\"" + paramName +"\"=\'" + paramValue + "\',";
 				}
@@ -170,9 +162,9 @@ public class LeadAdder extends HttpServlet {
 			update = update + " where fid = " + fid;
 			update = "update Opengeo.\"DATATABLE\" set " + update;
 			out.println(update);
-		}
-		else{
 			
+		}
+		else {			
 			myList.clear();
 			myList.put("Project_Title", req.getParameter("Project_Title"));
 			myList.put("Specific_Location", req.getParameter("Specific_Location"));
@@ -195,13 +187,13 @@ public class LeadAdder extends HttpServlet {
 			myList.put("Business_URL", req.getParameter("Business_URL"));
 			myList.put("Submitting_Officer", req.getParameter("Submitting_Officer"));
 			myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact"));
+			myList.put("Submitting_Officer_Contact", req.getParameter("Submitting_Officer_Contact2"));
 			myList.put("Project_POCs", req.getParameter("Project_POCs"));
 			myList.put("Post_Comments", req.getParameter("Post_Comments"));
 			
 			Set<String> keys = myList.keySet();
 			
-			for(String key: keys){
-				
+			for(String key: keys) {
 				String val = myList.get(key);
 				val = val.replace("'", "&#39;");
 				val = val.replace("\"", "&#34;");
@@ -213,16 +205,13 @@ public class LeadAdder extends HttpServlet {
 				String paramName = (String) paramNames.nextElement();
 				String[] paramValues = req.getParameterValues(paramName);
 
-				if(paramName.equals("editType")){
-
+				if(paramName.equals("editType")) {
 				}
-	
-				else if(paramName.equals("fid")){
-
+				else if(paramName.equals("fid")) {
 				}
-
+				else if(paramName.equals("Submitting_Officer_Contact2")) {
+				}
 				else if (paramValues.length > 0) {
-
 					String paramValue = paramValues[0];
 					
 					paramValue = paramValue.replace("'", "''");
@@ -234,21 +223,15 @@ public class LeadAdder extends HttpServlet {
 					paramValue = paramValue.replace("\f", " ");
 					
 					if (paramValue.length() > 0) {
-
 						if (paramName.startsWith("ch")) {
-
 							//String newName = checkName(paramName);
-							//sectors += newName + " ";
-		
+							//sectors += newName + " ";		
 						} else {
-
-							if (paramName.startsWith("Country")) {
-								
+							if (paramName.startsWith("Country")) {								
 								String wkt = Geocode(lat, lon);
 								printWriter.println("*********WKT"+sdf.format(date));
 								printWriter.println (wkt);
 								if (wkt.equals("0")) {
-
 								}
 								else{
 									names += "\"" + paramName + "\"" + ",";
@@ -256,18 +239,14 @@ public class LeadAdder extends HttpServlet {
 									names += "\"" + "the_geom" + "\"" + ",";
 									values +=  wkt +  ",";
 								}
-							} else {
-								
+							} else {								
 								names += "\"" + paramName + "\"" + ",";
 								values += "\'" + paramValue + "\'" + ",";
 							}
 						}
-
 					}
 				}
-
 			}
-
 			/*if (sectors.length() > 0) {
 				names += "\"Sector\"" + ",";
 				values += "\'" + sectors + "\'" + ",";
@@ -276,7 +255,6 @@ public class LeadAdder extends HttpServlet {
 			names = names.substring(0, names.length() - 1);
 			values = values.substring(0, values.length() - 1);
 		}
-
 		try {
 
 			Class.forName("org.postgresql.Driver");
@@ -290,19 +268,20 @@ public class LeadAdder extends HttpServlet {
 			String fs = req.getParameter("Source");
 			String mid = req.getParameter("fid");
 			
-			if(editType.equals("clear")){
+			if(editType.equals("clear")) {
 			
 			send(poc,fs,mid,"clear");
 			}
-			else if(editType.equals("edit")){
-				
+			else if(editType.equals("edit")) {				
 				printWriter.println("*********UPDATE"+sdf.format(date));
 				printWriter.println (update);
+				popupUpdateEdit = "update Opengeo.\"DATATABLE\" set " + "\"popup_HTML\" = '<div class=\"popupLead\"><div class=\"popupLeadTitle\">' || \"Project_Title\" || '</div>' || '<div class=\"popupLeadDetails\">'	|| '<b>Country: </b>' || \"Country\" || '<br>'	|| '<b>Sector: </b>' || \"Sector\" || '<br>' || '<b>Date Added: </b>' || \"Timestamp\"::timestamp::date || '<br>' || '<b>Primary Funding Source: </b>' || \"Project_Funding_Source\" || '<br>' || '<b>Project Size (USD): </b>' || \"Project_Size\" || '<br>' || '<b>Status: </b>' || \"Status\" || '<br>' || CASE WHEN \"Archived\" = '0' THEN '' ELSE '<br><b>Archived: </b>' END || CASE WHEN \"Archived\" = '0' THEN '' ELSE 'Yes' END || CASE WHEN \"Archived\" IS NULL THEN '<br>' ELSE '<br>' END || CASE WHEN \"Project_Description\" IS NULL THEN '' ELSE '<b>Description: </b><br>' END || CASE WHEN \"Project_Description\" IS NULL THEN '' ELSE \"Project_Description\" END || CASE WHEN \"Project_Description\" IS NULL THEN '<br>' ELSE '<br>' END || CASE WHEN \"Post_Comments\" IS NULL THEN '' ELSE '<br><b>Post Comments: </b><br>' END || CASE WHEN \"Post_Comments\" IS NULL THEN '' ELSE \"Post_Comments\" END || CASE WHEN \"Post_Comments\" IS NULL THEN '<br>' ELSE '<br><br>' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE '<a href=\"' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE \"Link_To_Project\" END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE '\" target=\"_blank\" ' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE ' onclick=\"javascript:ga(''send'', ''event'', ''External_Link'', ''' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE \"Project_Title\" END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE '_Lead_Details'', {''nonInteraction'': 1});\">Project Website</a>&nbsp;&nbsp;&nbsp;' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE '<a href=\"' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE \"Business_URL\" END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE '\" target=\"_blank\" ' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE ' onclick=\"javascript:ga(''send'', ''event'', ''Business_Tab_Link'', ''' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE \"Project_Title\" END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE '_Lead_Details'', {''nonInteraction'': 1});\">Embassy Website</a>&nbsp;&nbsp;&nbsp;' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE '<a href=\"mailto:' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE \"Submitting_Officer_Contact\" END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE '\" ' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE ' onclick=\"javascript:ga(''send'', ''event'', ''Contact'', ''' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE \"Project_Title\" END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE '_Lead_Details'', {''nonInteraction'': 1});\">Contact</a></font></div></div>' END;";			
 				int resUpdate = stmt.executeUpdate(update);
+				int resultPopupUpdateEdit = stmt.executeUpdate(popupUpdateEdit);
 				send(poc,fs,mid,"edit");
 				
 				//printWriter.close (); 
-			}else{
+			} else {
 				
 				String f = "select max(fid) from Opengeo.\"DATATABLE\"";
 				rs = stmt.executeQuery(f);
@@ -318,23 +297,25 @@ public class LeadAdder extends HttpServlet {
 				String insert = "INSERT INTO Opengeo.\"DATATABLE\" (" + names
 						+ ") VALUES(" + values + ")";
 				
+				popupUpdateAdd = "update Opengeo.\"DATATABLE\" set " + "\"popup_HTML\" = '<div class=\"popupLead\"><div class=\"popupLeadTitle\">' || \"Project_Title\" || '</div>' || '<div class=\"popupLeadDetails\">'	|| '<b>Country: </b>' || \"Country\" || '<br>'	|| '<b>Sector: </b>' || \"Sector\" || '<br>' || '<b>Date Added: </b>' || \"Timestamp\"::timestamp::date || '<br>' || '<b>Primary Funding Source: </b>' || \"Project_Funding_Source\" || '<br>' || '<b>Project Size (USD): </b>' || \"Project_Size\" || '<br>' || '<b>Status: </b>' || \"Status\" || '<br>' || CASE WHEN \"Archived\" = '0' THEN '' ELSE '<br><b>Archived: </b>' END || CASE WHEN \"Archived\" = '0' THEN '' ELSE 'Yes' END || CASE WHEN \"Archived\" IS NULL THEN '<br>' ELSE '<br>' END || CASE WHEN \"Project_Description\" IS NULL THEN '' ELSE '<b>Description: </b><br>' END || CASE WHEN \"Project_Description\" IS NULL THEN '' ELSE \"Project_Description\" END || CASE WHEN \"Project_Description\" IS NULL THEN '<br>' ELSE '<br>' END || CASE WHEN \"Post_Comments\" IS NULL THEN '' ELSE '<br><b>Post Comments: </b><br>' END || CASE WHEN \"Post_Comments\" IS NULL THEN '' ELSE \"Post_Comments\" END || CASE WHEN \"Post_Comments\" IS NULL THEN '<br>' ELSE '<br><br>' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE '<a href=\"' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE \"Link_To_Project\" END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE '\" target=\"_blank\" ' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE ' onclick=\"javascript:ga(''send'', ''event'', ''External_Link'', ''' END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE \"Project_Title\" END || CASE WHEN \"Link_To_Project\" IS NULL THEN '' ELSE '_Lead_Details'', {''nonInteraction'': 1});\">Project Website</a>&nbsp;&nbsp;&nbsp;' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE '<a href=\"' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE \"Business_URL\" END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE '\" target=\"_blank\" ' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE ' onclick=\"javascript:ga(''send'', ''event'', ''Business_Tab_Link'', ''' END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE \"Project_Title\" END || CASE WHEN \"Business_URL\" IS NULL THEN '' ELSE '_Lead_Details'', {''nonInteraction'': 1});\">Embassy Website</a>&nbsp;&nbsp;&nbsp;' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE '<a href=\"mailto:' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE \"Submitting_Officer_Contact\" END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE '\" ' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE ' onclick=\"javascript:ga(''send'', ''event'', ''Contact'', ''' END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE \"Project_Title\" END || CASE WHEN \"Submitting_Officer_Contact\" IS NULL THEN '' ELSE '_Lead_Details'', {''nonInteraction'': 1});\">Contact</a></font></div></div>' END;";			
+				
 				int result = stmt.executeUpdate(insert);
+				int resultPopupUpdateAdd = stmt.executeUpdate(popupUpdateAdd);
 				
 				printWriter.println("*********INSERT"+sdf.format(date));
 				printWriter.println (insert);
+				
 				send(poc,fs,mid,"insert");
 				printWriter.println("Email sent");
 				//printWriter.close (); 
-			}
-			
+			}			
 		} catch (ClassNotFoundException e) {
 			out.println("Couldn't load database driver: " + e.getMessage());
 			printWriter.println ("Couldn't load database driver: " + e.getMessage());
 		} catch (SQLException e) {
 			out.println ("SQLException caught: " + e.getMessage());
 			printWriter.println ("SQLException caught: " + e.getMessage());
-		} finally {
-			
+		} finally {			
 			try {
 				if (con != null)
 					con.close();
@@ -343,8 +324,7 @@ public class LeadAdder extends HttpServlet {
 		}
 	}
 
-	public void send(String em, String fs, String mid, String edit){
-		
+	public void send(String em, String fs, String mid, String edit) {		
 		Properties prop = new Properties();
 		
 		String m1sub="";
@@ -358,7 +338,6 @@ public class LeadAdder extends HttpServlet {
 		String m3text2="";
 		
 		try {
-
 			String propertiesFilePath = getServletContext().getRealPath("WEB-INF/config.properties");
 			prop.load(new FileInputStream(propertiesFilePath));
 
@@ -420,8 +399,7 @@ public class LeadAdder extends HttpServlet {
 		else if(edit.equals("insert"))
 		b.shell(m1to,m2sub,m2text);
 		else if(edit.equals("clear"))
-		b.shell(m1to,m3sub,m3text);
-		
+		b.shell(m1to,m3sub,m3text);		
 	}
 
 	public String checkName(String ch) {
@@ -442,11 +420,9 @@ public class LeadAdder extends HttpServlet {
 		return newCheck;
 	}
 
-	public String Geocode(String lat, String lon) {
-		
+	public String Geocode(String lat, String lon) {		
 		String wkt = "ST_GeomFromText(\'POINT(" + lon + " " + lat + ")\', 4326)";
 		
 		return wkt;
 	}
-
 }
