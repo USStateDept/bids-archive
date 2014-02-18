@@ -10,3 +10,5 @@
 
 echo on
 %PGSQL_PATH%psql -U %PGUSERNAME% -d %DATABASE% -f %SQL_FILE%
+
+java StaleMessengerCaller

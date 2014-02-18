@@ -19,6 +19,21 @@
     <servlet-name>Clear</servlet-name>
     <servlet-class>Clear</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>Archive</servlet-name>
+    <servlet-class>Archive</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>StaleMessenger</servlet-name>
+    <servlet-class>StaleMessenger</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>Reopen</servlet-name>
+    <servlet-class>Reopen</servlet-class>
+  </servlet>
 
   <!-- Map URLs to that servlet. -->
   
@@ -36,6 +51,21 @@
   <servlet-mapping>
     <servlet-name>Clear</servlet-name>
     <url-pattern>/servlet/Clear</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Archive</servlet-name>
+    <url-pattern>/servlet/Archive</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>StaleMessenger</servlet-name>
+    <url-pattern>/servlet/StaleMessenger</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Reopen</servlet-name>
+    <url-pattern>/servlet/Reopen</url-pattern>
   </servlet-mapping>
   
 </web-app>

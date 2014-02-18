@@ -6,7 +6,7 @@ import java.util.*;
 import java.net.*;
 import java.util.Properties;
 
-public class Clear extends HttpServlet {
+public class Reopen extends HttpServlet {
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -21,7 +21,6 @@ public class Clear extends HttpServlet {
 		Enumeration paramNames = req.getParameterNames();
 		
 		String fid = req.getParameter("fid");
-		String type = req.getParameter("type");
 
 		try {
 
@@ -34,11 +33,9 @@ public class Clear extends HttpServlet {
 			
 			String update="";
 			
-			update="update Opengeo.\"DATATABLE\" set \"Cleared\" = 1 where fid =" + fid;
-				
-			out.print("Lead Cleared");
-			
-			
+			update="update Opengeo.\"DATATABLE\" set \"Archived\" = 0 where fid =" + fid;
+			out.print("Lead Reopened");
+						
 			rs = stmt.executeQuery(update);
 
 		} catch (ClassNotFoundException e) {
