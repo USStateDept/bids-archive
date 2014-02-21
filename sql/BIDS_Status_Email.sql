@@ -12,8 +12,8 @@ DROP TABLE IF EXISTS opengeo."BIDS_Status_Email_List";
 SELECT *
 INTO opengeo."BIDS_Status_Email_List"
 FROM opengeo."DATATABLE"
-WHERE "DATATABLE"."Contact_Timestamp" >= ('now'::text::date - '90 days'::interval)
-	AND "DATATABLE"."Contact_Timestamp" <= ('now'::text::date - '89 days'::interval)
+WHERE "DATATABLE"."Contact_Timestamp" >= ('now'::text::date - '91 days'::interval)
+	AND "DATATABLE"."Contact_Timestamp" < ('now'::text::date - '90 days'::interval)
 	AND "DATATABLE"."Archived" = '0'
 	AND "DATATABLE"."Cleared" = '1';
 ALTER TABLE Opengeo."BIDS_Status_Email_List" ADD COLUMN Contact_Status integer;
@@ -21,16 +21,8 @@ ALTER TABLE Opengeo."BIDS_Status_Email_List" ADD COLUMN Contact_Status integer;
 INSERT INTO opengeo."BIDS_Status_Email_List" 
 SELECT *
 FROM opengeo."DATATABLE"
-WHERE "DATATABLE"."Contact_Timestamp" >= ('now'::text::date - '140 days'::interval)
-	AND "DATATABLE"."Contact_Timestamp" <= ('now'::text::date - '139 days'::interval)
-	AND "DATATABLE"."Archived" = '0'
-	AND "DATATABLE"."Cleared" = '1';
-
-INSERT INTO opengeo."BIDS_Status_Email_List" 
-SELECT *
-FROM opengeo."DATATABLE"
-WHERE "DATATABLE"."Contact_Timestamp" >= ('now'::text::date - '150 days'::interval)
-	AND "DATATABLE"."Contact_Timestamp" <= ('now'::text::date - '149 days'::interval)
+WHERE "DATATABLE"."Contact_Timestamp" >= ('now'::text::date - '141 days'::interval)
+	AND "DATATABLE"."Contact_Timestamp" < ('now'::text::date - '140 days'::interval)
 	AND "DATATABLE"."Archived" = '0'
 	AND "DATATABLE"."Cleared" = '1';
 
@@ -38,19 +30,27 @@ INSERT INTO opengeo."BIDS_Status_Email_List"
 SELECT *
 FROM opengeo."DATATABLE"
 WHERE "DATATABLE"."Contact_Timestamp" >= ('now'::text::date - '151 days'::interval)
-	AND "DATATABLE"."Contact_Timestamp" <= ('now'::text::date - '150 days'::interval)
+	AND "DATATABLE"."Contact_Timestamp" < ('now'::text::date - '150 days'::interval)
+	AND "DATATABLE"."Archived" = '0'
+	AND "DATATABLE"."Cleared" = '1';
+
+INSERT INTO opengeo."BIDS_Status_Email_List" 
+SELECT *
+FROM opengeo."DATATABLE"
+WHERE "DATATABLE"."Contact_Timestamp" >= ('now'::text::date - '152 days'::interval)
+	AND "DATATABLE"."Contact_Timestamp" < ('now'::text::date - '151 days'::interval)
 	AND "DATATABLE"."Archived" = '0'
 	AND "DATATABLE"."Cleared" = '1';
 
 UPDATE "opengeo"."BIDS_Status_Email_List"
 SET Contact_Status = 
 	CASE 
-		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '90 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" <= ('now'::text::date - '89 days'::interval)
+		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '91 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" < ('now'::text::date - '90 days'::interval)
 			THEN 90
-		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '140 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" <= ('now'::text::date - '139 days'::interval)
+		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '141 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" < ('now'::text::date - '140 days'::interval)
 			THEN 140
-		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '150 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" <= ('now'::text::date - '149 days'::interval) 
+		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '151 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" < ('now'::text::date - '150 days'::interval) 
 			THEN 150
-		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '151 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" <= ('now'::text::date - '150 days'::interval) 
+		WHEN "BIDS_Status_Email_List"."Contact_Timestamp" >= ('now'::text::date - '152 days'::interval) AND "BIDS_Status_Email_List"."Contact_Timestamp" < ('now'::text::date - '151 days'::interval) 
 			THEN 151
 	END;
