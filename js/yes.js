@@ -383,11 +383,11 @@ tabs = new Ext.FormPanel({
 		text : 'Save Edits',
 		id : 'btnEdit',
 		handler : function() {
-			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue() === tabs.getForm().findField("Submitting_Officer_Contact2").getValue()) {
-				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue())[0]);
-				if (emailDomain === 'state.gov') {
+			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue().toLowerCase() == tabs.getForm().findField("Submitting_Officer_Contact2").getValue().toLowerCase()) {
+				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue().toLowerCase())[0]);
+				if (emailDomain == 'state.gov') {
 					geo('edit','edit');
-				} else if (emailDomain === 'commerce.gov') {
+				} else if (emailDomain == 'commerce.gov') {
 					geo('edit','edit');
 				} else {
 					Ext.Msg.alert('Invalid email address','BIDS only accepts submissions from users with a state.gov or commerce.gov email address.');
@@ -401,11 +401,11 @@ tabs = new Ext.FormPanel({
 		text : 'Save as New Lead',
 		id : 'btnClone',
 		handler : function() {
-			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue() === tabs.getForm().findField("Submitting_Officer_Contact2").getValue()) {
-				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue())[0]);
-				if (emailDomain === 'state.gov') {
+			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue().toLowerCase() == tabs.getForm().findField("Submitting_Officer_Contact2").getValue().toLowerCase()) {
+				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue().toLowerCase())[0]);
+				if (emailDomain == 'state.gov') {
 					geo('clone','insert');
-				} else if (emailDomain === 'commerce.gov') {
+				} else if (emailDomain == 'commerce.gov') {
 					geo('clone','insert');
 				} else {
 					Ext.Msg.alert('Invalid email address','BIDS only accepts submissions from users with a state.gov or commerce.gov email address.');
@@ -419,11 +419,11 @@ tabs = new Ext.FormPanel({
 		text : 'Save',
 		id : 'btnSave',
 		handler : function() {
-			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue() === tabs.getForm().findField("Submitting_Officer_Contact2").getValue()) {
-				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue())[0]);
-				if (emailDomain === 'state.gov') {
+			if (tabs.getForm().findField("Submitting_Officer_Contact").getValue().toLowerCase() == tabs.getForm().findField("Submitting_Officer_Contact2").getValue().toLowerCase()) {
+				var emailDomain = (/[^@]*$/.exec(tabs.getForm().findField("Submitting_Officer_Contact").getValue().toLowerCase())[0]);
+				if (emailDomain == 'state.gov') {
 					geo('save','insert');
-				} else if (emailDomain === 'commerce.gov') {
+				} else if (emailDomain == 'commerce.gov') {
 					geo('save','insert');
 				} else {
 					Ext.Msg.alert('Invalid email address','BIDS only accepts submissions from users with a state.gov or commerce.gov email address.');
