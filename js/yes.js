@@ -494,7 +494,7 @@ function geo(type,eType)
 
 	if (tabs.getForm().findField("Specific_Location").getValue() != '') {
 		address = tabs.getForm().findField("Specific_Location").getValue(); //'Washington, DC';
-		componenst = tabs.getForm().findField("Country").getValue(); //'United States of America';
+		components = tabs.getForm().findField("Country").getValue(); //'United States of America';
 		
 		geocoder.geocode({ 'address': address, 'componentRestrictions':{'country': components}}, function(results, status) {
 			if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
