@@ -323,7 +323,10 @@ tabs = new Ext.FormPanel({
 		emptyText : 'Post Business Tab (http://www.example.gov/business/)',
 		xtype : 'textfield',
 		vtype : 'url',
-		width : 275
+		width : 275,
+		allowBlank: false,
+		blankText: 'a Business URL is required.',
+		emptyClass: 'reqField'
 	}, {
 		name : 'Submitting_Officer',
 		emptyText : 'USG Submitting Officer',
