@@ -10,10 +10,10 @@ We'll be releasing the URL to the site once we go live sometime later this year.
 
 # Tech Details
 * We're using the [OpenGeo suite](http://opengeo.org/) to make the map interface
-* The webpage itself is all the javascript we put here on [this git](https://github.com/eDiper/bids)
+* The webpage itself is all the javascript we put here on [this git](https://github.com/USStateDept/bids)
 
 # More info
-* Check the [wiki](https://github.com/eDiper/bids/wiki) for more information, or just dive into the code
+* Check the [wiki](https://github.com/USStateDept/bids/wiki) for more information, or just dive into the code
 * [Contact us via email](mailto:BIDS-Mailbox@state.gov) if you've got project related questions
 
 ## License
