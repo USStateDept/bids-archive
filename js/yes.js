@@ -128,6 +128,7 @@ stat = [['In Procurement'], ['Pipeline'], ['Fulfilled']]
 arch = [['Active'], ['Archived']]
 sizes = [['0-25M'], ['25-50M'], ['50-100M'], ['>100M'], ['Unpublished']]
 sec = [['Administrative and Support and Waste Management and Remediation Services'],['Agriculture, Forestry, Fishing and Hunting'],['Construction'],['Educational Services'],['Finance and Insurance'],['Health Care and Social Assistance'],['Information'],['Manufacturing'],['Mining, Quarrying, and Oil and Gas Extraction'],['Professional, Scientific, and Technical Services'],['Public Administration'],['Transportation and Warehousing'],['Utilities']]
+var bureaus=[['sovereignt'],['Afghanistan'],['Albania'],['Algeria'],['Angola'],['Antarctica'],['Argentina'],['Armenia'],['Australia'],['Austria'],['Azerbaijan'],['Bangladesh'],['Belarus'],['Belgium'],['Belize'],['Benin'],['Bhutan'],['Bolivia'],['Bosnia and Herzegovina'],['Botswana'],['Brazil'],['Brunei'],['Bulgaria'],['Burkina Faso'],['Burma'],['Burundi'],['Cambodia'],['Cameroon'],['Canada'],['Central African Republic'],['Chad'],['Chile'],['China'],['Colombia'],['Costa Rica'],['C\u00F4te d\'Ivoire'],['Croatia'],['Cuba'],['Cyprus'],['Czech Republic'],['Democratic Republic of the Congo'],['Denmark'],['Djibouti'],['Dominican Republic'],['East Timor'],['Ecuador'],['Egypt'],['El Salvador'],['Equatorial Guinea'],['Eritrea'],['Estonia'],['Ethiopia'],['Fiji'],['Finland'],['France'],['Gabon'],['Gambia'],['Georgia'],['Germany'],['Ghana'],['Greece'],['Guatemala'],['Guinea'],['Guinea Bissau'],['Guyana'],['Haiti'],['Honduras'],['Hungary'],['Iceland'],['India'],['Indonesia'],['Iran'],['Iraq'],['Ireland'],['Israel'],['Italy'],['Jamaica'],['Japan'],['Jordan'],['Kazakhstan'],['Kenya'],['Kosovo'],['Kuwait'],['Kyrgyzstan'],['Laos'],['Latvia'],['Lebanon'],['Lesotho'],['Liberia'],['Libya'],['Lithuania'],['Luxembourg'],['Macedonia'],['Madagascar'],['Malawi'],['Malaysia'],['Mali'],['Mauritania'],['Mexico'],['Moldova'],['Mongolia'],['Montenegro'],['Morocco'],['Mozambique'],['Namibia'],['Nepal'],['Netherlands'],['New Zealand'],['Nicaragua'],['Niger'],['Nigeria'],['North Korea'],['Norway'],['Oman'],['Pakistan'],['Panama'],['Papua New Guinea'],['Paraguay'],['Peru'],['Philippines'],['Poland'],['Portugal'],['Qatar'],['Republic of Congo'],['Republic of Serbia'],['Romania'],['Russia'],['Rwanda'],['Saudi Arabia'],['Senegal'],['Sierra Leone'],['Slovakia'],['Slovenia'],['Solomon Islands'],['Somalia'],['South Africa'],['South Korea'],['South Sudan'],['Spain'],['Sri Lanka'],['Sudan'],['Suriname'],['Swaziland'],['Sweden'],['Switzerland'],['Syria'],['Taiwan'],['Tajikistan'],['Thailand'],['The Bahamas'],['Togo'],['Trinidad and Tobago'],['Tunisia'],['Turkey'],['Turkmenistan'],['Uganda'],['Ukraine'],['United Arab Emirates'],['United Kingdom'],['United Republic of Tanzania'],['United States of America'],['Uruguay'],['Uzbekistan'],['Vanuatu'],['Venezuela'],['Vietnam'],['West Bank'],['Western Sahara'],['Yemen'],['Zambia'],['Zimbabwe']]
 
 // Add a lead Form / Edit a lead Form
 tabs = new Ext.FormPanel({
@@ -167,15 +168,26 @@ tabs = new Ext.FormPanel({
 		allowBlank: false,
 		blankText: 'a Project Title is required.',
 		emptyClass: 'reqField'
-	}, {
+	}, new Ext.form.ComboBox({
+		store : new Ext.data.ArrayStore({
+			fields : ['Country'],
+			data : bureaus
+		}),
 		name : 'Country',
-		xtype : 'textfield',
+		displayField : 'Country',
 		emptyText : 'Country',
+		typeAhead : true,
+		editable : false,
+		mode : 'local',
+		forceSelection : true,
+		triggerAction : 'all',
+		selectOnFocus : true,
 		width : 275,
+		height : 140,
 		allowBlank: false,
-		blankText: 'a Country is required.',
+		blankText: 'a Primary Sector is required.',
 		emptyClass: 'reqField'
-	}, {
+	}), {
 		name : 'Specific_Location',
 		xtype : 'textfield',
 		emptyText : 'City, Province, or Region',
