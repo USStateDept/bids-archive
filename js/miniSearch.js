@@ -9,7 +9,7 @@
 				var pra = "Project_Announced";
 				var dBeginVal = dBegin.getValue();
 				
-				urlWhole = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json";
+				urlWhole = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=opengeo%3ADATATABLE&maxfeatures=230&outputformat=json";
 
 				/////////////////
 				//////Sector

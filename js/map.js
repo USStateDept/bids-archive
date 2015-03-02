@@ -15,9 +15,9 @@ var addForm, editForm;
 var addWin, editWin;
 var required, banks, regions, stat, arch, sizes, sec;
 var sp, pr, co, prt, prn, li, se, ke, prs, pra, br, im, ime, prd, pos, su, subo, sou, fid, ten;
-var defaultURL = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
+var defaultURL = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
 var searchURL = defaultURL;
-var csvURL = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
+var csvURL = "http://" + host + "/geoserver/opengeo/ows?service=WFS&version=1.1.0&request=GetFeature&typeName=opengeo%3ADATATABLE";
 
 // Default filters to apply for CSV export
 var defaultFilter = "&Filter=%3CFilter%3E%0A%09%3CAnd%3E%0A%09%09%3COr%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EIn%20Procurement%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%09%3CPropertyName%3EStatus%3C%2FPropertyName%3E%0A%09%09%09%09%3CLiteral%3EPipeline%3C%2FLiteral%3E%0A%09%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%3C%2FOr%3E%0A%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3ECleared%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E1%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%09%3CPropertyIsEqualTo%3E%0A%09%09%09%3CPropertyName%3EArchived%3C%2FPropertyName%3E%0A%09%09%09%3CLiteral%3E0%3C%2FLiteral%3E%0A%09%09%3C%2FPropertyIsEqualTo%3E%0A%09%3C%2FAnd%3E%0A%3C%2FFilter%3E";
