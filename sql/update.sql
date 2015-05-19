@@ -13,7 +13,7 @@ CREATE TABLE "IMPORT"
 "Project_Title" character varying(160),
 "Project_Number" character varying(50),
 "Sector" character varying(125),
-"Project_Size" character varying(15),
+"Project_Size" numeric(12,0),
 "Project_Description" character varying(1300),
 "Keyword" character varying(255),
 "Source" character varying(80),
